@@ -1,0 +1,44 @@
+{% extends '/base.html.twig' %}
+
+{% block main %}
+    {% for post in posts %}
+        <article class="post">
+            <header>
+                <div class="title">
+                    <h2><a href="{{ path('blog_post', {'id': post.p_id, 'slug': post.p_title|slugify}) }}">{{ post.p_title }}</a></h2>
+                </div>
+                <div class="meta">
+                    <time class="published"><i class="icon fa-pencil"></i>{{ post.p_createdAt|date("d/m/Y") }}</time>
+                    {% if post.p_lastUpdate != null %}
+                        <time class="published"><i class="icon fa-refresh"></i>{{ post.p_lastUpdate|date("d/m/Y") }}</time>
+                    {% endif %}
+                    <a href="{{ path('user_profile', {'id': post.p_authorId}) }}" class="author">
+                        <span class="name">{{ post.u_username }}</span>
+                        <img src="{{ asset('assets/images/avatar.jpg') }}" alt="{{ 'Picture of the author'|trans }}"/>
+                    </a>
+                    <span class="icon fa-heart">28</span>
+                    <span class="icon fa-comment">128</span>
+                </div>
+            </header>
+            <a href="{{ path('blog_post', {'id': post.p_id, 'slug': post.p_title|slugify}) }}" class="image featured">
+                <img src="{{ asset('assets/images/pic01.jpg') }}" alt="{{ 'Picture of the post'|trans }}"/>
+            </a>
+            <div>
+                <p>
+                    {{ post.p_description }}
+                </p>
+            </div>
+            <footer>
+                <ul class="actions">
+                    <li><a href="{{ path('blog_post', {'id': post.p_id, 'slug': post.p_title|slugify}) }}" class="button large">{{ 'Continue reading'|trans }}</a></li>
+                </ul>
+                <ul class="stats">
+                    {% set tags = post.p_tags_id|split(',') %}
+                    {% for tag in tags %}
+                        <li class="icon fa-tag"><a href="{{ path('blog_tag', {'tag': tag|slugify}) }}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </footer>
+        </article>
+    {% endfor %}
+{% endblock %}

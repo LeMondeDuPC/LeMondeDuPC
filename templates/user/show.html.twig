@@ -1,0 +1,26 @@
+{% extends '/base.html.twig' %}
+ 
+{% block main %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1>{{ "Profile of"|trans }} {{ user.username }}</h1>
+            </div>
+            <div class="meta">
+                <time class="published"><i class="icon fa-archive"></i>{{ user.createdAt|date("d/m/Y") }}</time>
+            </div>
+        </header>
+        <img class="image featured" src="{{ asset('assets/images/pic01.jpg') }}"
+             alt="{{ 'Picture of the post'|trans }}"/>
+        <div>
+            <p>
+                {% if user.description is not empty %}{{ user.description }}{% else %}Aucune description{% endif %}
+            </p>
+        </div>
+        <footer>
+            <ul class="stats">
+                <li>{{ 'Last Connection'|trans }} : {{ user.lastConnection|date("d/m/Y") }}</li>
+            </ul>
+        </footer>
+    </article>
+{% endblock %}

@@ -1,0 +1,178 @@
+<?php return [PHP_INT_MAX, static function () {
+
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+            clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'name' => [
+                    'App\\Entity\\Posts',
+                ],
+                'namespace' => [
+                    'App\\Entity',
+                ],
+                'rootEntityName' => [
+                    'App\\Entity\\Posts',
+                ],
+                'customRepositoryClassName' => [
+                    'App\\Repository\\PostsRepository',
+                ],
+                'identifier' => [
+                    [
+                        'id',
+                    ],
+                ],
+                'generatorType' => [
+                    4,
+                ],
+                'fieldMappings' => [
+                    [
+                        'id' => [
+                            'fieldName' => 'id',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'id' => true,
+                            'columnName' => 'id',
+                        ],
+                        'title' => [
+                            'fieldName' => 'title',
+                            'type' => 'string',
+                            'scale' => 0,
+                            'length' => 255,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'title',
+                        ],
+                        'description' => [
+                            'fieldName' => 'description',
+                            'type' => 'text',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'description',
+                        ],
+                        'content' => [
+                            'fieldName' => 'content',
+                            'type' => 'text',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'content',
+                        ],
+                        'createdAt' => [
+                            'fieldName' => 'createdAt',
+                            'type' => 'datetime',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'created_at',
+                        ],
+                        'access' => [
+                            'fieldName' => 'access',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'access',
+                        ],
+                        'validation' => [
+                            'fieldName' => 'validation',
+                            'type' => 'boolean',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'validation',
+                        ],
+                        'authorId' => [
+                            'fieldName' => 'authorId',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'author_id',
+                        ],
+                        'tags_id' => [
+                            'fieldName' => 'tags_id',
+                            'type' => 'string',
+                            'scale' => 0,
+                            'length' => 255,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'tags_id',
+                        ],
+                        'lastUpdate' => [
+                            'fieldName' => 'lastUpdate',
+                            'type' => 'datetime',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => true,
+                            'precision' => 0,
+                            'columnName' => 'last_update',
+                        ],
+                    ],
+                ],
+                'fieldNames' => [
+                    [
+                        'id' => 'id',
+                        'title' => 'title',
+                        'description' => 'description',
+                        'content' => 'content',
+                        'created_at' => 'createdAt',
+                        'access' => 'access',
+                        'validation' => 'validation',
+                        'author_id' => 'authorId',
+                        'tags_id' => 'tags_id',
+                        'last_update' => 'lastUpdate',
+                    ],
+                ],
+                'columnNames' => [
+                    [
+                        'id' => 'id',
+                        'title' => 'title',
+                        'description' => 'description',
+                        'content' => 'content',
+                        'createdAt' => 'created_at',
+                        'access' => 'access',
+                        'validation' => 'validation',
+                        'authorId' => 'author_id',
+                        'tags_id' => 'tags_id',
+                        'lastUpdate' => 'last_update',
+                    ],
+                ],
+                'table' => [
+                    [
+                        'name' => 'posts',
+                    ],
+                ],
+                'idGenerator' => [
+                    $o[1],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+
+}];

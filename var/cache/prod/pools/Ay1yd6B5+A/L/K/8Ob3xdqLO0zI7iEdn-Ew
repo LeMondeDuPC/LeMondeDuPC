@@ -1,0 +1,122 @@
+<?php return [PHP_INT_MAX, static function () {
+
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+            clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+            clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+        ],
+        null,
+        [
+            'Doctrine\\ORM\\Query\\ParserResult' => [
+                '_sqlExecutor' => [
+                    $o[1],
+                ],
+                '_resultSetMapping' => [
+                    $o[2],
+                ],
+                '_parameterMappings' => [
+                    [
+                        'postValidation' => [
+                            0,
+                        ],
+                    ],
+                ],
+            ],
+            'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+                '_sqlStatements' => [
+                    1 => 'SELECT p0_.id AS id_0, p0_.title AS title_1, p0_.description AS description_2, p0_.content AS content_3, p0_.created_at AS created_at_4, p0_.access AS access_5, p0_.validation AS validation_6, p0_.author_id AS author_id_7, p0_.tags_id AS tags_id_8, p0_.last_update AS last_update_9, u1_.id AS id_10, u1_.username AS username_11, u1_.roles AS roles_12, u1_.password AS password_13, u1_.validation AS validation_14, u1_.confirm_key AS confirm_key_15, u1_.email AS email_16, u1_.created_at AS created_at_17, u1_.description AS description_18, u1_.last_connection AS last_connection_19 FROM posts p0_ INNER JOIN users u1_ ON (p0_.author_id = u1_.id) WHERE p0_.validation = ?',
+                ],
+            ],
+            'stdClass' => [
+                'aliasMap' => [
+                    2 => [
+                        'p' => 'App\\Entity\\Posts',
+                        'u' => 'App\\Entity\\Users',
+                    ],
+                ],
+                'fieldMappings' => [
+                    2 => [
+                        'id_0' => 'id',
+                        'title_1' => 'title',
+                        'description_2' => 'description',
+                        'content_3' => 'content',
+                        'created_at_4' => 'createdAt',
+                        'access_5' => 'access',
+                        'validation_6' => 'validation',
+                        'author_id_7' => 'authorId',
+                        'tags_id_8' => 'tags_id',
+                        'last_update_9' => 'lastUpdate',
+                        'id_10' => 'id',
+                        'username_11' => 'username',
+                        'roles_12' => 'roles',
+                        'password_13' => 'password',
+                        'validation_14' => 'validation',
+                        'confirm_key_15' => 'confirmKey',
+                        'email_16' => 'email',
+                        'created_at_17' => 'createdAt',
+                        'description_18' => 'description',
+                        'last_connection_19' => 'lastConnection',
+                    ],
+                ],
+                'entityMappings' => [
+                    2 => [
+                        'p' => null,
+                        'u' => null,
+                    ],
+                ],
+                'columnOwnerMap' => [
+                    2 => [
+                        'id_0' => 'p',
+                        'title_1' => 'p',
+                        'description_2' => 'p',
+                        'content_3' => 'p',
+                        'created_at_4' => 'p',
+                        'access_5' => 'p',
+                        'validation_6' => 'p',
+                        'author_id_7' => 'p',
+                        'tags_id_8' => 'p',
+                        'last_update_9' => 'p',
+                        'id_10' => 'u',
+                        'username_11' => 'u',
+                        'roles_12' => 'u',
+                        'password_13' => 'u',
+                        'validation_14' => 'u',
+                        'confirm_key_15' => 'u',
+                        'email_16' => 'u',
+                        'created_at_17' => 'u',
+                        'description_18' => 'u',
+                        'last_connection_19' => 'u',
+                    ],
+                ],
+                'declaringClasses' => [
+                    2 => [
+                        'id_0' => 'App\\Entity\\Posts',
+                        'title_1' => 'App\\Entity\\Posts',
+                        'description_2' => 'App\\Entity\\Posts',
+                        'content_3' => 'App\\Entity\\Posts',
+                        'created_at_4' => 'App\\Entity\\Posts',
+                        'access_5' => 'App\\Entity\\Posts',
+                        'validation_6' => 'App\\Entity\\Posts',
+                        'author_id_7' => 'App\\Entity\\Posts',
+                        'tags_id_8' => 'App\\Entity\\Posts',
+                        'last_update_9' => 'App\\Entity\\Posts',
+                        'id_10' => 'App\\Entity\\Users',
+                        'username_11' => 'App\\Entity\\Users',
+                        'roles_12' => 'App\\Entity\\Users',
+                        'password_13' => 'App\\Entity\\Users',
+                        'validation_14' => 'App\\Entity\\Users',
+                        'confirm_key_15' => 'App\\Entity\\Users',
+                        'email_16' => 'App\\Entity\\Users',
+                        'created_at_17' => 'App\\Entity\\Users',
+                        'description_18' => 'App\\Entity\\Users',
+                        'last_connection_19' => 'App\\Entity\\Users',
+                    ],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+
+}];

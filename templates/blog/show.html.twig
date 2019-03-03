@@ -1,0 +1,43 @@
+{% extends '/base.html.twig' %}
+ 
+{% block title %}{{ post.0.p_title }}{% endblock %}
+
+{% block description %}{{ post.0.p_description }}{% endblock %}
+ 
+{% block main %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1>{{ post.0.p_title }}</h1>
+            </div>
+            <div class="meta">
+                <time class="published"><i class="icon fa-pencil"></i>{{ post.0.p_createdAt|date("d/m/Y") }}</time>
+                {% if post.0.p_lastUpdate != null %}
+                    <time class="published"><i class="icon fa-refresh"></i>{{ post.0.p_lastUpdate|date("d/m/Y") }}
+                    </time>
+                {% endif %}
+                <a href="{{ path('user_profile', {'id': post.0.p_authorId}) }}" class="author">
+                    <span class="name">{{ post.0.u_username }}</span>
+                    <img src="{{ asset('assets/images/avatar.jpg') }}" alt="{{ 'Picture of the author'|trans }}"/>
+                </a>
+                <span class="icon fa-heart">127</span>
+                <span class="icon fa-comment">2</span>
+            </div>
+        </header>
+        <img class="image featured" src="{{ asset('assets/images/pic01.jpg') }}"
+             alt="{{ 'Picture of the post'|trans }}"/>
+        <div>
+            <p>
+                {{ post.0.p_content }}
+            </p>
+        </div>
+        <footer>
+            <ul class="stats">
+                {% set tags = post.0.p_tags_id|split(',') %}
+                {% for tag in tags %}
+                    <li class="icon fa-tag"><a href="{{ path('blog_tag', {'tag': tag|slugify}) }}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
+        </footer>
+    </article>
+{% endblock %}
