@@ -1,0 +1,4 @@
+composer.phar
+symfony.lock
+composer.lock
+vendor/
