@@ -1,5 +1,5 @@
 # Le Monde Du PC
-Repository of the new website version (v2.0)
+Repository of the new [website](https://www.lemondedupc.fr) version (v2.0)
 
 ## Built with
 * PHPStorm
