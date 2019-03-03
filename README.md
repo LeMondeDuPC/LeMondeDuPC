@@ -1,9 +1,12 @@
 # Le Monde Du PC
 Repository of the new [website](https://www.lemondedupc.fr) version (v2.0)
 
-## Built with
+## Using
 * PHPStorm
 * Composer
+* Sass
+* Symfony
+* HTML5 UP!
 
 ## Networks
 * [Discord](https://discord.gg/ZvXtxqD)
