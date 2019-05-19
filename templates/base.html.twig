@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="fr">
 <head>
-    <title>{{ app.name }} - {% block title %}{{ 'Digital explained simply'|trans }}{% endblock %}</title>
+    <title>Le Monde Du PC - {% block title %}{{ 'app.title_part'|trans }}{% endblock %}</title>
     <meta name="description"
-          content="{% block description %}{{ 'The topics of digital and high tech should not be understood only by those who master them'|trans }}{% endblock %}"/>
+          content="{% block description %}{{ 'app.description'|trans }}{% endblock %}"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <link rel="stylesheet" href="{{ asset('assets/style/css/main.css') }}"/>
@@ -11,9 +11,9 @@
     <link rel="stylesheet"
           href="{{ asset('https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i') }}"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <meta property="og:site_name" content="{{ app.name }}"/>
+    <meta property="og:site_name" content="Le Monde Du PC"/>
     <meta property="og:locale" content="fr_FR"/>
-    <meta property="og:title" content="{{ app.name }} - {{ block('title') }}"/>
+    <meta property="og:title" content="Le Monde Du PC - {{ block('title') }}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="Image"/>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/logo/apple-touch-icon.png') }}"/>
@@ -27,24 +27,24 @@
 
     <!-- Header -->
     <header id="header">
-        <h2><a href="{{ path('blog_index') }}">{{ app.name }}</a></h2>
+        <h2><a href="{{ path('blog_posts') }}">Le Monde Du PC</a></h2>
         <nav id="navheader" class="links">
             <ul id="nav">
-                <li><a href="{{ path('blog_tag', {'tag': 'news'}) }}">{{ 'News'|trans }}</a></li>
-                <li><a href="{{ path('blog_tag', {'tag': 'articles'}) }}">{{ 'Articles'|trans }}</a></li>
-                <li><a href="{{ path('blog_about') }}">{{ 'About'|trans }}</a></li>
+                <li><a href="{{ path('blog_posts', {'tag': 'news'}) }}">{{ 'post.news'|trans }}</a></li>
+                <li><a href="{{ path('blog_posts', {'tag': 'articles'}) }}">{{ 'post.articles'|trans }}</a></li>
+                <li><a href="{{ path('blog_about') }}">{{ 'app.about'|trans }}</a></li>
             </ul>
         </nav>
         <nav class="main">
             <ul>
                 <li class="search">
-                    <a class="icon fa-search" href="#search">{{ 'Search'|trans }}</a>
+                    <a class="icon fa-search" href="#search">{{ 'post.search'|trans }}</a>
                     <form id="search" method="get" action="#">
-                        <input type="search" name="query" placeholder="{{ 'Search'|trans }}"/>
+                        <input type="search" name="query" placeholder="{{ 'post.search'|trans }}"/>
                     </form>
                 </li>
                 <li class="menu">
-                    <a class="icon fa-bars" href="#menu">{{ 'Menu'|trans }}</a>
+                    <a class="icon fa-bars" href="#menu">{{ 'app.menu'|trans }}</a>
                 </li>
             </ul>
         </nav>
@@ -55,7 +55,7 @@
         <!-- Search -->
         <div>
             <form class="search" method="get" action="#">
-                <input type="text" name="query" placeholder="{{ 'Search'|trans }}"/>
+                <input type="text" name="query" placeholder="{{ 'post.search'|trans }}"/>
             </form>
         </div>
         <!-- links -->
@@ -65,18 +65,18 @@
 
         <!--<nav>
             <ul class="links">
-                <li><a href="">{{ 'My profile'|trans }}</a></li>
-                <li><a href="">{{ 'Edit my profile'|trans }}</a></li>
-                <li><a href="">{{ 'My settings'|trans }}</a></li>
+                <li><a href="">{{ 'account.profile'|trans }}</a></li>
+                <li><a href="">{{ 'account.edit'|trans }}</a></li>
+                <li><a href="">{{ 'account.settings'|trans }}</a></li>
             </ul>
         </nav>-->
 
         <!-- Links -->
         <nav>
             <ul class="actions fit">
-                <li><a href="{{ path('user_connection') }}" class="button fit">{{ 'Connection'|trans }}</a></li>
-                <li><a href="{{ path('user_registration') }}" class="button fit">{{ 'Registration'|trans }}</a></li>
-                <!--<li><a href="" class="button fit">{{ 'Logout'|trans }}</a></li>-->
+                <li><a href="{{ path('user_connection') }}" class="button fit">{{ 'user.connection'|trans }}</a></li>
+                <li><a href="{{ path('user_registration') }}" class="button fit">{{ 'user.registration'|trans }}</a></li>
+                <!--<li><a href="" class="button fit">{{ 'user.log_out'|trans }}</a></li>-->
             </ul>
         </nav>
     </nav>
@@ -90,18 +90,18 @@
     <aside id="sidebar">
         <!-- Intro -->
         <section id="intro">
-            <img class="logo" src="{{ asset('assets/images/logo/android-chrome-192x192.png') }}" alt="{{ 'Logo'|trans }}"/>
+            <img class="logo" src="{{ asset('assets/images/logo/android-chrome-192x192.png') }}" alt="{{ 'app.logo'|trans }}"/>
             <header>
-                <h2>{{ app.name }}</h2>
-                <p>{{ 'The topics of digital and high tech should not be understood only by those who master them'|trans }}
+                <h2>Le Monde Du PC</h2>
+                <p>{{ 'app.description'|trans }}
                     .</p>
             </header>
         </section>
         <!-- Mini Posts -->
         <section>
-            <h3>{{ 'News'|trans }} :</h3>
+            <h3>{{ 'post.news'|trans }} :</h3>
             <div class="mini-posts">
-                {{ render(controller("App\\Controller\\BlogController::showPosts", {'tag': 'news', 'target': 'aside'})) }}
+                {{ render(controller("App\\Controller\\BlogController::showPosts", {'tag': 'windows', 'target': '/libs/_asidePosts.html.twig'})) }}
             </div>
         </section>
         <!-- Footer -->
@@ -115,7 +115,7 @@
                 <li><a href="#" class="icon fa-rss"><span class="label">RSS</span></a></li>
                 <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
             </ul>
-            <p class="license">{{ app.name }} {{ app.version }} <br/> {{ 'On a base of'|trans }} <a
+            <p class="license">Le Monde Du PC | Version 2.0 CC BY NC ND <br/> {{ 'app.base'|trans }} <a
                         href="https://html5up.net/">HTML5 UP!</a></p>
         </footer>
     </aside>

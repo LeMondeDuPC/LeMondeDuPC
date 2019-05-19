@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Users;
-use App\Form\UserLoginType;
-use App\Form\UserRegistrationType;
+use App\Form\User\LoginType;
+use App\Form\User\RegistrationType;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +35,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     {"fr": "/inscription", "/registration"},
+     *     {"fr": "/membre/inscription"},
      *     name="user_registration"
      * )
      * @param Request $request
@@ -48,7 +48,7 @@ class UserController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = new Users();
-        $registrationForm = $this->createForm(UserRegistrationType::class, $user);
+        $registrationForm = $this->createForm(RegistrationType::class, $user);
         $registrationForm->handleRequest($request);
 
         /*if ($registrationForm->isSubmitted() AND $registrationForm->isValid()) {
@@ -66,7 +66,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     {"fr": "/connexion", "/connection"},
+     *     {"fr": "/membre/connexion"},
      *     name="user_connection"
      * )
      * @param Request $request
@@ -75,7 +75,7 @@ class UserController extends AbstractController
      */
     public function loginUser(Request $request)
     {
-        $registrationForm = $this->createForm(UserLoginType::class);
+        $registrationForm = $this->createForm(LoginType::class);
         $registrationForm->handleRequest($request);
         return $this->render('/user/account.html.twig', [
             'formLogin' => $registrationForm->createView()
@@ -84,7 +84,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     {"fr": "/membre/{id}", "/user/{id}"},
+     *     {"fr": "/membre/{id}"},
      *     name="user_profile"
      * )
      * @param $id int
@@ -101,7 +101,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     {"fr": "/membre/{id}/parametre", "/user/{id}/params"},
+     *     {"fr": "/membre/{id}/parametre"},
      *     name="user_params"
      * )
      * @param $id int
@@ -113,7 +113,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(
-     *     {"fr": "/membre/{id}/modifier", "/user/{id}/edit"},
+     *     {"fr": "/membre/{id}/modifier"},
      *     name="user_params"
      * )
      * @param $id int

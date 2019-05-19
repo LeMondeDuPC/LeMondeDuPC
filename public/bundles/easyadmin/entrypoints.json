@@ -1,0 +1,28 @@
+{
+  "entrypoints": {
+    "app": {
+      "css": [
+        "./app.css"
+      ],
+      "js": [
+        "./app.js"
+      ]
+    },
+    "app-rtl": {
+      "css": [
+        "./app-rtl.css"
+      ],
+      "js": [
+        "./app-rtl.js"
+      ]
+    },
+    "bootstrap-all": {
+      "css": [
+        "./bootstrap-all.css"
+      ],
+      "js": [
+        "./bootstrap-all.js"
+      ]
+    }
+  }
+}

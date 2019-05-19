@@ -10,7 +10,6 @@
                 'localizedPaths' => [
                     [
                         'fr' => '/membre/{id}/parametre',
-                        '/user/{id}/params',
                     ],
                 ],
                 'name' => [

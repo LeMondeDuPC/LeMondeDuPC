@@ -1,33 +1,35 @@
 #app
-The topics of digital and high tech should not be understood only by those who master them: Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent
-News: Actualités
-Articles: Articles
-About: A propos
-Search: Rechercher
-On a base of: Sur une base de
-Digital explained simply: Du numérique expliqué simplement
-Menu: Menu
-Logo: Logo
+app.title_part: Du numérique expliqué simplement
+app.description: Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent
+app.about: A propos
+app.base: Sur une base de
+app.menu: Menu
+app.logo: Logo
+app.no_result: Il n' y aucun résultat pour le moment
 
 #posts
-Picture of the author: Image de l'auteur
-Picture of the post: Image du post
-Continue reading: Poursuivre la lecture
+post.articles: Articles
+post.news: Actualités
+post.pic: Image du post
+post.reading: Poursuivre la lecture
+post.search: Rechercher
 
 #user
-Member area: Espace membre
-Username: Pseudo
-Password: Mot de passe
-Connection: Connexion
-Registration: Inscription
-Email: Email
-Create: Créer
-Cancel: Annuler
-Last Connection: Dernière connexion
-Profile of: Profil de
-My profile: Mon profil
-Edit my profile: Modifier mon profil
-My settings: Mes paramètres
-Logout: Deconnexion
+user.area: Espace membre
+user.name: Pseudo
+user.password: Mot de passe
+user.connection: Connexion
+user.registration: Inscription
+user.email: Email
+user.last: Dernière connexion
+user.profile: Profil de
+user.pic: Image de l'utilisateur
 
-#admin
+#form
+form.create: Créer
+form.cancel: Annuler
+
+account.profile: Mon profil
+account.edit: Modifier mon profil
+account.settings: Mes paramètres
+user.log_out: Deconnexion

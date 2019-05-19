@@ -7,14 +7,11 @@
         null,
         [
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
-                'localizedPaths' => [
-                    [
-                        'fr' => '/categorie/{tag}',
-                        '/tag/{tag}',
-                    ],
+                'path' => [
+                    '/{tag<\\w+>?all}',
                 ],
                 'name' => [
-                    'blog_tag',
+                    'blog_posts',
                 ],
             ],
         ],

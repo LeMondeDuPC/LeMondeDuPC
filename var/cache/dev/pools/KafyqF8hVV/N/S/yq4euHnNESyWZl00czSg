@@ -8,18 +8,17 @@
         null,
         [
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
-                'localizedPaths' => [
-                    [
-                        'fr' => '/a-propos',
-                        '/about',
-                    ],
+                'path' => [
+                    '/{id<\\d+>}-{slug}',
                 ],
                 'name' => [
-                    'blog_about',
                     'blog_post',
+                    'blog_about',
                 ],
-                'path' => [
-                    1 => '/{id<\\d+>}-{slug}',
+                'localizedPaths' => [
+                    1 => [
+                        'fr' => '/a-propos',
+                    ],
                 ],
             ],
         ],

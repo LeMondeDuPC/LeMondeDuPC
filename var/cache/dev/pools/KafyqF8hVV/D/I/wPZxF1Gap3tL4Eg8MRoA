@@ -10,7 +10,6 @@
                 'localizedPaths' => [
                     [
                         'fr' => '/membre/{id}/modifier',
-                        '/user/{id}/edit',
                     ],
                 ],
                 'name' => [

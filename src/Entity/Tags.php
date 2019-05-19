@@ -22,9 +22,10 @@ class Tags
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
     private $validation;
+
 
     public function getId(): ?int
     {
@@ -54,4 +55,5 @@ class Tags
 
         return $this;
     }
+
 }

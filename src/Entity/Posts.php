@@ -58,14 +58,19 @@ class Posts
     private $authorId;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $tags_id;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastUpdate;
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $tagsIds = [];
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -156,28 +161,29 @@ class Posts
         return $this;
     }
 
-    public function getTagsId(): ?string
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->tags_id;
+        return $this->updatedAt;
     }
 
-    public function setTagsId(array $tags_id): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $tags_id = implode(",", $tags_id);
-        $this->tags_id = $tags_id;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getLastUpdate(): ?\DateTimeInterface
+    public function getTagsIds(): ?array
     {
-        return $this->lastUpdate;
+        return $this->tagsIds;
     }
 
-    public function setLastUpdate(?\DateTimeInterface $lastUpdate): self
+    public function setTagsIds(?array $tagsIds): self
     {
-        $this->lastUpdate = $lastUpdate;
+        $this->tagsIds = $tagsIds;
 
         return $this;
     }
+
+
 }

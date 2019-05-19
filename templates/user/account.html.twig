@@ -8,38 +8,38 @@
     <article class="post">
         <header>
             <div class="title">
-                <h1>{{ 'Member area'|trans }}</h1>
+                <h1>{{ 'user.area'|trans }}</h1>
             </div>
         </header>
         {% if formRegistration is defined %}
             {{ form_start(formRegistration) }}
-            <h3>{{ 'Registration'|trans }}</h3>
+            <h3>{{ 'user.registration'|trans }}</h3>
             <div class="row gtr-uniform">
                 <div class="col-12">
-                    {{ form_widget(formRegistration.Username) }}
-                    {{ form_widget(formRegistration.Email) }}
-                    {{ form_widget(formRegistration.Password) }}
+                    {{ form_widget(formRegistration.username) }}
+                    {{ form_widget(formRegistration.email) }}
+                    {{ form_widget(formRegistration.password) }}
                 </div>
                 <div class="col-12">
                     <ul class="actions">
-                        <li>{{ form_widget(formRegistration.Create) }}</li>
-                        <li>{{ form_widget(formRegistration.Cancel) }}</li>
+                        <li>{{ form_widget(formRegistration.create) }}</li>
+                        <li>{{ form_widget(formRegistration.cancel) }}</li>
                     </ul>
                 </div>
             </div>
             {{ form_end(formRegistration) }}
         {% else %}
             {{ form_start(formLogin) }}
-            <h3>{{ 'Connection'|trans }}</h3>
+            <h3>{{ 'user.connection'|trans }}</h3>
             <div class="row gtr-uniform">
                 <div class="col-12">
-                    {{ form_widget(formLogin.Username) }}
-                    {{ form_widget(formLogin.Password) }}
+                    {{ form_widget(formLogin.username) }}
+                    {{ form_widget(formLogin.password) }}
                 </div>
                 <div class="col-12">
                     <ul class="actions">
-                        <li>{{ form_widget(formLogin.Connection) }}</li>
-                        <li>{{ form_widget(formLogin.Cancel) }}</li>
+                        <li>{{ form_widget(formLogin.connection) }}</li>
+                        <li>{{ form_widget(formLogin.cancel) }}</li>
                     </ul>
                 </div>
             </div>

@@ -4,22 +4,22 @@
     <article class="post">
         <header>
             <div class="title">
-                <h1>{{ "Profile of"|trans }} {{ user.username }}</h1>
+                <h1>{{ "user.profile"|trans }} {{ user.username }}</h1>
             </div>
             <div class="meta">
                 <time class="published"><i class="icon fa-archive"></i>{{ user.createdAt|date("d/m/Y") }}</time>
             </div>
         </header>
         <img class="image featured" src="{{ asset('assets/images/pic01.jpg') }}"
-             alt="{{ 'Picture of the post'|trans }}"/>
+             alt="{{ 'user.pic'|trans }}"/>
         <div>
             <p>
-                {% if user.description is not empty %}{{ user.description }}{% else %}Aucune description{% endif %}
+                {% if user.description is not empty %}{{ user.description }}{% endif %}
             </p>
         </div>
         <footer>
             <ul class="stats">
-                <li>{{ 'Last Connection'|trans }} : {{ user.lastConnection|date("d/m/Y") }}</li>
+                <li>{{ 'user.last'|trans }} : {{ user.lastConnection|date("d/m/Y") }}</li>
             </ul>
         </footer>
     </article>

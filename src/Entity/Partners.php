@@ -27,7 +27,7 @@ class Partners
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     private $link;
 
@@ -36,53 +36,53 @@ class Partners
      */
     private $validation;
 
-    public function getId(): ?int
+    public function getId():  ? int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName() :  ? string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name) : self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription():  ? string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description) : self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getLink(): ?string
+    public function getLink():  ? string
     {
         return $this->link;
     }
 
-    public function setLink(string $link): self
+    public function setLink(string $link) : self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    public function getValidation(): ?bool
+    public function getValidation():  ? bool
     {
         return $this->validation;
     }
 
-    public function setValidation(bool $validation): self
+    public function setValidation(bool $validation) : self
     {
         $this->validation = $validation;
 

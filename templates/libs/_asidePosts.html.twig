@@ -1,15 +1,23 @@
 {% for post in posts %}
     <article class="mini-post">
         <header>
-            <h3><a href="{{ path('blog_post', {'id': post.p_id, 'slug': post.p_title|slugify}) }}">{{ post.p_title }}</a></h3>
-            <time class="published" datetime="2015-10-20"><i class="icon fa-pencil"></i>{{ post.p_createdAt|date("d/m/Y") }}</time>
-            <a href="{{ path('user_profile', {'id': post.p_authorId}) }}" class="author">
-                <span class="name">{{ post.u_username }}</span>
-                <img src="{{ asset('assets/images/avatar.jpg') }}" alt="{{ 'Picture of the author'|trans }}"/>
+            <h3><a href="{{ path('blog_post', {'id': post.post.id, 'slug': post.post.title|slugify}) }}">{{ post.post.title }}</a></h3>
+            <time class="published" datetime="2015-10-20"><i class="icon fa-pencil"></i>{{ post.post.createdAt|date("d/m/Y") }}</time>
+            <a href="{{ path('user_profile', {'id': post.user.id}) }}" class="author">
+                <span class="name">{{ post.user.username }}</span>
             </a>
         </header>
-        <a href="{{ path('blog_post', {'id': post.p_id, 'slug': post.p_title|slugify}) }}" class="image">
-            <img src="{{ asset('assets/images/pic04.jpg') }}" alt="{{ 'Picture of the post'|trans }}"/>
+        <a href="{{ path('blog_post', {'id': post.post.id, 'slug': post.post.title|slugify}) }}" class="image">
+            <img src="{{ asset('assets/images/pic04.jpg') }}" alt="{{ 'post.pic'|trans }}"/>
         </a>
     </article>
 {% endfor %}
+{% if posts is empty %}
+    <article class="mini-post">
+        <div>
+            <p>
+                {{ 'app.no_result'|trans }}
+            </p>
+        </div>
+    </article>
+{% endif %}

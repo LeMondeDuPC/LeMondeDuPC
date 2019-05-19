@@ -9,8 +9,7 @@
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
                 'localizedPaths' => [
                     [
-                        'fr' => '/inscription',
-                        '/registration',
+                        'fr' => '/membre/inscription',
                     ],
                 ],
                 'name' => [

@@ -9,8 +9,7 @@
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
                 'localizedPaths' => [
                     [
-                        'fr' => '/connexion',
-                        '/connection',
+                        'fr' => '/membre/connexion',
                     ],
                 ],
                 'name' => [

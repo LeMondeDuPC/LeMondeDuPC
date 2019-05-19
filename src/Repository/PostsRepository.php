@@ -6,6 +6,7 @@ use App\Entity\Posts;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use \PDO;
 
 /**
  * @method Posts|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,46 +21,8 @@ class PostsRepository extends ServiceEntityRepository
         parent::__construct($registry, Posts::class);
     }
 
-    public function findValidatedPosts($filter = null)
-    {
-        $query = $this->createQueryBuilder('p');
-        $query->innerJoin(Users::class, 'u', 'WITH', 'p.authorId = u.id')
-            ->addSelect('u')
-            ->where('p.validation = :postValidation')
-            ->setParameter('postValidation', Posts::CONSTANTS['validated']);
-        if ($filter !== null) {
-            //code
-        }
-        return $query->getQuery()->getScalarResult();
-    }
-
-    public function findValidatedPost($id)
-    {
-        $query = $this->createQueryBuilder('p');
-        $query->innerJoin(Users::class, 'u', 'WITH', 'p.authorId = u.id')
-            ->addSelect('u')
-            ->where('p.validation = :postValidation')
-            ->andWhere('p.id = :postId')
-            ->setParameter('postValidation', Posts::CONSTANTS['validated'])
-            ->setParameter('postId', $id)
-            ->groupBy('p.id');
-        return $query->getQuery()->getScalarResult();
-    }
-
-//SELECT posts.title, interactions.type, COUNT(interactions.type) FROM posts INNER JOIN interactions ON (posts.id = interactions.post_id)
-//GROUP BY interactions.type;
-
-//SELECT
-//posts.id,
-//posts.title,
-//posts.description,
-//posts.content,
-//posts.created_at,
-//GROUP_CONCAT(tags.name) AS tags,
-//users.username
-//FROM posts
-//INNER JOIN tags ON FIND_IN_SET(tags.id, posts.tags_id) != 0
-//INNER JOIN users ON posts.author_id = users.id
-//WHERE posts.validation = 1
-//GROUP BY posts.title ORDER BY posts.id;
+     /*$sql = '
+            SELECT p.id, p.title, p.description, p.content, p.created_at, p.author_id, u.username, p.updated_at, GROUP_CONCAT(t.name) AS tags_name FROM posts AS p LEFT JOIN tags AS t ON t.post_id = p.id LEFT JOIN users as u ON p.author_id = u.id WHERE p.id = ? AND p.validation = ? GROUP BY p.id
+        ';
+     */
 }
