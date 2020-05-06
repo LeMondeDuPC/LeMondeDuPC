@@ -35,7 +35,7 @@ class PostsController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        if (!$this->isGranted('ACCESS_MANAGE_PRODUCTS')) {
+        if (!$this->isGranted('ROLE_CREATE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $post = new Posts();
@@ -79,7 +79,7 @@ class PostsController extends AbstractController
      */
     public function edit(Request $request, Posts $post): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ROLE_MANAGE_PRODUCTS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ROLE_MANAGE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(PostsType::class, $post);
@@ -105,7 +105,7 @@ class PostsController extends AbstractController
      */
     public function delete(Request $request, Posts $post): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ACCESS_MANAGE_PRODUCTS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ROLE_MANAGE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
