@@ -3,10 +3,11 @@ security:
         App\Entity\Users:
             algorithm: bcrypt
 
-
-
-
-
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_WRITER: [ROLE_USER, ACCESS_OWN_PRODUCTS]
+        ROLE_ADMIN: [ROLE_WRITER, ACCESS_MANAGE_LOCATIONS, ACCESS_MANAGE_PARTNERS]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ACCESS_MANAGE_USERS, ACCESS_MANAGE_PRODUCTS]
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -16,24 +17,26 @@ security:
                 class: App\Entity\Users
                 property: username
         # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: users_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

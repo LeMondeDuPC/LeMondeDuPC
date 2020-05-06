@@ -3,19 +3,22 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="This username already exists in the database"
+ * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="This email already exists in the database"
+ * )
  */
 class Users implements UserInterface
 {
-
-    const CONSTANTS = [
-        'sizeKey' => 5
-    ];
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,8 +28,6 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank
-     * @Assert\Type("string")
      */
     private $username;
 
@@ -38,43 +39,28 @@ class Users implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\Type("string")
-     * @Assert\Length(min="4")
      */
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $validation;
-
-    /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $confirmKey;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank
-     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    private $confirm_key;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $lastConnection;
+    private $time_publication;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $validated;
 
     public function getId(): ?int
     {
@@ -88,7 +74,7 @@ class Users implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
@@ -122,7 +108,7 @@ class Users implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -149,30 +135,6 @@ class Users implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getValidation(): ?bool
-    {
-        return $this->validation;
-    }
-
-    public function setValidation(bool $validation): self
-    {
-        $this->validation = $validation;
-
-        return $this;
-    }
-
-    public function getConfirmKey(): ?string
-    {
-        return $this->confirmKey;
-    }
-
-    public function setConfirmKey(string $confirmKey): self
-    {
-        $this->confirmKey = $confirmKey;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -185,38 +147,38 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getConfirmKey(): ?string
     {
-        return $this->createdAt;
+        return $this->confirm_key;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setConfirmKey(string $confirm_key): self
     {
-        $this->createdAt = $createdAt;
+        $this->confirm_key = $confirm_key;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getTimePublication(): ?\DateTimeInterface
     {
-        return $this->description;
+        return $this->time_publication;
     }
 
-    public function setDescription(?string $description): self
+    public function setTimePublication(\DateTimeInterface $time_publication): self
     {
-        $this->description = $description;
+        $this->time_publication = $time_publication;
 
         return $this;
     }
 
-    public function getLastConnection(): ?\DateTimeInterface
+    public function getValidated(): ?int
     {
-        return $this->lastConnection;
+        return $this->validated;
     }
 
-    public function setLastConnection(?\DateTimeInterface $lastConnection): self
+    public function setValidated(int $validated): self
     {
-        $this->lastConnection = $lastConnection;
+        $this->validated = $validated;
 
         return $this;
     }

@@ -3,18 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostsRepository")
+ * @UniqueEntity(
+ *     fields={"title"},
+ *     message="This title already exists in the database"
+ * )
  */
 class Posts
 {
-
-    const CONSTANTS = [
-      'validated' => true,
-      'unvalidated' => false
-    ];
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -28,7 +27,7 @@ class Posts
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
@@ -40,37 +39,22 @@ class Posts
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $timePublication;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $access;
+    private $idLocation;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $validation;
+    private $idUser;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $authorId;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $tagsIds = [];
-
-    public function __construct()
-    {
-        $this->setCreatedAt(new \DateTime());
-    }
+    private $validated;
 
     public function getId(): ?int
     {
@@ -113,77 +97,52 @@ class Posts
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getTimePublication(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->timePublication;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setTimePublication(\DateTimeInterface $timePublication): self
     {
-        $this->createdAt = $createdAt;
+        $this->timePublication = $timePublication;
 
         return $this;
     }
 
-    public function getAccess(): ?int
+    public function getIdLocation(): ?int
     {
-        return $this->access;
+        return $this->idLocation;
     }
 
-    public function setAccess(int $access): self
+    public function setIdLocation(int $idLocation): self
     {
-        $this->access = $access;
+        $this->idLocation = $idLocation;
 
         return $this;
     }
 
-    public function getValidation(): ?bool
+    public function getIdUser(): ?int
     {
-        return $this->validation;
+        return $this->idUser;
     }
 
-    public function setValidation(bool $validation): self
+    public function setIdUser(?int $idUser): self
     {
-        $this->validation = $validation;
+        $this->idUser = $idUser;
 
         return $this;
     }
 
-    public function getAuthorId(): ?int
+    public function getValidated(): ?int
     {
-        return $this->authorId;
+        return $this->validated;
     }
 
-    public function setAuthorId(int $authorId): self
+    public function setValidated(int $validated): self
     {
-        $this->authorId = $authorId;
+        $this->validated = $validated;
 
         return $this;
     }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getTagsIds(): ?array
-    {
-        return $this->tagsIds;
-    }
-
-    public function setTagsIds(?array $tagsIds): self
-    {
-        $this->tagsIds = $tagsIds;
-
-        return $this;
-    }
-
 
 }

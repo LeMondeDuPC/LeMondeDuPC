@@ -8,8 +8,8 @@ return [[
 'IteratorAggregate' => 1,
 'Traversable' => 2,
 'Symfony.Component.Form.FormInterface' => 3,
-'ArrayAccess' => 4,
-'Countable' => 5,
+'Countable' => 4,
+'ArrayAccess' => 5,
 'Symfony.Component.Form.ClearableErrorsInterface' => 6,
 
 ], [
@@ -151,10 +151,10 @@ return [[
         [
             'stdClass' => [
                 'name' => [
-                    'ArrayAccess',
+                    'Countable',
                 ],
                 'defaultGroup' => [
-                    'ArrayAccess',
+                    'Countable',
                 ],
             ],
         ],
@@ -171,10 +171,10 @@ return [[
         [
             'stdClass' => [
                 'name' => [
-                    'Countable',
+                    'ArrayAccess',
                 ],
                 'defaultGroup' => [
-                    'Countable',
+                    'ArrayAccess',
                 ],
             ],
         ],

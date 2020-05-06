@@ -1,0 +1,50 @@
+# Articles, catégories, pagination, commentaires et recherche
+RewriteRule ^article/([0-9]+)/(.*)$ articles/article.php?article=$1 [L]
+RewriteRule ^categorie/(.*)/page/([0-9]+)$ articles/categorie.php?categorie=$1&page=$2 [L]
+RewriteRule ^categorie/(.*)$ articles/categorie.php?categorie=$1 [L]
+RewriteRule ^recherche/(.*)/page/([0-9]+)$ articles/resultat.php?q=$1&page=$2 [L]
+RewriteRule ^recherche/(.*)$ articles/resultat.php?q=$1 [L]
+RewriteRule ^page/([0-9]+)$ index.php?page=$1 [L]
+
+# Espace membre
+RewriteRule ^membre/inscription$ espace-membre/inscription.php [L]
+RewriteRule ^membre/connexion$ espace-membre/connexion.php [L]
+RewriteRule ^membre/([0-9]+)/profil$ espace-membre/profil.php?id=$1 [L]
+RewriteRule ^membre/([0-9]+)/deconnexion$ espace-membre/deconnexion.php?id=$1 [L]
+RewriteRule ^membre/([0-9]+)/edition/(.*)$ espace-membre/editionprofil.php?id=$1&token=$2 [L]
+RewriteRule ^membre/([0-9]+)/parametre/(.*)$ espace-membre/parametre.php?id=$1&token=$2 [L]
+RewriteRule ^membre/confirmer/(.*)/(.*)$ espace-membre/confirmation.php?pseudo=$1&key=$2 [L]
+
+# Newsletter
+RewriteRule ^newsletter/(.*)/(.*)/(.*)$ divers/newsletter.php?id=$2&key=$3&action=$1 [L]
+
+# Administration
+RewriteRule ^administration/connexion$ groups/admin/dist/page-login.php [L]
+RewriteRule ^administration/accueil/([0-9]+)/(.*)$ groups/admin/dist/index.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/accueil/supprimer/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/index.php?id_membre=$2&token=$3&supprim=$1 [L]
+RewriteRule ^administration/ban/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/bannissement.php?id_ban=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/download/(.*)/([0-9]+)/(.*)$ groups/admin/dist/download.php?file=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/deconnexion/([0-9]+)/(.*)$ groups/admin/dist/deconnexion.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/liste-membre/([0-9]+)/(.*)$ groups/admin/dist/liste-membre.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/mode-maintenance/([0-9]+)/(.*)$ groups/admin/dist/mode_maintenance.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/liste-article/([0-9]+)/(.*)$ groups/admin/dist/liste-article.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/liste-backup/([0-9]+)/(.*)$ groups/admin/dist/liste-backup.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/redaction/([0-9]+)/(.*)$ groups/admin/dist/redaction.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/categorie/([0-9]+)/(.*)$ groups/admin/dist/categorie.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/categorie/supprimer/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/categorie.php?supprime=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/categorie/online/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/categorie.php?online=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/modifier/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/redaction.php?edit=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/liste-article/supprimer/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/liste-article.php?supprimer=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/liste-membre/moderateur/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/liste-membre.php?modo=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/liste-membre/membre/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/liste-membre.php?m=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/liste-membre/redacteur/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/liste-membre.php?r=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/liste-membre/supprimer/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/liste-membre.php?supprime=$1&id_membre=$2&token=$3 [L]
+RewriteRule ^administration/mode-maintenance/([0-9]+)/(.*)$ groups/admin/dist/mode_maintenance.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/modifier/profil/([0-9]+)/(.*)$ groups/admin/dist/modif_profil.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/partenaire/([0-9]+)/(.*)$ groups/admin/dist/partenaire.php?id_membre=$1&token=$2 [L]
+RewriteRule ^administration/partenaire/supprimer/([0-9]+)/([0-9]+)/(.*)$ groups/admin/dist/partenaire.php?supprimer=$1&id_membre=$2&token=$3 [L]
+
+
+# divers
+RewriteRule ^divers/a-propos$ divers/propos.php [L]
+RewriteRule ^divers/contact$ divers/contact.php [L]

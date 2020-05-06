@@ -3,10 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Posts;
-use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use \PDO;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Posts|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,13 +14,37 @@ use \PDO;
  */
 class PostsRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Posts::class);
     }
 
-     /*$sql = '
-            SELECT p.id, p.title, p.description, p.content, p.created_at, p.author_id, u.username, p.updated_at, GROUP_CONCAT(t.name) AS tags_name FROM posts AS p LEFT JOIN tags AS t ON t.post_id = p.id LEFT JOIN users as u ON p.author_id = u.id WHERE p.id = ? AND p.validation = ? GROUP BY p.id
-        ';
-     */
+    // /**
+    //  * @return Posts[] Returns an array of Posts objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Posts
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }

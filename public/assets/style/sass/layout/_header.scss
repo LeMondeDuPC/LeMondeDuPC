@@ -39,7 +39,7 @@ body {
     }
   }
 
-  h2 {
+  h1 {
     height: inherit;
     line-height: inherit;
     padding: 0 0 0 1.5em;
@@ -82,10 +82,6 @@ body {
           font-weight: _font(weight-heading);
           letter-spacing: _font(kerning-heading);
           text-transform: uppercase;
-          &.active {
-            color: _palette(accent);
-            border-bottom: solid 2px _palette(accent);
-          }
         }
       }
     }

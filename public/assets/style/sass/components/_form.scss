@@ -43,11 +43,9 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="search"],
 input[type="tel"],
 select,
 textarea {
-  appearance: none;
   background: _palette(border-bg);
   border: solid 1px _palette(border);
   border-radius: 0;
@@ -118,7 +116,6 @@ select {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="search"],
 select {
   height: _size(element-height);
 }

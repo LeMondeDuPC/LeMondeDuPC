@@ -3,6 +3,7 @@
 /// @param {list} $list List.
 /// @param {integer} $index Index.
 /// @return {list} Updated list.
+
 @function remove-nth($list, $index) {
 
   $result: null;
@@ -25,7 +26,6 @@
       }
 
     }
-
   }
 
   @return $result;

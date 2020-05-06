@@ -1,8 +1,0 @@
-easy_admin:
-    site_name: 'Le Monde Du PC'
-    entities:
-        - App\Entity\Posts
-        - App\Entity\Partners
-        - App\Entity\Tags
-        - App\Entity\Users
-        - App\Entity\Interactions
