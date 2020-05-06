@@ -32,6 +32,8 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/login", name="users_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -57,6 +59,9 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/new", name="users_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -92,6 +97,8 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/{id}", name="users_show", methods={"GET"})
+     * @param Users $user
+     * @return Response
      */
     public function show(Users $user): Response
     {
@@ -102,10 +109,13 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="users_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Users $user
+     * @return Response
      */
     public function edit(Request $request, Users $user): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ACCESS_MANAGE_USERS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ROLE_MANAGE_USERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(UsersType::class, $user);
@@ -125,10 +135,13 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/{id}", name="users_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Users $user
+     * @return Response
      */
     public function delete(Request $request, Users $user): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ACCESS_MANAGE_USERS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ROLE_MANAGE_USERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {

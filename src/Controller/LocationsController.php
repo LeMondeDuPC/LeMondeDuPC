@@ -17,6 +17,8 @@ class LocationsController extends AbstractController
 {
     /**
      * @Route("/", name="locations_index", methods={"GET"})
+     * @param LocationsRepository $locationsRepository
+     * @return Response
      */
     public function index(LocationsRepository $locationsRepository): Response
     {
@@ -27,10 +29,12 @@ class LocationsController extends AbstractController
 
     /**
      * @Route("/new", name="locations_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
-        if (!$this->isGranted('ACCESS_MANAGE_LOCATIONS')) {
+        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $location = new Locations();
@@ -53,6 +57,8 @@ class LocationsController extends AbstractController
 
     /**
      * @Route("/{id}", name="locations_show", methods={"GET"})
+     * @param Locations $location
+     * @return Response
      */
     public function show(Locations $location): Response
     {
@@ -63,10 +69,13 @@ class LocationsController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="locations_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Locations $location
+     * @return Response
      */
     public function edit(Request $request, Locations $location): Response
     {
-        if (!$this->isGranted('ACCESS_MANAGE_LOCATIONS')) {
+        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(LocationsType::class, $location);
@@ -86,10 +95,13 @@ class LocationsController extends AbstractController
 
     /**
      * @Route("/{id}", name="locations_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Locations $location
+     * @return Response
      */
     public function delete(Request $request, Locations $location): Response
     {
-        if (!$this->isGranted('ACCESS_MANAGE_LOCATIONS')) {
+        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {

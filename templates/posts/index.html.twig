@@ -3,10 +3,14 @@
 {% block title %}Posts index{% endblock %}
 
 {% block body %}
-    <h1>Posts index</h1>
-
-    <table class="table">
-        <thead>
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2><a href="#">Posts index</a></h2>
+            </div>
+        </header>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
@@ -18,30 +22,34 @@
                 <th>Validated</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.description }}</td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.timePublication ? post.timePublication|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.idLocation }}</td>
-                <td>{{ post.idUser }}</td>
-                <td>{{ post.validated }}</td>
-                <td>
-                    <a href="{{ path('posts_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('posts_new') }}">Create new</a>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.content }}</td>
+                    <td>{{ post.timePublication ? post.timePublication|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ post.idLocation }}</td>
+                    <td>{{ post.idUser }}</td>
+                    <td>{{ post.validated }}</td>
+                    <td>
+                        <a href="{{ path('posts_show', {'id': post.id}) }}">show</a>
+                        <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <footer>
+            <ul class="actions">
+                <li><a class="button large" href="{{ path('posts_new') }}">Create new</a></li>
+            </ul>
+        </footer>
+    </article>
 {% endblock %}

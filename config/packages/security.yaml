@@ -4,10 +4,10 @@ security:
             algorithm: bcrypt
 
     role_hierarchy:
-        ROLE_USER: ROLE_USER
-        ROLE_WRITER: [ROLE_USER, ACCESS_OWN_PRODUCTS]
-        ROLE_ADMIN: [ROLE_WRITER, ACCESS_MANAGE_LOCATIONS, ACCESS_MANAGE_PARTNERS]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ACCESS_MANAGE_USERS, ACCESS_MANAGE_PRODUCTS]
+        ROLE_USER : [ROLE_USER]
+        ROLE_WRITER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_WRITER, ROLE_MANAGE_LOCATIONS, ROLE_MANAGE_PARTNERS]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_MANAGE_USERS, ROLE_MANAGE_PRODUCTS]
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:

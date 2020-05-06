@@ -18,6 +18,8 @@ class PostsController extends AbstractController
 {
     /**
      * @Route("/", name="posts_index", methods={"GET"})
+     * @param PostsRepository $postsRepository
+     * @return Response
      */
     public function index(PostsRepository $postsRepository): Response
     {
@@ -28,6 +30,8 @@ class PostsController extends AbstractController
 
     /**
      * @Route("/posts/new", name="posts_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -57,6 +61,8 @@ class PostsController extends AbstractController
 
     /**
      * @Route("/posts/{id}", name="posts_show", methods={"GET"})
+     * @param Posts $post
+     * @return Response
      */
     public function show(Posts $post): Response
     {
@@ -67,10 +73,13 @@ class PostsController extends AbstractController
 
     /**
      * @Route("/posts/{id}/edit", name="posts_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Posts $post
+     * @return Response
      */
     public function edit(Request $request, Posts $post): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ACCESS_MANAGE_PRODUCTS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getIdUser() and !$this->isGranted('ROLE_MANAGE_PRODUCTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(PostsType::class, $post);
@@ -90,6 +99,9 @@ class PostsController extends AbstractController
 
     /**
      * @Route("/posts/{id}", name="posts_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Posts $post
+     * @return Response
      */
     public function delete(Request $request, Posts $post): Response
     {
