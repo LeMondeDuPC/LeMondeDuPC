@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/")
- */
 class PostsController extends AbstractController
 {
     /**
@@ -24,12 +21,25 @@ class PostsController extends AbstractController
     public function index(PostsRepository $postsRepository): Response
     {
         return $this->render('posts/index.html.twig', [
-            'posts' => $postsRepository->findAll(),
+            'posts' => $postsRepository->findPosts(Posts::VALIDATED),
+        ]);
+
+    }
+
+    /**
+     * @Route("/{id}-{slug}", name="posts_show", methods={"GET"})
+     * @param Posts $post
+     * @return Response
+     */
+    public function show(Posts $post): Response
+    {
+        return $this->render('posts/show.html.twig', [
+            'post' => $post,
         ]);
     }
 
     /**
-     * @Route("/posts/new", name="posts_new", methods={"GET","POST"})
+     * @Route("/admin/posts/nouveau", name="posts_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -60,19 +70,7 @@ class PostsController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{id}", name="posts_show", methods={"GET"})
-     * @param Posts $post
-     * @return Response
-     */
-    public function show(Posts $post): Response
-    {
-        return $this->render('posts/show.html.twig', [
-            'post' => $post,
-        ]);
-    }
-
-    /**
-     * @Route("/posts/{id}/edit", name="posts_edit", methods={"GET","POST"})
+     * @Route("/admin/posts/{id}/modifier", name="posts_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Posts $post
      * @return Response
@@ -98,7 +96,7 @@ class PostsController extends AbstractController
     }
 
     /**
-     * @Route("/posts/{id}", name="posts_delete", methods={"DELETE"})
+     * @Route("/admin/posts/{id}", name="posts_delete", methods={"DELETE"})
      * @param Request $request
      * @param Posts $post
      * @return Response

@@ -28,7 +28,19 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="locations_new", methods={"GET","POST"})
+     * @Route("/{name}", name="locations_show", methods={"GET"})
+     * @param Locations $location
+     * @return Response
+     */
+    public function show(Locations $location): Response
+    {
+        return $this->render('locations/show.html.twig', [
+            'location' => $location,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/locations/new", name="locations_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -56,19 +68,7 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="locations_show", methods={"GET"})
-     * @param Locations $location
-     * @return Response
-     */
-    public function show(Locations $location): Response
-    {
-        return $this->render('locations/show.html.twig', [
-            'location' => $location,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="locations_edit", methods={"GET","POST"})
+     * @Route("/admin/locations/{id}/edit", name="locations_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Locations $location
      * @return Response
@@ -94,7 +94,7 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="locations_delete", methods={"DELETE"})
+     * @Route("/admin/locations/{id}", name="locations_delete", methods={"DELETE"})
      * @param Request $request
      * @param Locations $location
      * @return Response

@@ -23,7 +23,7 @@
                 <td>{{ partner.link }}</td>
                 <td>{{ partner.description }}</td>
                 <td>
-                    <a href="{{ path('partners_show', {'id': partner.id}) }}">show</a>
+                    <a href="{{ path('partners_show', {'id': partner.id, 'slug' : partner.name|slugify}) }}">show</a>
                     <a href="{{ path('partners_edit', {'id': partner.id}) }}">edit</a>
                 </td>
             </tr>

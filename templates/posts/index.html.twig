@@ -1,55 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posts index{% endblock %}
+{% block title %}Du numérique expliqué simplement{% endblock %}
 
 {% block body %}
-    <article class="post">
-        <header>
-            <div class="title">
-                <h2><a href="#">Posts index</a></h2>
-            </div>
-        </header>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Content</th>
-                <th>TimePublication</th>
-                <th>IdLocation</th>
-                <th>IdUser</th>
-                <th>Validated</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for post in posts %}
-                <tr>
-                    <td>{{ post.id }}</td>
-                    <td>{{ post.title }}</td>
-                    <td>{{ post.description }}</td>
-                    <td>{{ post.content }}</td>
-                    <td>{{ post.timePublication ? post.timePublication|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ post.idLocation }}</td>
-                    <td>{{ post.idUser }}</td>
-                    <td>{{ post.validated }}</td>
-                    <td>
-                        <a href="{{ path('posts_show', {'id': post.id}) }}">show</a>
-                        <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="9">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <footer>
-            <ul class="actions">
-                <li><a class="button large" href="{{ path('posts_new') }}">Create new</a></li>
-            </ul>
-        </footer>
-    </article>
+    {% for post in posts %}
+        <article class="post">
+            <header>
+                <div class="title">
+                    <h2>
+                        <a href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}">{{ post.post_title }}</a>
+                    </h2>
+                </div>
+                <div class="meta">
+                    <time class="published">{{ post.post_time_publication|date('Y-m-d H:i:s') }}</time>
+                    <span class="author name">{{ post.user_name }}</span>
+                    {% if post.location_name is not null %}
+                        <span><a href="{{ path('locations_show', {'name': post.location_name|slugify }) }}">{{ post.location_name }}</a></span>
+                    {% endif %}
+                </div>
+            </header>
+            <a href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}"
+               class="image featured">
+                <img src="" alt="Image de l'article"/>
+            </a>
+            <p>{{ post.post_description }}</p>
+            <footer>
+                <ul class="actions">
+                    <li><a class="button"
+                           href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}">Lire</a>
+                    </li>
+                </ul>
+                <ul class="stats">
+                    <li><a href="{{ path('posts_new') }}">Ajouter un article</a></li>
+                    <li><a href="{{ path('posts_edit', {'id': post.post_id}) }}">Modifier</a></li>
+                </ul>
+            </footer>
+        </article>
+    {% else %}
+        <article class="post">
+            <header>
+                <div class="title">
+                    <h2>Oups</h2>
+                </div>
+            </header>
+            <p>Aucun article n'est disponible pour le moment</p>
+        </article>
+    {% endfor %}
+
 {% endblock %}
+

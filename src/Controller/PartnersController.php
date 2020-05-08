@@ -10,13 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/partners")
- */
 class PartnersController extends AbstractController
 {
     /**
-     * @Route("/", name="partners_index", methods={"GET"})
+     * @Route("/partenaires", name="partners_index", methods={"GET"})
      * @param PartnersRepository $partnersRepository
      * @return Response
      */
@@ -28,7 +25,19 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="partners_new", methods={"GET","POST"})
+     * @Route("/partenaires/{id}-{slug}", name="partners_show", methods={"GET"})
+     * @param Partners $partner
+     * @return Response
+     */
+    public function show(Partners $partner): Response
+    {
+        return $this->render('partners/show.html.twig', [
+            'partner' => $partner,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/partenaires/nouveau", name="partners_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -56,19 +65,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="partners_show", methods={"GET"})
-     * @param Partners $partner
-     * @return Response
-     */
-    public function show(Partners $partner): Response
-    {
-        return $this->render('partners/show.html.twig', [
-            'partner' => $partner,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="partners_edit", methods={"GET","POST"})
+     * @Route("/admin/partenaires/{id}/edit", name="partners_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Partners $partner
      * @return Response
@@ -94,7 +91,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="partners_delete", methods={"DELETE"})
+     * @Route("/admin/partenaires/{id}", name="partners_delete", methods={"DELETE"})
      * @param Request $request
      * @param Partners $partner
      * @return Response

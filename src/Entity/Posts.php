@@ -14,6 +14,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Posts
 {
+
+    public const VALIDATED = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
