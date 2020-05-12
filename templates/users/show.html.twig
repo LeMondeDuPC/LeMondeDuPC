@@ -3,32 +3,36 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('users_index') }}">back to list</a>
-
-    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('users/_delete_form.html.twig') }}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>
+                    Compte utilisateur
+                </h2>
+            </div>
+            <div class="meta">
+                <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
+                <a href="#" class="author">
+                    <span class="name">{{ user.username }}</span>
+                    <img src="" alt=""/>
+                </a>
+            </div>
+        </header>
+        <section>
+            <p>Niveau : {{ user.roles ? user.roles|json_encode : '' }}</p>
+            <div class="box alt">
+                <div class="row gtr-uniform">
+                    {% for post in posts %}
+                        <div class="col-4">
+                            <a class="image featured"
+                               href="{{ path('posts_show', {'id' : post.post_id, 'slug' : post.post_title|slugify }) }}">
+                                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt=""/>
+                                <span>{{ post.post_title }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </article>
 {% endblock %}

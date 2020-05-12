@@ -13,15 +13,12 @@
                 </div>
                 <div class="meta">
                     <time class="published">{{ post.post_time_publication|date('Y-m-d H:i:s') }}</time>
-                    <span class="author name">{{ post.user_name }}</span>
-                    {% if post.location_name is not null %}
-                        <span><a href="{{ path('locations_show', {'name': post.location_name|slugify }) }}">{{ post.location_name }}</a></span>
-                    {% endif %}
+                    <span class="author name">{{ post.user_name ? post.user_name : 'Anonyme' }}</span>
                 </div>
             </header>
             <a href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}"
                class="image featured">
-                <img src="" alt="Image de l'article"/>
+                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt="Image de l'article"/>
             </a>
             <p>{{ post.post_description }}</p>
             <footer>
@@ -31,8 +28,13 @@
                     </li>
                 </ul>
                 <ul class="stats">
-                    <li><a href="{{ path('posts_new') }}">Ajouter un article</a></li>
-                    <li><a href="{{ path('posts_edit', {'id': post.post_id}) }}">Modifier</a></li>
+                    {% if post.location_name is not null %}
+                        <li>
+                            <a href="{{ path('locations_show', {'name': post.location_name|slugify }) }}">{{ post.location_name }}</a>
+                        </li>
+                    {% else %}
+                        <li>{{ post.location_name ? post.location_name : 'Non répertorié' }}</li>
+                    {% endif %}
                 </ul>
             </footer>
         </article>

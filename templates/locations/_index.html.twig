@@ -1,0 +1,8 @@
+{% for location in locations %}
+    <article class="mini-post">
+        <header>
+            <h3><a href="{{ path('locations_show', {'name' : location.location_name|slugify}) }}">{{ location.location_name }}</a></h3>
+            <span class="author">{{ location.posts_number }}</span>
+        </header>
+    </article>
+{% endfor %}

@@ -3,48 +3,52 @@
 {% block title %}Posts{% endblock %}
 
 {% block body %}
-    <h1>Posts</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ post.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ post.description }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ post.content }}</td>
-            </tr>
-            <tr>
-                <th>TimePublication</th>
-                <td>{{ post.timePublication ? post.timePublication|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IdLocation</th>
-                <td>{{ post.idLocation }}</td>
-            </tr>
-            <tr>
-                <th>IdUser</th>
-                <td>{{ post.idUser }}</td>
-            </tr>
-            <tr>
-                <th>Validated</th>
-                <td>{{ post.validated }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('posts_index') }}">back to list</a>
-
-    <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
-
-    {{ include('posts/_delete_form.html.twig') }}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>
+                    {{ post.post_title }}
+                </h2>
+            </div>
+            <div class="meta">
+                <time class="published">{{ post.post_time_publication|date('Y-m-d H:i:s') }}</time>
+                <span class="author name">{{ post.user_name ? post.user_name : 'Anonyme' }}</span>
+                {% if post.location_name is not null %}
+                    <span><a href="{{ path('locations_show', {'name': post.location_name|slugify }) }}">{{ post.location_name }}</a></span>
+                {% else %}
+                    <span>{{ post.location_name ? post.location_name : 'Non répertorié' }}</span>
+                {% endif %}
+                <ul class="icons">
+                    <li>
+                        <a href="https://twitter.com/share?url={{ app.request.uri }}&text={{ post.post_title|slugify }}"
+                           target="_blank" class="icon fa-twitter">
+                            <span class="label">Twitter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ post.post_title|slugify }}"
+                           target="_blank" class="icon fa-facebook">
+                            <span class="label">Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/share?url={{ app.request.uri }}&hl=fr"
+                           target="_blank" class="icon fa-google-plus">
+                            <span class="label">Google +</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title={{ post.post_title|slugify }}"
+                           target="_blank" class="icon fa-linkedin">
+                            <span class="label">LinkedIn</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <img src="" alt="" class="image featured"/>
+        <section>
+            {{ post.post_content|raw }}
+        </section>
+    </article>
 {% endblock %}

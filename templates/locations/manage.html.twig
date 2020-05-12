@@ -7,11 +7,11 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for location in locations %}
@@ -19,7 +19,7 @@
                 <td>{{ location.id }}</td>
                 <td>{{ location.name }}</td>
                 <td>
-                    <a href="{{ path('locations_show', {'id': location.id}) }}">show</a>
+                    <a href="{{ path('locations_show', {'name': location.name}) }}">show</a>
                     <a href="{{ path('locations_edit', {'id': location.id}) }}">edit</a>
                 </td>
             </tr>

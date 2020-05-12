@@ -19,6 +19,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Users implements UserInterface
 {
+    public const VALIDATED = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

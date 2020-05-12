@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Posts;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,6 +33,17 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         }
 
         $user->setPassword($newEncodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
+
+    public function upgradeValidation(UserInterface $user): void
+    {
+        if (!$user instanceof Users) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setValidated(Posts::VALIDATED);
         $this->_em->persist($user);
         $this->_em->flush();
     }

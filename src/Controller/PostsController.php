@@ -13,29 +13,54 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostsController extends AbstractController
 {
+    private $_postRepository;
+
+    public function __construct(PostsRepository $postsRepository)
+    {
+        $this->_postRepository = $postsRepository;
+    }
+
     /**
      * @Route("/", name="posts_index", methods={"GET"})
-     * @param PostsRepository $postsRepository
      * @return Response
      */
-    public function index(PostsRepository $postsRepository): Response
+    public function index(): Response
     {
         return $this->render('posts/index.html.twig', [
-            'posts' => $postsRepository->findPosts(Posts::VALIDATED),
+            'posts' => $this->_postRepository->findPosts(Posts::VALIDATED),
         ]);
 
     }
 
     /**
      * @Route("/{id}-{slug}", name="posts_show", methods={"GET"})
-     * @param Posts $post
+     * @param $id
      * @return Response
      */
-    public function show(Posts $post): Response
+    public function show($id): Response
     {
         return $this->render('posts/show.html.twig', [
-            'post' => $post,
+            'post' => $this->_postRepository->findPost($id, Posts::VALIDATED)
         ]);
+    }
+
+    /**
+     * @Route("/admin/posts", name="posts_manage", methods={"GET"})
+     * @return Response
+     */
+    public function manage(): Response
+    {
+        if ($this->isGranted('ROLE_MANAGE_POSTS')) {
+            return $this->render('posts/manage.html.twig', [
+                'posts' => $this->_postRepository->findPosts(),
+            ]);
+        } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
+            return $this->render('posts/manage.html.twig', [
+                'posts' => $this->_postRepository->findPostsByAuthor($this->getUser()->getId()),
+            ]);
+        } else {
+            throw $this->createAccessDeniedException('No access!');
+        }
     }
 
     /**
@@ -86,7 +111,7 @@ class PostsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('posts_index');
+            return $this->redirectToRoute('posts_manage');
         }
 
         return $this->render('posts/edit.html.twig', [
@@ -112,6 +137,6 @@ class PostsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('posts_index');
+        return $this->redirectToRoute('posts_manage');
     }
 }

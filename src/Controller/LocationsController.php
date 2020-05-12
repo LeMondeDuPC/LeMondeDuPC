@@ -3,39 +3,61 @@
 namespace App\Controller;
 
 use App\Entity\Locations;
+use App\Entity\Posts;
 use App\Form\LocationsType;
 use App\Repository\LocationsRepository;
+use App\Repository\PostsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/locations")
- */
 class LocationsController extends AbstractController
 {
+
+    private $_locationsRepository;
+
+    public function __construct(LocationsRepository $locationsRepository)
+    {
+        $this->_locationsRepository = $locationsRepository;
+    }
+
     /**
-     * @Route("/", name="locations_index", methods={"GET"})
-     * @param LocationsRepository $locationsRepository
      * @return Response
      */
-    public function index(LocationsRepository $locationsRepository): Response
+    public function _index()
     {
-        return $this->render('locations/index.html.twig', [
-            'locations' => $locationsRepository->findAll(),
+        return $this->render('locations/_index.html.twig', [
+            'locations' => $this->_locationsRepository->findLocationsNb(Posts::VALIDATED)
         ]);
     }
 
     /**
-     * @Route("/{name}", name="locations_show", methods={"GET"})
+     * @Route("/location/{name}", name="locations_show", methods={"GET"})
+     * @param $name
      * @param Locations $location
+     * @param PostsRepository $postsRepository
      * @return Response
      */
-    public function show(Locations $location): Response
+    public function show($name, Locations $location, PostsRepository $postsRepository): Response
     {
         return $this->render('locations/show.html.twig', [
             'location' => $location,
+            'posts' => $postsRepository->findPostsByLocationName($name, Posts::VALIDATED),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/locations", name="locations_manage", methods={"GET"})
+     * @return Response
+     */
+    public function manage(): Response
+    {
+        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+            throw $this->createAccessDeniedException('No access!');
+        }
+        return $this->render('locations/manage.html.twig', [
+            'locations' => $this->_locationsRepository->findAll(),
         ]);
     }
 
@@ -58,7 +80,7 @@ class LocationsController extends AbstractController
             $entityManager->persist($location);
             $entityManager->flush();
 
-            return $this->redirectToRoute('locations_index');
+            return $this->redirectToRoute('locations_manage');
         }
 
         return $this->render('locations/new.html.twig', [
@@ -84,7 +106,7 @@ class LocationsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('locations_index');
+            return $this->redirectToRoute('locations_manage');
         }
 
         return $this->render('locations/edit.html.twig', [
@@ -110,6 +132,6 @@ class LocationsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('locations_index');
+        return $this->redirectToRoute('locations_manage');
     }
 }

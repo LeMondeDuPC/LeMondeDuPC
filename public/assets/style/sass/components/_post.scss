@@ -60,7 +60,9 @@
         letter-spacing: _font(kerning-heading);
         margin-top: 0.5em;
         text-transform: uppercase;
-        white-space: nowrap;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        text-align: justify;
       }
     }
   }

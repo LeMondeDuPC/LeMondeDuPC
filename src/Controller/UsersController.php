@@ -2,36 +2,26 @@
 
 namespace App\Controller;
 
+use App\Entity\Posts;
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Repository\PostsRepository;
 use App\Repository\UsersRepository;
 use DateTime;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * @Route("/users")
- */
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/", name="users_index", methods={"GET"})
-     * @param UsersRepository $userRepository
-     * @return Response
-     */
-    public function index(UsersRepository $userRepository): Response
-    {
-        return $this->render('users/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/login", name="users_login")
+     * @Route("/membre/connexion", name="users_login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -50,7 +40,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="users_logout")
+     * @Route("/membre/deconnexion", name="users_logout")
      */
     public function logout()
     {
@@ -58,19 +48,31 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="users_new", methods={"GET","POST"})
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @Route("/admin/membres", name="users_manage", methods={"GET"})
+     * @param UsersRepository $userRepository
      * @return Response
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function manage(UsersRepository $userRepository): Response
+    {
+        return $this->render('users/manage.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/membre/inscription", name="users_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param MailerInterface $mailer
+     * @return Response
+     */
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -85,9 +87,20 @@ class UsersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            $email = (new TemplatedEmail())
+                ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
+                ->to(new Address($user->getEmail()))
+                ->subject('Merci de votre inscription !')
+                ->htmlTemplate('emails/signup.html.twig')
+                ->context([
+                    'user_name' => $user->getUsername(),
+                    'user_id' => $user->getId(),
+                    'confirm_key' => $user->getConfirmKey()
+                ]);
 
-            return $this->redirectToRoute('posts_index');
+            $mailer->send($email);
+
+            return $this->redirectToRoute('users_login');
         }
 
         return $this->render('users/new.html.twig', [
@@ -96,19 +109,40 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="users_show", methods={"GET"})
+     * @Route("/membre/validation/{id}/{confirmKey}", name="users_validate", methods={"GET"})
+     * @param $confirmKey
      * @param Users $user
+     * @param UsersRepository $usersRepository
      * @return Response
      */
-    public function show(Users $user): Response
+    public function validateUser($confirmKey, Users $user, UsersRepository $usersRepository)
     {
-        return $this->render('users/show.html.twig', [
-            'user' => $user,
+        $result = false;
+        if ($user->getConfirmKey() === $confirmKey AND $user->getValidated() !== Users::VALIDATED) {
+            $usersRepository->upgradeValidation($user);
+            $result = true;
+        }
+        return $this->render('users/validation.html.twig', [
+            'result' => $result,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="users_edit", methods={"GET","POST"})
+     * @Route("/membre/{id}", name="users_show", methods={"GET"})
+     * @param Users $user
+     * @param PostsRepository $postsRepository
+     * @return Response
+     */
+    public function show(Users $user, PostsRepository $postsRepository): Response
+    {
+        return $this->render('users/show.html.twig', [
+            'user' => $user,
+            'posts' => $postsRepository->findPostsByAuthor($user->getId(), Posts::VALIDATED),
+        ]);
+    }
+
+    /**
+     * @Route("/membre/{id}/parametres", name="users_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Users $user
      * @return Response
@@ -124,7 +158,7 @@ class UsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('users_index');
+            return $this->redirectToRoute('users_show', ['id' => $user->getId()]);
         }
 
         return $this->render('users/edit.html.twig', [
@@ -134,7 +168,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="users_delete", methods={"DELETE"})
+     * @Route("/membre/{id}", name="users_delete", methods={"DELETE"})
      * @param Request $request
      * @param Users $user
      * @return Response
@@ -150,6 +184,6 @@ class UsersController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('users_index');
+        return $this->redirectToRoute('posts_index');
     }
 }

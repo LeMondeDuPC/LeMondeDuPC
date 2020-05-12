@@ -1,0 +1,19 @@
+<form method="post">
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <label for="inputUsername">Identifiant</label>
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                   class="form-control" required autofocus/>
+        </div>
+        <div class="col-6 col-12-xsmall">
+            <label for="inputPassword">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required/>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </div>
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" name="formconnexion" value="Se connecter"/></li>
+            </ul>
+        </div>
+    </div>
+</form>

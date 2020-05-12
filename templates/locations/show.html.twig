@@ -3,24 +3,29 @@
 {% block title %}Locations{% endblock %}
 
 {% block body %}
-    <h1>Locations</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ location.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ location.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('locations_index') }}">back to list</a>
-
-    <a href="{{ path('locations_edit', {'id': location.id}) }}">edit</a>
-
-    {{ include('locations/_delete_form.html.twig') }}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>Catégorie : {{ location.name }}</h2>
+            </div>
+            <div class="meta">
+                <span>nb article</span>
+            </div>
+        </header>
+        <section>
+            <div class="box alt">
+                <div class="row gtr-uniform">
+                    {% for post in posts %}
+                        <div class="col-4">
+                            <a class="image featured"
+                               href="{{ path('posts_show', {'id' : post.post_id, 'slug' : post.post_title|slugify }) }}">
+                                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt=""/>
+                                <span>{{ post.post_title }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </article>
 {% endblock %}

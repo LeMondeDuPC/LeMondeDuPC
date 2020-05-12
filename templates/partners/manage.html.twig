@@ -7,13 +7,13 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Link</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Link</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for partner in partners %}
@@ -23,7 +23,7 @@
                 <td>{{ partner.link }}</td>
                 <td>{{ partner.description }}</td>
                 <td>
-                    <a href="{{ path('partners_show', {'id': partner.id, 'slug' : partner.name|slugify}) }}">show</a>
+                    <a href="{{ path('partners_show', {'name' : partner.name|slugify}) }}">show</a>
                     <a href="{{ path('partners_edit', {'id': partner.id}) }}">edit</a>
                 </td>
             </tr>

@@ -3,11 +3,14 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-
-    <button class="btn">Register</button>
-    {{ form_end(form) }}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>Inscription</h2>
+            </div>
+        </header>
+        <section>
+            {% include('users/form/_new_form.html.twig') %}
+        </section>
+    </article>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>
+                    Comfirmation d'inscription
+                </h2>
+            </div>
+        </header>
+        <section>
+            {% if result == true %}
+                <p>Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !</p>
+            {% else %}
+                <p>Une erreur s'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé</p>
+            {% endif %}
+        </section>
+    </article>
+{% endblock %}

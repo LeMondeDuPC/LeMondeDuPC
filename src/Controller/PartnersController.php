@@ -12,20 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartnersController extends AbstractController
 {
-    /**
-     * @Route("/partenaires", name="partners_index", methods={"GET"})
-     * @param PartnersRepository $partnersRepository
-     * @return Response
-     */
-    public function index(PartnersRepository $partnersRepository): Response
-    {
-        return $this->render('partners/index.html.twig', [
-            'partners' => $partnersRepository->findAll(),
-        ]);
-    }
 
     /**
-     * @Route("/partenaires/{id}-{slug}", name="partners_show", methods={"GET"})
+     * @Route("/partenaires/{name}", name="partners_show", methods={"GET"})
      * @param Partners $partner
      * @return Response
      */
@@ -33,6 +22,21 @@ class PartnersController extends AbstractController
     {
         return $this->render('partners/show.html.twig', [
             'partner' => $partner,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/partenaires", name="partners_manage", methods={"GET"})
+     * @param PartnersRepository $partnersRepository
+     * @return Response
+     */
+    public function manage(PartnersRepository $partnersRepository): Response
+    {
+        if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
+            throw $this->createAccessDeniedException('No access!');
+        }
+        return $this->render('partners/manage.html.twig', [
+            'partners' => $partnersRepository->findAll(),
         ]);
     }
 
@@ -55,7 +59,7 @@ class PartnersController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
 
-            return $this->redirectToRoute('partners_index');
+            return $this->redirectToRoute('partners_manage');
         }
 
         return $this->render('partners/new.html.twig', [
@@ -81,7 +85,7 @@ class PartnersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('partners_index');
+            return $this->redirectToRoute('partners_manage');
         }
 
         return $this->render('partners/edit.html.twig', [
@@ -107,6 +111,6 @@ class PartnersController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('partners_index');
+        return $this->redirectToRoute('partners_manage');
     }
 }
