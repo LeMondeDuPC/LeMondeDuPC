@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,75 +17,108 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostsRepository extends ServiceEntityRepository
 {
-    private $conn;
+    /**
+     * @var Connection
+     */
+    private $_conn;
 
+    /**
+     * PostsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Posts::class);
-        $this->conn = $this->getEntityManager()->getConnection();
+        $this->_conn = $this->getEntityManager()->getConnection();
     }
 
+    /**
+     * @param null $validated
+     * @return mixed[]
+     * @throws DBALException
+     */
     public function findPosts($validated = null)
     {
-        $sql = $this->query();
+        $sql = $this->_query();
         if ($validated !== null) {
             $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$validated]);
         } else {
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute();
         }
         return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
     }
 
+    /**
+     * @param $locationName
+     * @param null $validated
+     * @return mixed[]
+     * @throws DBALException
+     */
     public function findPostsByLocationName($locationName, $validated = null)
     {
 
-        $sql = $this->query();
+        $sql = $this->_query();
         $sql .= ' WHERE l.name = ?';
         if ($validated !== null) {
             $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$locationName, $validated]);
         } else {
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$locationName]);
         }
         return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
     }
 
+    /**
+     * @param $idAuthor
+     * @param null $validated
+     * @return mixed[]
+     * @throws DBALException
+     */
     public function findPostsByAuthor($idAuthor, $validated = null)
     {
-        $sql = $this->query();
+        $sql = $this->_query();
         $sql .= ' WHERE p.id_user = ?';
         if ($validated !== null) {
             $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$idAuthor, $validated]);
         } else {
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$idAuthor]);
         }
         return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
     }
 
+    /**
+     * @param $id
+     * @param null $validated
+     * @return mixed
+     * @throws DBALException
+     */
     public function findPost($id, $validated = null)
     {
-        $sql = $this->query();
+        $sql = $this->_query();
         $sql .= ' WHERE p.id = ?';
         if ($validated !== null) {
             $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$id, $validated]);
         } else {
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->_conn->prepare($sql);
             $stmt->execute([$id]);
         }
         return $stmt->fetch(FetchMode::STANDARD_OBJECT);
     }
 
-    private function query()
+    /**
+     * @return string
+     */
+    private function _query()
     {
         return '
             SELECT 

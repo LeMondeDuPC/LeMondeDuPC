@@ -8,18 +8,38 @@ use App\Form\UsersType;
 use App\Repository\PostsRepository;
 use App\Repository\UsersRepository;
 use DateTime;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Class UsersController
+ * @package App\Controller
+ */
 class UsersController extends AbstractController
 {
+    /**
+     * @var UsersRepository
+     */
+    private $_usersRepository;
+
+    /**
+     * UsersController constructor.
+     * @param UsersRepository $usersRepository
+     */
+    public function __construct(UsersRepository $usersRepository)
+    {
+        $this->_usersRepository = $usersRepository;
+    }
+
     /**
      * @Route("/membre/connexion", name="users_login")
      * @param AuthenticationUtils $authenticationUtils
@@ -49,13 +69,12 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/admin/membres", name="users_manage", methods={"GET"})
-     * @param UsersRepository $userRepository
      * @return Response
      */
-    public function manage(UsersRepository $userRepository): Response
+    public function manage(): Response
     {
         return $this->render('users/manage.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $this->_usersRepository->findAll(),
         ]);
     }
 
@@ -65,6 +84,7 @@ class UsersController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param MailerInterface $mailer
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
@@ -112,14 +132,16 @@ class UsersController extends AbstractController
      * @Route("/membre/validation/{id}/{confirmKey}", name="users_validate", methods={"GET"})
      * @param $confirmKey
      * @param Users $user
-     * @param UsersRepository $usersRepository
      * @return Response
      */
-    public function validateUser($confirmKey, Users $user, UsersRepository $usersRepository)
+    public function validateUser($confirmKey, Users $user)
     {
         $result = false;
-        if ($user->getConfirmKey() === $confirmKey AND $user->getValidated() !== Users::VALIDATED) {
-            $usersRepository->upgradeValidation($user);
+        if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== Users::VALIDATED) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setValidated(Posts::VALIDATED);
+            $entityManager->persist($user);
+            $entityManager->flush();
             $result = true;
         }
         return $this->render('users/validation.html.twig', [
@@ -132,6 +154,7 @@ class UsersController extends AbstractController
      * @param Users $user
      * @param PostsRepository $postsRepository
      * @return Response
+     * @throws DBALException
      */
     public function show(Users $user, PostsRepository $postsRepository): Response
     {

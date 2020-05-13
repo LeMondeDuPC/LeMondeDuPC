@@ -6,15 +6,27 @@ use App\Entity\Posts;
 use App\Form\PostsType;
 use App\Repository\PostsRepository;
 use DateTime;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class PostsController
+ * @package App\Controller
+ */
 class PostsController extends AbstractController
 {
+    /**
+     * @var PostsRepository
+     */
     private $_postRepository;
 
+    /**
+     * PostsController constructor.
+     * @param PostsRepository $postsRepository
+     */
     public function __construct(PostsRepository $postsRepository)
     {
         $this->_postRepository = $postsRepository;
@@ -23,6 +35,7 @@ class PostsController extends AbstractController
     /**
      * @Route("/", name="posts_index", methods={"GET"})
      * @return Response
+     * @throws DBALException
      */
     public function index(): Response
     {
@@ -36,6 +49,7 @@ class PostsController extends AbstractController
      * @Route("/{id}-{slug}", name="posts_show", methods={"GET"})
      * @param $id
      * @return Response
+     * @throws DBALException
      */
     public function show($id): Response
     {
@@ -47,6 +61,7 @@ class PostsController extends AbstractController
     /**
      * @Route("/admin/posts", name="posts_manage", methods={"GET"})
      * @return Response
+     * @throws DBALException
      */
     public function manage(): Response
     {

@@ -7,16 +7,28 @@ use App\Entity\Posts;
 use App\Form\LocationsType;
 use App\Repository\LocationsRepository;
 use App\Repository\PostsRepository;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class LocationsController
+ * @package App\Controller
+ */
 class LocationsController extends AbstractController
 {
 
+    /**
+     * @var LocationsRepository
+     */
     private $_locationsRepository;
 
+    /**
+     * LocationsController constructor.
+     * @param LocationsRepository $locationsRepository
+     */
     public function __construct(LocationsRepository $locationsRepository)
     {
         $this->_locationsRepository = $locationsRepository;
@@ -24,11 +36,12 @@ class LocationsController extends AbstractController
 
     /**
      * @return Response
+     * @throws DBALException
      */
     public function _index()
     {
         return $this->render('locations/_index.html.twig', [
-            'locations' => $this->_locationsRepository->findLocationsNb(Posts::VALIDATED)
+            'locations' => $this->_locationsRepository->findLocations(Posts::VALIDATED)
         ]);
     }
 
@@ -38,6 +51,7 @@ class LocationsController extends AbstractController
      * @param Locations $location
      * @param PostsRepository $postsRepository
      * @return Response
+     * @throws DBALException
      */
     public function show($name, Locations $location, PostsRepository $postsRepository): Response
     {

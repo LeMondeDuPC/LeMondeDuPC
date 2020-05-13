@@ -10,8 +10,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class PartnersController
+ * @package App\Controller
+ */
 class PartnersController extends AbstractController
 {
+
+    /**
+     * @var PartnersRepository
+     */
+    private $_partnersRepository;
+
+    /**
+     * PartnersController constructor.
+     * @param PartnersRepository $partnersRepository
+     */
+    public function __construct(PartnersRepository $partnersRepository)
+    {
+        $this->_partnersRepository = $partnersRepository;
+    }
 
     /**
      * @Route("/partenaires/{name}", name="partners_show", methods={"GET"})
@@ -27,16 +45,15 @@ class PartnersController extends AbstractController
 
     /**
      * @Route("/admin/partenaires", name="partners_manage", methods={"GET"})
-     * @param PartnersRepository $partnersRepository
      * @return Response
      */
-    public function manage(PartnersRepository $partnersRepository): Response
+    public function manage(): Response
     {
         if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         return $this->render('partners/manage.html.twig', [
-            'partners' => $partnersRepository->findAll(),
+            'partners' => $this->_partnersRepository->findAll(),
         ]);
     }
 
