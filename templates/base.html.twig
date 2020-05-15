@@ -38,8 +38,8 @@
             <ul>
                 <li class="search">
                     <a class="icon fa-search" href="#search">Rechercher</a>
-                    <form id="search" method="get" action="#">
-                        <input type="search" name="query" placeholder="Rechercher"/>
+                    <form id="search" method="post" action="{{ path('posts_search') }}">
+                        <input type="search" name="q" placeholder="Rechercher"/>
                     </form>
                 </li>
                 <li class="menu">
@@ -53,8 +53,8 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            <form class="search" method="get" action="#">
-                <input type="text" name="query" placeholder="Rechercher"/>
+            <form class="search" method="post" action="{{ path('posts_search') }}">
+                <input type="text" name="q" placeholder="Rechercher"/>
             </form>
         </div>
         <!-- links -->
@@ -113,6 +113,7 @@
     <!-- Main -->
     <div id="main">
         {% block body %}{% endblock %}
+        {% block paginate %}{% endblock %}
     </div>
 
     <!-- Sidebar -->

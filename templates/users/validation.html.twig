@@ -12,11 +12,7 @@
             </div>
         </header>
         <section>
-            {% if result == true %}
-                <p>Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !</p>
-            {% else %}
-                <p>Une erreur s'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé</p>
-            {% endif %}
+            <p>{{ message }}</p>
         </section>
     </article>
 {% endblock %}

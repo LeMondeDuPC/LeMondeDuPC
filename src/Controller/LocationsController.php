@@ -47,17 +47,16 @@ class LocationsController extends AbstractController
 
     /**
      * @Route("/location/{name}", name="locations_show", methods={"GET"})
-     * @param $name
      * @param Locations $location
      * @param PostsRepository $postsRepository
      * @return Response
      * @throws DBALException
      */
-    public function show($name, Locations $location, PostsRepository $postsRepository): Response
+    public function show(Locations $location, PostsRepository $postsRepository): Response
     {
         return $this->render('locations/show.html.twig', [
             'location' => $location,
-            'posts' => $postsRepository->findPostsByLocationName($name, Posts::VALIDATED),
+            'posts' => $postsRepository->findPostsByLocationName($location->getName(), Posts::VALIDATED),
         ]);
     }
 

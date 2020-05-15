@@ -7,6 +7,7 @@ use App\Form\PostsType;
 use App\Repository\PostsRepository;
 use DateTime;
 use Doctrine\DBAL\DBALException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,28 +34,57 @@ class PostsController extends AbstractController
     }
 
     /**
-     * @Route("/", name="posts_index", methods={"GET"})
+     * @Route("/{page<\d+>?1}", name="posts_index", methods={"GET"})
+     * @param int $page
+     * @param PaginatorInterface $paginator
      * @return Response
      * @throws DBALException
      */
-    public function index(): Response
+    public function index(int $page, PaginatorInterface $paginator): Response
     {
+        $posts = $paginator->paginate(
+            $this->_postRepository->findPosts(Posts::VALIDATED),
+            $page,
+            2
+        );
         return $this->render('posts/index.html.twig', [
-            'posts' => $this->_postRepository->findPosts(Posts::VALIDATED),
+            'posts' => $posts,
         ]);
 
     }
 
     /**
      * @Route("/{id}-{slug}", name="posts_show", methods={"GET"})
-     * @param $id
+     * @param Posts $post
      * @return Response
      * @throws DBALException
      */
-    public function show($id): Response
+    public function show(Posts $post): Response
     {
         return $this->render('posts/show.html.twig', [
-            'post' => $this->_postRepository->findPost($id, Posts::VALIDATED)
+            'post' => $this->_postRepository->findPost($post->getId(), Posts::VALIDATED)
+        ]);
+    }
+
+    /**
+     * @Route("/posts/search-article/{page<\d+>?1}", name="posts_search", methods={"POST"})
+     * @param Request $request
+     * @param int $page
+     * @param PaginatorInterface $paginator
+     * @return Response
+     * @throws DBALException
+     */
+    public function search(Request $request, int $page, PaginatorInterface $paginator)
+    {
+        $search = $request->request->get('q');
+        $posts = $paginator->paginate(
+            $this->_postRepository->findPostsByTitleLike($search, Posts::VALIDATED),
+            $page,
+            2
+        );
+        return $this->render('posts/result.html.twig', [
+            'posts' => $posts,
+            'search' => $search
         ]);
     }
 

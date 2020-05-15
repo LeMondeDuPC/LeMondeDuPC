@@ -41,6 +41,15 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @Route("/email/test/design", name="test_email")
+     * @return Response
+     */
+    public function testEmail()
+    {
+        return $this->render('emails/test.html.twig', ['user_id' => 2, 'confirm_key' => 254511816, 'user_name' => 'Niels']);
+    }
+
+    /**
      * @Route("/membre/connexion", name="users_login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
@@ -88,6 +97,7 @@ class UsersController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
+        $message = null;
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
@@ -109,7 +119,7 @@ class UsersController extends AbstractController
 
             $email = (new TemplatedEmail())
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
-                ->to(new Address($user->getEmail()))
+                ->to(new Address($user->getEmail(), $user->getUsername()))
                 ->subject('Merci de votre inscription !')
                 ->htmlTemplate('emails/signup.html.twig')
                 ->context([
@@ -119,12 +129,12 @@ class UsersController extends AbstractController
                 ]);
 
             $mailer->send($email);
-
-            return $this->redirectToRoute('users_login');
+            $message = 'Veuillez confirmé votre inscription via le mail qui vous a été envoyé';
         }
 
         return $this->render('users/new.html.twig', [
             'form' => $form->createView(),
+            'message' => $message
         ]);
     }
 
@@ -134,18 +144,18 @@ class UsersController extends AbstractController
      * @param Users $user
      * @return Response
      */
-    public function validateUser($confirmKey, Users $user)
+    public function validateUser(string $confirmKey, Users $user)
     {
-        $result = false;
+        $message = 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé';
         if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== Users::VALIDATED) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setValidated(Posts::VALIDATED);
             $entityManager->persist($user);
             $entityManager->flush();
-            $result = true;
+            $message = 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !';
         }
         return $this->render('users/validation.html.twig', [
-            'result' => $result,
+            'message' => $message,
         ]);
     }
 

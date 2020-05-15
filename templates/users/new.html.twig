@@ -11,6 +11,9 @@
         </header>
         <section>
             {% include('users/form/_new_form.html.twig') %}
+            {% if message is not null %}
+                <p>{{ message }}</p>
+            {% endif %}
         </section>
     </article>
 {% endblock %}

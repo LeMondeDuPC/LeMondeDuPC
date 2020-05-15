@@ -52,12 +52,33 @@ class PostsRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $search
+     * @param null $validated
+     * @return mixed[]
+     * @throws DBALException
+     */
+    public function findPostsByTitleLike(string $search, $validated = null)
+    {
+        $sql = $this->_query();
+        $sql .= ' WHERE p.title LIKE ?';
+        if ($validated !== null) {
+            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
+            $stmt = $this->_conn->prepare($sql);
+            $stmt->execute(['%' . $search . '%', $validated]);
+        } else {
+            $stmt = $this->_conn->prepare($sql);
+            $stmt->execute(['%' . $search . '%']);
+        }
+        return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
+    }
+
+    /**
      * @param $locationName
      * @param null $validated
      * @return mixed[]
      * @throws DBALException
      */
-    public function findPostsByLocationName($locationName, $validated = null)
+    public function findPostsByLocationName(string $locationName, $validated = null)
     {
 
         $sql = $this->_query();
@@ -79,7 +100,7 @@ class PostsRepository extends ServiceEntityRepository
      * @return mixed[]
      * @throws DBALException
      */
-    public function findPostsByAuthor($idAuthor, $validated = null)
+    public function findPostsByAuthor(int $idAuthor, $validated = null)
     {
         $sql = $this->_query();
         $sql .= ' WHERE p.id_user = ?';
@@ -100,7 +121,7 @@ class PostsRepository extends ServiceEntityRepository
      * @return mixed
      * @throws DBALException
      */
-    public function findPost($id, $validated = null)
+    public function findPost(int $id, $validated = null)
     {
         $sql = $this->_query();
         $sql .= ' WHERE p.id = ?';
