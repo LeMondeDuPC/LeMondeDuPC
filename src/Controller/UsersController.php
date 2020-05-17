@@ -162,15 +162,13 @@ class UsersController extends AbstractController
     /**
      * @Route("/membre/{id}", name="users_show", methods={"GET"})
      * @param Users $user
-     * @param PostsRepository $postsRepository
      * @return Response
-     * @throws DBALException
      */
-    public function show(Users $user, PostsRepository $postsRepository): Response
+    public function show(Users $user): Response
     {
         return $this->render('users/show.html.twig', [
             'user' => $user,
-            'posts' => $postsRepository->findPostsByAuthor($user->getId(), Posts::VALIDATED),
+            'posts' => $user->getPosts(),
         ]);
     }
 

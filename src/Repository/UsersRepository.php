@@ -29,11 +29,6 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         parent::__construct($registry, Users::class);
     }
 
-    public function findUser(int $id, $validated = null)
-    {
-
-    }
-
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      * @param UserInterface $user

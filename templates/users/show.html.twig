@@ -25,9 +25,9 @@
                     {% for post in posts %}
                         <div class="col-4">
                             <a class="image featured"
-                               href="{{ path('posts_show', {'id' : post.post_id, 'slug' : post.post_title|slugify }) }}">
+                               href="{{ path('posts_show', {'id' : post.id, 'slug' : post.title|slugify }) }}">
                                 <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt=""/>
-                                <span>{{ post.post_title }}</span>
+                                <span>{{ post.title }}</span>
                             </a>
                         </div>
                     {% endfor %}

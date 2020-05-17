@@ -60,10 +60,10 @@ class Posts
     private $location;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type("int")
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idUser;
+    private $user;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,6 +71,7 @@ class Posts
      * @Assert\Choice({0, 1})
      */
     private $validated;
+
 
     public function getId(): ?int
     {
@@ -137,14 +138,14 @@ class Posts
         return $this;
     }
 
-    public function getIdUser(): ?int
+    public function getUser(): ?Users
     {
-        return $this->idUser;
+        return $this->user;
     }
 
-    public function setIdUser(?int $idUser): self
+    public function setUser(?Users $user): self
     {
-        $this->idUser = $idUser;
+        $this->user = $user;
 
         return $this;
     }

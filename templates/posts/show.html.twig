@@ -13,7 +13,13 @@
                 </div>
                 <div class="meta">
                     <time class="published">{{ post.timePublication|date('Y-m-d H:i:s') }}</time>
-                    {#<span class="author name">{{ post.user_name ? post.user_name : 'Anonyme' }}</span>#}
+                    {% if post.user is not null %}
+                        <span class="author name">
+                            <a href="{{ path('users_show', {'id' : post.user.id}) }}">{{ post.user.username }}</a>
+                        </span>
+                    {% else %}
+                        <span class="author name">Anonyme</span>
+                    {% endif %}
                     {% if location.name is not null %}
                         <span><a href="{{ path('locations_show', {'id': location.id, 'name': location.name|slugify }) }}">{{ location.name }}</a></span>
                     {% else %}
