@@ -58,7 +58,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/admin/partenaires/nouveau", name="partners_new", methods={"GET","POST"})
+     * @Route("/admin/partenaire/nouveau", name="partners_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -86,7 +86,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/admin/partenaires/{id}/edit", name="partners_edit", methods={"GET","POST"})
+     * @Route("/admin/partenaire/{id}/modifier", name="partners_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Partners $partner
      * @return Response
@@ -112,7 +112,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/admin/partenaires/{id}", name="partners_delete", methods={"DELETE"})
+     * @Route("/admin/partenaire/{id}", name="partners_delete", methods={"DELETE"})
      * @param Request $request
      * @param Partners $partner
      * @return Response

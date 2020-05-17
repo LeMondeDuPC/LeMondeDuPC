@@ -41,27 +41,26 @@ class LocationsController extends AbstractController
     public function _index()
     {
         return $this->render('locations/_index.html.twig', [
-            'locations' => $this->_locationsRepository->findLocations(Posts::VALIDATED)
+            'locations' => $this->_locationsRepository->findAll()
         ]);
     }
 
     /**
-     * @Route("/location/{name}", name="locations_show", methods={"GET"})
+     * @Route("/categorie/{id}-{name}", name="locations_show", methods={"GET"})
      * @param Locations $location
      * @param PostsRepository $postsRepository
      * @return Response
-     * @throws DBALException
      */
     public function show(Locations $location, PostsRepository $postsRepository): Response
     {
         return $this->render('locations/show.html.twig', [
             'location' => $location,
-            'posts' => $postsRepository->findPostsByLocationName($location->getName(), Posts::VALIDATED),
+            'posts' => $location->getPosts(),
         ]);
     }
 
     /**
-     * @Route("/admin/locations", name="locations_manage", methods={"GET"})
+     * @Route("/admin/categories", name="locations_manage", methods={"GET"})
      * @return Response
      */
     public function manage(): Response
@@ -75,7 +74,7 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/locations/new", name="locations_new", methods={"GET","POST"})
+     * @Route("/admin/categorie/nouveau", name="locations_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -103,7 +102,7 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/locations/{id}/edit", name="locations_edit", methods={"GET","POST"})
+     * @Route("/admin/categorie/{id}/modifier", name="locations_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Locations $location
      * @return Response
@@ -129,7 +128,7 @@ class LocationsController extends AbstractController
     }
 
     /**
-     * @Route("/admin/locations/{id}", name="locations_delete", methods={"DELETE"})
+     * @Route("/admin/categorie/{id}", name="locations_delete", methods={"DELETE"})
      * @param Request $request
      * @param Locations $location
      * @return Response

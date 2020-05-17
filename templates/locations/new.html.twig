@@ -3,8 +3,17 @@
 {% block title %}New Locations{% endblock %}
 
 {% block body %}
-    <h1>Create new Locations</h1>
-
-    {{ include('locations/form/_form.html.twig') }}
-
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>Ajouter une catégorie</h2>
+            </div>
+            <div class="meta">
+                <a href="{{ path('locations_manage') }}">Retourner à la liste des catégories</a>
+            </div>
+        </header>
+        <section>
+            {{ include('locations/form/_form.html.twig') }}
+        </section>
+    </article>
 {% endblock %}

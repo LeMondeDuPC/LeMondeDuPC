@@ -26,7 +26,7 @@
       -ms-flex: 1;
       padding: (_size(section-spacing) * 1.25) _size(section-spacing) (_size(section-spacing) * 1.1) _size(section-spacing);
 
-      h2 {
+      .heading {
         font-weight: _font(weight-heading-bold);
         font-size: 1.3em;
       }

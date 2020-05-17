@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\FetchMode;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,6 +27,11 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Users::class);
+    }
+
+    public function findUser(int $id, $validated = null)
+    {
+
     }
 
     /**

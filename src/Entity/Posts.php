@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostsRepository")
@@ -26,16 +27,24 @@ class Posts
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(min="10", max="150")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(min="20", max="255")
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $content;
 
@@ -45,17 +54,21 @@ class Posts
     private $timePublication;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Locations::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idLocation;
+    private $location;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type("int")
      */
     private $idUser;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type("int")
+     * @Assert\Choice({0, 1})
      */
     private $validated;
 
@@ -112,14 +125,14 @@ class Posts
         return $this;
     }
 
-    public function getIdLocation(): ?int
+    public function getLocation(): ?Locations
     {
-        return $this->idLocation;
+        return $this->location;
     }
 
-    public function setIdLocation(int $idLocation): self
+    public function setLocation(?Locations $location): self
     {
-        $this->idLocation = $idLocation;
+        $this->location = $location;
 
         return $this;
     }

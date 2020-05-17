@@ -117,7 +117,7 @@ class UsersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $email = (new TemplatedEmail())
+            /*$email = (new TemplatedEmail())
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
                 ->to(new Address($user->getEmail(), $user->getUsername()))
                 ->subject('Merci de votre inscription !')
@@ -128,7 +128,7 @@ class UsersController extends AbstractController
                     'confirm_key' => $user->getConfirmKey()
                 ]);
 
-            $mailer->send($email);
+            $mailer->send($email);*/
             $message = 'Veuillez confirmé votre inscription via le mail qui vous a été envoyé';
         }
 

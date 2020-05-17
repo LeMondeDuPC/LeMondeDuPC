@@ -17,12 +17,12 @@
         <tbody>
         {% for post in posts %}
             <tr>
-                <td>{{ post.post_id }}</td>
-                <td>{{ post.post_description }}</td>
-                <td>{{ post.post_validated }}</td>
+                <td>{{ post.id }}</td>
+                <td>{{ post.description }}</td>
+                <td>{{ post.validated }}</td>
                 <td>
-                    <a href="{{ path('posts_show', {'id': post.post_id, 'slug': post.post_title|slugify}) }}">show</a>
-                    <a href="{{ path('posts_edit', {'id': post.post_id}) }}">edit</a>
+                    <a href="{{ path('posts_show', {'id': post.id, 'slug': post.title|slugify}) }}">show</a>
+                    <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

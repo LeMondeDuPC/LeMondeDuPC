@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -30,6 +31,9 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(min="1", max="100")
      */
     private $username;
 
@@ -46,11 +50,15 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email
+     * @Assert\Length(min="1", max="255")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $confirm_key;
 
@@ -61,6 +69,8 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type("int")
+     * @Assert\Choice({0, 1})
      */
     private $validated;
 

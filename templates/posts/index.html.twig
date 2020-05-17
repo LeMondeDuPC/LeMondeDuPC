@@ -3,51 +3,38 @@
 {% block title %}Du numérique expliqué simplement{% endblock %}
 
 {% block body %}
-    {% for post in posts %}
-        <article class="post">
-            <header>
-                <div class="title">
-                    <h2>
-                        <a href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}">{{ post.post_title }}</a>
-                    </h2>
-                </div>
-                <div class="meta">
-                    <time class="published">{{ post.post_time_publication|date('Y-m-d H:i:s') }}</time>
-                    <span class="author name">{{ post.user_name ? post.user_name : 'Anonyme' }}</span>
-                </div>
-            </header>
-            <a href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}"
-               class="image featured">
-                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt="Image de l'article"/>
-            </a>
-            <p>{{ post.post_description }}</p>
-            <footer>
-                <ul class="actions">
-                    <li><a class="button"
-                           href="{{ path('posts_show', {'id': post.post_id, 'slug' : post.post_title|slugify}) }}">Lire</a>
-                    </li>
-                </ul>
-                <ul class="stats">
-                    {% if post.location_name is not null %}
-                        <li>
-                            <a href="{{ path('locations_show', {'name': post.location_name|slugify }) }}">{{ post.location_name }}</a>
-                        </li>
-                    {% else %}
-                        <li>{{ post.location_name ? post.location_name : 'Non répertorié' }}</li>
-                    {% endif %}
-                </ul>
-            </footer>
-        </article>
-    {% else %}
-        <article class="post">
-            <header>
-                <div class="title">
-                    <h2>Oups</h2>
-                </div>
-            </header>
-            <p>Aucun article n'est disponible pour le moment</p>
-        </article>
-    {% endfor %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Les derniers articles</h1>
+            </div>
+        </header>
+        <section>
+            {% for post in posts %}
+                <article class="mini-post">
+                    <section class="content">
+                        <h2 class="title-max">
+                            <a href="{{ path('posts_show', {'id' : post.id, 'slug' : post.title|slugify }) }}">{{ post.title }}</a>
+                        </h2>
+                        <p>{{ post.description }}</p>
+                        {% if post.location is not null %}
+                            <span class="location icon fa-tag"><a href="{{ path('locations_show', {'id': post.location.id, 'name': post.location.name|slugify }) }}">{{ post.location.name }}</a></span>
+                        {% else %}
+                            <span class="location icon fa-tag">{{ post.location.name ? post.location.name : 'Non répertorié' }}</span>
+                        {% endif %}
+                    </section>
+                    <section>
+                        <a href="{{ path('posts_show', {'id' : post.id, 'slug' : post.title|slugify }) }}"
+                           class="image">
+                            <img src="http://www.e-works.fr/blog/wp-content/uploads/2017/11/amazon-1024x458.png" alt="">
+                        </a>
+                    </section>
+                </article>
+            {% else %}
+                <p>Aucun article n'est disponible pour le moment</p>
+            {% endfor %}
+        </section>
+    </article>
 {% endblock %}
 {% block paginate %}
     {{ knp_pagination_render(posts) }}

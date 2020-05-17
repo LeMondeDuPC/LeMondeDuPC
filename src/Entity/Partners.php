@@ -30,7 +30,7 @@ class Partners
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Type("string")
-     * @Assert\Length(min="1", max="150")
+     * @Assert\Length(min="1", max="100")
      */
     private $name;
 

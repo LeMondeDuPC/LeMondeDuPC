@@ -29,17 +29,13 @@
     }
   }
 
-  header {
+  .content {
     @include padding(1.25em, 1.25em, (0, 0em, 0, 0));
     min-height: 4em;
     position: relative;
     flex-grow: 1;
 
-    h3 {
-      font-size: 0.7em;
-    }
-
-    .published {
+    .location {
       display: block;
       font-family: _font(family-heading);
       font-size: 0.6em;
@@ -49,10 +45,21 @@
       text-transform: uppercase;
     }
 
-    .author {
+    .title-max {
+      display: inline;
+      font-size: 1em;
+    }
+
+    .title-min {
+      display: inline;
+      font-size: 0.7em;
+    }
+
+    .info {
+      display: inline;
       position: absolute;
+      font-size: 0.8em;
       right: 2em;
-      top: 2em;
     }
   }
 }

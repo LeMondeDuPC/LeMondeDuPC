@@ -6,7 +6,6 @@ use App\Entity\Posts;
 use App\Form\PostsType;
 use App\Repository\PostsRepository;
 use DateTime;
-use Doctrine\DBAL\DBALException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,17 +37,16 @@ class PostsController extends AbstractController
      * @param int $page
      * @param PaginatorInterface $paginator
      * @return Response
-     * @throws DBALException
      */
     public function index(int $page, PaginatorInterface $paginator): Response
     {
         $posts = $paginator->paginate(
-            $this->_postRepository->findPosts(Posts::VALIDATED),
+            $this->_postRepository->findBy(['validated' => Posts::VALIDATED]),
             $page,
             2
         );
         return $this->render('posts/index.html.twig', [
-            'posts' => $posts,
+            'posts' => $posts
         ]);
 
     }
@@ -57,12 +55,13 @@ class PostsController extends AbstractController
      * @Route("/{id}-{slug}", name="posts_show", methods={"GET"})
      * @param Posts $post
      * @return Response
-     * @throws DBALException
      */
     public function show(Posts $post): Response
     {
+        $post = $this->_postRepository->findOneBy(['id' => $post->getId(), 'validated' => Posts::VALIDATED]);
         return $this->render('posts/show.html.twig', [
-            'post' => $this->_postRepository->findPost($post->getId(), Posts::VALIDATED)
+            'post' => $post,
+            'location' => $post->getLocation()
         ]);
     }
 
@@ -72,13 +71,12 @@ class PostsController extends AbstractController
      * @param int $page
      * @param PaginatorInterface $paginator
      * @return Response
-     * @throws DBALException
      */
     public function search(Request $request, int $page, PaginatorInterface $paginator)
     {
         $search = $request->request->get('q');
         $posts = $paginator->paginate(
-            $this->_postRepository->findPostsByTitleLike($search, Posts::VALIDATED),
+            $this->_postRepository->findByWord($search, Posts::VALIDATED),
             $page,
             2
         );
@@ -91,17 +89,16 @@ class PostsController extends AbstractController
     /**
      * @Route("/admin/posts", name="posts_manage", methods={"GET"})
      * @return Response
-     * @throws DBALException
      */
     public function manage(): Response
     {
         if ($this->isGranted('ROLE_MANAGE_POSTS')) {
             return $this->render('posts/manage.html.twig', [
-                'posts' => $this->_postRepository->findPosts(),
+                'posts' => $this->_postRepository->findAll(),
             ]);
         } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
             return $this->render('posts/manage.html.twig', [
-                'posts' => $this->_postRepository->findPostsByAuthor($this->getUser()->getId()),
+                'posts' => $this->_postRepository->findBy(['idUser' => $this->getUser()->getId()]),
             ]);
         } else {
             throw $this->createAccessDeniedException('No access!');

@@ -4,9 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\FetchMode;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,10 +14,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostsRepository extends ServiceEntityRepository
 {
-    /**
-     * @var Connection
-     */
-    private $_conn;
 
     /**
      * PostsRepository constructor.
@@ -29,127 +22,20 @@ class PostsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Posts::class);
-        $this->_conn = $this->getEntityManager()->getConnection();
     }
 
-    /**
-     * @param null $validated
-     * @return mixed[]
-     * @throws DBALException
-     */
-    public function findPosts($validated = null)
+    public function findByWord(string $search, $validated = null)
     {
-        $sql = $this->_query();
+        $query = $this->createQueryBuilder('p')
+            ->where('p.title LIKE :key')
+            ->orWhere('p.description LIKE :key')
+            ->orWhere('p.content LIKE :key')
+            ->setParameter('key', '%' . $search . '%');
         if ($validated !== null) {
-            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$validated]);
-        } else {
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute();
+            $query->andWhere('p.validated = :validated')
+                ->setParameter('validated', $validated);
         }
-        return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
-    }
 
-    /**
-     * @param string $search
-     * @param null $validated
-     * @return mixed[]
-     * @throws DBALException
-     */
-    public function findPostsByTitleLike(string $search, $validated = null)
-    {
-        $sql = $this->_query();
-        $sql .= ' WHERE p.title LIKE ?';
-        if ($validated !== null) {
-            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute(['%' . $search . '%', $validated]);
-        } else {
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute(['%' . $search . '%']);
-        }
-        return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
-    }
-
-    /**
-     * @param $locationName
-     * @param null $validated
-     * @return mixed[]
-     * @throws DBALException
-     */
-    public function findPostsByLocationName(string $locationName, $validated = null)
-    {
-
-        $sql = $this->_query();
-        $sql .= ' WHERE l.name = ?';
-        if ($validated !== null) {
-            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$locationName, $validated]);
-        } else {
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$locationName]);
-        }
-        return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
-    }
-
-    /**
-     * @param $idAuthor
-     * @param null $validated
-     * @return mixed[]
-     * @throws DBALException
-     */
-    public function findPostsByAuthor(int $idAuthor, $validated = null)
-    {
-        $sql = $this->_query();
-        $sql .= ' WHERE p.id_user = ?';
-        if ($validated !== null) {
-            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$idAuthor, $validated]);
-        } else {
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$idAuthor]);
-        }
-        return $stmt->fetchAll(FetchMode::STANDARD_OBJECT);
-    }
-
-    /**
-     * @param $id
-     * @param null $validated
-     * @return mixed
-     * @throws DBALException
-     */
-    public function findPost(int $id, $validated = null)
-    {
-        $sql = $this->_query();
-        $sql .= ' WHERE p.id = ?';
-        if ($validated !== null) {
-            $sql .= ' AND p.validated = ? ORDER BY p.time_publication DESC';
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$id, $validated]);
-        } else {
-            $stmt = $this->_conn->prepare($sql);
-            $stmt->execute([$id]);
-        }
-        return $stmt->fetch(FetchMode::STANDARD_OBJECT);
-    }
-
-    /**
-     * @return string
-     */
-    private function _query()
-    {
-        return '
-            SELECT 
-            p.id AS post_id, p.title AS post_title, p.description AS post_description, p.time_publication AS post_time_publication, 
-            p.validated AS post_validated, p.content AS post_content,
-            u.id AS user_id, u.username AS user_name, 
-            l.id AS location_id, l.name AS location_name 
-            FROM posts p 
-            LEFT JOIN users u ON p.id_user = u.id 
-            LEFT JOIN locations l ON p.id_location = l.id
-        ';
+        return $query->getQuery()->getResult();
     }
 }
