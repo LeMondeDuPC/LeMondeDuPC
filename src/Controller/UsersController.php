@@ -5,19 +5,16 @@ namespace App\Controller;
 use App\Entity\Posts;
 use App\Entity\Users;
 use App\Form\UsersType;
-use App\Repository\PostsRepository;
 use App\Repository\UsersRepository;
 use DateTime;
-use Doctrine\DBAL\DBALException;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -83,7 +80,7 @@ class UsersController extends AbstractController
     public function manage(): Response
     {
         return $this->render('users/manage.html.twig', [
-            'users' => $this->_usersRepository->findAll(),
+            'users' => $this->_usersRepository->findBy([], ['timePublication' => 'DESC']),
         ]);
     }
 
@@ -176,14 +173,15 @@ class UsersController extends AbstractController
      * @Route("/membre/{id}/parametres", name="users_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Users $user
+     * @param Security $security
      * @return Response
      */
-    public function edit(Request $request, Users $user): Response
+    public function edit(Request $request, Users $user, Security $security): Response
     {
         if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ROLE_MANAGE_USERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

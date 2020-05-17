@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -31,21 +33,23 @@ class UsersType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])/*->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])*/
-        ;
+            ]);
+        if ($options['security']->isGranted('ROLE_MANAGE_USERS')) {
+            $builder->add('validated', ChoiceType::class, [
+                'label' => 'Compte validé ?',
+                'choices' => [
+                    'Oui' => 1,
+                    'Non' => 0
+                ]
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
+            'security' => Security::class
         ]);
     }
 }

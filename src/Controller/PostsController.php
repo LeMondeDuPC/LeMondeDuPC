@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class PostsController
@@ -41,7 +42,7 @@ class PostsController extends AbstractController
     public function index(int $page, PaginatorInterface $paginator): Response
     {
         $posts = $paginator->paginate(
-            $this->_postRepository->findBy(['validated' => Posts::VALIDATED]),
+            $this->_postRepository->findBy(['validated' => Posts::VALIDATED], ['timePublication' => 'DESC']),
             $page,
             2
         );
@@ -94,11 +95,11 @@ class PostsController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_POSTS')) {
             return $this->render('posts/manage.html.twig', [
-                'posts' => $this->_postRepository->findAll(),
+                'posts' => $this->_postRepository->findBy([], ['timePublication' => 'DESC']),
             ]);
         } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
             return $this->render('posts/manage.html.twig', [
-                'posts' => $this->_postRepository->findBy(['idUser' => $this->getUser()->getId()]),
+                'posts' => $this->_postRepository->findBy(['idUser' => $this->getUser()->getId()], ['timePublication' => 'DESC']),
             ]);
         } else {
             throw $this->createAccessDeniedException('No access!');
@@ -108,15 +109,16 @@ class PostsController extends AbstractController
     /**
      * @Route("/admin/posts/nouveau", name="posts_new", methods={"GET","POST"})
      * @param Request $request
+     * @param Security $security
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Security $security): Response
     {
         if (!$this->isGranted('ROLE_CREATE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $post = new Posts();
-        $form = $this->createForm(PostsType::class, $post);
+        $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -140,14 +142,15 @@ class PostsController extends AbstractController
      * @Route("/admin/posts/{id}/modifier", name="posts_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Posts $post
+     * @param Security $security
      * @return Response
      */
-    public function edit(Request $request, Posts $post): Response
+    public function edit(Request $request, Posts $post, Security $security): Response
     {
         if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getUser()->getId() and !$this->isGranted('ROLE_MANAGE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(PostsType::class, $post);
+        $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

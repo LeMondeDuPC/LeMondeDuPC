@@ -62,17 +62,16 @@ class Users implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Type("string")
      */
-    private $confirm_key;
+    private $confirmKey;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $time_publication;
+    private $timePublication;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\Type("int")
-     * @Assert\Choice({0, 1})
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
      */
     private $validated;
 
@@ -173,34 +172,34 @@ class Users implements UserInterface
 
     public function getConfirmKey(): ?string
     {
-        return $this->confirm_key;
+        return $this->confirmKey;
     }
 
-    public function setConfirmKey(string $confirm_key): self
+    public function setConfirmKey(string $confirmKey): self
     {
-        $this->confirm_key = $confirm_key;
+        $this->confirmKey = $confirmKey;
 
         return $this;
     }
 
     public function getTimePublication(): ?\DateTimeInterface
     {
-        return $this->time_publication;
+        return $this->timePublication;
     }
 
-    public function setTimePublication(\DateTimeInterface $time_publication): self
+    public function setTimePublication(\DateTimeInterface $timePublication): self
     {
-        $this->time_publication = $time_publication;
+        $this->timePublication = $timePublication;
 
         return $this;
     }
 
-    public function getValidated(): ?int
+    public function getValidated(): ?bool
     {
         return $this->validated;
     }
 
-    public function setValidated(int $validated): self
+    public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
 

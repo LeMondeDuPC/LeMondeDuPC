@@ -1,37 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post manage{% endblock %}
+{% block title %}Gestion des articles{% endblock %}
 
 {% block body %}
-    <h1>Post index</h1>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Validated</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.description }}</td>
-                <td>{{ post.validated }}</td>
-                <td>
-                    <a href="{{ path('posts_show', {'id': post.id, 'slug': post.title|slugify}) }}">show</a>
-                    <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('posts_new') }}">Create new</a>
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Gestion des articles</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('posts_new') }}">Ajouter un article</a>
+            </div>
+        </header>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Validation</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{% if post.validated %}Oui{% else %}Non{% endif %}</td>
+                        <td>
+                            <a href="{{ path('posts_show', {'id': post.id, 'slug': post.title|slugify}) }}">Afficher</a>
+                            <a href="{{ path('posts_edit', {'id': post.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun résultat</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </article>
 {% endblock %}

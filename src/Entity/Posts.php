@@ -66,9 +66,8 @@ class Posts
     private $user;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\Type("int")
-     * @Assert\Choice({0, 1})
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
      */
     private $validated;
 
@@ -150,12 +149,12 @@ class Posts
         return $this;
     }
 
-    public function getValidated(): ?int
+    public function getValidated(): ?bool
     {
         return $this->validated;
     }
 
-    public function setValidated(int $validated): self
+    public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
 

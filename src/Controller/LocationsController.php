@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Locations;
-use App\Entity\Posts;
 use App\Form\LocationsType;
 use App\Repository\LocationsRepository;
 use App\Repository\PostsRepository;
-use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +34,6 @@ class LocationsController extends AbstractController
 
     /**
      * @return Response
-     * @throws DBALException
      */
     public function _index()
     {

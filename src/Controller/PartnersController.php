@@ -32,14 +32,12 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("/partenaires/{name}", name="partners_show", methods={"GET"})
-     * @param Partners $partner
      * @return Response
      */
-    public function show(Partners $partner): Response
+    public function _index()
     {
-        return $this->render('partners/show.html.twig', [
-            'partner' => $partner,
+        return $this->render('partners/_index.html.twig', [
+            'locations' => $this->_partnersRepository->findAll()
         ]);
     }
 
