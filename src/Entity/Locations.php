@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -66,4 +67,27 @@ class Locations
     {
         return $this->posts;
     }
+
+    public function addPostLink(Posts $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostLink(Posts $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            if ($post->getLocation() === $this) {
+                $post->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

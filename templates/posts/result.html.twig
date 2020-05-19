@@ -17,11 +17,11 @@
                             <a href="{{ path('posts_show', {'id' : post.id, 'slug' : post.title|slugify }) }}">{{ post.title }}</a>
                         </h2>
                         <p>{{ post.description }}</p>
-                        {% if post.location.name is not null %}
+                        {% if post.location is not null %}
                             <span class="location icon fa-tag"><a
                                         href="{{ path('locations_show', {'id': post.location.id, 'name': post.location.name|slugify }) }}">{{ post.location.name }}</a></span>
                         {% else %}
-                            <span class="location icon fa-tag">{{ post.location.name ? post.location.name : 'Non répertorié' }}</span>
+                            <span class="location icon fa-tag">Non répertorié</span>
                         {% endif %}
                     </section>
                     <section>

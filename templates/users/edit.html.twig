@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Modification du profil</h1>
 
-    {{ include('users/form/_edit_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('users/form/_edit_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
     <a href="{{ path('users_show', {'id' : app.user.id}) }}">Retour au profil</a>
 {% endblock %}

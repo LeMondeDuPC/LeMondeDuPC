@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200517191232 extends AbstractMigration
+final class Version20200519205553 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,6 +23,7 @@ final class Version20200517191232 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE users CHANGE roles roles JSON NOT NULL');
+        $this->addSql('ALTER TABLE posts CHANGE location_id location_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE partners CHANGE link link VARCHAR(255) DEFAULT NULL');
     }
 
@@ -32,6 +33,7 @@ final class Version20200517191232 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE partners CHANGE link link VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE posts CHANGE location_id location_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE users CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
     }
 }

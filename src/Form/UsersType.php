@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UsersType extends AbstractType
 {
@@ -22,14 +21,11 @@ class UsersType extends AbstractType
             ->add('email', EmailType::class)
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
                         'max' => 4096,
                     ]),
                 ],
@@ -38,8 +34,8 @@ class UsersType extends AbstractType
             $builder->add('validated', ChoiceType::class, [
                 'label' => 'Compte validé ?',
                 'choices' => [
-                    'Oui' => 1,
-                    'Non' => 0
+                    'Oui' => true,
+                    'Non' => false
                 ]
             ]);
         }

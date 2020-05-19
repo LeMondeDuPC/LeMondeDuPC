@@ -6,9 +6,9 @@
     <article class="post">
         <header>
             <div class="title">
-                <h2>
+                <h1 class="heading">
                     Compte utilisateur
-                </h2>
+                </h1>
             </div>
             <div class="meta">
                 <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
@@ -22,7 +22,7 @@
             <p>Niveau : {{ user.roles ? user.roles|json_encode : '' }}</p>
             <div class="box alt">
                 <div class="row gtr-uniform">
-                    {% for post in posts %}
+                    {% for post in user.posts %}
                         <div class="col-4">
                             <a class="image featured"
                                href="{{ path('posts_show', {'id' : post.id, 'slug' : post.title|slugify }) }}">

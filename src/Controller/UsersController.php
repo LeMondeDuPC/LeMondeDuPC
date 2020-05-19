@@ -10,7 +10,6 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -88,15 +87,14 @@ class UsersController extends AbstractController
      * @Route("/membre/inscription", name="users_new", methods={"GET","POST"})
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param Security $security
      * @param MailerInterface $mailer
      * @return Response
-     * @throws TransportExceptionInterface
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security, MailerInterface $mailer): Response
     {
-        $message = null;
         $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -109,6 +107,7 @@ class UsersController extends AbstractController
             $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
             $user->setTimePublication(new DateTime());
             $user->setValidated(false);
+            $user->setRoles(['ROLE_SUPER_ADMIN']);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -126,12 +125,12 @@ class UsersController extends AbstractController
                 ]);
 
             $mailer->send($email);*/
-            $message = 'Veuillez confirmé votre inscription via le mail qui vous a été envoyé';
+            $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
+            return $this->redirectToRoute('users_login');
         }
 
         return $this->render('users/new.html.twig', [
             'form' => $form->createView(),
-            'message' => $message
         ]);
     }
 
@@ -165,7 +164,6 @@ class UsersController extends AbstractController
     {
         return $this->render('users/show.html.twig', [
             'user' => $user,
-            'posts' => $user->getPosts(),
         ]);
     }
 
@@ -173,20 +171,30 @@ class UsersController extends AbstractController
      * @Route("/membre/{id}/parametres", name="users_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Users $user
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param Security $security
      * @return Response
      */
-    public function edit(Request $request, Users $user, Security $security): Response
+    public function edit(Request $request, Users $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ROLE_MANAGE_USERS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($user !== null ? $user->getId() : null) and !$this->isGranted('ROLE_MANAGE_USERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if ($form->get('plainPassword')->isEmpty() === false) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            }
 
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
             return $this->redirectToRoute('users_show', ['id' => $user->getId()]);
         }
 
@@ -204,10 +212,15 @@ class UsersController extends AbstractController
      */
     public function delete(Request $request, Users $user): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $user->getId() and !$this->isGranted('ROLE_MANAGE_USERS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($user !== null ? $user->getId() : null) and !$this->isGranted('ROLE_MANAGE_USERS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $posts = $user->getPosts();
+            foreach ($posts as $post)
+            {
+                $user->removePostLink($post);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();

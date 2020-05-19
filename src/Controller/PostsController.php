@@ -61,8 +61,7 @@ class PostsController extends AbstractController
     {
         $post = $this->_postRepository->findOneBy(['id' => $post->getId(), 'validated' => Posts::VALIDATED]);
         return $this->render('posts/show.html.twig', [
-            'post' => $post,
-            'location' => $post->getLocation()
+            'post' => $post
         ]);
     }
 
@@ -124,7 +123,6 @@ class PostsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setUser($this->getUser());
             $post->setTimePublication(new DateTime());
-            $post->setValidated(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
@@ -147,7 +145,7 @@ class PostsController extends AbstractController
      */
     public function edit(Request $request, Posts $post, Security $security): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getUser()->getId() and !$this->isGranted('ROLE_MANAGE_POSTS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($post->getUser() !== null ? $post->getUser()->getId() : null) and !$this->isGranted('ROLE_MANAGE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
@@ -173,7 +171,7 @@ class PostsController extends AbstractController
      */
     public function delete(Request $request, Posts $post): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== $post->getUser()->getId() and !$this->isGranted('ROLE_MANAGE_POSTS')) {
+        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($post->getUser() !== null ? $post->getUser()->getId() : null) and !$this->isGranted('ROLE_MANAGE_POSTS')) {
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {

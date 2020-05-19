@@ -28,8 +28,8 @@ class PostsType extends AbstractType
             $builder->add('validated', ChoiceType::class, [
                 'label' => 'Mettre en ligne ?',
                 'choices' => [
-                    'Oui' => 1,
-                    'Non' => 0
+                    'Oui' => true,
+                    'Non' => false
                 ]
             ]);
         }

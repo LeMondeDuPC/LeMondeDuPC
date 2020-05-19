@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Locations;
+use App\Entity\Posts;
 use App\Form\LocationsType;
 use App\Repository\LocationsRepository;
 use App\Repository\PostsRepository;
@@ -52,7 +53,6 @@ class LocationsController extends AbstractController
     {
         return $this->render('locations/show.html.twig', [
             'location' => $location,
-            'posts' => $location->getPosts(),
         ]);
     }
 
@@ -136,6 +136,11 @@ class LocationsController extends AbstractController
             throw $this->createAccessDeniedException('No access!');
         }
         if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {
+            $posts = $location->getPosts();
+            foreach ($posts as $post)
+            {
+                $location->removePostLink($post);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($location);
             $entityManager->flush();

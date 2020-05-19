@@ -19,10 +19,10 @@
                 {% else %}
                     <span class="author name">Anonyme</span>
                 {% endif %}
-                {% if location.name is not null %}
-                    <span><a href="{{ path('locations_show', {'id': location.id, 'name': location.name|slugify }) }}">{{ location.name }}</a></span>
+                {% if post.location is not null %}
+                    <span><a href="{{ path('locations_show', {'id': post.location.id, 'name': post.location.name|slugify }) }}">{{ post.location.name }}</a></span>
                 {% else %}
-                    <span>{{ location.name ? location.name : 'Non répertorié' }}</span>
+                    <span>Non répertorié</span>
                 {% endif %}
                 <ul class="icons">
                     <li>

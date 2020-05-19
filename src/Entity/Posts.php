@@ -53,17 +53,6 @@ class Posts
      */
     private $timePublication;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Locations::class, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $location;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="boolean")
@@ -71,6 +60,17 @@ class Posts
      */
     private $validated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Locations::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -125,6 +125,18 @@ class Posts
         return $this;
     }
 
+    public function getValidated(): ?bool
+    {
+        return $this->validated;
+    }
+
+    public function setValidated(bool $validated): self
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
     public function getLocation(): ?Locations
     {
         return $this->location;
@@ -145,18 +157,6 @@ class Posts
     public function setUser(?Users $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getValidated(): ?bool
-    {
-        return $this->validated;
-    }
-
-    public function setValidated(bool $validated): self
-    {
-        $this->validated = $validated;
 
         return $this;
     }
