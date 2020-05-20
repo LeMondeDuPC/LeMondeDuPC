@@ -37,6 +37,12 @@ class UsersType extends AbstractType
                     'Oui' => true,
                     'Non' => false
                 ]
+            ])
+            ->add('roles', ChoiceType::class, [
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Rôles',
+                'choices' => $options['roles']
             ]);
         }
     }
@@ -45,7 +51,8 @@ class UsersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
-            'security' => Security::class
+            'security' => Security::class,
+            'roles' => [],
         ]);
     }
 }

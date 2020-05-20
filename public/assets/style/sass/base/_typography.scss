@@ -1,35 +1,11 @@
-///
-/// Future Imperfect by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-///
-
-/* Type */
-
 body, input, select, textarea {
   color: _palette(fg);
-  font-family: _font(family);
+  font-family: _font(family), serif;
   font-size: 14pt;
   font-weight: _font(weight);
   line-height: 1.75;
 
   @include breakpoint('<=xlarge') {
-    font-size: 12pt;
-  }
-
-  @include breakpoint('<=large') {
-    font-size: 12pt;
-  }
-
-  @include breakpoint('<=medium') {
-    font-size: 12pt;
-  }
-
-  @include breakpoint('<=small') {
-    font-size: 12pt;
-  }
-
-  @include breakpoint('<=xsmall') {
     font-size: 12pt;
   }
 }
@@ -80,6 +56,10 @@ h1, h2, h3, h4, h5, h6 {
     color: inherit;
     border-bottom: 0;
   }
+}
+
+h1 {
+  font-size: 1.3em;
 }
 
 h2 {

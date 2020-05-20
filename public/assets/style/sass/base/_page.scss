@@ -1,25 +1,10 @@
-///
-/// Future Imperfect by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-///
-
-/* Basic */
-
-// MSIE: Prevents scrollbar from overlapping content.
-body {
-  -ms-overflow-style: scrollbar;
-}
-
-// Ensures page width is always >=320px.
+// page width is always >=320px.
 @include breakpoint('<=xsmall') {
   html, body {
     min-width: 320px;
   }
 }
 
-// Set box model to border-box.
-// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
 html {
   box-sizing: border-box;
 }
@@ -30,13 +15,4 @@ html {
 
 body {
   background: _palette(bg-alt);
-
-  // Stops initial animations until page loads.
-  &.is-preload {
-    *, *:before, *:after {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
 }

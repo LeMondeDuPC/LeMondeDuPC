@@ -39,7 +39,7 @@ class PostsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Posts::class,
-            'security' => Security::class
+            'security' => Security::class,
         ]);
     }
 }

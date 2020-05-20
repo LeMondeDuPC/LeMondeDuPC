@@ -103,7 +103,6 @@ class UsersController extends AbstractController
             $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
             $user->setTimePublication(new DateTime());
             $user->setValidated(false);
-            $user->setRoles(['ROLE_SUPER_ADMIN']);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -177,8 +176,13 @@ class UsersController extends AbstractController
      */
     public function edit(Request $request, Users $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
     {
+        $roles = [];
+        foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role)
+        {
+            $roles[$role] = $role;
+        }
         if (((!is_null($this->getUser()) and !is_null($user)) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
-            $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
+            $form = $this->createForm(UsersType::class, $user, ['security' => $security, 'roles' => $roles]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 if ($form->get('plainPassword')->isEmpty() === false) {

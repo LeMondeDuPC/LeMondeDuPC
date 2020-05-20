@@ -112,11 +112,11 @@
 
     <!-- Main -->
     <div id="main">
-        {# read and display all flash messages #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="alert {{ label }}">
+                <div class="notification {{ label }}">
                     {{ message }}
+                    <span class="closebtn">&times;</span>
                 </div>
             {% endfor %}
         {% endfor %}
