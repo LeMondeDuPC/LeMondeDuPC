@@ -60,9 +60,13 @@ class PostsController extends AbstractController
     public function show(Posts $post): Response
     {
         $post = $this->_postRepository->findOneBy(['id' => $post->getId(), 'validated' => Posts::VALIDATED]);
-        return $this->render('posts/show.html.twig', [
-            'post' => $post
-        ]);
+        if (!is_null($post)) {
+            return $this->render('posts/show.html.twig', [
+                'post' => $post
+            ]);
+        } else {
+            throw $this->createNotFoundException();
+        }
     }
 
     /**
@@ -98,7 +102,7 @@ class PostsController extends AbstractController
             ]);
         } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
             return $this->render('posts/manage.html.twig', [
-                'posts' => $this->_postRepository->findBy(['idUser' => $this->getUser()->getId()], ['timePublication' => 'DESC']),
+                'posts' => $this->getUser()->getPosts(),
             ]);
         } else {
             throw $this->createAccessDeniedException('No access!');
@@ -113,27 +117,35 @@ class PostsController extends AbstractController
      */
     public function new(Request $request, Security $security): Response
     {
-        if (!$this->isGranted('ROLE_CREATE_POSTS')) {
+        if ($this->isGranted('ROLE_CREATE_POSTS')) {
+            $post = new Posts();
+            $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $post->setUser($this->getUser());
+                $post->setTimePublication(new DateTime());
+                if (!$form->has('validated')) {
+                    $post->setValidated(false);
+                }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($post);
+                $entityManager->flush();
+                if ($this->isGranted('ROLE_MANAGE_POSTS')) {
+                    $this->addFlash('success', 'Votre article a bien été posté !');
+                } else {
+                    $this->addFlash('success', 'Votre article a bien été envoyé, en attente de validation...');
+                }
+                return $this->redirectToRoute('posts_index');
+            }
+
+            return $this->render('posts/new.html.twig', [
+                'post' => $post,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $post = new Posts();
-        $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $post->setUser($this->getUser());
-            $post->setTimePublication(new DateTime());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($post);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('posts_index');
-        }
-
-        return $this->render('posts/new.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -145,22 +157,21 @@ class PostsController extends AbstractController
      */
     public function edit(Request $request, Posts $post, Security $security): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($post->getUser() !== null ? $post->getUser()->getId() : null) and !$this->isGranted('ROLE_MANAGE_POSTS')) {
+        if (((!is_null($this->getUser()) and !is_null($post->getUser())) ? ($this->getUser()->getId() === $post->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_POSTS')) {
+            $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Votre article a bien été modifié !');
+                return $this->redirectToRoute('posts_manage');
+            }
+            return $this->render('posts/edit.html.twig', [
+                'post' => $post,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(PostsType::class, $post, ['security' => $security]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('posts_manage');
-        }
-
-        return $this->render('posts/edit.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -171,15 +182,17 @@ class PostsController extends AbstractController
      */
     public function delete(Request $request, Posts $post): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($post->getUser() !== null ? $post->getUser()->getId() : null) and !$this->isGranted('ROLE_MANAGE_POSTS')) {
+        if (((!is_null($this->getUser()) and !is_null($post->getUser())) ? ($this->getUser()->getId() === $post->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_POSTS')) {
+            if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($post);
+                $entityManager->flush();
+                $this->addFlash('success', 'Votre article a bien été supprimé !');
+            }
+
+            return $this->redirectToRoute('posts_manage');
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($post);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('posts_manage');
     }
 }

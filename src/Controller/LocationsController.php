@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Locations;
-use App\Entity\Posts;
 use App\Form\LocationsType;
 use App\Repository\LocationsRepository;
 use App\Repository\PostsRepository;
@@ -62,12 +61,13 @@ class LocationsController extends AbstractController
      */
     public function manage(): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+        if ($this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+            return $this->render('locations/manage.html.twig', [
+                'locations' => $this->_locationsRepository->findAll(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        return $this->render('locations/manage.html.twig', [
-            'locations' => $this->_locationsRepository->findAll(),
-        ]);
     }
 
     /**
@@ -77,25 +77,24 @@ class LocationsController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+        if ($this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+            $location = new Locations();
+            $form = $this->createForm(LocationsType::class, $location);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($location);
+                $entityManager->flush();
+                $this->addFlash('success', 'La catégorie a bien été ajouté !');
+                return $this->redirectToRoute('locations_manage');
+            }
+            return $this->render('locations/new.html.twig', [
+                'location' => $location,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $location = new Locations();
-        $form = $this->createForm(LocationsType::class, $location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($location);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('locations_manage');
-        }
-
-        return $this->render('locations/new.html.twig', [
-            'location' => $location,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -106,22 +105,22 @@ class LocationsController extends AbstractController
      */
     public function edit(Request $request, Locations $location): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+        if ($this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+            $form = $this->createForm(LocationsType::class, $location);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'La catégorie a bien été modifié !');
+                return $this->redirectToRoute('locations_manage');
+            }
+            return $this->render('locations/edit.html.twig', [
+                'location' => $location,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(LocationsType::class, $location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('locations_manage');
-        }
-
-        return $this->render('locations/edit.html.twig', [
-            'location' => $location,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -132,20 +131,20 @@ class LocationsController extends AbstractController
      */
     public function delete(Request $request, Locations $location): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+        if ($this->isGranted('ROLE_MANAGE_LOCATIONS')) {
+            if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {
+                $posts = $location->getPosts();
+                foreach ($posts as $post) {
+                    $location->removePostLink($post);
+                }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($location);
+                $entityManager->flush();
+                $this->addFlash('success', 'La catégorie a bien été supprimé !');
+            }
+            return $this->redirectToRoute('locations_manage');
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {
-            $posts = $location->getPosts();
-            foreach ($posts as $post)
-            {
-                $location->removePostLink($post);
-            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($location);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('locations_manage');
     }
 }

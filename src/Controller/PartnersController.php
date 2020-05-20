@@ -47,12 +47,13 @@ class PartnersController extends AbstractController
      */
     public function manage(): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
+        if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
+            return $this->render('partners/manage.html.twig', [
+                'partners' => $this->_partnersRepository->findAll(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        return $this->render('partners/manage.html.twig', [
-            'partners' => $this->_partnersRepository->findAll(),
-        ]);
     }
 
     /**
@@ -62,25 +63,26 @@ class PartnersController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
+        if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
+            $partner = new Partners();
+            $form = $this->createForm(PartnersType::class, $partner);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($partner);
+                $entityManager->flush();
+                $this->addFlash('success', 'Le partenaire a bien été ajouté !');
+                return $this->redirectToRoute('partners_manage');
+            }
+
+            return $this->render('partners/new.html.twig', [
+                'partner' => $partner,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $partner = new Partners();
-        $form = $this->createForm(PartnersType::class, $partner);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($partner);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('partners_manage');
-        }
-
-        return $this->render('partners/new.html.twig', [
-            'partner' => $partner,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -91,22 +93,23 @@ class PartnersController extends AbstractController
      */
     public function edit(Request $request, Partners $partner): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
+        if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
+            $form = $this->createForm(PartnersType::class, $partner);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Le partenaire a bien été modifié !');
+                return $this->redirectToRoute('partners_manage');
+            }
+
+            return $this->render('partners/edit.html.twig', [
+                'partner' => $partner,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(PartnersType::class, $partner);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('partners_manage');
-        }
-
-        return $this->render('partners/edit.html.twig', [
-            'partner' => $partner,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -117,15 +120,16 @@ class PartnersController extends AbstractController
      */
     public function delete(Request $request, Partners $partner): Response
     {
-        if (!$this->isGranted('ROLE_MANAGE_PARTNERS')) {
+        if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
+            if ($this->isCsrfTokenValid('delete' . $partner->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($partner);
+                $entityManager->flush();
+                $this->addFlash('success', 'Le partenaire a bien été supprimé !');
+            }
+            return $this->redirectToRoute('partners_manage');
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        if ($this->isCsrfTokenValid('delete' . $partner->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($partner);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('partners_manage');
     }
 }

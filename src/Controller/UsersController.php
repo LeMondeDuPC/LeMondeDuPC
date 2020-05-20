@@ -52,16 +52,13 @@ class UsersController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
+        if (!$this->getUser()) {
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+            return $this->render('users/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        } else {
             return $this->redirectToRoute('users_show', ['id' => $this->getUser()->getId()]);
         }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('users/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
@@ -69,7 +66,6 @@ class UsersController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     /**
@@ -136,23 +132,22 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/membre/validation/{id}/{confirmKey}", name="users_validate", methods={"GET"})
-     * @param $confirmKey
+     * @param string $confirmKey
      * @param Users $user
-     * @return Response
+     * @return void
      */
     public function validateUser(string $confirmKey, Users $user)
     {
-        $message = 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé';
         if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== Users::VALIDATED) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setValidated(Posts::VALIDATED);
             $entityManager->persist($user);
             $entityManager->flush();
-            $message = 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !';
+            $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
+        } else {
+            $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
         }
-        return $this->render('users/validation.html.twig', [
-            'message' => $message,
-        ]);
+        $this->redirectToRoute('users_login');
     }
 
     /**
@@ -162,9 +157,14 @@ class UsersController extends AbstractController
      */
     public function show(Users $user): Response
     {
-        return $this->render('users/show.html.twig', [
-            'user' => $user,
-        ]);
+        $user = $this->_usersRepository->findOneBy(['id' => $user->getId(), 'validated' => Users::VALIDATED]);
+        if (!is_null($user)) {
+            return $this->render('users/show.html.twig', [
+                'user' => $user,
+            ]);
+        } else {
+            throw $this->createNotFoundException();
+        }
     }
 
     /**
@@ -177,31 +177,29 @@ class UsersController extends AbstractController
      */
     public function edit(Request $request, Users $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($user !== null ? $user->getId() : null) and !$this->isGranted('ROLE_MANAGE_USERS')) {
+        if (((!is_null($this->getUser()) and !is_null($user)) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
+            $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                if ($form->get('plainPassword')->isEmpty() === false) {
+                    $user->setPassword(
+                        $passwordEncoder->encodePassword(
+                            $user,
+                            $form->get('plainPassword')->getData()
+                        )
+                    );
+                }
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Le compte a bien été modifié');
+                return $this->redirectToRoute('users_show', ['id' => $user->getId()]);
+            }
+            return $this->render('users/edit.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        $form = $this->createForm(UsersType::class, $user, ['security' => $security]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('plainPassword')->isEmpty() === false) {
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-            }
-
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
-            return $this->redirectToRoute('users_show', ['id' => $user->getId()]);
-        }
-
-        return $this->render('users/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -212,20 +210,20 @@ class UsersController extends AbstractController
      */
     public function delete(Request $request, Users $user): Response
     {
-        if (($this->getUser() !== null ? $this->getUser()->getId() : null) !== ($user !== null ? $user->getId() : null) and !$this->isGranted('ROLE_MANAGE_USERS')) {
+        if (((!is_null($this->getUser()) and !is_null($user)) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
+            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+                $posts = $user->getPosts();
+                foreach ($posts as $post) {
+                    $user->removePostLink($post);
+                }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($user);
+                $entityManager->flush();
+            }
+            $this->addFlash('success', 'Le compte a bien été supprimé');
+            return $this->redirectToRoute('posts_index');
+        } else {
             throw $this->createAccessDeniedException('No access!');
         }
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $posts = $user->getPosts();
-            foreach ($posts as $post)
-            {
-                $user->removePostLink($post);
-            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('posts_index');
     }
 }
