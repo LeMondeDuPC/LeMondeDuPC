@@ -102,6 +102,7 @@ class UsersController extends AbstractController
             );
             $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
             $user->setTimePublication(new DateTime());
+            $user->setRoles(['ROLE_USER']);
             $user->setValidated(false);
 
             $entityManager = $this->getDoctrine()->getManager();

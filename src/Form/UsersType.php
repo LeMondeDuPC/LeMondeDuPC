@@ -30,7 +30,7 @@ class UsersType extends AbstractType
                     ]),
                 ],
             ]);
-        if ($options['security']->isGranted('ROLE_MANAGE_USERS')) {
+        if ($options['security']->isGranted('ROLE_MANAGE_USERS') AND $options['data']->getId() !== $options['security']->getUser()->getId()) {
             $builder->add('validated', ChoiceType::class, [
                 'label' => 'Compte validé ?',
                 'choices' => [
