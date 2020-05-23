@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Ajouter un article</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('product_manage') }}">Retouner à la liste des articles</a>
+            </div>
+        </header>
+        <section>
+            {{ include('product/form/_form.html.twig') }}
+        </section>
+    </article>
+{% endblock %}

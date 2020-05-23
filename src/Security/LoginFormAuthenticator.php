@@ -2,8 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\Posts;
-use App\Entity\Users;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +24,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'users_login';
+    public const LOGIN_ROUTE = 'user_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -68,7 +67,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Users::class)->findOneBy(['username' => $credentials['username'], 'validated' => Posts::VALIDATED]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username'], 'validated' => User::VALIDATED]);
 
         if (!$user) {
             throw new CustomUserMessageAuthenticationException('Compte non trouvé ou non confirmé');
@@ -95,7 +94,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        return new RedirectResponse($this->urlGenerator->generate('posts_index'));
+        return new RedirectResponse($this->urlGenerator->generate('product_index'));
     }
 
     protected function getLoginUrl()

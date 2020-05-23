@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une catégorie{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Ajouter une catégorie</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('category_manage') }}">Retourner à la liste des catégories</a>
+            </div>
+        </header>
+        <section>
+            {{ include('category/form/_form.html.twig') }}
+        </section>
+    </article>
+{% endblock %}

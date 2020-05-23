@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie : {{ category.name }}{% endblock %}
+
+{% block body %}
+    <article class="product">
+        <header>
+            <div class="title">
+                <h1 class="heading">Catégorie : {{ category.name }}</h1>
+            </div>
+        </header>
+        <section>
+            {% for product in category.products %}
+                <article class="mini-product">
+                    <section class="content">
+                        <h2 class="title">
+                            <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
+                        </h2>
+                        <p>{{ product.description }}</p>
+                    </section>
+                    <section>
+                        <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
+                           class="image">
+                            <img src="http://www.e-works.fr/blog/wp-content/uploads/2017/11/amazon-1024x458.png" alt="">
+                        </a>
+                    </section>
+                </article>
+            {% else %}
+                <p>Aucun article n'est disponible pour le moment</p>
+            {% endfor %}
+        </section>
+    </article>
+{% endblock %}

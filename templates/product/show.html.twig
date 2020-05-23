@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">
+                    {{ product.title }}
+                </h1>
+            </div>
+            <div class="meta">
+                <time class="published">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                {% if product.user is not null %}
+                    <span class="author name">
+                            <a href="{{ path('user_show', {'id' : post.user.id}) }}">{{ post.user.username }}</a>
+                        </span>
+                {% else %}
+                    <span class="author name">Anonyme</span>
+                {% endif %}
+                {% if product.location is not null %}
+                    <span><a href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
+                {% else %}
+                    <span>Non répertorié</span>
+                {% endif %}
+                <ul class="icons">
+                    <li>
+                        <a href="https://twitter.com/share?url={{ app.request.uri }}&text={{ product.title|slugify }}"
+                           target="_blank" class="icon fa-twitter">
+                            <span class="label">Twitter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ product.title|slugify }}"
+                           target="_blank" class="icon fa-facebook">
+                            <span class="label">Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/share?url={{ app.request.uri }}&hl=fr"
+                           target="_blank" class="icon fa-google-plus">
+                            <span class="label">Google +</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title={{ product.title|slugify }}"
+                           target="_blank" class="icon fa-linkedin">
+                            <span class="label">LinkedIn</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <section>
+            <img src="" alt="" class="image featured"/>
+            {{ post.content|raw }}
+        </section>
+    </article>
+{% endblock %}

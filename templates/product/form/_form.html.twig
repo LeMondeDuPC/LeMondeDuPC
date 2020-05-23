@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
+{% block editor %}
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+{% endblock %}

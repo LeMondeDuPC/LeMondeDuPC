@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une catégorie{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Modification d'une catégorie</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('category_manage') }}">Retourner à la liste des catégories</a>
+            </div>
+        </header>
+        <section>
+            {{ include('category/form/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            <form method="post" action="{{ path('category_delete', {'id': category.id}) }}"
+                  onsubmit="return confirm('Etes vous sûr de vouloir supprimer ce partenaire ?');">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                <button class="btn">Delete</button>
+            </form>
+        </section>
+    </article>
+{% endblock %}

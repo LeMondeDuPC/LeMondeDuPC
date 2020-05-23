@@ -1,20 +1,19 @@
 security:
     encoders:
-        App\Entity\Users:
+        App\Entity\User:
             algorithm: bcrypt
 
     role_hierarchy:
-        ROLE_USER : [ROLE_USER]
-        ROLE_WRITER: [ROLE_CREATE_POSTS]
-        ROLE_MANAGER: [ROLE_CREATE_LOCATIONS, ROLE_CREATE_PARTNERS]
-        ROLE_ADMIN: [ROLE_CREATE_USERS, ROLE_MANAGE_USERS, ROLE_MANAGE_POSTS, ROLE_MANAGE_LOCATIONS, ROLE_MANAGE_PARTNERS]
+        ROLE_WRITER: [ROLE_CREATE_PRODUCTS]
+        ROLE_MANAGER: [ROLE_CREATE_CATEGORIES, ROLE_CREATE_PARTNERS]
+        ROLE_ADMIN: [ROLE_CREATE_USERS, ROLE_MANAGE_USERS, ROLE_MANAGE_PRODUCTS, ROLE_MANAGE_CATEGORIES, ROLE_MANAGE_PARTNERS]
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\Users
+                class: App\Entity\User
                 property: username
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
@@ -28,7 +27,7 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: users_logout
+                path: user_logout
                 # where to redirect after logout
                 # target: app_any_route
 

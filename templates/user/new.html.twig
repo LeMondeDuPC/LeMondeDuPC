@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Inscription</h1>
+            </div>
+        </header>
+        <section>
+            {% include('user/form/_new_form.html.twig') %}
+        </section>
+    </article>
+{% endblock %}

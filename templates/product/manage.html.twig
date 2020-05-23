@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des articles{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Gestion des articles</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('product_new') }}">Ajouter un article</a>
+            </div>
+        </header>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Validation</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.title }}</td>
+                        <td>{% if product.validated %}Oui{% else %}Non{% endif %}</td>
+                        <td>
+                            <a href="{{ path('product_show', {'id': product.id, 'slug': product.title|slugify}) }}">Afficher</a>
+                            <a href="{{ path('product_edit', {'id': product.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun résultat</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </article>
+{% endblock %}

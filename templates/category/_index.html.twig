@@ -1,0 +1,15 @@
+{% for category in categories %}
+    <article class="mini-post">
+        <section class="content">
+            <h3 class="title-min"><a
+                        href="{{ path('category_show', {'id': category.id,'name' : category.name|slugify}) }}">{{ category.name }}</a>
+            </h3>
+        </section>
+    </article>
+{% else %}
+    <article class="mini-post">
+        <section class="content">
+            <h3 class="title-min">Aucune catégorie n'est disponible</h3>
+        </section>
+    </article>
+{% endfor %}

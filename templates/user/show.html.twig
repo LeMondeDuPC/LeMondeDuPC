@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">
+                    Compte utilisateur
+                </h1>
+            </div>
+            <div class="meta">
+                <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
+                <a href="#" class="author">
+                    <span class="name">{{ user.username }}</span>
+                    <img src="" alt=""/>
+                </a>
+            </div>
+        </header>
+        <section>
+            <p>Niveau : {{ user.roles ? user.roles|json_encode : '' }}</p>
+            <div class="box alt">
+                <div class="row gtr-uniform">
+                    {% for product in user.products %}
+                        <div class="col-4">
+                            <a class="image featured"
+                               href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
+                                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt=""/>
+                                <span>{{ post.title }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </article>
+{% endblock %}

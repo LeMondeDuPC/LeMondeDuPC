@@ -27,7 +27,7 @@
 
     <!-- Header -->
     <header id="header">
-        <h1><a href="{{ path('posts_index') }}">Le Monde Du PC</a></h1>
+        <h1><a href="{{ path('product_index') }}">Le Monde Du PC</a></h1>
         <nav id="navheader" class="links">
             <ul id="nav">
                 <li><a href="">Nous contacter</a></li>
@@ -38,7 +38,7 @@
             <ul>
                 <li class="search">
                     <a class="icon fa-search" href="#search">Rechercher</a>
-                    <form id="search" method="post" action="{{ path('posts_search') }}">
+                    <form id="search" method="post" action="{{ path('product_search') }}">
                         <input type="search" name="q" placeholder="Rechercher"/>
                     </form>
                 </li>
@@ -53,7 +53,7 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            <form class="search" method="post" action="{{ path('posts_search') }}">
+            <form class="search" method="post" action="{{ path('product_search') }}">
                 <input type="text" name="q" placeholder="Rechercher"/>
             </form>
         </div>
@@ -63,36 +63,36 @@
         </nav>
 
         {% if is_granted('ROLE_USER') %}
-            {% if is_granted('ROLE_MANAGE_LOCATIONS') or is_granted('ROLE_MANAGE_USERS') or is_granted('ROLE_MANAGE_POSTS') or is_granted('ROLE_MANAGE_PARTNERS') %}
+            {% if is_granted('ROLE_MANAGE_CATEGORIES') or is_granted('ROLE_MANAGE_USERS') or is_granted('ROLE_MANAGE_PRODUCTS') or is_granted('ROLE_MANAGE_PARTNERS') %}
                 <nav>
                     <ul class="links">
                         {% if is_granted('ROLE_MANAGE_USERS') %}
-                            <li><a href="{{ path('users_manage') }}">Gestions des utilisateurs</a></li>
+                            <li><a href="{{ path('user_manage') }}">Gestions des utilisateurs</a></li>
                         {% endif %}
-                        {% if is_granted('ROLE_MANAGE_POSTS') %}
-                            <li><a href="{{ path('posts_manage') }}">Gestion des articles</a></li>
+                        {% if is_granted('ROLE_MANAGE_PRODUCTS') %}
+                            <li><a href="{{ path('product_manage') }}">Gestion des articles</a></li>
                         {% endif %}
-                        {% if is_granted('ROLE_MANAGE_LOCATIONS') %}
-                            <li><a href="{{ path('locations_manage') }}">Gestion des catégories</a></li>
+                        {% if is_granted('ROLE_MANAGE_CATEGORIES') %}
+                            <li><a href="{{ path('category_manage') }}">Gestion des catégories</a></li>
                         {% endif %}
                         {% if is_granted('ROLE_MANAGE_PARTNERS') %}
-                            <li><a href="{{ path('partners_manage') }}">Gestion des partenaires</a></li>
+                            <li><a href="{{ path('partner_manage') }}">Gestion des partenaires</a></li>
                         {% endif %}
                     </ul>
                 </nav>
             {% endif %}
-            {% if is_granted('ROLE_CREATE_POSTS') and is_granted('ROLE_MANAGE_POSTS') == false %}
+            {% if is_granted('ROLE_CREATE_PRODUCTS') and is_granted('ROLE_MANAGE_PRODUCTS') == false %}
                 <nav>
                     <ul class="links">
-                        <li><a href="{{ path('posts_new') }}">Créer un article</a></li>
-                        <li><a href="{{ path('posts_manage') }}">Mes articles</a></li>
+                        <li><a href="{{ path('product_new') }}">Créer un article</a></li>
+                        <li><a href="{{ path('product_manage') }}">Mes articles</a></li>
                     </ul>
                 </nav>
             {% endif %}
             <nav>
                 <ul class="links">
-                    <li><a href="{{ path('users_show', {'id' : app.user.id }) }}">Mon profil</a></li>
-                    <li><a href="{{ path('users_edit', {'id' : app.user.id }) }}">Paramètres</a></li>
+                    <li><a href="{{ path('user_show', {'id' : app.user.id }) }}">Mon profil</a></li>
+                    <li><a href="{{ path('user_edit', {'id' : app.user.id }) }}">Paramètres</a></li>
                 </ul>
             </nav>
         {% endif %}
@@ -101,10 +101,10 @@
         <nav>
             <ul class="actions fit">
                 {% if is_granted('ROLE_USER') %}
-                    <li><a href="{{ path('users_logout') }}" class="button fit">Déconnexion</a></li>
+                    <li><a href="{{ path('user_logout') }}" class="button fit">Déconnexion</a></li>
                 {% else %}
-                    <li><a href="{{ path('users_login') }}" class="button fit">Connexion</a></li>
-                    <li><a href="{{ path('users_new') }}" class="button fit">Inscription</a></li>
+                    <li><a href="{{ path('user_login') }}" class="button fit">Connexion</a></li>
+                    <li><a href="{{ path('user_new') }}" class="button fit">Inscription</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -145,7 +145,7 @@
         <section>
             <h3>Catégories :</h3>
             <div class="mini-posts">
-                {{ render(controller('App\\Controller\\LocationsController::_index')) }}
+                {{ render(controller('App\\Controller\\CategoryController::_index')) }}
             </div>
         </section>
         <!-- Footer -->

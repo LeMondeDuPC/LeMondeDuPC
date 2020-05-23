@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Du numérique expliqué simplement{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Les derniers articles</h1>
+            </div>
+        </header>
+        <section>
+            {% for product in products %}
+                <article class="mini-post">
+                    <section class="content">
+                        <h2 class="title-max">
+                            <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
+                        </h2>
+                        <p>{{ product.description }}</p>
+                        {% if product.category is not null %}
+                            <span class="location icon fa-tag"><a
+                                        href="{{ path('category_show', {'id': product.location.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
+                        {% else %}
+                            <span class="location icon fa-tag">Non répertorié</span>
+                        {% endif %}
+                    </section>
+                    <section>
+                        <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
+                           class="image">
+                            <img src="http://www.e-works.fr/blog/wp-content/uploads/2017/11/amazon-1024x458.png" alt="">
+                        </a>
+                    </section>
+                </article>
+            {% else %}
+                <p>Aucun article n'est disponible pour le moment</p>
+            {% endfor %}
+        </section>
+    </article>
+{% endblock %}
+{% block paginate %}
+    {{ knp_pagination_render(products) }}
+{% endblock %}
+

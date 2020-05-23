@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un partenaire{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Modification d'un partenaire</h1>
+            </div>
+            <div class="meta">
+                <a href="{{ path('partner_manage') }}">Retourner à la liste des partenaires</a>
+            </div>
+        </header>
+        <section>
+            {{ include('partner/form/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            <form method="post" action="{{ path('partner_delete', {'id': partner.id}) }}"
+                  onsubmit="return confirm('Etes vous sûr de vouloir supprimer ce partenaire ?');">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ partner.id) }}">
+                <button class="btn">Supprimer</button>
+            </form>
+        </section>
+    </article>
+{% endblock %}
