@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="files")
  * @ORM\HasLifecycleCallbacks
  */
 class File
@@ -32,22 +32,9 @@ class File
 
     private $temp;
 
-    private $appKernel;
-
-    public function __construct(KernelInterface $appKernel)
+    public function getId()
     {
-        $this->appKernel = $appKernel;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        if ($this->getFile() !== null) {
-            $this->fileName = md5(uniqid()) . '.' . $this->getFile()->guessExtension();
-        }
+        return $this->id;
     }
 
     /**
@@ -59,8 +46,17 @@ class File
     }
 
     /**
-     * Sets file.
-     *
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function generateFileName()
+    {
+        if ($this->getFile() !== null) {
+            $this->fileName = md5(uniqid()) . '.' . $this->getFile()->guessExtension();
+        }
+    }
+
+    /**
      * @param UploadedFile $file
      */
     public function setFile(UploadedFile $file = null)
@@ -77,14 +73,10 @@ class File
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload()
+    public function uploadFile()
     {
         if ($this->getFile() !== null) {
-            // if there is an error when moving the file, an exception will
-            // be automatically thrown by move(). This will properly prevent
-            // the entity from being persisted to the database on error
             $this->getFile()->move($this->getUploadRootDir(), $this->fileName);
-
             // check if we have an old image
             if (isset($this->temp)) {
                 // delete the old image
@@ -96,39 +88,24 @@ class File
         }
     }
 
-    protected function getUploadRootDir()
-    {
-        return $this->appKernel->getProjectDir() . '/public/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        return 'assets/uploads';
-    }
-
     /**
      * @ORM\PreRemove()
      */
-    public function storeFilenameForRemove()
-    {
-        $this->temp = $this->getAbsolutePath();
-    }
-
-    public function getAbsolutePath()
+    public function storeFilename()
     {
         if ($this->fileName === null) {
-            return null;
+            $this->temp = null;
         } else {
-            return $this->getUploadRootDir() . '/' . $this->fileName;
+            $this->temp = $this->getUploadRootDir() . '/' . $this->fileName;
         }
     }
 
     /**
      * @ORM\PostRemove()
      */
-    public function removeUpload()
+    public function removeFile()
     {
-        if ($this->temp) {
+        if ($this->temp !== null) {
             unlink($this->temp);
         }
     }
@@ -140,5 +117,15 @@ class File
         } else {
             return null;
         }
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../public/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'assets/uploads';
     }
 }

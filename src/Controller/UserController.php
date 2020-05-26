@@ -73,9 +73,13 @@ class UserController extends AbstractController
      */
     public function manage(): Response
     {
-        return $this->render('user/manage.html.twig', [
-            'users' => $this->userRepository->findBy([], ['timePublication' => 'DESC']),
-        ]);
+        if ($this->isGranted('ROLE_MANAGE_USERS')) {
+            return $this->render('user/manage.html.twig', [
+                'users' => $this->userRepository->findBy([], ['timePublication' => 'DESC']),
+            ]);
+        } else {
+            throw $this->createAccessDeniedException('No access!');
+        }
     }
 
     /**
@@ -183,7 +187,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user, ['security' => $security, 'roles' => $roles]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                if ($form->get('plainPassword')->isEmpty() === false) {
+                if (!$form->get('plainPassword')->isEmpty()) {
                     $user->setPassword(
                         $passwordEncoder->encodePassword(
                             $user,

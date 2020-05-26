@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="users")
  * @UniqueEntity(
  *     fields={"username"},
  *     message="This username already exists in the database"
@@ -23,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    public const VALIDATED = 1;
+    public const VALIDATED = true;
 
     /**
      * @ORM\Id()
@@ -212,7 +213,9 @@ class User implements UserInterface
      */
     public function getProducts(): Collection
     {
-        return $this->products;
+        return $this->products->filter(function (Product $product) {
+            return $product->getValidated() === Product::VALIDATED;
+        });
     }
 
     public function addProductLink(Product $product): self

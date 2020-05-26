@@ -14,12 +14,12 @@
                 <time class="published">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
                 {% if product.user is not null %}
                     <span class="author name">
-                            <a href="{{ path('user_show', {'id' : post.user.id}) }}">{{ post.user.username }}</a>
+                            <a href="{{ path('user_show', {'id' : product.user.id}) }}">{{ product.user.username }}</a>
                         </span>
                 {% else %}
                     <span class="author name">Anonyme</span>
                 {% endif %}
-                {% if product.location is not null %}
+                {% if product.category is not null %}
                     <span><a href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
                 {% else %}
                     <span>Non répertorié</span>
@@ -54,7 +54,7 @@
         </header>
         <section>
             <img src="" alt="" class="image featured"/>
-            {{ post.content|raw }}
+            {{ product.content|raw }}
         </section>
     </article>
 {% endblock %}

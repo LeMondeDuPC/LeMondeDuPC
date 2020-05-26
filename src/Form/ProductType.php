@@ -24,12 +24,8 @@ class ProductType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name'
-            ])
-            ->add('file', FileType::class, [
-                'mapped' => false,
-                'required' => false
             ]);
-        if ($options['security']->isGranted('ROLE_MANAGE_POSTS')) {
+        if ($options['security']->isGranted('ROLE_MANAGE_PRODUCTS')) {
             $builder->add('validated', ChoiceType::class, [
                 'label' => 'Mettre en ligne ?',
                 'choices' => [

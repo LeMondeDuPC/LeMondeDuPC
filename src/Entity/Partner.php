@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartnerRepository")
+ * @ORM\Table(name="partners")
  * @UniqueEntity(
  *     fields={"name"},
  *     message="This link already exists in the database"

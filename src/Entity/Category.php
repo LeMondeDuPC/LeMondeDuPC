@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Table(name="categories")
  * @UniqueEntity(
  *     fields={"name"},
  *     message="This name already exists in the database"
@@ -64,7 +65,9 @@ class Category
      */
     public function getProducts(): Collection
     {
-        return $this->products;
+        return $this->products->filter(function (Product $product) {
+            return $product->getValidated() === Product::VALIDATED;
+        });
     }
 
     public function addProductLink(Product $product): self

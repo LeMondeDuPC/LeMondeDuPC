@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\Table(name="products")
  * @UniqueEntity(
  *     fields={"title"},
  *     message="This title already exists in the database"
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product
 {
 
-    public const VALIDATED = 1;
+    public const VALIDATED = true;
 
     /**
      * @ORM\Id()

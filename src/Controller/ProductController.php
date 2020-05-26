@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\File;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -11,7 +10,6 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
@@ -62,7 +60,7 @@ class ProductController extends AbstractController
     public function show(Product $product): Response
     {
         $product = $this->productRepository->findOneBy(['id' => $product->getId(), 'validated' => Product::VALIDATED]);
-        if (!is_null($product)) {
+        if ($product !== null) {
             return $this->render('product/show.html.twig', [
                 'product' => $product
             ]);
@@ -115,10 +113,9 @@ class ProductController extends AbstractController
      * @Route("/admin/product/nouveau", name="product_new", methods={"GET","POST"})
      * @param Request $request
      * @param Security $security
-     * @param KernelInterface $kernel
      * @return Response
      */
-    public function new(Request $request, Security $security, KernelInterface $kernel): Response
+    public function new(Request $request, Security $security): Response
     {
         if ($this->isGranted('ROLE_CREATE_PRODUCTS')) {
             $product = new Product();
@@ -131,13 +128,10 @@ class ProductController extends AbstractController
                 if (!$form->has('validated')) {
                     $product->setValidated(false);
                 }
-                $document = new File($kernel);
-                $document->setFile($form->get('file')->getData());
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($product);
-                $entityManager->persist($document);
                 $entityManager->flush();
-                if ($this->isGranted('ROLE_MANAGE_POSTS')) {
+                if ($this->isGranted('ROLE_MANAGE_PRODUCTS')) {
                     $this->addFlash('success', 'Votre article a bien été posté !');
                 } else {
                     $this->addFlash('success', 'Votre article a bien été envoyé, en attente de validation...');
@@ -167,7 +161,8 @@ class ProductController extends AbstractController
             $form = $this->createForm(ProductType::class, $product, ['security' => $security]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $this->getDoctrine()->getManager()->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
                 $this->addFlash('success', 'Votre article a bien été modifié !');
                 return $this->redirectToRoute('product_manage');
             }
