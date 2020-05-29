@@ -26,9 +26,27 @@ class File
     private $fileName;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(min="5", max="255")
+     */
+    private $description;
+
+    /**
+     * @Assert\Image
      */
     private $file;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="files")
+     */
+    private $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="files")
+     */
+    private $user;
 
     private $temp;
 
@@ -43,6 +61,18 @@ class File
     public function getFile()
     {
         return $this->file;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -127,5 +157,29 @@ class File
     protected function getUploadDir()
     {
         return 'assets/uploads';
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

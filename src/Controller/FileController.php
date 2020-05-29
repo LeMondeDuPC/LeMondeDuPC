@@ -78,7 +78,9 @@ class FileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file->setFile($form->get('file')->getData());
+            if (!$form->get('file')->isEmpty()) {
+                $file->setFile($form->get('file')->getData());
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($file);
             $entityManager->flush();
@@ -100,7 +102,7 @@ class FileController extends AbstractController
      */
     public function delete(Request $request, File $file): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$file->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $file->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($file);
             $entityManager->flush();

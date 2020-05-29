@@ -29,6 +29,9 @@ class UserType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])->add('file', \Symfony\Component\Form\Extension\Core\Type\FileType::class, [
+                'mapped' => false,
+                'required' => false
             ]);
         if ($options['security']->isGranted('ROLE_MANAGE_USERS') and $options['data']->getId() !== $options['security']->getUser()->getId()) {
             $builder->add('validated', ChoiceType::class, [

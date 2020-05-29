@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\File;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -119,6 +120,7 @@ class ProductController extends AbstractController
     {
         if ($this->isGranted('ROLE_CREATE_PRODUCTS')) {
             $product = new Product();
+            $file = new File();
             $form = $this->createForm(ProductType::class, $product, ['security' => $security]);
             $form->handleRequest($request);
 
@@ -128,8 +130,13 @@ class ProductController extends AbstractController
                 if (!$form->has('validated')) {
                     $product->setValidated(false);
                 }
+                $file->setDescription($form->get('file_description')->getData());
+                $file->setProduct($product);
+                $file->setFile($form->get('file')->getData());
+                $product->addFile($file);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($product);
+                $entityManager->persist($file);
                 $entityManager->flush();
                 if ($this->isGranted('ROLE_MANAGE_PRODUCTS')) {
                     $this->addFlash('success', 'Votre article a bien été posté !');
@@ -162,6 +169,14 @@ class ProductController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
+                if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
+                    $file = $product->getFiles()[0];
+                    $file->setDescription($form->get('file_description')->getData());
+                    $file->setProduct($product);
+                    $file->setFile($form->get('file')->getData());
+                    $product->addFile($file);
+                    $entityManager->persist($file);
+                }
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre article a bien été modifié !');
                 return $this->redirectToRoute('product_manage');
