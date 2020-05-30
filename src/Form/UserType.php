@@ -48,7 +48,7 @@ class UserType extends AbstractType
                     'choices' => $options['roles']
                 ]);
         }
-        if ($options['data']->getId() === $options['security']->getUser()->getId()) {
+        if ($options['security']->isGranted('ROLE_USER') and $options['data']->getId() === $options['security']->getUser()->getId()) {
             $builder
                 ->add('file', FileType::class, [
                     'label' => 'Miniature',

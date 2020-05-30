@@ -7,10 +7,13 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use DateTime;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
@@ -90,6 +93,7 @@ class UserController extends AbstractController
      * @param Security $security
      * @param MailerInterface $mailer
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security, MailerInterface $mailer): Response
     {
@@ -112,7 +116,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            /*$email = (new TemplatedEmail())
+            $email = (new TemplatedEmail())
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
                 ->to(new Address($user->getEmail(), $user->getUsername()))
                 ->subject('Merci de votre inscription !')
@@ -123,7 +127,7 @@ class UserController extends AbstractController
                     'confirm_key' => $user->getConfirmKey()
                 ]);
 
-            $mailer->send($email);*/
+            $mailer->send($email);
             $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
             return $this->redirectToRoute('user_login');
         }
