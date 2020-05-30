@@ -14,25 +14,27 @@
                 <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
                 <a href="#" class="author">
                     <span class="name">{{ user.username }}</span>
-                    <img src="" alt=""/>
+                    <img src="{{ asset(user.file.getWebPath) }}" alt="{{ user.file.description }}"/>
                 </a>
             </div>
         </header>
         <section>
-            <p>Niveau : {{ user.roles ? user.roles|json_encode : '' }}</p>
-            <div class="box alt">
-                <div class="row gtr-uniform">
-                    {% for product in user.products %}
-                        <div class="col-4">
-                            <a class="image featured"
-                               href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
-                                <img src="https://ressources.blogdumoderateur.com/2013/10/google-logo.png" alt=""/>
-                                <span>{{ product.title }}</span>
-                            </a>
-                        </div>
-                    {% endfor %}
+            {% if user.products is not null %}
+                <h2>Les articles de l'utilisateur : </h2>
+                <div class="box alt">
+                    <div class="row gtr-uniform">
+                        {% for product in user.products %}
+                            <div class="col-4">
+                                <a class="image featured"
+                                   href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
+                                    <img src="{{ asset(product.file.getWebPath) }}" alt=""/>
+                                    <span>{{ product.title }}</span>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </section>
     </article>
 {% endblock %}

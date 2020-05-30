@@ -27,7 +27,7 @@
                     <section>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
-                            <img src="{{ asset(product.files[0].getWebPath) }}" alt="{{ product.files[0].description }}"
+                            <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
                                  class="image featured"/>
                         </a>
                     </section>

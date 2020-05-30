@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -77,14 +76,9 @@ class Product
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=File::class, mappedBy="product")
+     * @ORM\OneToOne(targetEntity=File::class, mappedBy="product", cascade={"persist", "remove"})
      */
-    private $files;
-
-    public function __construct()
-    {
-        $this->files = new ArrayCollection();
-    }
+    private $file;
 
     public function getId(): ?int
     {
@@ -175,32 +169,19 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|File[]
-     */
-    public function getFiles(): Collection
+    public function getFile(): ?File
     {
-        return $this->files;
+        return $this->file;
     }
 
-    public function addFile(File $file): self
+    public function setFile(?File $file): self
     {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setProduct($this);
-        }
+        $this->file = $file;
 
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->files->contains($file)) {
-            $this->files->removeElement($file);
-            // set the owning side to null (unless already changed)
-            if ($file->getProduct() === $this) {
-                $file->setProduct(null);
-            }
+        // set (or unset) the owning side of the relation if necessary
+        $newProduct = null === $file ? null : $this;
+        if ($file->getProduct() !== $newProduct) {
+            $file->setProduct($newProduct);
         }
 
         return $this;

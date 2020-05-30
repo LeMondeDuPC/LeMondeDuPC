@@ -33,22 +33,19 @@ class File
      */
     private $description;
 
-    /**
-     * @Assert\Image
-     */
     private $file;
 
+    private $temp;
+
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="files")
+     * @ORM\OneToOne(targetEntity=Product::class, inversedBy="file", cascade={"persist", "remove"})
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="files")
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="file", cascade={"persist", "remove"})
      */
     private $user;
-
-    private $temp;
 
     public function getId()
     {
@@ -135,7 +132,7 @@ class File
      */
     public function removeFile()
     {
-        if ($this->temp !== null) {
+        if ($this->temp !== null and file_exists($this->temp)) {
             unlink($this->temp);
         }
     }
@@ -164,7 +161,7 @@ class File
         return $this->product;
     }
 
-    public function setProduct(?Product $product): self
+    public function setProduct(Product $product): self
     {
         $this->product = $product;
 

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
@@ -24,15 +25,31 @@ class ProductType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name'
-            ])->add('file', \Symfony\Component\Form\Extension\Core\Type\FileType::class, [
+            ])
+            ->add('file', \Symfony\Component\Form\Extension\Core\Type\FileType::class, [
+                'label' => 'Miniature',
                 'mapped' => false,
-                'required' => false
-            ])->add('file_description', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2048k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image de type : png, jpeg/jpg ou gif',
+                    ])
+                ],
+            ])
+            ->add('file_description', TextType::class, [
+                'label' => 'Description de la miniature',
                 'mapped' => false,
                 'required' => false
             ]);
         if ($options['security']->isGranted('ROLE_MANAGE_PRODUCTS')) {
-            $builder->add('validated', ChoiceType::class, [
+            $builder
+                ->add('validated', ChoiceType::class, [
                 'label' => 'Mettre en ligne ?',
                 'choices' => [
                     'Oui' => true,

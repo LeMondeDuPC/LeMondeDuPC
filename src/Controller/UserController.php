@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\File;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -187,6 +188,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user, ['security' => $security, 'roles' => $roles]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
                 if (!$form->get('plainPassword')->isEmpty()) {
                     $user->setPassword(
                         $passwordEncoder->encodePassword(
@@ -195,7 +197,14 @@ class UserController extends AbstractController
                         )
                     );
                 }
-                $this->getDoctrine()->getManager()->flush();
+                if (!$form->get('file')->isEmpty()) {
+                    $file = ($user->getFile() !== null) ? $user->getFile() : new File();
+                    $file->setDescription('Minature de l\'utilisateur');
+                    $file->setUser($user);
+                    $file->setFile($form->get('file')->getData());
+                    $entityManager->persist($file);
+                }
+                $entityManager->flush();
                 $this->addFlash('success', 'Le compte a bien été modifié');
                 return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
             }

@@ -133,7 +133,6 @@ class ProductController extends AbstractController
                 $file->setDescription($form->get('file_description')->getData());
                 $file->setProduct($product);
                 $file->setFile($form->get('file')->getData());
-                $product->addFile($file);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($product);
                 $entityManager->persist($file);
@@ -170,11 +169,10 @@ class ProductController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
-                    $file = $product->getFiles()[0];
+                    $file = $product->getFile();
                     $file->setDescription($form->get('file_description')->getData());
                     $file->setProduct($product);
                     $file->setFile($form->get('file')->getData());
-                    $product->addFile($file);
                     $entityManager->persist($file);
                 }
                 $entityManager->flush();

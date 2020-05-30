@@ -83,14 +83,13 @@ class User implements UserInterface
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity=File::class, mappedBy="user")
+     * @ORM\OneToOne(targetEntity=File::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private $files;
+    private $file;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->files = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,32 +245,19 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|File[]
-     */
-    public function getFiles(): Collection
+    public function getFile(): ?File
     {
-        return $this->files;
+        return $this->file;
     }
 
-    public function addFile(File $file): self
+    public function setFile(?File $file): self
     {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setUser($this);
-        }
+        $this->file = $file;
 
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->files->contains($file)) {
-            $this->files->removeElement($file);
-            // set the owning side to null (unless already changed)
-            if ($file->getUser() === $this) {
-                $file->setUser(null);
-            }
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $file ? null : $this;
+        if ($file->getUser() !== $newUser) {
+            $file->setUser($newUser);
         }
 
         return $this;
