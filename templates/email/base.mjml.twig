@@ -1,0 +1,88 @@
+{% mjml %}
+    <mjml>
+        <mj-head>
+            <mj-title>Mon email</mj-title>
+        </mj-head>
+        <mj-body background-color="#e1e1e1">
+            {# header #}
+            <mj-section background-color="#ffffff">
+                <mj-column width="100%">
+                    <mj-image src="{{ asset('assets/images/favicons/favicon-192x192.png') }}" width="50px" padding="0" />
+                    <mj-text align="center" padding="0" color="#0098ff">
+                        <h1>
+                            Le Monde Du PC
+                        </h1>
+                    </mj-text>
+                </mj-column>
+            </mj-section>
+
+            <mj-section background-color="#0098ff">
+                <mj-column width="100%">
+                    <mj-text color="#ffffff">
+                        <h2>
+                            Validez votre inscription
+                        </h2>
+                    </mj-text>
+                    <mj-text color="#ffffff">
+                        <p>
+                            Bonjour user, il reste une dernière étape avant de pouvoir vous connecter: veuillez activer votre compte en cliquant sur le bouton ci-dessous.
+                        </p>
+                    </mj-text>
+                    <mj-button background-color="#e85034" color="#ffffff" href="{{ path('product_index') }}">
+                        Confirmation
+                    </mj-button>
+                </mj-column>
+            </mj-section>
+
+            <mj-section background-color="#ffffff">
+                <mj-column width="100%">
+                    <mj-text>
+                        <h1>Les derniers articles</h1>
+                    </mj-text>
+                </mj-column>
+                <mj-column width="50%">
+                    <mj-image src="http://127.0.0.1/personnal/web/v2/symfony/public/assets/uploads/1a8e802858a28dd9c20e9889718ff5bb.jpeg" />
+                </mj-column>
+
+                <mj-column width="50%">
+                    <mj-text align="left">
+                        <h1>
+                            Great newsletter for the best company out there
+                        </h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et
+                            dolore magna aliqua. Ut enim ad minim veniam.
+                        </p>
+                    </mj-text>
+                    <mj-button align="left" background-color="#e85034" color="#ffffff" border-radius="24px" href="{{ path('product_index') }}">
+                        Lire
+                    </mj-button>
+                </mj-column>
+            </mj-section>
+
+
+            <mj-section background-color="#0098ff">
+                <mj-column>
+                    <mj-text color="#ffffff">
+                        Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent.
+                    </mj-text>
+                    <mj-social font-size="15px" icon-size="30px" mode="horizontal" color="#ffffff">
+                        <mj-social-element name="facebook" href="https://mjml.io/">
+                            Facebook
+                        </mj-social-element>
+                        <mj-social-element name="google" href="https://mjml.io/">
+                            Google
+                        </mj-social-element>
+                        <mj-social-element  name="twitter" href="https://mjml.io/">
+                            Twitter
+                        </mj-social-element>
+                    </mj-social>
+                </mj-column>
+            </mj-section>
+
+
+
+        </mj-body>
+    </mjml>
+{% endmjml %}

@@ -78,11 +78,11 @@
     "doctrine/reflection": {
         "version": "1.2.1"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.0"
+    },
     "egulias/email-validator": {
         "version": "2.1.17"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "knplabs/knp-components": {
         "version": "v2.3.5"
@@ -92,6 +92,19 @@
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
+    },
+    "notfloran/mjml-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "025b969514039a9da280b3e14d1a96b636acee3d"
+        },
+        "files": [
+            "config/packages/mjml.yaml",
+            "config/packages/prod/mjml.yaml"
+        ]
     },
     "ocramius/package-versions": {
         "version": "1.5.1"
@@ -278,6 +291,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.15.0"
+    },
+    "symfony/process": {
+        "version": "v5.0.8"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"

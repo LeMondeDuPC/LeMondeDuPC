@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 /**
  * Class UsersController
@@ -40,12 +41,26 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/email/test/design", name="test_email")
-     * @return Response
+     * @Route("/email/{name}-{ext}", name="test_email")
+     * @param MailerInterface $mailer
+     * @return string
      */
-    public function testEmail()
+    public function testEmail($name, $ext, MailerInterface $mailer)
     {
-        return $this->render('emails/test.html.twig', ['user_id' => 2, 'confirm_key' => 254511816, 'user_name' => 'Niels']);
+        /*$email = (new TemplatedEmail())
+            ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
+            ->to(new Address('Niels@gmail.com', 'Niels'))
+            ->subject('Merci de votre inscription !')
+            ->htmlTemplate('emails/signup.html.twig')
+            ->context([
+                'user_name' => 'Niels',
+                'user_id' => 1,
+                'confirm_key' => 254511816
+            ]);
+
+        $mailer->send($email);
+        return new Response('send');*/
+        return $this->render('email/'.$name.'.'.$ext.'.twig');
     }
 
     /**
@@ -120,7 +135,7 @@ class UserController extends AbstractController
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
                 ->to(new Address($user->getEmail(), $user->getUsername()))
                 ->subject('Merci de votre inscription !')
-                ->htmlTemplate('emails/signup.html.twig')
+                ->htmlTemplate('email/signup.html.twig')
                 ->context([
                     'user_name' => $user->getUsername(),
                     'user_id' => $user->getId(),

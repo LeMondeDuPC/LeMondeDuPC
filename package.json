@@ -1,0 +1,23 @@
+{
+  "name": "symfony",
+  "version": "1.0.0",
+  "description": "Dépot de la nouvelle version (v2.0) du site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NielsTRS/LeMondeDuPC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NielsTRS/LeMondeDuPC/issues"
+  },
+  "homepage": "https://github.com/NielsTRS/LeMondeDuPC#readme",
+  "dependencies": {
+    "mjml": "^4.6.3"
+  }
+}
