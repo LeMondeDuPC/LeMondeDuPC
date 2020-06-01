@@ -87,6 +87,11 @@ class User implements UserInterface
      */
     private $file;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $newsletter;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -259,6 +264,18 @@ class User implements UserInterface
         if ($file->getUser() !== $newUser) {
             $file->setUser($newUser);
         }
+
+        return $this;
+    }
+
+    public function getNewsletter(): ?bool
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(bool $newsletter): self
+    {
+        $this->newsletter = $newsletter;
 
         return $this;
     }

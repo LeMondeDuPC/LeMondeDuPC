@@ -65,6 +65,13 @@ class UserType extends AbstractType
                             'mimeTypesMessage' => 'Veuillez uploader une image de type : png, jpeg/jpg ou gif',
                         ])
                     ],
+                ])
+                ->add('newsletter', ChoiceType::class, [
+                    'label' => 'Inscription newsletter ?',
+                    'choices' => [
+                        'Oui' => true,
+                        'Non' => false
+                    ]
                 ]);
         }
     }

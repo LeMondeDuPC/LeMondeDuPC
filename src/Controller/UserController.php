@@ -163,6 +163,7 @@ class UserController extends AbstractController
         if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== User::VALIDATED) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setValidated(User::VALIDATED);
+            $user->setNewsletter(User::VALIDATED);
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
