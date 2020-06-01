@@ -3,22 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\File;
+use App\Entity\Product;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use App\Service\SenderService;
 use DateTime;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Twig\Environment;
 
 /**
  * Class UsersController
@@ -42,10 +42,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/email/{name}-{ext}", name="test_email")
+     * @param $name
+     * @param $ext
      * @param MailerInterface $mailer
      * @return string
      */
-    public function testEmail($name, $ext, MailerInterface $mailer)
+    public function testEmail($name, $ext, MailerInterface $mailer, ProductRepository $productRepository)
     {
         /*$email = (new TemplatedEmail())
             ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
@@ -60,7 +62,10 @@ class UserController extends AbstractController
 
         $mailer->send($email);
         return new Response('send');*/
-        return $this->render('email/'.$name.'.'.$ext.'.twig');
+        $products = $productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
+        return $this->render('email/' . $name . '.' . $ext . '.twig', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -106,11 +111,10 @@ class UserController extends AbstractController
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param Security $security
-     * @param MailerInterface $mailer
+     * @param SenderService $senderService
      * @return Response
-     * @throws TransportExceptionInterface
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security, MailerInterface $mailer): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security, SenderService $senderService): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['security' => $security]);
@@ -126,23 +130,14 @@ class UserController extends AbstractController
             $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
             $user->setTimePublication(new DateTime());
             $user->setValidated(false);
+            $user->setNewsletter(false);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $email = (new TemplatedEmail())
-                ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
-                ->to(new Address($user->getEmail(), $user->getUsername()))
-                ->subject('Merci de votre inscription !')
-                ->htmlTemplate('email/signup.html.twig')
-                ->context([
-                    'user_name' => $user->getUsername(),
-                    'user_id' => $user->getId(),
-                    'confirm_key' => $user->getConfirmKey()
-                ]);
+            $senderService->welcomeEmail($user);
 
-            $mailer->send($email);
             $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
             return $this->redirectToRoute('user_login');
         }
