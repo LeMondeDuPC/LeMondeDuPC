@@ -3,14 +3,12 @@
 namespace App\Command;
 
 use App\Entity\User;
-use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use App\Service\SenderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Mailer\MailerInterface;
 
 class NewsletterCommand extends Command
 {
@@ -38,8 +36,6 @@ class NewsletterCommand extends Command
         $users = $this->userRepository->findBy(['newsletter' => User::VALIDATED]);
 
         $this->senderService->newsletterEmail($users);
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
         return 0;
     }

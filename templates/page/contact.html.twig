@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Nous contacter</h1>
+            </div>
+        </header>
+        <section>
+            {% include('page/form/_contact.html.twig') %}
+        </section>
+    </article>
+{% endblock %}
