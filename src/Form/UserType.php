@@ -28,6 +28,9 @@ class UserType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'label' => 'Mot de passe',
+                'attr'=> [
+                    'autocomplete' => 'off',
+                ],
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
