@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Entity\Contact;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\ProductRepository;
@@ -66,13 +67,13 @@ class SenderService
         }
     }
 
-    public function contactEmail($name, $email, $subject, $message)
+    public function contactEmail(Contact $contact)
     {
         $email = (new Email())
-            ->from(new Address($email, $name))
+            ->from(new Address($contact->getEmail(), $contact->getName()))
             ->to(new Address('contact@lemondedupc.fr', 'Le Monde Du PC'))
-            ->subject('Mail de contact : ' . $subject)
-            ->text("Mail : $email \nNom : $name \nMessage : \n$message");
+            ->subject('Mail de contact : ' . $contact->getSubject())
+            ->text("Mail : " . $contact->getEmail() . "\nNom : " . $contact->getName() . "\nMessage :\n" . $contact->getMessage());
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {

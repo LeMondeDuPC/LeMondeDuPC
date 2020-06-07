@@ -48,6 +48,7 @@ class Product
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      * @Assert\Type("string")
+     * @Assert\Length(min="10")
      */
     private $content;
 

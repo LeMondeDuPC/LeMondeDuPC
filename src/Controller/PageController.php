@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Form\PageType;
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Service\SenderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,14 +29,11 @@ class PageController extends AbstractController
      */
     public function contact(Request $request, SenderService $senderService)
     {
-        $form = $this->createForm(PageType::class);
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $senderService->contactEmail(
-                $form->get('name')->getData(),
-                $form->get('email')->getData(),
-                $form->get('subject')->getData(),
-                $form->get('message')->getData());
+            $senderService->contactEmail($contact);
             $this->addFlash('success', 'Votre message a bien été envoyé !');
         }
         return $this->render('page/contact.html.twig', [
