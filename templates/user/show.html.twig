@@ -14,7 +14,9 @@
                 <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
                 <a href="#" class="author">
                     <span class="name">{{ user.username }}</span>
-                    <img src="{{ asset(user.file.getWebPath) }}" alt="{{ user.file.description }}"/>
+                    {% if user.file is not null %}
+                        <img src="{{ asset(user.file.getWebPath) }}" alt="{{ user.file.description }}"/>
+                    {% endif %}
                 </a>
             </div>
         </header>
