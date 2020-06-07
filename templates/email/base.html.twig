@@ -7,7 +7,7 @@
 <mj-section background-color="#ffffff">
     <mj-column width="100%">
         <mj-image
-                src="http://127.0.0.1/personnal/web/v2/symfony/public/assets/images/favicons/favicon-192x192.png"
+                src="{{ email.image('@assets/images/favicons/favicon-192x192.png') }}"
                 width="50px" padding="0"/>
         <mj-text align="center" padding="0" color="#0098ff">
             <h1>
@@ -36,7 +36,7 @@
                 </p>
             </mj-text>
             <mj-button align="left" background-color="#e85034" color="#ffffff" border-radius="24px"
-                       href="{{ path('product_show', {'id': product.id, 'slug': product.title|slugify }) }}">
+                       href="{{ url('product_show', {'id': product.id, 'slug': product.title|slugify }) }}">
                 Lire
             </mj-button>
         </mj-column>
@@ -191,7 +191,7 @@
                                         <tbody>
                                         <tr>
                                             <td style="width:50px;"><img height="auto"
-                                                                         src="http://127.0.0.1/personnal/web/v2/symfony/public/assets/images/favicons/favicon-192x192.png"
+                                                                         src="{{ email.image('@assets/images/favicons/favicon-192x192.png') }}"
                                                                          style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"
                                                                          width="50"
                                                 /></td>
@@ -290,7 +290,7 @@
                                             <td align="center" bgcolor="#e85034" role="presentation"
                                                 style="border:none;border-radius:24px;cursor:auto;mso-padding-alt:10px 25px;background:#e85034;"
                                                 valign="middle"><a
-                                                        href="{{ path('product_show', {'id': product.id, 'slug': product.title|slugify }) }}"
+                                                        href="{{ url('product_show', {'id': product.id, 'slug': product.title|slugify }) }}"
                                                         style="display:inline-block;background:#e85034;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:24px;"
                                                         target="_blank">
                                                     Lire
