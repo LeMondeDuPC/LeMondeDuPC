@@ -3,9 +3,16 @@
 {% block title %}Modification du profil{% endblock %}
 
 {% block body %}
-    <h1>Modification du profil</h1>
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Modification du profil</h1>
+            </div>
+        </header>
+        <section>
+            {{ include('user/form/_edit_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    {{ include('user/form/_edit_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
-    <a href="{{ path('user_show', {'id' : app.user.id}) }}">Retour au profil</a>
+            <a href="{{ path('user_show', {'id' : app.user.id}) }}">Retour au profil</a>
+        </section>
+    </article>
 {% endblock %}
