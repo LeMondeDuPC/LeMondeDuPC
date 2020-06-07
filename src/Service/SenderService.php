@@ -8,8 +8,10 @@ use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\ProductRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
 class SenderService
 {
@@ -37,7 +39,10 @@ class SenderService
                 'confirm_key' => $user->getConfirmKey(),
                 'products' => $products
             ]);
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+        }
     }
 
     public function newsletterEmail($users)
@@ -54,9 +59,23 @@ class SenderService
                     'products' => $products,
                 ]);
 
-            $this->mailer->send($email);
+            try {
+                $this->mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+            }
         }
     }
 
-
+    public function contactEmail($name, $email, $subject, $message)
+    {
+        $email = (new Email())
+            ->from(new Address($email, $name))
+            ->to(new Address('contact@lemondedupc.fr', 'Le Monde Du PC'))
+            ->subject('Mail de contact : ' . $subject)
+            ->text("Mail : $email \nNom : $name \nMessage : \n$message");
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+        }
+    }
 }
