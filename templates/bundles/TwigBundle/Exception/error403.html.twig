@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur {{ status_code }}{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Erreur {{ status_code }}</h1>
+            </div>
+        </header>
+        <section>
+            <p>Accès refusé</p>
+        </section>
+    </article>
+{% endblock %}
