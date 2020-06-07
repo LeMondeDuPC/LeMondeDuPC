@@ -64,7 +64,7 @@ class CategoryController extends AbstractController
                 'categories' => $this->categoryRepository->findAll(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -91,7 +91,7 @@ class CategoryController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -117,7 +117,7 @@ class CategoryController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -142,7 +142,7 @@ class CategoryController extends AbstractController
             }
             return $this->redirectToRoute('category_manage');
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 }

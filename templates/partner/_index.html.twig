@@ -1,0 +1,8 @@
+<ul>
+    {% for partner in partners %}
+        <li>
+            <a href="{{ partner.link }}" target="_blank">{{ partner.name|upper }}</a>
+            <p>{{ partner.description }}</p>
+        </li>
+    {% endfor %}
+</ul>

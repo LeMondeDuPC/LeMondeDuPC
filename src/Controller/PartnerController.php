@@ -52,7 +52,7 @@ class PartnerController extends AbstractController
                 'partners' => $this->partnersRepository->findAll(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -81,7 +81,7 @@ class PartnerController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -108,7 +108,7 @@ class PartnerController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -129,7 +129,7 @@ class PartnerController extends AbstractController
             }
             return $this->redirectToRoute('partner_manage');
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 }

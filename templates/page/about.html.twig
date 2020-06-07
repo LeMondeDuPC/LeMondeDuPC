@@ -12,12 +12,7 @@
         <section>
             <h1>Nos partenaires</h1>
             <ul>
-                {% for partner in partners %}
-                    <li>
-                        <a href="{{ partner.link }}" target="_blank">{{ partner.name|upper }}</a>
-                        <p>{{ partner.description }}</p>
-                    </li>
-                {% endfor %}
+                {{ render(controller('App\\Controller\\PartnerController::_index')) }}
             </ul>
             <hr/>
             <h1>Les Mentions Légales</h1>

@@ -15,15 +15,19 @@ class PageType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Nom',
                 'mapped' => false,
             ])
             ->add('email', EmailType::class, [
+                'label' => 'Email',
                 'mapped' => false,
             ])
             ->add('subject', TextType::class, [
+                'label' => 'Sujet',
                 'mapped' => false,
             ])
             ->add('message', TextareaType::class, [
+                'label' => 'Message',
                 'mapped' => false,
             ]);
     }

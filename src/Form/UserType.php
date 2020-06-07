@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,9 +20,14 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class, [
+                'label' => 'Identifiant',
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+            ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -38,14 +44,14 @@ class UserType extends AbstractType
                     'label' => 'Compte validé ?',
                     'choices' => [
                         'Oui' => true,
-                        'Non' => false
-                    ]
+                        'Non' => false,
+                    ],
                 ])
                 ->add('roles', ChoiceType::class, [
+                    'label' => 'Rôles',
                     'expanded' => true,
                     'multiple' => true,
-                    'label' => 'Rôles',
-                    'choices' => $options['roles']
+                    'choices' => $options['roles'],
                 ]);
         }
         if ($options['security']->isGranted('ROLE_USER') and $options['data']->getId() === $options['security']->getUser()->getId()) {
@@ -63,15 +69,15 @@ class UserType extends AbstractType
                                 'image/gif'
                             ],
                             'mimeTypesMessage' => 'Veuillez uploader une image de type : png, jpeg/jpg ou gif',
-                        ])
+                        ]),
                     ],
                 ])
                 ->add('newsletter', ChoiceType::class, [
                     'label' => 'Inscription newsletter ?',
                     'choices' => [
                         'Oui' => true,
-                        'Non' => false
-                    ]
+                        'Non' => false,
+                    ],
                 ]);
         }
     }

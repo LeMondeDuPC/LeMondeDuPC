@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\PageType;
-use App\Repository\PartnerRepository;
 use App\Service\SenderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,14 +13,11 @@ class PageController extends AbstractController
 {
     /**
      * @Route("/a-propos", name="page_about")
-     * @param PartnerRepository $partnerRepository
      * @return Response
      */
-    public function about(PartnerRepository $partnerRepository)
+    public function about()
     {
-        return $this->render('page/about.html.twig', [
-            'partners' => $partnerRepository->findAll(),
-        ]);
+        return $this->render('page/about.html.twig');
     }
 
     /**

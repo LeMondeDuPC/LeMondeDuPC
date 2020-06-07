@@ -27,7 +27,7 @@
                     <section>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
-                            <img src="http://www.e-works.fr/blog/wp-content/uploads/2017/11/amazon-1024x458.png" alt="">
+                            <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" />
                         </a>
                     </section>
                 </article>

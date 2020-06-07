@@ -3,18 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\File;
-use App\Entity\Product;
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use App\Service\SenderService;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
@@ -38,34 +34,6 @@ class UserController extends AbstractController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-    }
-
-    /**
-     * @Route("/email/{name}-{ext}", name="test_email")
-     * @param $name
-     * @param $ext
-     * @param MailerInterface $mailer
-     * @return string
-     */
-    public function testEmail($name, $ext, MailerInterface $mailer, ProductRepository $productRepository)
-    {
-        /*$email = (new TemplatedEmail())
-            ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
-            ->to(new Address('Niels@gmail.com', 'Niels'))
-            ->subject('Merci de votre inscription !')
-            ->htmlTemplate('emails/signup.html.twig')
-            ->context([
-                'user_name' => 'Niels',
-                'user_id' => 1,
-                'confirm_key' => 254511816
-            ]);
-
-        $mailer->send($email);
-        return new Response('send');*/
-        $products = $productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
-        return $this->render('email/' . $name . '.' . $ext . '.twig', [
-            'products' => $products
-        ]);
     }
 
     /**
@@ -102,7 +70,7 @@ class UserController extends AbstractController
                 'users' => $this->userRepository->findBy([], ['timePublication' => 'DESC']),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -181,7 +149,7 @@ class UserController extends AbstractController
                 'user' => $user,
             ]);
         } else {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -228,7 +196,7 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -253,7 +221,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Le compte a bien été supprimé');
             return $this->redirectToRoute('product_index');
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 }

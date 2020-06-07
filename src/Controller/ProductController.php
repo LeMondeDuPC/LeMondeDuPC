@@ -66,7 +66,7 @@ class ProductController extends AbstractController
                 'product' => $product
             ]);
         } else {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -106,7 +106,7 @@ class ProductController extends AbstractController
                 'products' => $this->getUser()->getProducts(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -150,7 +150,7 @@ class ProductController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -184,7 +184,7 @@ class ProductController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 
@@ -206,7 +206,7 @@ class ProductController extends AbstractController
 
             return $this->redirectToRoute('product_manage');
         } else {
-            throw $this->createAccessDeniedException('No access!');
+            throw $this->createNotFoundException('Page non trouvée');
         }
     }
 }

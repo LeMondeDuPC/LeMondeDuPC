@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User manage{% endblock %}
+{% block title %}Gestion des membres{% endblock %}
 
 {% block body %}
     <article class="post">
@@ -17,10 +17,10 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Username</th>
+                    <th>Identifiant</th>
                     <th>Roles</th>
                     <th>Validation</th>
-                    <th>actions</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,8 +31,8 @@
                         <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                         <td>{% if user.validated %}Oui{% else %}Non{% endif %}</td>
                         <td>
-                            <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                            <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                            <a href="{{ path('user_show', {'id': user.id}) }}">Voir le profil</a>
+                            <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier le membre</a>
                         </td>
                     </tr>
                 {% else %}

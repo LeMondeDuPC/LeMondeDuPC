@@ -19,12 +19,20 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description', TextareaType::class)
-            ->add('content', TextareaType::class, ['attr' => ['class' => 'ckeditor']])
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
+                'attr' => ['class' => 'ckeditor'],
+            ])
             ->add('category', EntityType::class, [
+                'label' => 'Catégorie associée',
                 'class' => Category::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
             ->add('file', \Symfony\Component\Form\Extension\Core\Type\FileType::class, [
                 'label' => 'Miniature',
@@ -39,23 +47,23 @@ class ProductType extends AbstractType
                             'image/gif'
                         ],
                         'mimeTypesMessage' => 'Veuillez uploader une image de type : png, jpeg/jpg ou gif',
-                    ])
+                    ]),
                 ],
             ])
             ->add('file_description', TextType::class, [
                 'label' => 'Description de la miniature',
                 'mapped' => false,
-                'required' => false
+                'required' => false,
             ]);
         if ($options['security']->isGranted('ROLE_MANAGE_PRODUCTS')) {
             $builder
                 ->add('validated', ChoiceType::class, [
-                'label' => 'Mettre en ligne ?',
-                'choices' => [
-                    'Oui' => true,
-                    'Non' => false
-                ]
-            ]);
+                    'label' => 'Mettre en ligne ?',
+                    'choices' => [
+                        'Oui' => true,
+                        'Non' => false,
+                    ],
+                ]);
         }
     }
 

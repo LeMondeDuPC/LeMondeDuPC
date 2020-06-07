@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
     <article class="post">
@@ -12,11 +12,6 @@
         <section>
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('user_logout') }}">Logout</a>
-                </div>
             {% endif %}
             {% include('user/form/_login_form.html.twig') %}
         </section>

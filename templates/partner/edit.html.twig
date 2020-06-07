@@ -15,7 +15,7 @@
         <section>
             {{ include('partner/form/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
             <form method="post" action="{{ path('partner_delete', {'id': partner.id}) }}"
-                  onsubmit="return confirm('Etes vous sûr de vouloir supprimer ce partenaire ?');">
+                  onsubmit="return confirm('Confirmer la suppression ?');">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ partner.id) }}">
                 <button class="btn">Supprimer</button>
