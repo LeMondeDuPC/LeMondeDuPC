@@ -32,7 +32,7 @@ class SenderService
             ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
             ->to(new Address($user->getEmail(), $user->getUsername()))
             ->subject('Merci de votre inscription !')
-            ->htmlTemplate('email/signup.mjml.twig')
+            ->htmlTemplate('email/signup.html.twig')
             ->context([
                 'user_name' => $user->getUsername(),
                 'user_id' => $user->getId(),
@@ -53,7 +53,7 @@ class SenderService
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
                 ->to(new Address($user->getEmail(), $user->getUsername()))
                 ->subject('Newsletter')
-                ->htmlTemplate('email/newsletter.mjml.twig')
+                ->htmlTemplate('email/newsletter.html.twig')
                 ->context([
                     'user_name' => $user->getUsername(),
                     'products' => $products,

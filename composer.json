@@ -8,7 +8,6 @@
         "ext-openssl": "*",
         "cocur/slugify": "^4.0",
         "knplabs/knp-paginator-bundle": "^5.2",
-        "notfloran/mjml-bundle": "^3.4",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.0.*",

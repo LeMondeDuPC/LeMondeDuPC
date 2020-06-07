@@ -17,8 +17,7 @@ return [[
 0 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
-            (($f = &\Symfony\Component\VarExporter\Internal\Registry::$factories)['Symfony\\Component\\Validator\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\ClassMetadata'))(),
-            ($f['Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'))(),
+            (\Symfony\Component\VarExporter\Internal\Registry::$factories['Symfony\\Component\\Validator\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\ClassMetadata'))(),
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\Form\\Extension\\Validator\\Constraints\\Form'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Form\\Extension\\Validator\\Constraints\\Form')),
         ],
         null,
@@ -26,52 +25,30 @@ return [[
             'stdClass' => [
                 'name' => [
                     'Symfony\\Component\\Form\\Form',
-                    'children',
                 ],
                 'defaultGroup' => [
                     'Form',
                 ],
-                'members' => [
-                    [
-                        'children' => [
-                            $o[1],
-                        ],
-                    ],
-                ],
-                'properties' => [
-                    [
-                        'children' => $o[1],
-                    ],
+                'traversalStrategy' => [
+                    2,
                 ],
                 'constraints' => [
                     [
-                        $o[2],
+                        $o[1],
                     ],
                 ],
                 'constraintsByGroup' => [
                     [
                         'Default' => [
-                            $o[2],
+                            $o[1],
                         ],
                         'Form' => [
-                            $o[2],
+                            $o[1],
                         ],
                     ],
                 ],
-                'class' => [
-                    1 => 'Symfony\\Component\\Form\\Form',
-                ],
-                'property' => [
-                    1 => 'children',
-                ],
-                'cascadingStrategy' => [
-                    1 => 2,
-                ],
-                'traversalStrategy' => [
-                    1 => 1,
-                ],
                 'groups' => [
-                    2 => [
+                    1 => [
                         'Default',
                         'Form',
                     ],
