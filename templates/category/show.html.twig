@@ -3,7 +3,7 @@
 {% block title %}Catégorie : {{ category.name }}{% endblock %}
 
 {% block body %}
-    <article class="product">
+    <article class="post">
         <header>
             <div class="title">
                 <h1 class="heading">Catégorie : {{ category.name }}</h1>
@@ -11,7 +11,7 @@
         </header>
         <section>
             {% for product in category.products %}
-                <article class="mini-product">
+                <article class="mini-post">
                     <section class="content">
                         <h2 class="title">
                             <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
