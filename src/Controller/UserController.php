@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Service\SenderService;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -119,7 +120,7 @@ class UserController extends AbstractController
      * @Route("/membre/validation/{id}/{confirmKey}", name="user_validate", methods={"GET"})
      * @param string $confirmKey
      * @param User $user
-     * @return void
+     * @return RedirectResponse
      */
     public function validateUser(string $confirmKey, User $user)
     {
@@ -133,7 +134,7 @@ class UserController extends AbstractController
         } else {
             $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
         }
-        $this->redirectToRoute('user_login');
+        return $this->redirectToRoute('user_login');
     }
 
     /**
