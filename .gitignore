@@ -6,4 +6,6 @@
 /public/bundles/
 /var/
 /vendor/
+/public/assets/uploads/
+/src/Migrations/
 ###< symfony/framework-bundle ###
