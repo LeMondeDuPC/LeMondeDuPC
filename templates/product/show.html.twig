@@ -17,16 +17,19 @@
                 {% if product.user is not null %}
                     <a href="{{ path('user_show', {'id' : product.user.id}) }}" class="author">
                         <span class="name">{{ product.user.username }}</span>
-                        <img src="{{ asset(product.user.file.getWebPath) }}"
-                             alt="{{ product.user.file.description }}"/>
+                        {% if product.user.file is not null %}
+                            <img src="{{ asset(product.user.file.getWebPath) }}"
+                                 alt="{{ product.user.file.description }}"/>
+                        {% endif %}
                     </a>
                 {% else %}
                     <span class="author name">Anonyme</span>
                 {% endif %}
                 {% if product.category is not null %}
-                    <span><a href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
+                    <span class="location icon fa-tag"><a
+                                href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
                 {% else %}
-                    <span>Non répertorié</span>
+                    <span class="location icon fa-tag">Non répertorié</span>
                 {% endif %}
                 <ul class="icons">
                     <li>
