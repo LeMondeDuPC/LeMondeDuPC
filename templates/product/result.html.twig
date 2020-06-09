@@ -19,7 +19,7 @@
                         <p>{{ product.description }}</p>
                         {% if product.category is not null %}
                             <span class="location icon fa-tag"><a
-                                        href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ post.category.name }}</a></span>
+                                        href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
                         {% else %}
                             <span class="location icon fa-tag">Non répertorié</span>
                         {% endif %}

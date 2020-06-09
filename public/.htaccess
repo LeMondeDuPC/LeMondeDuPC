@@ -70,3 +70,12 @@ DirectoryIndex index.php
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Content-Type-Options "nosniff"
 </IfModule>
+
+AddType text/html .html .htm
+AddType application/xhtml+xml .xhtml
+AddType text/css .css
+AddType application/font-woff2 .woff2
+AddType application/vnd.ms-fontobject  .eot
+AddType font/truetype .ttf
+AddType font/opentype .otf
+AddType application/x-font-woff .woff

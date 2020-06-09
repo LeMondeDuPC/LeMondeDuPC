@@ -40,6 +40,7 @@
                     <a class="icon fa-search" href="#search">Rechercher</a>
                     <form id="search" method="post" action="{{ path('product_search') }}">
                         <input type="search" name="q" placeholder="Rechercher"/>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('search') }}" />
                     </form>
                 </li>
                 <li class="menu">
@@ -55,6 +56,7 @@
         <div>
             <form class="search" method="post" action="{{ path('product_search') }}">
                 <input type="text" name="q" placeholder="Rechercher"/>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('search') }}" />
             </form>
         </div>
         <!-- links -->
