@@ -12,10 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * Class PostsController
@@ -78,16 +75,11 @@ class ProductController extends AbstractController
      * @param Request $request
      * @param int $page
      * @param PaginatorInterface $paginator
-     * @param CsrfTokenManagerInterface $csrfTokenManager
      * @return Response
      */
-    public function search(Request $request, int $page, PaginatorInterface $paginator, CsrfTokenManagerInterface $csrfTokenManager)
+    public function search(Request $request, int $page, PaginatorInterface $paginator)
     {
         if ($request->isMethod('POST') and $request->request->has('q')) {
-            $token = new CsrfToken('search', $request->request->get('_csrf_token'));
-            if (!$csrfTokenManager->isTokenValid($token)) {
-                throw new InvalidCsrfTokenException();
-            }
             $search = $request->request->get('q');
             $products = $paginator->paginate(
                 $this->productRepository->findByWord($search, Product::VALIDATED),

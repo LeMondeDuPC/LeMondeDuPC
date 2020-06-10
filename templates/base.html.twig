@@ -38,10 +38,7 @@
             <ul>
                 <li class="search">
                     <a class="icon fa-search" href="#search">Rechercher</a>
-                    <form id="search" method="post" action="{{ path('product_search') }}">
-                        <input type="search" name="q" placeholder="Rechercher"/>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('search') }}" />
-                    </form>
+                    {{ include('product/form/_search_form_header.html.twig') }}
                 </li>
                 <li class="menu">
                     <a class="icon fa-bars" href="#menu">Menu</a>
@@ -54,10 +51,7 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            <form class="search" method="post" action="{{ path('product_search') }}">
-                <input type="text" name="q" placeholder="Rechercher"/>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('search') }}" />
-            </form>
+            {{ include('product/form/_search_form_menu.html.twig') }}
         </div>
         <!-- links -->
         <nav id="navmenu">
