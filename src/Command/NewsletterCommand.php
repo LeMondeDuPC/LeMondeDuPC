@@ -36,6 +36,7 @@ class NewsletterCommand extends Command
         $users = $this->userRepository->findBy(['newsletter' => User::VALIDATED]);
 
         $this->senderService->newsletterEmail($users);
+        $io->success('Mails send');
 
         return 0;
     }

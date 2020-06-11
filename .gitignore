@@ -8,4 +8,5 @@
 /vendor/
 /public/assets/uploads/
 /src/Migrations/
+.todo
 ###< symfony/framework-bundle ###
