@@ -48,6 +48,6 @@ class CleanUsersCommand extends Command
             $io->success('Users cleaned');
             return 0;
         }
-        return 0;
+        return 1;
     }
 }
