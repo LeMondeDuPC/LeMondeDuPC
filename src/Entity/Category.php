@@ -38,21 +38,34 @@ class Category
      */
     private $products;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -70,6 +83,10 @@ class Category
         });
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function addProductLink(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -80,6 +97,10 @@ class Category
         return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function removeProductLink(Product $product): self
     {
         if ($this->products->contains($product)) {

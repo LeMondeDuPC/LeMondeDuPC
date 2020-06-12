@@ -33,8 +33,14 @@ class File
      */
     private $description;
 
+    /**
+     * @var
+     */
     private $file;
 
+    /**
+     * @var
+     */
     private $temp;
 
     /**
@@ -47,24 +53,26 @@ class File
      */
     private $user;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @return UploadedFile
+     * @return string|null
      */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -81,6 +89,14 @@ class File
         if ($this->getFile() !== null) {
             $this->fileName = md5(uniqid()) . '.' . $this->getFile()->guessExtension();
         }
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
@@ -116,6 +132,22 @@ class File
     }
 
     /**
+     * @return string
+     */
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../public/' . $this->getUploadDir();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        return 'assets/uploads';
+    }
+
+    /**
      * @ORM\PreRemove()
      */
     public function storeFilename()
@@ -137,6 +169,9 @@ class File
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getWebPath()
     {
         if ($this->fileName !== null) {
@@ -146,21 +181,18 @@ class File
         }
     }
 
-    protected function getUploadRootDir()
-    {
-        return __DIR__ . '/../../public/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        return 'assets/uploads';
-    }
-
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function setProduct(Product $product): self
     {
         $this->product = $product;
@@ -168,11 +200,18 @@ class File
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;

@@ -21,7 +21,7 @@ use function get_class;
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     /**
-     * UsersRepository constructor.
+     * UserRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)

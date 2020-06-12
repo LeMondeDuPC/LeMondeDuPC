@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product
 {
 
+    /**
+     *
+     */
     public const VALIDATED = true;
 
     /**
@@ -81,16 +83,26 @@ class Product
      */
     private $file;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -98,11 +110,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -110,11 +129,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -122,11 +148,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getTimePublication(): ?DateTimeInterface
     {
         return $this->timePublication;
     }
 
+    /**
+     * @param DateTimeInterface $timePublication
+     * @return $this
+     */
     public function setTimePublication(DateTimeInterface $timePublication): self
     {
         $this->timePublication = $timePublication;
@@ -134,11 +167,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getValidated(): ?bool
     {
         return $this->validated;
     }
 
+    /**
+     * @param bool $validated
+     * @return $this
+     */
     public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
@@ -146,11 +186,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * @param Category|null $category
+     * @return $this
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
@@ -158,11 +205,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -170,11 +224,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return File|null
+     */
     public function getFile(): ?File
     {
         return $this->file;
     }
 
+    /**
+     * @param File|null $file
+     * @return $this
+     */
     public function setFile(?File $file): self
     {
         $this->file = $file;

@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class PartnerRepository extends ServiceEntityRepository
 {
     /**
-     * PartnersRepository constructor.
+     * PartnerRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)

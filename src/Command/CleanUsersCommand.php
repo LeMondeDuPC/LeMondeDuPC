@@ -10,13 +10,31 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Class CleanUsersCommand
+ * @package App\Command
+ */
 class CleanUsersCommand extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = 'app:clean-users';
 
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * CleanUsersCommand constructor.
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
     {
         $this->userRepository = $userRepository;
@@ -24,6 +42,9 @@ class CleanUsersCommand extends Command
         parent::__construct();
     }
 
+    /**
+     *
+     */
     protected function configure()
     {
         $this
@@ -31,6 +52,11 @@ class CleanUsersCommand extends Command
             ->addArgument('days', InputArgument::OPTIONAL, 'Limit days');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

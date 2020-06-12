@@ -24,6 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    /**
+     *
+     */
     public const VALIDATED = true;
 
     /**
@@ -92,11 +95,17 @@ class User implements UserInterface
      */
     private $newsletter;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -112,6 +121,10 @@ class User implements UserInterface
         return (string)$this->username;
     }
 
+    /**
+     * @param string $username
+     * @return $this
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -131,6 +144,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -146,6 +163,10 @@ class User implements UserInterface
         return (string)$this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -170,11 +191,18 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -182,11 +210,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getConfirmKey(): ?string
     {
         return $this->confirmKey;
     }
 
+    /**
+     * @param string $confirmKey
+     * @return $this
+     */
     public function setConfirmKey(string $confirmKey): self
     {
         $this->confirmKey = $confirmKey;
@@ -194,11 +229,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getTimePublication(): ?DateTimeInterface
     {
         return $this->timePublication;
     }
 
+    /**
+     * @param DateTimeInterface $timePublication
+     * @return $this
+     */
     public function setTimePublication(DateTimeInterface $timePublication): self
     {
         $this->timePublication = $timePublication;
@@ -206,11 +248,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getValidated(): ?bool
     {
         return $this->validated;
     }
 
+    /**
+     * @param bool $validated
+     * @return $this
+     */
     public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
@@ -228,6 +277,10 @@ class User implements UserInterface
         });
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function addProductLink(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -238,6 +291,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function removeProductLink(Product $product): self
     {
         if ($this->products->contains($product)) {
@@ -250,11 +307,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return File|null
+     */
     public function getFile(): ?File
     {
         return $this->file;
     }
 
+    /**
+     * @param File|null $file
+     * @return $this
+     */
     public function setFile(?File $file): self
     {
         $this->file = $file;
@@ -268,11 +332,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getNewsletter(): ?bool
     {
         return $this->newsletter;
     }
 
+    /**
+     * @param bool $newsletter
+     * @return $this
+     */
     public function setNewsletter(bool $newsletter): self
     {
         $this->newsletter = $newsletter;

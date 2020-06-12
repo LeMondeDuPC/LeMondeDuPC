@@ -16,7 +16,7 @@ class ProductRepository extends ServiceEntityRepository
 {
 
     /**
-     * PostsRepository constructor.
+     * ProductRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
@@ -24,6 +24,11 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @param string $search
+     * @param null $validated
+     * @return int|mixed|string
+     */
     public function findByWord(string $search, $validated = null)
     {
         $query = $this->createQueryBuilder('p')

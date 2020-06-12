@@ -14,18 +14,36 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
+/**
+ * Class SenderService
+ * @package App\Service
+ */
 class SenderService
 {
 
+    /**
+     * @var MailerInterface
+     */
     private $mailer;
+    /**
+     * @var ProductRepository
+     */
     private $productRepository;
 
+    /**
+     * SenderService constructor.
+     * @param MailerInterface $mailer
+     * @param ProductRepository $productRepository
+     */
     public function __construct(MailerInterface $mailer, ProductRepository $productRepository)
     {
         $this->mailer = $mailer;
         $this->productRepository = $productRepository;
     }
 
+    /**
+     * @param User $user
+     */
     public function welcomeEmail(User $user)
     {
         $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
@@ -46,6 +64,9 @@ class SenderService
         }
     }
 
+    /**
+     * @param $users
+     */
     public function newsletterEmail($users)
     {
         $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
@@ -67,6 +88,9 @@ class SenderService
         }
     }
 
+    /**
+     * @param Contact $contact
+     */
     public function contactEmail(Contact $contact)
     {
         $email = (new Email())

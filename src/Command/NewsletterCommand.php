@@ -10,13 +10,31 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Class NewsletterCommand
+ * @package App\Command
+ */
 class NewsletterCommand extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = 'app:newsletter';
 
+    /**
+     * @var SenderService
+     */
     private $senderService;
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
+    /**
+     * NewsletterCommand constructor.
+     * @param SenderService $senderService
+     * @param UserRepository $userRepository
+     */
     public function __construct(SenderService $senderService, UserRepository $userRepository)
     {
         $this->senderService = $senderService;
@@ -24,12 +42,20 @@ class NewsletterCommand extends Command
         parent::__construct();
     }
 
+    /**
+     *
+     */
     protected function configure()
     {
         $this
             ->setDescription('Sending a newsletter to users');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

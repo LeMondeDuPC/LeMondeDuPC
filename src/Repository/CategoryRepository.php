@@ -16,7 +16,7 @@ class CategoryRepository extends ServiceEntityRepository
 {
 
     /**
-     * LocationsRepository constructor.
+     * CategoryRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
