@@ -198,7 +198,7 @@
       width: calc(100% + #{_size(section-spacing-small) * 2});
 
       .title {
-        h2 {
+        .heading {
           font-size: 1.1em;
         }
       }
@@ -215,12 +215,6 @@
           border-left: 0;
           margin: (_size(element-margin) * 0.5) 0 0 0;
           padding-left: 0;
-        }
-
-        .author {
-          .name {
-            display: none;
-          }
         }
       }
     }

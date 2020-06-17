@@ -5,15 +5,18 @@
   opacity: 1;
   transition: opacity 0.6s;
   margin-bottom: 15px;
-  .success {
-    background-color: #4CAF50;
-  }
-  .danger {
-    background-color: #f44336;
-  }
-  .warning {
-    background-color: #ff9800;
-  }
+}
+
+.success {
+  background-color: #4CAF50;
+}
+
+.danger {
+  background-color: #f44336;
+}
+
+.warning {
+  background-color: #ff9800;
 }
 
 .closebtn {
@@ -25,6 +28,7 @@
   line-height: 20px;
   cursor: pointer;
   transition: 0.3s;
+
   &:hover {
     color: black;
   }

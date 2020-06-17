@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -82,6 +83,19 @@ class Product
      * @ORM\OneToOne(targetEntity=File::class, mappedBy="product", cascade={"persist", "remove"})
      */
     private $file;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $votes;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -244,6 +258,65 @@ class Product
         $newProduct = null === $file ? null : $this;
         if ($file->getProduct() !== $newProduct) {
             $file->setProduct($newProduct);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getHearts(): ArrayCollection
+    {
+        $hearts = [];
+        foreach ($this->votes as $vote) {
+            if ($vote->getType() === Vote::TYPE_HEART) {
+                array_push($hearts, $vote);
+            }
+        }
+        return new ArrayCollection($hearts);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments(): ArrayCollection
+    {
+        $comments = [];
+        foreach ($this->votes as $vote) {
+            if ($vote->getType() === Vote::TYPE_COMMENT) {
+                array_push($comments, $vote);
+            }
+        }
+        return new ArrayCollection($comments);
+    }
+
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getProduct() === $this) {
+                $vote->setProduct(null);
+            }
         }
 
         return $this;

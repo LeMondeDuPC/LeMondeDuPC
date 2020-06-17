@@ -20,8 +20,27 @@
                 </a>
             </div>
         </header>
-        <section>
-            {% if user.products is not null %}
+        {% if user.hearts is not empty and app.user == user %}
+            <section>
+                <h2>Mes articles favoris : </h2>
+                <div class="box alt">
+                    <div class="row gtr-uniform">
+                        {% for heart in user.hearts %}
+                            <div class="col-4">
+                                <a class="image featured"
+                                   href="{{ path('product_show', {'id' : heart.product.id, 'slug' : heart.product.title|slugify }) }}">
+                                    <img src="{{ asset(heart.product.file.getWebPath) }}" alt=""/>
+                                    <span>{{ heart.product.title }}</span>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <hr/>
+        {% endif %}
+        {% if user.products is not empty %}
+            <section>
                 <h2>Les articles de l'utilisateur : </h2>
                 <div class="box alt">
                     <div class="row gtr-uniform">
@@ -36,7 +55,8 @@
                         {% endfor %}
                     </div>
                 </div>
-            {% endif %}
-        </section>
+            </section>
+        {% endif %}
+
     </article>
 {% endblock %}

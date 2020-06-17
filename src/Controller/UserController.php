@@ -12,7 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -205,19 +208,25 @@ class UserController extends AbstractController
      * @Route("/membre/{id}", name="user_delete", methods={"DELETE"})
      * @param Request $request
      * @param User $user
+     * @param TokenStorageInterface $token
+     * @param SessionInterface $session
      * @return Response
      */
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, TokenStorageInterface $token, SessionInterface $session): Response
     {
         if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $products = $user->getProducts();
                 foreach ($products as $product) {
-                    $user->removeProductLink($product);
+                    $user->removeProduct($product);
                 }
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($user);
                 $entityManager->flush();
+                if ($this->getUser()->getId() === $user->getId()) {
+                    $token->setToken(null);
+                    $session->invalidate(0);
+                }
             }
             $this->addFlash('success', 'Le compte a bien été supprimé');
             return $this->redirectToRoute('product_index');

@@ -87,7 +87,7 @@ class Category
      * @param Product $product
      * @return $this
      */
-    public function addProductLink(Product $product): self
+    public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
@@ -101,7 +101,7 @@ class Category
      * @param Product $product
      * @return $this
      */
-    public function removeProductLink(Product $product): self
+    public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);

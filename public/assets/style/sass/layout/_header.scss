@@ -26,8 +26,13 @@ body {
 
   a {
     text-decoration: none;
+
     &:hover {
       color: lightgray !important;
+
+      &:before {
+        color: lightgray !important;
+      }
     }
   }
 
@@ -51,6 +56,7 @@ body {
 
     a {
       font-size: 0.7em;
+
       sub {
         font-size: 0.7em;
       }

@@ -134,7 +134,7 @@ class ProductController extends AbstractController
                 if (!$form->has('validated')) {
                     $product->setValidated(false);
                 }
-                $file->setDescription($form->get('file_description')->getData());
+                $file->setDescription($form->get('file')->getData());
                 $file->setProduct($product);
                 $file->setFile($form->get('file')->getData());
                 $entityManager = $this->getDoctrine()->getManager();

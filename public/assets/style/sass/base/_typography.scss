@@ -25,7 +25,7 @@ a {
     color: _palette(accent) !important;
 
     &:before {
-      color: lightgray !important;
+      color: _palette(accent) !important;
     }
   }
 }

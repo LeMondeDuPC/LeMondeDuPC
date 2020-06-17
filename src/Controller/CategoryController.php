@@ -133,7 +133,7 @@ class CategoryController extends AbstractController
             if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
                 $products = $category->getProducts();
                 foreach ($products as $product) {
-                    $category->removeProductLink($product);
+                    $category->removeProduct($product);
                 }
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($category);

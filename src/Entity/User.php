@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+
     /**
      *
      */
@@ -96,11 +97,17 @@ class User implements UserInterface
     private $newsletter;
 
     /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $votes;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     /**
@@ -281,7 +288,7 @@ class User implements UserInterface
      * @param Product $product
      * @return $this
      */
-    public function addProductLink(Product $product): self
+    public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
@@ -295,7 +302,7 @@ class User implements UserInterface
      * @param Product $product
      * @return $this
      */
-    public function removeProductLink(Product $product): self
+    public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
@@ -347,6 +354,65 @@ class User implements UserInterface
     public function setNewsletter(bool $newsletter): self
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getHearts(): ArrayCollection
+    {
+        $hearts = [];
+        foreach ($this->votes as $vote) {
+            if ($vote->getType() === Vote::TYPE_HEART) {
+                array_push($hearts, $vote);
+            }
+        }
+        return new ArrayCollection($hearts);
+    }
+
+    /**
+     * @return array|Vote[]
+     */
+    public function getComments(): array
+    {
+        $comments = [];
+        foreach ($this->votes as $vote) {
+            if ($vote->getType() === Vote::TYPE_COMMENT) {
+                array_push($comments, $vote);
+            }
+        }
+        return new ArrayCollection($comments);
+    }
+
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Vote $vote
+     * @return $this
+     */
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getUser() === $this) {
+                $vote->setUser(null);
+            }
+        }
 
         return $this;
     }

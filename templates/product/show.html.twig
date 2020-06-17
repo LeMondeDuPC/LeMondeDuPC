@@ -25,12 +25,14 @@
                 {% else %}
                     <span class="author name">Anonyme</span>
                 {% endif %}
-                {% if product.category is not null %}
-                    <span class="location icon fa-tag"><a
-                                href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
-                {% else %}
-                    <span class="location icon fa-tag">Non répertorié</span>
-                {% endif %}
+                <ul class="icons">
+                    <li>
+                        <a href="{{ path('vote_heart', {'id': product.id}) }}" class="icon fa-heart"
+                           title="Ajouter dans ma liste d'article favoris">
+                            <span>{{ product.hearts|length }}</span>
+                        </a>
+                    </li>
+                </ul>
                 <ul class="icons">
                     <li>
                         <a href="https://twitter.com/share?url={{ app.request.uri }}&text={{ product.title|slugify }}"
@@ -57,12 +59,48 @@
                         </a>
                     </li>
                 </ul>
+                {% if product.category is not null %}
+                    <span class="location icon fa-tag"><a
+                                href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
+                {% else %}
+                    <span class="location icon fa-tag">Non répertorié</span>
+                {% endif %}
             </div>
         </header>
         <section>
             <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
                  class="image featured"/>
             {{ product.content|raw }}
+        </section>
+        <hr/>
+        <section>
+            <h3>Commentaires :</h3>
+            <section>
+                {{ render(controller('App\\Controller\\VoteController::newComment', {'product' : product})) }}
+            </section>
+            {% for comment in product.comments %}
+                <article class="comment">
+                    <header>
+                        <div class="title">
+                            <span>{{ comment.content }}</span>
+                        </div>
+                        <div class="meta">
+                            <time class="published">{{ comment.timePublication|date('Y-m-d H:i:s') }}</time>
+                            <a class="author"
+                               href="{{ path('user_show', {'id': comment.user.id }) }}">
+                                <span class="name">{{ comment.user.username }}</span>
+                                {% if comment.user.file is not null %}
+                                    <img src="{{ asset(comment.user.file.getWebPath) }}"
+                                         alt="{{ comment.user.file.description }}"/>
+                                {% endif %}
+                            </a>
+                            {% if app.user == comment.user %}
+                                {{ include('vote/form/_comment_delete_form.html.twig') }}
+                            {% endif %}
+                        </div>
+                    </header>
+                </article>
+            {% endfor %}
         </section>
     </article>
 {% endblock %}
