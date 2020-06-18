@@ -3,10 +3,21 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
+
+/**
+ * Class Search
+ * @package App\Entity
+ */
 class Search
 {
 
+    /**
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(min="1", max="150")
+     */
     private $query;
 
     /**
