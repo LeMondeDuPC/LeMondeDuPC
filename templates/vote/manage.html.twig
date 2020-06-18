@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des réactions{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Gestion des réactions</h1>
+            </div>
+        </header>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Type</th>
+                    <th>Membre</th>
+                    <th>Article</th>
+                    <th>Contenu</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for vote in votes %}
+                    <tr>
+                        <td>{{ vote.id }}</td>
+                        <td>{{ vote.type }}</td>
+                        <td>{{ vote.user.id }}</td>
+                        <td>{{ vote.product.id }}</td>
+                        <td>{{ vote.content }}</td>
+                        <td>
+                            {{ include('vote/form/_comment_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun résultat</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </article>
+{% endblock %}

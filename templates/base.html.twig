@@ -76,6 +76,9 @@
                         {% if is_granted('ROLE_MANAGE_PARTNERS') %}
                             <li><a href="{{ path('partner_manage') }}">Gestion des partenaires</a></li>
                         {% endif %}
+                        {% if is_granted('ROLE_MANAGE_VOTES') %}
+                            <li><a href="{{ path('votes_manage') }}">Gestion des réactions</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             {% endif %}

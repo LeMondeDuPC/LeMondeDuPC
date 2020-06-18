@@ -90,23 +90,23 @@
             <section>
                 {{ render(controller('App\\Controller\\VoteController::newComment', {'product' : product})) }}
             </section>
-            {% for comment in product.comments %}
+            {% for vote in product.comments %}
                 <article class="comment">
                     <header>
                         <div class="title">
-                            <span>{{ comment.content }}</span>
+                            <span>{{ vote.content }}</span>
                         </div>
                         <div class="meta">
-                            <time class="published">{{ comment.timePublication|date('Y-m-d H:i:s') }}</time>
+                            <time class="published">{{ vote.timePublication|date('Y-m-d H:i:s') }}</time>
                             <a class="author"
-                               href="{{ path('user_show', {'id': comment.user.id }) }}">
-                                <span class="name">{{ comment.user.username }}</span>
-                                {% if comment.user.file is not null %}
-                                    <img src="{{ asset(comment.user.file.getWebPath) }}"
-                                         alt="{{ comment.user.file.description }}"/>
+                               href="{{ path('user_show', {'id': vote.user.id }) }}">
+                                <span class="name">{{ vote.user.username }}</span>
+                                {% if vote.user.file is not null %}
+                                    <img src="{{ asset(vote.user.file.getWebPath) }}"
+                                         alt="{{ vote.user.file.description }}"/>
                                 {% endif %}
                             </a>
-                            {% if app.user == comment.user %}
+                            {% if app.user == vote.user %}
                                 {{ include('vote/form/_comment_delete_form.html.twig') }}
                             {% endif %}
                         </div>

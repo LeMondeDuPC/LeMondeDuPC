@@ -109,6 +109,25 @@ class VoteController extends AbstractController
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas supprimer ce commentaire');
         }
+        if ($this->isGranted('ROLE_MANAGE_VOTES')) {
+            return $this->redirectToRoute('votes_manage');
+        }
         return $this->redirectToRoute('product_show', ['id' => $vote->getProduct()->getId(), 'slug' => $slugify->slugify($vote->getProduct()->getTitle())]);
+    }
+
+    /**
+     * @Route("/admin/votes", name="votes_manage", methods={"GET"})
+     * @param VoteRepository $voteRepository
+     * @return Response
+     */
+    public function manage(VoteRepository $voteRepository): Response
+    {
+        if ($this->isGranted('ROLE_MANAGE_VOTES')) {
+            return $this->render('vote/manage.html.twig', [
+                'votes' => $voteRepository->findAll(),
+            ]);
+        } else {
+            throw $this->createNotFoundException('Page non trouvée');
+        }
     }
 }
