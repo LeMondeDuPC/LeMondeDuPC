@@ -90,6 +90,11 @@ class Product
     private $votes;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $timeUpdate;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -318,6 +323,25 @@ class Product
                 $vote->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getTimeUpdate(): ?\DateTimeInterface
+    {
+        return $this->timeUpdate;
+    }
+
+    /**
+     * @param DateTimeInterface|null $timeUpdate
+     * @return $this
+     */
+    public function setTimeUpdate(?\DateTimeInterface $timeUpdate): self
+    {
+        $this->timeUpdate = $timeUpdate;
 
         return $this;
     }

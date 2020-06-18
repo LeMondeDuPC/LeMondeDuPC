@@ -106,6 +106,7 @@ class ProductController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $product->setUser($this->getUser());
                 $product->setTimePublication(new DateTime());
+                $product->setTimeUpdate(null);
                 if (!$form->has('validated')) {
                     $product->setValidated(false);
                 }
@@ -146,6 +147,7 @@ class ProductController extends AbstractController
             $form = $this->createForm(ProductType::class, $product, ['security' => $security]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+                $product->setTimeUpdate(new DateTime());
                 $entityManager = $this->getDoctrine()->getManager();
                 if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
                     $file = $product->getFile();
@@ -154,6 +156,7 @@ class ProductController extends AbstractController
                     $file->setFile($form->get('file')->getData());
                     $entityManager->persist($file);
                 }
+                $entityManager->persist($product);
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre article a bien été modifié !');
                 return $this->redirectToRoute('product_manage');
