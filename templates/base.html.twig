@@ -40,7 +40,7 @@
             <ul>
                 <li class="search">
                     <a class="icon fa-search" href="#search">Rechercher</a>
-                    {{ render(controller('App\\Controller\\SearchController::productSearch')) }}
+                    {{ render(controller('App\\Controller\\SearchController::createView')) }}
                 </li>
                 <li class="menu">
                     <a class="icon fa-bars" href="#menu">Menu</a>
@@ -53,7 +53,7 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            {{ render(controller('App\\Controller\\SearchController::productSearch')) }}
+            {{ render(controller('App\\Controller\\SearchController::createView')) }}
         </div>
         <!-- links -->
         <nav id="navmenu">
