@@ -85,39 +85,6 @@
       flex-grow: 1;
     }
 
-    .stats {
-      cursor: default;
-      list-style: none;
-      padding: 0;
-
-      li {
-        border-left: solid 1px _palette(border);
-        display: inline-block;
-        font-family: _font(family-heading);
-        font-size: 0.6em;
-        font-weight: _font(weight-heading);
-        letter-spacing: _font(kerning-heading);
-        line-height: 1;
-        margin: 0 0 0 2em;
-        padding: 0 0 0 2em;
-        text-transform: uppercase;
-
-        &:first-child {
-          border-left: 0;
-          margin-left: 0;
-          padding-left: 0;
-        }
-
-        .icon {
-          border-bottom: 0;
-
-          &:before {
-            color: _palette(border);
-            margin-right: 0.75em;
-          }
-        }
-      }
-    }
   }
 
   @include breakpoint('<=medium') {
@@ -225,14 +192,6 @@
       align-items: stretch;
       flex-direction: column-reverse;
 
-      .stats {
-        text-align: center;
-
-        li {
-          margin: 0 0 0 1.25em;
-          padding: 0 0 0 1.25em;
-        }
-      }
     }
   }
 }

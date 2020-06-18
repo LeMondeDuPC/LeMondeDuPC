@@ -23,13 +23,13 @@
     transition: border-bottom-color _duration(transition) ease;
     border-bottom: dotted 1px _palette(border-alt);
     display: block;
-    margin: 0 1.5em 0 0;
+    margin: 1.5em;
   }
 
   img {
-    border-radius: 100%;
+    border-radius: 25%;
     display: block;
-    width: 4em;
+    width: 5em;
   }
 
   &:hover {

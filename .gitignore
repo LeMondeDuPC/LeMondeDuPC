@@ -7,6 +7,7 @@
 /var/
 /vendor/
 /public/assets/uploads/
+/public/assets/style/.sass-cache
 /src/Migrations/
 .todo
 ###< symfony/framework-bundle ###

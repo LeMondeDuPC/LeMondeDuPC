@@ -16,13 +16,11 @@ const breakpoints = (function () {
 
         /**
          * Events.
-         * @var {array}
          */
         events: [],
 
         /**
          * Initialize.
-         * @param {array} list List.
          */
         init: function (list) {
 
@@ -116,7 +114,7 @@ const breakpoints = (function () {
                         else if (!isNaN(y))
                             units = a[1].substr(String(y).length);
                         else
-                            return;
+                            return undefined;
 
                         // Max only.
                         if (isNaN(x)) {

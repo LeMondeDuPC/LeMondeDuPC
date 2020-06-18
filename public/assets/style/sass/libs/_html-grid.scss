@@ -49,38 +49,8 @@
   }
 
   // Gutters.
-  &.gtr-uniform {
-    > * {
-      > :last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
 
   // Alignment.
-  &.aln-left {
-    justify-content: flex-start;
-  }
-
-  &.aln-center {
-    justify-content: center;
-  }
-
-  &.aln-right {
-    justify-content: flex-end;
-  }
-
-  &.aln-top {
-    align-items: flex-start;
-  }
-
-  &.aln-middle {
-    align-items: center;
-  }
-
-  &.aln-bottom {
-    align-items: flex-end;
-  }
 
   // Step through suffixes.
   @each $suffix in $suffixes {
@@ -95,9 +65,6 @@
     // Row.
 
     // Important.
-    > .imp#{$suffix} {
-      order: -1;
-    }
 
     // Columns, offsets.
     @for $i from 1 through $cols {
@@ -129,13 +96,6 @@
         }
 
         // Uniform.
-        &.gtr-uniform {
-          margin-top: $guttersCols * $multiplier * -1;
-
-          > * {
-            padding-top: $guttersCols * $multiplier;
-          }
-        }
 
       }
 

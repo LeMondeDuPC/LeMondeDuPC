@@ -119,7 +119,7 @@
             const diffX = $this.touchPosX - event.originalEvent.touches[0].pageX,
                 diffY = $this.touchPosY - event.originalEvent.touches[0].pageY,
                 th = $this.outerHeight(),
-                ts = ($this.get(0).scrollHeight - $this.scrollTop());
+                ts = ($this.get(0).scrollHeight - $this.scrollTop);
 
             // Hide on swipe?
             if (config.hideOnSwipe) {
@@ -164,7 +164,7 @@
             }
 
             // Prevent vertical scrolling past the top or bottom.
-            if (($this.scrollTop() < 0 && diffY < 0)
+            if (($this.scrollTop < 0 && diffY < 0)
                 || (ts > (th - 2) && ts < (th + 2) && diffY > 0)) {
 
                 event.preventDefault();
