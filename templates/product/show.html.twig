@@ -13,18 +13,26 @@
                 </h1>
             </div>
             <div class="meta">
-                <time class="published">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
-                {% if product.user is not null %}
-                    <a href="{{ path('user_show', {'id' : product.user.id}) }}" class="author">
-                        <span class="name">{{ product.user.username }}</span>
-                        {% if product.user.file is not null %}
-                            <img src="{{ asset(product.user.file.getWebPath) }}"
-                                 alt="{{ product.user.file.description }}"/>
+                <ul class="icons">
+                    <li>
+                        <time class="published">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                    </li>
+                </ul>
+                <ul class="icons">
+                    <li>
+                        {% if product.user is not null %}
+                            <a href="{{ path('user_show', {'id' : product.user.id}) }}" class="author">
+                                <span class="name">{{ product.user.username }}</span>
+                                {% if product.user.file is not null %}
+                                    <img src="{{ asset(product.user.file.getWebPath) }}"
+                                         alt="{{ product.user.file.description }}"/>
+                                {% endif %}
+                            </a>
+                        {% else %}
+                            <span class="author name">Anonyme</span>
                         {% endif %}
-                    </a>
-                {% else %}
-                    <span class="author name">Anonyme</span>
-                {% endif %}
+                    </li>
+                </ul>
                 <ul class="icons">
                     <li>
                         <a href="{{ path('vote_heart', {'id': product.id}) }}" class="icon fa-heart"
@@ -59,12 +67,16 @@
                         </a>
                     </li>
                 </ul>
-                {% if product.category is not null %}
-                    <span class="location icon fa-tag"><a
-                                href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
-                {% else %}
-                    <span class="location icon fa-tag">Non répertorié</span>
-                {% endif %}
+                <ul class="icons">
+                    <li>
+                        {% if product.category is not null %}
+                            <span class="location icon fa-tag"><a
+                                        href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
+                        {% else %}
+                            <span class="location icon fa-tag">Non répertorié</span>
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
         </header>
         <section>

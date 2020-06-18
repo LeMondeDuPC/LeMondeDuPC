@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Résultat de recherche : {{ search }}{% endblock %}
+{% block title %}Résultat de recherche : {{ search.query }} {% endblock %}
 
 {% block body %}
     <article class="post">
         <header>
             <div class="title">
-                <h1 class="heading">Résultat pour votre recherche : {{ search }}</h1>
+                <h1 class="heading">Résultat pour votre recherche : {{ search.query }}</h1>
             </div>
         </header>
         <section>

@@ -168,6 +168,8 @@ body {
     white-space: nowrap;
 
     input {
+      background-color: white;
+      color: _palette(fg);
       width: 12em;
     }
 

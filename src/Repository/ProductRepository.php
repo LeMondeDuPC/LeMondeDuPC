@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,22 +28,29 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $search
-     * @param null $validated
-     * @return int|mixed|string
+     * @param Search $search
+     * @return Query
      */
-    public function findByWord(string $search, $validated = null)
+    public function findByWordQuery(Search $search)
     {
-        $query = $this->createQueryBuilder('p')
-            ->where('p.title LIKE :key')
-            ->orWhere('p.description LIKE :key')
-            ->orWhere('p.content LIKE :key')
-            ->setParameter('key', '%' . $search . '%');
-        if ($validated !== null) {
-            $query->andWhere('p.validated = :validated')
-                ->setParameter('validated', $validated);
+        $query = $this->findValidatedQuery();
+        if ($search->getQuery()) {
+            $query
+                ->andWhere('p.title LIKE :key')
+                ->orWhere('p.description LIKE :key')
+                ->orWhere('p.content LIKE :key')
+                ->setParameter('key', '%' . $search->getQuery() . '%');
         }
+        return $query->getQuery();
+    }
 
-        return $query->getQuery()->getResult();
+    /**
+     * @return QueryBuilder
+     */
+    private function findValidatedQuery()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.validated = :validated')
+            ->setParameter('validated', Product::VALIDATED);
     }
 }

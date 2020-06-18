@@ -71,31 +71,6 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/products/search/{page<\d+>?1}", name="product_search")
-     * @param Request $request
-     * @param int $page
-     * @param PaginatorInterface $paginator
-     * @return Response
-     */
-    public function search(Request $request, int $page, PaginatorInterface $paginator)
-    {
-        if ($request->isMethod('POST') and $request->request->has('q')) {
-            $search = $request->request->get('q');
-            $products = $paginator->paginate(
-                $this->productRepository->findByWord($search, Product::VALIDATED),
-                $page,
-                2
-            );
-            return $this->render('product/result.html.twig', [
-                'products' => $products,
-                'search' => $search
-            ]);
-        } else {
-            throw $this->createNotFoundException('Page non trouvée');
-        }
-    }
-
-    /**
      * @Route("/admin/products", name="product_manage", methods={"GET"})
      * @return Response
      */

@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets/style/css/font-awesome.css') }}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/>
-    <script data-ad-client="ca-pub-4341744515604326" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-4341744515604326" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body class="is-preload">
 
@@ -39,7 +40,7 @@
             <ul>
                 <li class="search">
                     <a class="icon fa-search" href="#search">Rechercher</a>
-                    {{ include('product/form/_search_form_header.html.twig') }}
+                    {{ render(controller('App\\Controller\\SearchController::productSearch')) }}
                 </li>
                 <li class="menu">
                     <a class="icon fa-bars" href="#menu">Menu</a>
@@ -52,7 +53,7 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            {{ include('product/form/_search_form_menu.html.twig') }}
+            {{ render(controller('App\\Controller\\SearchController::productSearch')) }}
         </div>
         <!-- links -->
         <nav id="navmenu">
@@ -132,9 +133,12 @@
                 <p>Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les
                     maitrisent.</p>
                 <ul class="icons">
-                    <li><a href="https://twitter.com/LeMondeDuPC" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="https://www.instagram.com/lemondedupc.fr" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="https://github.com/NielsTRS/LeMondeDuPC" target="_blank" class="icon fa-github"><span class="label">Github</span></a></li>
+                    <li><a href="https://twitter.com/LeMondeDuPC" target="_blank" class="icon fa-twitter"><span
+                                    class="label">Twitter</span></a></li>
+                    <li><a href="https://www.instagram.com/lemondedupc.fr" target="_blank"
+                           class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://github.com/NielsTRS/LeMondeDuPC" target="_blank" class="icon fa-github"><span
+                                    class="label">Github</span></a></li>
                 </ul>
             </header>
         </section>
