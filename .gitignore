@@ -3,11 +3,11 @@
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
 /var/
 /vendor/
 /public/assets/uploads/
 /public/assets/style/.sass-cache
 /src/Migrations/
+symfony.lock
 .todo
 ###< symfony/framework-bundle ###
