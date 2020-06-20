@@ -2,19 +2,3 @@
     {{ form_widget(form) }}
 <button>{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
-
-{% block editor %}
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.on('instanceReady', function (evt) {
-            evt.editor.dataProcessor.htmlFilter.addRules({
-                elements: {
-                    img: function (el) {
-                        el.attributes.alt = 'Image explicative de l\'article';
-                        el.addClass('image featured');
-                    }
-                }
-            });
-        });
-    </script>
-{% endblock %}

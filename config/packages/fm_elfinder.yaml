@@ -1,0 +1,18 @@
+fm_elfinder:
+    assets_path: bundles/fmelfinder
+    instances:
+        default:
+            locale: "%kernel.default_locale%" # Langue
+            editor: ckeditor # Editeur utilisé
+            visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg']
+            connector:
+                debug: false # Désactive le débug
+                roots:
+                    uploads:
+                        show_hidden: false # Masque les fichiers cachés
+                        driver: LocalFileSystem # Pilote des fichiers
+                        path: assets/uploads/blob # Chemin d'upload
+                        disabled_commands: [rm, rename, mkdir]
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg'] # Fichiers autorisés
+                        upload_deny: ['all'] # Fichiers interdits
+                        upload_max_size: 2M # Taille maximum
