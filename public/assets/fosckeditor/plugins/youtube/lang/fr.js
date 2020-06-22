@@ -3,6 +3,7 @@ CKEDITOR.plugins.setLang('youtube', 'fr', {
 	title : 'Insérer une vidéo youtube',
 	txtEmbed : 'Coller le code embed ici',
 	txtUrl : 'Coller l\'url de la vidéo ici',
+	videoID: 'Coller l\'id de la vidéo ici',
 	txtWidth : 'Largeur',
 	txtHeight : 'Hauteur',
 	chkRelated : 'Montrer les suggestions de vidéo à la fin',

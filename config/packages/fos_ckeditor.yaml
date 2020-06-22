@@ -9,10 +9,12 @@ fos_ck_editor:
     configs:
         main_config:
             toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source'] }
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', 'Iframe', '-', 'Table', '-', 'Format', '-', 'Source'] }
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
             extraPlugins: "youtube"
+            allowedContent: true
+            language: "fr"
     plugins:
         youtube:
             path: "assets/fosckeditor/plugins/youtube/" # with trailing slash

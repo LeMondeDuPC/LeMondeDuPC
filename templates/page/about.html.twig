@@ -8,21 +8,31 @@
             <div class="title">
                 <h1 class="heading">A propos</h1>
             </div>
+            <div class="meta" style="text-align: left;">
+                <p>Sommaire : </p>
+                <ul>
+                    <li><a href="#partenaires">Nos partenaires</a></li>
+                    <li><a href="#legal">Les mentions légales</a></li>
+                    <li><a href="#confidentialité">Vie privée</a></li>
+                </ul>
+            </div>
         </header>
-        <section>
+        <section id="partenaires">
             <h1>Nos partenaires</h1>
             <ul>
                 {{ render(controller('App\\Controller\\PartnerController::_index')) }}
             </ul>
-            <hr/>
-            <h1>Les Mentions Légales</h1>
-            <p>Le site www.lemondedupc.fr est édité par :</p>
+        </section>
+        <hr/>
+        <section id="legal">
+            <h1>Les Mentions légales</h1>
+            <p>Le site lemondedupc.fr est édité par :</p>
             <ul>
                 <li>
                     Niels
                 </li>
             </ul>
-            <p>Le site www.lemondedupc.fr est hébergé par :</p>
+            <p>Le site lemondedupc.fr est hébergé par :</p>
             <ul>
                 <li>OVH</li>
                 <li>SAS au capital de 10 069 020 €</li>
@@ -31,6 +41,68 @@
                 <li>N° TVA : FR 22 424 761 419</li>
                 <li>Siège social : 2 rue Kellermann - 59100 Roubaix - France</li>
             </ul>
+        </section>
+        <hr/>
+        <section id="confidentialité">
+            <h1>Vie privée</h1>
+            <section>
+                <h2>Déclaration de confidentialité</h2>
+                <p>Le site lemondedupc.fr prête une attention particulière à vos données personnelles, et s’engage de
+                    par ses conditions d’utilisation à ne transmettre, vendre ou céder à un tiers aucune information
+                    personnelle vous concernant.</p>
+                <p> Conformément à la loi « Informatique et Libertés » N° 78-17 du 6 Janvier 1978, vous bénéficiez de
+                    vos droits que vous pouvez exercer :
+                </p>
+                <ul>
+                    <li>
+                        via les options dans les paramètres de votre compte utilisateur.
+                    </li>
+                    <li>
+                        en nous contactant par l’intermédiaire du <a href="{{ path('page_contact') }}">formulaire de
+                            contact</a>.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Cookie</h2>
+                <p>Un cookie est un petit fichier texte que les sites web sauvegardent sur votre ordinateur ou appareil
+                    mobile lorsque vous les consultez. Il permet à ces sites de mémoriser vos actions et préférences
+                    pendant un temps défini, pour que vous n’ayez pas à indiquer ces informations à chaque fois que vous
+                    consultez ces
+                    sites ou naviguez d’une page à une autre.</p>
+                <p>Nous utilisons les cookies uniquement à des fins de statistiques pour connaître le comportement des
+                    visiteurs et optimiser leur expérience.</p>
+                <ul>
+                    <li><b>consent_status</b> : Ce cookie, indispensable, conserve les préférences quant au
+                        consentement/refus de dépôt des cookies. Ce cookie est valable 13 mois.
+                    </li>
+                    <li><b>PHPSESSID</b> : Ce cookie technique, indispensable, sert à optimiser l'expérience des
+                        visiteurs. Ce
+                        cookie est valable jusqu'à la fermeture du navigateur.
+                    </li>
+                </ul>
+                <p>Vous pouvez aisément accepter ou rejeter les cookies sur ce site. Pour les accepter, cliquez sur le
+                    bouton « Accepter » dans le bandeau en bas de l’écran (masqué si ils sont déjà acceptés). Pour
+                    modifier votre choix, utilisez l'onglet « Gestion des services » en bas à droite de l'écran.</p>
+            </section>
+            <section>
+                <h2>Durées de stockage de vos données</h2>
+                <p>Pour les utilisateurs et utilisatrices qui s’enregistrent sur le site, nous stockons également les
+                    données personnelles indiquées dans leur profil. Tous les utilisateurs et utilisatrices peuvent
+                    voir, modifier ou supprimer leurs informations personnelles à tout moment.</p>
+            </section>
+            <section>
+                <h2>Contenu embarqué depuis d’autres sites</h2>
+                <p>Certains articles de ce site peuvent inclure des contenus intégrés (par exemple des vidéos, images,
+                    articles…). Le contenu intégré depuis d’autres sites se comporte de la même manière que si le
+                    visiteur
+                    se rendait sur cet autre site.</p>
+                <p>Ces sites web pourraient collecter des données sur vous, utiliser des cookies, embarquer des outils
+                    de
+                    suivis tiers, suivre vos interactions avec ces contenus embarqués si vous disposez d’un compte
+                    connecté
+                    sur leur site web.</p>
+            </section>
         </section>
     </article>
 {% endblock %}
