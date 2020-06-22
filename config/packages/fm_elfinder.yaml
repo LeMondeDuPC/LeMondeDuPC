@@ -1,5 +1,5 @@
 fm_elfinder:
-    assets_path: bundles/fmelfinder
+    assets_path: assets/fmelfinder
     instances:
         default:
             locale: "%kernel.default_locale%" # Langue

@@ -19,8 +19,10 @@
     <link rel="stylesheet" href="{{ asset('assets/style/css/font-awesome.css') }}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/>
-    <script data-ad-client="ca-pub-4341744515604326" async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {#    <script data-ad-client="ca-pub-4341744515604326" async#}
+    {#            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
+    <script type="text/javascript" src="{{ asset('assets/tarteaucitron/tarteaucitron.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/conf/tarteaucitron.js') }}"></script>
 </head>
 <body class="is-preload">
 
@@ -163,11 +165,11 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('assets/js/libs/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
-<script src="{{ asset('assets/js/libs/util.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
-<script src="{{ asset('assets/js/ckeditorConf.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/libs/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/conf/ckeditor.js') }}"></script>
 
 </body>
 </html>

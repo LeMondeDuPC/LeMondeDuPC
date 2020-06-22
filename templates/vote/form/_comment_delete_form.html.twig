@@ -2,5 +2,5 @@
       onsubmit="return confirm('Confirmer la suppression ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vote.id) }}">
-    <button class="btn">Supprimer</button>
+    <button class="button">Supprimer</button>
 </form>
