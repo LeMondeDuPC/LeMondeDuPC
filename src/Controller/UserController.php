@@ -8,13 +8,13 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\SenderService;
 use DateTime;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
@@ -82,36 +82,42 @@ class UserController extends AbstractController
      * @Route("/membre/inscription", name="user_new", methods={"GET","POST"})
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param ReCaptcha $ReCaptcha
      * @param Security $security
      * @param SenderService $senderService
      * @return Response
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Security $security, SenderService $senderService): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, ReCaptcha $ReCaptcha, Security $security, SenderService $senderService): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['security' => $security]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
-            $user->setTimePublication(new DateTime());
-            $user->setValidated(false);
-            $user->setNewsletter(false);
+            $response = $ReCaptcha->verify($_POST['g-recaptcha-response']);
+            if ($response->isSuccess()) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+                $user->setTimePublication(new DateTime());
+                $user->setValidated(false);
+                $user->setNewsletter(false);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $senderService->welcomeEmail($user);
+                $senderService->welcomeEmail($user);
 
-            $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
-            return $this->redirectToRoute('user_login');
+                $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
+                return $this->redirectToRoute('user_login');
+            } else {
+                $this->addFlash('danger', 'Veuillez valider le ReCaptcha');
+            }
         }
 
         return $this->render('user/new.html.twig', [

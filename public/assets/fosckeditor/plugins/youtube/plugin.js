@@ -31,52 +31,36 @@
                         }
                     },
                     contents:
-                        [
-                            {
-                                id: 'youtubePlugin',
-                                expand: true,
-                                elements:
-                                    [
-                                        {
-                                            type: 'hbox',
-                                            widths: ['70%', '15%', '15%'],
-                                            children:
-                                                [
-                                                    {
-                                                        id: 'txtUrl',
-                                                        type: 'text',
-                                                        label: editor.lang.youtube.txtUrl,
-                                                        validate: function () {
-                                                            if (this.isEnabled()) {
-                                                                if (!this.getValue()) {
-                                                                    alert(editor.lang.youtube.noCode);
-                                                                    return false;
-                                                                } else {
-                                                                    video = ytVidId(this.getValue());
+                        [{
+                            id: 'youtubePlugin',
+                            expand: true,
+                            elements:
+                                [{
+                                    id: 'txtUrl',
+                                    type: 'text',
+                                    label: editor.lang.youtube.txtUrl,
+                                    validate: function () {
+                                        if (this.isEnabled()) {
+                                            if (!this.getValue()) {
+                                                alert(editor.lang.youtube.noCode);
+                                                return false;
+                                            } else {
+                                                video = ytVidId(this.getValue());
 
-                                                                    if (this.getValue().length === 0 || video === false) {
-                                                                        alert(editor.lang.youtube.invalidUrl);
-                                                                        return false;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                ]
+                                                if (this.getValue().length === 0 || video === false) {
+                                                    alert(editor.lang.youtube.invalidUrl);
+                                                    return false;
+                                                }
+                                            }
                                         }
-                                    ]
-                            }
-                        ],
+                                    }
+                                }]
+                        }],
                     onOk: function () {
-                        var content = '<div class="youtube_player" videoID="' + video + '" theme = "theme light" controls = "controls 1" showinfo = "showinfo 1"></div>';
-
-                        var element = CKEDITOR.dom.element.createFromHtml(content);
                         var instance = this.getParentEditor();
-                        instance.insertElement(element);
-
-                        var fakeElement = editor.createFakeElement(element, 'test', 't_test', false);
-
-                        editor.insertElement(fakeElement);
+                        var content = '<div class="youtube_player" videoID="' + video + '" theme = "theme light" controls = "controls 1" showinfo = "showinfo 1"></div>';
+                        var realElement = CKEDITOR.dom.element.createFromHtml(content);
+                        instance.insertElement(realElement);
                     }
                 };
             });

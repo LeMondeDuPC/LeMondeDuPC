@@ -8,6 +8,7 @@
         "ext-openssl": "*",
         "cocur/slugify": "^4.0",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
+        "google/recaptcha": "^1.2",
         "helios-ag/fm-elfinder-bundle": "^10.0",
         "knplabs/knp-paginator-bundle": "^5.2",
         "sensio/framework-extra-bundle": "^5.5",
