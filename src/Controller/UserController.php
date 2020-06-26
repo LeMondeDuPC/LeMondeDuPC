@@ -147,6 +147,22 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/membre/mot-de-passe", name="user_forgotten_password", methods={"GET"})
+     */
+    public function forgottenPassword()
+    {
+
+    }
+
+    /**
+     * @Route("/membre/mot-de-passe/{id}/{confirmKey}", name="user_reset_password", methods={"GET"})
+     */
+    public function resetPassword()
+    {
+
+    }
+
+    /**
      * @Route("/membre/{id}", name="user_show", methods={"GET"})
      * @param User $user
      * @return Response

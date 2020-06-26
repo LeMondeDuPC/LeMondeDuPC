@@ -6,6 +6,7 @@ use App\Entity\File;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use Cocur\Slugify\Slugify;
 use DateTime;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +46,7 @@ class ProductController extends AbstractController
         $products = $paginator->paginate(
             $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']),
             $page,
-            2
+            Product::ITEM_ON_PAGE
         );
         return $this->render('product/index.html.twig', [
             'products' => $products
@@ -54,14 +55,22 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}-{slug}", name="product_show", methods={"GET"})
+     * @Route("/article/{id}-{slug}", name="product_show", methods={"GET"})
      * @param Product $product
+     * @param string $slug
      * @return Response
      */
-    public function show(Product $product): Response
+    public function show(Product $product, string $slug = null): Response
     {
         $product = $this->productRepository->findOneBy(['id' => $product->getId(), 'validated' => Product::VALIDATED]);
         if ($product !== null) {
+            $productSlug = (new Slugify())->slugify($product->getTitle());
+            if ($slug !== $productSlug) {
+                return $this->redirectToRoute('product_show', [
+                    'id' => $product->getId(),
+                    'slug' => $productSlug,
+                ], 308);
+            }
             return $this->render('product/show.html.twig', [
                 'product' => $product
             ]);
@@ -104,25 +113,29 @@ class ProductController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $product->setUser($this->getUser());
-                $product->setTimePublication(new DateTime());
-                $product->setTimeUpdate(null);
-                if (!$form->has('validated')) {
-                    $product->setValidated(false);
-                }
-                $file->setDescription($form->get('file')->getData());
-                $file->setProduct($product);
-                $file->setFile($form->get('file')->getData());
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($product);
-                $entityManager->persist($file);
-                $entityManager->flush();
-                if ($this->isGranted('ROLE_MANAGE_PRODUCTS')) {
-                    $this->addFlash('success', 'Votre article a bien été posté !');
+                if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
+                    $product->setUser($this->getUser());
+                    $product->setTimePublication(new DateTime());
+                    $product->setTimeUpdate(null);
+                    if (!$form->has('validated')) {
+                        $product->setValidated(false);
+                    }
+                    $file->setDescription($form->get('file_description')->getData());
+                    $file->setProduct($product);
+                    $file->setFile($form->get('file')->getData());
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($product);
+                    $entityManager->persist($file);
+                    $entityManager->flush();
+                    if ($this->isGranted('ROLE_MANAGE_PRODUCTS')) {
+                        $this->addFlash('success', 'Votre article a bien été posté !');
+                    } else {
+                        $this->addFlash('success', 'Votre article a bien été envoyé, en attente de validation...');
+                    }
+                    return $this->redirectToRoute('product_index');
                 } else {
-                    $this->addFlash('success', 'Votre article a bien été envoyé, en attente de validation...');
+                    $this->addFlash('danger', 'Veuillez ajouter une miniature et sa description');
                 }
-                return $this->redirectToRoute('product_index');
             }
 
             return $this->render('product/new.html.twig', [

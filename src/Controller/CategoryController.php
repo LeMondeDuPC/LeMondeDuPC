@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
+use Cocur\Slugify\Slugify;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,14 +46,31 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/categorie/{id}-{name}", name="category_show", methods={"GET"})
+     * @Route("/categorie/{id}-{name}/{page<\d+>?1}", name="category_show", methods={"GET"})
      * @param Category $category
+     * @param int $page
+     * @param PaginatorInterface $paginator
+     * @param ProductRepository $productRepository
+     * @param string|null $name
      * @return Response
      */
-    public function show(Category $category): Response
+    public function show(Category $category, int $page, PaginatorInterface $paginator, ProductRepository $productRepository, string $name = null): Response
     {
+        $categorySlug = (new Slugify())->slugify($category->getName());
+        if ($name !== $categorySlug) {
+            return $this->redirectToRoute('category_show', [
+                'id' => $category->getId(),
+                'name' => $categorySlug,
+            ], 308);
+        }
+        $products = $paginator->paginate(
+            $productRepository->findBy(['category' => $category]),
+            $page,
+            Product::ITEM_ON_PAGE
+        );
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'products' => $products,
         ]);
     }
 

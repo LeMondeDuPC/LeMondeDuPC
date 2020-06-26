@@ -10,7 +10,7 @@
             </div>
         </header>
         <section>
-            {% for product in category.products %}
+            {% for product in products %}
                 <article class="mini-post">
                     <section class="content">
                         <h2 class="title">
@@ -31,4 +31,7 @@
             {% endfor %}
         </section>
     </article>
+{% endblock %}
+{% block paginate %}
+    {{ knp_pagination_render(products) }}
 {% endblock %}

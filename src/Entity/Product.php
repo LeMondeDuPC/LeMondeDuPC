@@ -25,6 +25,11 @@ class Product
     public const VALIDATED = true;
 
     /**
+     *
+     */
+    public const ITEM_ON_PAGE = 2;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
