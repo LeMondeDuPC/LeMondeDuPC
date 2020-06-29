@@ -33,7 +33,7 @@ class SearchController extends AbstractController
     }
 
     /**
-     * @Route("/search/{page<\d+>?1}", name="product_search")
+     * @Route("/recherche/{page<\d+>?1}", name="product_search")
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @param ProductRepository $productRepository

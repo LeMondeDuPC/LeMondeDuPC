@@ -7,27 +7,16 @@ product:
     permanent: true
     keepQueryParams: true
 
-#    Articles, catégories, pagination, commentaires et recherche
-#    RewriteRule ^categorie/(.*)/page/([0-9]+)$ articles/categorie.php?categorie=$1&page=$2 [L]
-#    RewriteRule ^categorie/(.*)$ articles/categorie.php?categorie=$1 [L]
-#    RewriteRule ^recherche/(.*)/page/([0-9]+)$ articles/resultat.php?q=$1&page=$2 [L]
-#    RewriteRule ^recherche/(.*)$ articles/resultat.php?q=$1 [L]
-#    RewriteRule ^page/([0-9]+)$ index.php?page=$1 [L]
-#    RewriteRule ^like/([0-9]+)$ articles/action.php?t=1&id=$1 [L]
-#    RewriteRule ^dislike/([0-9]+)$ articles/action.php?t=2&id=$1 [L]
-#    RewriteRule ^supprimer/([0-9]+)/commentaire/([0-9]+)$ articles/article.php?article=$1&suppr_comment=$2 [L]
-#    RewriteRule ^modifier/([0-9]+)/commentaire/([0-9]+)$ articles/article.php?article=$1&modif_comment=$2 [L]
-#    RewriteRule ^signaler/([0-9]+)/commentaire/([0-9]+)$ articles/article.php?article=$1&signal_comment=$2 [L]
-#
-#    Espace membre
-#    RewriteRule ^membre/inscription$ espace-membre/inscription.php [L]
-#    RewriteRule ^membre/connexion$ espace-membre/connexion.php [L]
-#    RewriteRule ^membre/([0-9]+)/profil$ espace-membre/profil.php?id=$1 [L]
-#    RewriteRule ^membre/([0-9]+)/deconnexion$ espace-membre/deconnexion.php?id=$1 [L]
-#    RewriteRule ^membre/([0-9]+)/edition/(.*)$ espace-membre/editionprofil.php?id=$1&token=$2 [L]
-#    RewriteRule ^membre/([0-9]+)/parametre/(.*)$ espace-membre/parametre.php?id=$1&token=$2 [L]
-#    RewriteRule ^membre/confirmer/(.*)/(.*)$ espace-membre/confirmation.php?pseudo=$1&key=$2 [L]
-#
-#    # divers
-#    RewriteRule ^divers/a-propos$ divers/propos.php [L]
-#    RewriteRule ^divers/contact$ divers/contact.php [L]
+about:
+  path: /divers/a-propos
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  defaults:
+    route: page_about
+    permanent: true
+
+contact:
+  path: /divers/contact
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  defaults:
+    route: page_contact
+    permanent: true

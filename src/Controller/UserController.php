@@ -89,40 +89,45 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, ReCaptcha $ReCaptcha, Security $security, SenderService $senderService): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user, ['security' => $security]);
-        $form->handleRequest($request);
+        if (!$this->getUser()) {
+            $user = new User();
+            $form = $this->createForm(UserType::class, $user, ['security' => $security]);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $response = $ReCaptcha->verify($_POST['g-recaptcha-response']);
-            if ($response->isSuccess()) {
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-                $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
-                $user->setTimePublication(new DateTime());
-                $user->setValidated(false);
-                $user->setNewsletter(false);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $response = $ReCaptcha->verify($_POST['g-recaptcha-response']);
+                if ($response->isSuccess()) {
+                    $user->setPassword(
+                        $passwordEncoder->encodePassword(
+                            $user,
+                            $form->get('plainPassword')->getData()
+                        )
+                    );
+                    $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+                    $user->setTimePublication(new DateTime());
+                    $user->setValidated(false);
+                    $user->setNewsletter(false);
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
 
-                $senderService->welcomeEmail($user);
+                    $senderService->welcomeEmail($user);
 
-                $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
-                return $this->redirectToRoute('user_login');
-            } else {
-                $this->addFlash('danger', 'Veuillez valider le ReCaptcha');
+                    $this->addFlash('success', 'Votre compte a bien été créer ! Veuillez confirmé votre inscription via le mail qui vous a été envoyé');
+                    return $this->redirectToRoute('user_login');
+                } else {
+                    $this->addFlash('danger', 'Veuillez valider le ReCaptcha');
+                }
             }
+
+            return $this->render('user/new.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        } else {
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
 
-        return $this->render('user/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -133,33 +138,66 @@ class UserController extends AbstractController
      */
     public function validateUser(string $confirmKey, User $user)
     {
-        if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== User::VALIDATED) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $user->setValidated(User::VALIDATED);
-            $user->setNewsletter(User::VALIDATED);
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
+        if (!$this->getUser()) {
+            if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== User::VALIDATED) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $user->setValidated(User::VALIDATED);
+                $user->setNewsletter(User::VALIDATED);
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
+            } else {
+                $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
+            }
+            return $this->redirectToRoute('user_login');
         } else {
-            $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
-        return $this->redirectToRoute('user_login');
     }
 
     /**
      * @Route("/membre/mot-de-passe", name="user_forgotten_password", methods={"GET"})
+     * @param ReCaptcha $ReCaptcha
      */
-    public function forgottenPassword()
+    public function forgottenPassword(ReCaptcha $ReCaptcha)
     {
-
+        if (!$this->getUser()) {
+            // code logic
+        } else {
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+        }
     }
 
     /**
      * @Route("/membre/mot-de-passe/{id}/{confirmKey}", name="user_reset_password", methods={"GET"})
+     * @param string $confirmKey
+     * @param Request $request
+     * @param User $user
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function resetPassword()
+    public function resetPassword(string $confirmKey, Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if (!$this->getUser()) {
+            if ($user->getConfirmKey() === $confirmKey and $user->getValidated() === User::VALIDATED) {
+                $form = $this->createForm(UserType::class, $user);
+                $form->handleRequest($request);
 
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $user->setPassword(
+                        $passwordEncoder->encodePassword(
+                            $user,
+                            $form->get('plainPassword')->getData()
+                        )
+                    );
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('user_login');
+                }
+            }
+        } else {
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+        }
     }
 
     /**
@@ -189,11 +227,11 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
     {
-        $roles = [];
-        foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role) {
-            $roles[$role] = $role;
-        }
         if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
+            $roles = [];
+            foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role) {
+                $roles[$role] = $role;
+            }
             $form = $this->createForm(UserType::class, $user, ['security' => $security, 'roles' => $roles]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {

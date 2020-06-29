@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Product;
 use App\Form\ContactType;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use App\Service\SenderService;
+use Cocur\Slugify\SlugifyInterface;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +22,58 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PageController extends AbstractController
 {
+    /**
+     * @Route("sitemap.xml", name="page_sitemap", defaults={"_format"="xml"})
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @param CategoryRepository $categoryRepository
+     * @param SlugifyInterface $slugify
+     * @return Response
+     */
+    public function sitemap(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SlugifyInterface $slugify, Packages $assetPackage)
+    {
+        $hostname = $request->getSchemeAndHttpHost();
+        $urls = [];
+
+        $urls[] = ['loc' => $this->generateUrl('page_about')];
+        $urls[] = ['loc' => $this->generateUrl('page_contact')];
+        $urls[] = ['loc' => $this->generateUrl('user_login')];
+        $urls[] = ['loc' => $this->generateUrl('user_new')];
+
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED]) as $product) {
+            $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
+            $urls[] = [
+                'loc' => $this->generateUrl('product_show', [
+                    'id' => $product->getId(),
+                    'slug' => $slugify->slugify($product->getTitle()),
+                ]),
+                'lastmod' => $time->format('Y-m-d'),
+                'image' => [
+                    'loc' => $assetPackage->getUrl($product->getFile()->getWebPath()),
+                    'title' => $product->getTitle(),
+                ]
+            ];
+        }
+
+        foreach ($categoryRepository->findAll() as $category) {
+            $urls[] = ['loc' => $this->generateUrl('category_show', [
+                    'id' => $category->getId(),
+                    'name' => $slugify->slugify($category->getName()),
+                ]
+            )];
+        }
+        $response = new Response(
+            $this->renderView('page/sitemap.html.twig', ['urls' => $urls,
+                'hostname' => $hostname]),
+            200
+        );
+
+        $response->headers->set('Content-Type', 'text/xml');
+
+        return $response;
+
+    }
+
     /**
      * @Route("/a-propos", name="page_about")
      * @return Response
