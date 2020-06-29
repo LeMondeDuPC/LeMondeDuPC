@@ -1,0 +1,7 @@
+{% for robot in robots %}User-agent: {{ robot.agent }}
+{% for disallow in robot.disallow %}Disallow: {{ disallow }}
+{% endfor %}
+
+{% endfor %}
+
+Sitemap: {{ sitemap }}

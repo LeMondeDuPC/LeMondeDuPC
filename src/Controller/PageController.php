@@ -71,6 +71,34 @@ class PageController extends AbstractController
     }
 
     /**
+     * @Route("robots.txt", name="page_robots", defaults={"_format"="txt"})
+     * @param Request $request
+     * @return Response
+     */
+    public function robots(Request $request)
+    {
+        $hostname = $request->getSchemeAndHttpHost();
+        $robots = [];
+        $robots[] = [
+            'agent' => '*',
+            'disallow' => [
+                '',
+            ],
+        ];
+        $response = new Response(
+            $this->renderView('page/robots.html.twig', [
+                'robots' => $robots,
+                'sitemap' => $hostname . $this->generateUrl('page_sitemap'),
+            ]),
+            200
+        );
+
+        $response->headers->set('Content-Type', 'text/plain');
+
+        return $response;
+    }
+
+    /**
      * @Route("sitemap.xml", name="page_sitemap", defaults={"_format"="xml"})
      * @param Request $request
      * @param ProductRepository $productRepository
