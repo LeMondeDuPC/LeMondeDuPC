@@ -31,7 +31,7 @@ class PageController extends AbstractController
      * @param Packages $assetPackage
      * @return Response
      */
-    public function rss(Request $request, ProductRepository $productRepository, SlugifyInterface $slugify, Packages $assetPackage)
+    public function rss(Request $request, ProductRepository $productRepository, SlugifyInterface $slugify, Packages $assetPackage): Response
     {
         $hostname = $request->getSchemeAndHttpHost();
         $items = [];
@@ -75,7 +75,7 @@ class PageController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function robots(Request $request)
+    public function robots(Request $request): Response
     {
         $hostname = $request->getSchemeAndHttpHost();
         $robots = [];
@@ -107,7 +107,7 @@ class PageController extends AbstractController
      * @param Packages $assetPackage
      * @return Response
      */
-    public function sitemap(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SlugifyInterface $slugify, Packages $assetPackage)
+    public function sitemap(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SlugifyInterface $slugify, Packages $assetPackage): Response
     {
         $hostname = $request->getSchemeAndHttpHost();
         $urls = [];
@@ -153,7 +153,7 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/a-propos", name="page_about")
+     * @Route("/a-propos", name="page_about"): Response
      * @return Response
      */
     public function about()
@@ -168,7 +168,7 @@ class PageController extends AbstractController
      * @param ReCaptcha $ReCaptcha
      * @return Response
      */
-    public function contact(Request $request, SenderService $senderService, ReCaptcha $ReCaptcha)
+    public function contact(Request $request, SenderService $senderService, ReCaptcha $ReCaptcha): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);

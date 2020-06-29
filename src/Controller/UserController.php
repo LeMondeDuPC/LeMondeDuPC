@@ -136,7 +136,7 @@ class UserController extends AbstractController
      * @param User $user
      * @return RedirectResponse
      */
-    public function validateUser(string $confirmKey, User $user)
+    public function validateUser(string $confirmKey, User $user): RedirectResponse
     {
         if (!$this->getUser()) {
             if ($user->getConfirmKey() === $confirmKey and $user->getValidated() !== User::VALIDATED) {
@@ -150,51 +150,6 @@ class UserController extends AbstractController
                 $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
             }
             return $this->redirectToRoute('user_login');
-        } else {
-            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
-        }
-    }
-
-    /**
-     * @Route("/membre/mot-de-passe", name="user_forgotten_password", methods={"GET"})
-     * @param ReCaptcha $ReCaptcha
-     */
-    public function forgottenPassword(ReCaptcha $ReCaptcha)
-    {
-        if (!$this->getUser()) {
-            // code logic
-        } else {
-            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
-        }
-    }
-
-    /**
-     * @Route("/membre/mot-de-passe/{id}/{confirmKey}", name="user_reset_password", methods={"GET"})
-     * @param string $confirmKey
-     * @param Request $request
-     * @param User $user
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
-    public function resetPassword(string $confirmKey, Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        if (!$this->getUser()) {
-            if ($user->getConfirmKey() === $confirmKey and $user->getValidated() === User::VALIDATED) {
-                $form = $this->createForm(UserType::class, $user);
-                $form->handleRequest($request);
-
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $user->setPassword(
-                        $passwordEncoder->encodePassword(
-                            $user,
-                            $form->get('plainPassword')->getData()
-                        )
-                    );
-                    $entityManager->persist($user);
-                    $entityManager->flush();
-                    return $this->redirectToRoute('user_login');
-                }
-            }
         } else {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }

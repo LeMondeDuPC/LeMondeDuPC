@@ -40,7 +40,7 @@ class SearchController extends AbstractController
      * @param int $page
      * @return Response
      */
-    public function productSearch(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository, int $page)
+    public function productSearch(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository, int $page): Response
     {
         $form = $this->createSearchForm();
         $form->handleRequest($request);
@@ -62,7 +62,7 @@ class SearchController extends AbstractController
     /**
      * @return FormInterface
      */
-    private function createSearchForm()
+    private function createSearchForm(): FormInterface
     {
         return $this->createForm(SearchType::class, $this->search, [
             'action' => $this->generateUrl('product_search'),
@@ -73,7 +73,7 @@ class SearchController extends AbstractController
     /**
      * @return Response
      */
-    public function createView()
+    public function createView() : Response
     {
         return $this->render('search/form/_search_form.html.twig', [
             'form' => $this->createSearchForm()->createView(),

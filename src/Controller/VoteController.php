@@ -57,7 +57,7 @@ class VoteController extends AbstractController
      * @param SlugifyInterface $slugify
      * @return Response
      */
-    public function newComment(Product $product, Request $request, SlugifyInterface $slugify)
+    public function newComment(Product $product, Request $request, SlugifyInterface $slugify): Response
     {
         $vote = new Vote();
         $form = $this->createForm(VoteType::class, $vote, [

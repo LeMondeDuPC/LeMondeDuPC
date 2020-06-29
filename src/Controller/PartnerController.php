@@ -34,7 +34,7 @@ class PartnerController extends AbstractController
     /**
      * @return Response
      */
-    public function _index()
+    public function _index(): Response
     {
         return $this->render('partner/_index.html.twig', [
             'partners' => $this->partnersRepository->findAll()
