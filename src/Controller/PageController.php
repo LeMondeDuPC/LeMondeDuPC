@@ -22,12 +22,61 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PageController extends AbstractController
 {
+
+    /**
+     * @Route("rss.xml", name="page_rss", defaults={"_format"="xml"})
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @param SlugifyInterface $slugify
+     * @param Packages $assetPackage
+     * @return Response
+     */
+    public function rss(Request $request, ProductRepository $productRepository, SlugifyInterface $slugify, Packages $assetPackage)
+    {
+        $hostname = $request->getSchemeAndHttpHost();
+        $items = [];
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED]) as $product) {
+            $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
+            $items[] = [
+                'title' => $product->getTitle(),
+                'description' => $product->getDescription(),
+                'link' => $hostname . $this->generateUrl('product_show', [
+                        'id' => $product->getId(),
+                        'slug' => $slugify->slugify($product->getTitle()),
+                    ]),
+                'pubDate' => $time->format('D, d M Y'),
+                'category' => $product->getCategory()->getName(),
+                'image' => [
+                    'url' => $hostname . $assetPackage->getUrl($product->getFile()->getWebPath()),
+                    'link' => $hostname . $this->generateUrl('product_show', [
+                            'id' => $product->getId(),
+                            'slug' => $slugify->slugify($product->getTitle()),
+                        ]),
+                    'title' => $product->getTitle(),
+                ]
+            ];
+        }
+
+        $response = new Response(
+            $this->renderView('page/rss.html.twig', [
+                'hostname' => $hostname,
+                'items' => $items,
+            ]),
+            200
+        );
+
+        $response->headers->set('Content-Type', 'text/xml');
+
+        return $response;
+    }
+
     /**
      * @Route("sitemap.xml", name="page_sitemap", defaults={"_format"="xml"})
      * @param Request $request
      * @param ProductRepository $productRepository
      * @param CategoryRepository $categoryRepository
      * @param SlugifyInterface $slugify
+     * @param Packages $assetPackage
      * @return Response
      */
     public function sitemap(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SlugifyInterface $slugify, Packages $assetPackage)
@@ -35,36 +84,37 @@ class PageController extends AbstractController
         $hostname = $request->getSchemeAndHttpHost();
         $urls = [];
 
-        $urls[] = ['loc' => $this->generateUrl('page_about')];
-        $urls[] = ['loc' => $this->generateUrl('page_contact')];
-        $urls[] = ['loc' => $this->generateUrl('user_login')];
-        $urls[] = ['loc' => $this->generateUrl('user_new')];
+        $urls[] = ['loc' => $hostname . $this->generateUrl('page_about')];
+        $urls[] = ['loc' => $hostname . $this->generateUrl('page_contact')];
+        $urls[] = ['loc' => $hostname . $this->generateUrl('user_login')];
+        $urls[] = ['loc' => $hostname . $this->generateUrl('user_new')];
 
         foreach ($productRepository->findBy(['validated' => Product::VALIDATED]) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
             $urls[] = [
-                'loc' => $this->generateUrl('product_show', [
-                    'id' => $product->getId(),
-                    'slug' => $slugify->slugify($product->getTitle()),
-                ]),
+                'loc' => $hostname . $this->generateUrl('product_show', [
+                        'id' => $product->getId(),
+                        'slug' => $slugify->slugify($product->getTitle()),
+                    ]),
                 'lastmod' => $time->format('Y-m-d'),
                 'image' => [
-                    'loc' => $assetPackage->getUrl($product->getFile()->getWebPath()),
+                    'loc' => $hostname . $assetPackage->getUrl($product->getFile()->getWebPath()),
                     'title' => $product->getTitle(),
                 ]
             ];
         }
 
         foreach ($categoryRepository->findAll() as $category) {
-            $urls[] = ['loc' => $this->generateUrl('category_show', [
-                    'id' => $category->getId(),
-                    'name' => $slugify->slugify($category->getName()),
-                ]
-            )];
+            $urls[] = ['loc' => $hostname . $this->generateUrl('category_show', [
+                        'id' => $category->getId(),
+                        'name' => $slugify->slugify($category->getName()),
+                    ]
+                )];
         }
         $response = new Response(
-            $this->renderView('page/sitemap.html.twig', ['urls' => $urls,
-                'hostname' => $hostname]),
+            $this->renderView('page/sitemap.html.twig', [
+                'urls' => $urls,
+            ]),
             200
         );
 

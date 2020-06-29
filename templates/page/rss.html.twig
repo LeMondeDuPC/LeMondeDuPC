@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+    <channel>
+        <title>Le Monde Du PC</title>
+        <link>{{ hostname }}</link>
+        <description>Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les
+            maitrisent.</description>
+        {% for item in items %}
+            <item>
+                <title>{{ item.title }}</title>
+                <link>{{ item.link }}</link>
+                <description>{{ item.description }}</description>
+                <pubDate>{{ item.pubDate }}</pubDate>
+                {% if item.category is defined %}
+                    <category>{{ item.category }}</category>
+                {% endif %}
+
+                {% if item.image is defined %}
+                    <image>
+                        <url>{{ item.image.url }}</url>
+                        <title>{{ item.image.title }}</title>
+                        <link>{{ item.image.link }}</link>
+                    </image>
+                {% endif %}
+            </item>
+        {% endfor %}
+
+    </channel>
+
+</rss>
