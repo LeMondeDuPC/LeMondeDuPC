@@ -35,7 +35,7 @@ class PageController extends AbstractController
     {
         $hostname = $request->getSchemeAndHttpHost();
         $items = [];
-        foreach ($productRepository->findBy(['validated' => Product::VALIDATED]) as $product) {
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
             $items[] = [
                 'title' => $product->getTitle(),
@@ -89,7 +89,7 @@ class PageController extends AbstractController
         $urls[] = ['loc' => $hostname . $this->generateUrl('user_login')];
         $urls[] = ['loc' => $hostname . $this->generateUrl('user_new')];
 
-        foreach ($productRepository->findBy(['validated' => Product::VALIDATED]) as $product) {
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
             $urls[] = [
                 'loc' => $hostname . $this->generateUrl('product_show', [
