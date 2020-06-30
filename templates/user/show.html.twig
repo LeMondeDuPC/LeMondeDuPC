@@ -48,7 +48,9 @@
                             <div class="col-4">
                                 <a class="image featured"
                                    href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
-                                    <img src="{{ asset(product.file.getWebPath) }}" alt=""/>
+                                    {% if product.file is not null %}
+                                        <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"/>
+                                    {% endif %}
                                     <span>{{ product.title }}</span>
                                 </a>
                             </div>

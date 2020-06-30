@@ -13,7 +13,9 @@
             </div>
         </header>
         <section>
-            <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" width="300px">
+            {% if product.file is not null %}
+                <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" width="300px">
+            {% endif %}
             {{ include('product/form/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
             <form method="post" action="{{ path('product_delete', {'id': product.id}) }}"
                   onsubmit="return confirm('Confirmer la suppression ?');">

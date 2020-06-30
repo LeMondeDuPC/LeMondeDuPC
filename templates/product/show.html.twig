@@ -83,8 +83,10 @@
             </div>
         </header>
         <section>
-            <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
-                 class="image featured"/>
+            {% if product.file is not null %}
+                <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
+                     class="image featured"/>
+            {% endif %}
             {{ product.content|raw }}
         </section>
         <hr/>

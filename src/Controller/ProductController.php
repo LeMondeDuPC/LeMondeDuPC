@@ -163,7 +163,7 @@ class ProductController extends AbstractController
                 $product->setTimeUpdate(new DateTime());
                 $entityManager = $this->getDoctrine()->getManager();
                 if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
-                    $file = $product->getFile();
+                    $file = ($product->getFile() !== null) ? $product->getFile() : new File();
                     $file->setDescription($form->get('file_description')->getData());
                     $file->setProduct($product);
                     $file->setFile($form->get('file')->getData());
