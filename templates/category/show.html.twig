@@ -21,8 +21,10 @@
                     <section>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
-                            <img src="{{ asset(product.file.getWebPath) }}"
-                                 alt="{{ product.file.description }}"/>
+                            {% if product.file is not null %}
+                                <img src="{{ asset(product.file.getWebPath) }}"
+                                     alt="{{ product.file.description }}"/>
+                            {% endif %}
                         </a>
                     </section>
                 </article>
