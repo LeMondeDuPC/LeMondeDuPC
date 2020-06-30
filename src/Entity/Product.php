@@ -27,7 +27,7 @@ class Product
     /**
      *
      */
-    public const ITEM_ON_PAGE = 2;
+    public const ITEM_ON_PAGE = 4;
 
     /**
      * @ORM\Id()

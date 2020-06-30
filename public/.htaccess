@@ -71,6 +71,7 @@ DirectoryIndex index.php
     Header set X-Content-Type-Options "nosniff"
 </IfModule>
 
+AddType application/javascript .js
 AddType text/html .html .htm
 AddType application/xhtml+xml .xhtml
 AddType text/css .css
