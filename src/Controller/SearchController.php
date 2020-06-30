@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\Search;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
@@ -48,7 +49,7 @@ class SearchController extends AbstractController
             $products = $paginator->paginate(
                 $productRepository->findByWordQuery($this->search),
                 $page,
-                2
+                Product::ITEM_ON_PAGE
             );
             return $this->render('search/result_product.html.twig', [
                 'products' => $products,
@@ -73,7 +74,7 @@ class SearchController extends AbstractController
     /**
      * @return Response
      */
-    public function createView() : Response
+    public function createView(): Response
     {
         return $this->render('search/form/_search_form.html.twig', [
             'form' => $this->createSearchForm()->createView(),
