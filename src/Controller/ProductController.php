@@ -87,14 +87,14 @@ class ProductController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_PRODUCTS')) {
             return $this->render('product/manage.html.twig', [
-                'products' => $this->productRepository->findBy([], ['timePublication' => 'DESC']),
+                'products' => $this->productRepository->findBy([], ['id' => 'DESC']),
             ]);
         } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
             return $this->render('product/manage.html.twig', [
                 'products' => $this->getUser()->getProducts(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -143,7 +143,7 @@ class ProductController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -179,7 +179,7 @@ class ProductController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -201,7 +201,7 @@ class ProductController extends AbstractController
 
             return $this->redirectToRoute('product_manage');
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 }

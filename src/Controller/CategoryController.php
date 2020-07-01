@@ -82,10 +82,10 @@ class CategoryController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_CATEGORIES')) {
             return $this->render('category/manage.html.twig', [
-                'categories' => $this->categoryRepository->findAll(),
+                'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -112,7 +112,7 @@ class CategoryController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -138,7 +138,7 @@ class CategoryController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -163,7 +163,7 @@ class CategoryController extends AbstractController
             }
             return $this->redirectToRoute('category_manage');
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 }

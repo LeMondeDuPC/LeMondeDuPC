@@ -124,10 +124,10 @@ class VoteController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_VOTES')) {
             return $this->render('vote/manage.html.twig', [
-                'votes' => $voteRepository->findAll(),
+                'votes' => $voteRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 }

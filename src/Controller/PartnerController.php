@@ -49,10 +49,10 @@ class PartnerController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
             return $this->render('partner/manage.html.twig', [
-                'partners' => $this->partnersRepository->findAll(),
+                'partners' => $this->partnersRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -81,7 +81,7 @@ class PartnerController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -108,7 +108,7 @@ class PartnerController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -129,7 +129,7 @@ class PartnerController extends AbstractController
             }
             return $this->redirectToRoute('partner_manage');
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 }

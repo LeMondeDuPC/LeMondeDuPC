@@ -71,7 +71,7 @@ class UserController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_USERS')) {
             return $this->render('user/manage.html.twig', [
-                'users' => $this->userRepository->findBy([], ['timePublication' => 'DESC']),
+                'users' => $this->userRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
             throw $this->createNotFoundException('Page non trouvée');
@@ -215,7 +215,7 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
@@ -246,7 +246,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Le compte a bien été supprimé');
             return $this->redirectToRoute('product_index');
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 }
