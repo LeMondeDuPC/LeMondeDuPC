@@ -4,7 +4,7 @@ fm_elfinder:
         default:
             locale: "%kernel.default_locale%" # Langue
             editor: ckeditor # Editeur utilisé
-            visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg']
+            visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
             connector:
                 debug: false # Désactive le débug
                 roots:
