@@ -13,6 +13,6 @@ fm_elfinder:
                         driver: LocalFileSystem # Pilote des fichiers
                         path: assets/uploads/blob # Chemin d'upload
                         disabled_commands: [rm, rename, mkdir]
-                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg'] # Fichiers autorisés
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] # Fichiers autorisés
                         upload_deny: ['all'] # Fichiers interdits
                         upload_max_size: 2M # Taille maximum
