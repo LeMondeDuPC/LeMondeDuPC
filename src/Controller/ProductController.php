@@ -80,7 +80,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/products", name="product_manage", methods={"GET"})
+     * @Route("/admin/articles", name="product_manage", methods={"GET"})
      * @return Response
      */
     public function manage(): Response
@@ -99,7 +99,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/nouveau", name="product_new", methods={"GET","POST"})
+     * @Route("/admin/article/nouveau", name="product_new", methods={"GET","POST"})
      * @param Request $request
      * @param Security $security
      * @return Response
@@ -148,7 +148,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/{id}/modifier", name="product_edit", methods={"GET","POST"})
+     * @Route("/admin/article/{id}/modifier", name="product_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Product $product
      * @param Security $security
@@ -184,7 +184,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/{id}", name="product_delete", methods={"DELETE"})
+     * @Route("/admin/article/{id}", name="product_delete", methods={"DELETE"})
      * @param Request $request
      * @param Product $product
      * @return Response
