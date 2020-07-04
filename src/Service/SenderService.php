@@ -46,7 +46,7 @@ class SenderService
      */
     public function welcomeEmail(User $user)
     {
-        $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
+        $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC'], 6);
         $email = (new TemplatedEmail())
             ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
             ->to(new Address($user->getEmail(), $user->getUsername()))
@@ -69,7 +69,7 @@ class SenderService
      */
     public function newsletterEmail($users)
     {
-        $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']);
+        $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC'], 6);
         foreach ($users as $user) {
             $email = (new TemplatedEmail())
                 ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
