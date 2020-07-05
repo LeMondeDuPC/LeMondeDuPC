@@ -199,7 +199,7 @@ class UserController extends AbstractController
                         )
                     );
                 }
-                if (!$form->get('file')->isEmpty()) {
+                if ($form->has('file') and !$form->get('file')->isEmpty()) {
                     $file = ($user->getFile() !== null) ? $user->getFile() : new File();
                     $file->setDescription('Minature de l\'utilisateur');
                     $file->setUser($user);
