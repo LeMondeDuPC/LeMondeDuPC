@@ -89,7 +89,7 @@ class ProductController extends AbstractController
             return $this->render('product/manage.html.twig', [
                 'products' => $this->productRepository->findBy([], ['id' => 'DESC']),
             ]);
-        } elseif ($this->isGranted('ROLE_CREATE_POSTS')) {
+        } elseif ($this->isGranted('ROLE_CREATE_PRODUCTS')) {
             return $this->render('product/manage.html.twig', [
                 'products' => $this->getUser()->getProducts(),
             ]);
