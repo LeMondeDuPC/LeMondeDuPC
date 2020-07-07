@@ -13,16 +13,17 @@
     <meta property="og:description"
           content="{{ block('description') }}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
+    <meta property="og:image"
+          content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
     <meta property="og:url" content="{{ app.request.uri }}"/>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicons/apple-touch-icon.png') }}"/>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicons/favicon-32x32.png') }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/style/css/main.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/style/css/font-awesome.css') }}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/>
-    <script data-ad-client="ca-pub-4341744515604326" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-4341744515604326" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="text/javascript" src="{{ asset('assets/tarteaucitron/tarteaucitron.js') }}"></script>
     <script type="text/javascript">
         tarteaucitron.init({
@@ -176,6 +177,8 @@
                                     class="label">Github</span></a></li>
                     <li><a href="{{ path('page_rss') }}" target="_blank" class="icon fa-rss"><span
                                     class="label">RSS</span></a></li>
+                    <li><a href="https://discord.com/invite/3YFaKsm" target="_blank" class="icon fa-discord"><span
+                                    class="label">Discord</span></a></li>
                 </ul>
             </header>
         </section>
@@ -197,6 +200,7 @@
 </div>
 
 <!-- Scripts -->
+<script src="https://kit.fontawesome.com/75d1f3e298.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/js/libs/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>

@@ -17,7 +17,7 @@
             <div class="meta">
                 <ul class="icons">
                     <li>
-                        <time class="published icon fa-plus-square-o">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                        <time class="published icon fa-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
                         {% if product.timeUpdate is not null %}
                             <time class="published icon fa-edit">{{ product.timeUpdate|date('Y-m-d H:i:s') }}</time>
                         {% endif %}
