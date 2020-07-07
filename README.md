@@ -18,6 +18,6 @@ Les sujets du numérique et du high tech ne doivent pas être compris uniquement
 * Mjml
 
 ## Réseaux
-* [Discord](https://discord.gg/ZvXtxqD)
+* [Discord](https://discord.com/invite/3YFaKsm)
 * [Instagram](https://www.instagram.com/lemondedupc.fr/)
 * [Twitter](https://twitter.com/LeMondeDuPC)
