@@ -1,6 +1,8 @@
 # [Le Monde Du PC](https://www.lemondedupc.fr)
 Dépot de la nouvelle version (v2.0) du site 
 
+[License](LICENSE.md)
+
 ## Présentation
 <table>
 <tr>
