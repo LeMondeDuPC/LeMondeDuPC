@@ -64,7 +64,7 @@ class CategoryController extends AbstractController
             ], 308);
         }
         $products = $paginator->paginate(
-            $productRepository->findBy(['category' => $category]),
+            $productRepository->findBy(['category' => $category], ['timePublication' => 'DESC']),
             $page,
             Product::ITEM_ON_PAGE
         );
