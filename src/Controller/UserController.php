@@ -74,7 +74,7 @@ class UserController extends AbstractController
                 'users' => $this->userRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
-            throw $this->createNotFoundException('Page non trouvée');
+            return $this->redirectToRoute('user_login');
         }
     }
 
