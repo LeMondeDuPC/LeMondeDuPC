@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\User;
 use App\Entity\Vote;
 use App\Form\VoteType;
 use App\Repository\VoteRepository;
@@ -35,11 +36,13 @@ class VoteController extends AbstractController
                 $vote->setType(Vote::TYPE_HEART);
                 $vote->setContent(null);
                 $vote->setUser($this->getUser());
+                $vote->getUser()->incrementScore(User::SCORE['HEART']);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($vote);
                 $entityManager->flush();
             } else {
                 $vote = $voteRepository->findOneBy(['product' => $product, 'type' => Vote::TYPE_HEART, 'user' => $this->getUser()]);
+                $vote->getUser()->decrementScore(User::SCORE['HEART']);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($vote);
                 $entityManager->flush();
@@ -74,6 +77,7 @@ class VoteController extends AbstractController
                     $vote->setType(Vote::TYPE_COMMENT);
                     $vote->setContent($form->get('content')->getData());
                     $vote->setUser($this->getUser());
+                    $vote->getUser()->incrementScore(User::SCORE['COMMENT']);
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($vote);
                     $entityManager->flush();
@@ -102,6 +106,7 @@ class VoteController extends AbstractController
     {
         if ((($this->getUser() !== null and $vote->getUser() !== null) ? ($this->getUser()->getId() === $vote->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_COMMENTS')) {
             if ($this->isCsrfTokenValid('delete' . $vote->getId(), $request->request->get('_token'))) {
+                $vote->getUser()->decrementScore(User::SCORE['COMMENT']);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($vote);
                 $entityManager->flush();

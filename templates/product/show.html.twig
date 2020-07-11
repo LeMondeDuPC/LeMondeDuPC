@@ -27,6 +27,7 @@
                     <li>
                         {% if product.user is not null %}
                             <a href="{{ path('user_show', {'id' : product.user.id}) }}" class="author">
+                                <span class="icon fa fa-coins">{{ product.user.score }}</span>
                                 <span class="name">{{ product.user.username }}</span>
                                 {% if product.user.file is not null %}
                                     <img src="{{ asset(product.user.file.getWebPath) }}"

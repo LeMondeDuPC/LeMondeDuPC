@@ -31,6 +31,15 @@ class User implements UserInterface
     public const VALIDATED = true;
 
     /**
+     *
+     */
+    public const SCORE = [
+        'PRODUCT' => 5,
+        'HEART' => 1,
+        'COMMENT' => 2,
+    ];
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -100,6 +109,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="user", orphanRemoval=true)
      */
     private $votes;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $score;
 
     /**
      * User constructor.
@@ -414,6 +428,48 @@ class User implements UserInterface
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param int $score
+     * @return $this
+     */
+    public function setScore(int $score): self
+    {
+        $this->score = $score;
+        return $this;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function decrementScore(int $value): self
+    {
+        if (($this->score - $value) >= 0) {
+            $this->score -= $value;
+        } else {
+            $this->score = 0;
+        }
+        return $this;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function incrementScore(int $value): self
+    {
+        $this->score += $value;
         return $this;
     }
 }

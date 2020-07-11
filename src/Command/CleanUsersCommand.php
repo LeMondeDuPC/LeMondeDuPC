@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -73,6 +74,13 @@ class CleanUsersCommand extends Command
             $this->entityManager->flush();
             $io->success('Users cleaned');
             return 0;
+        } else {
+            $users = $this->userRepository->findBy(['validated' => User::VALIDATED]);
+            foreach ($users as $user) {
+                $user->setScore(0);
+            }
+            $this->entityManager->flush();
+            $io->success('Users score cleaned');
         }
         return 1;
     }

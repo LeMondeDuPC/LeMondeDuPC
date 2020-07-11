@@ -107,6 +107,7 @@ class UserController extends AbstractController
                     $user->setTimePublication(new DateTime());
                     $user->setValidated(false);
                     $user->setNewsletter(false);
+                    $user->setScore(0);
 
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
@@ -128,6 +129,18 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
 
+    }
+
+    /**
+     * @Route("/membre/classement", name="user_ranking", methods={"GET"})
+     * @return Response
+     */
+    public function ranking(): Response
+    {
+        $users = $this->userRepository->findBy(['validated' => User::VALIDATED], ['score' => 'DESC'], 10);
+        return $this->render('user/ranking.html.twig', [
+            'users' => $users,
+        ]);
     }
 
     /**

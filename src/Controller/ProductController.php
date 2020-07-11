@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\File;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Cocur\Slugify\Slugify;
@@ -115,6 +116,7 @@ class ProductController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
                     $product->setUser($this->getUser());
+                    $product->getUser()->incrementScore(User::SCORE['PRODUCT']);
                     $product->setTimePublication(new DateTime());
                     $product->setTimeUpdate(null);
                     if (!$form->has('validated')) {
@@ -193,6 +195,7 @@ class ProductController extends AbstractController
     {
         if ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS')) {
             if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
+                $product->getUser()->decrementScore(User::SCORE['PRODUCT']);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($product);
                 $entityManager->flush();

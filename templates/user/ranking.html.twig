@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement des membres les plus actifs du mois{% endblock %}
+
+{% block body %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h1 class="heading">Top 10 des membres les plus actifs du mois</h1>
+            </div>
+        </header>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td><a href="{{ path('user_show', {'id': user.id}) }}">{{ user.username }}</a></td>
+                        <td>{{ user.score }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun résultat</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </article>
+{% endblock %}
