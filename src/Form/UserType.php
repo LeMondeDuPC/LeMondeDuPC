@@ -66,7 +66,7 @@ class UserType extends AbstractType
                     'choices' => $options['roles'],
                 ]);
         }
-        if ($options['security']->isGranted('ROLE_USER') and $options['data']->getId() === $options['security']->getUser()->getId()) {
+        if ($options['security']->isGranted('ROLE_USER') and $options['data']->getId() === $options['security']->getUser()->getId() or $options['security']->isGranted('ROLE_MANAGE_USERS')) {
             $builder
                 ->add('description', TextareaType::class, [
                     'label' => 'Description',
