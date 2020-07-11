@@ -21,6 +21,11 @@
                 <p class="icon fa fa-coins">{{ user.score }}</p>
             </div>
         </header>
+        {% if user.description is not null %}
+            <section>
+                <p>{{ user.description }}</p>
+            </section>
+        {% endif %}
         {% if user.hearts is not empty and app.user == user %}
             <section>
                 <h2>Mes articles favoris : </h2>

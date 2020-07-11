@@ -116,6 +116,13 @@ class User implements UserInterface
     private $score;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
+     * @Assert\Length(max="255")
+     */
+    private $description;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -470,6 +477,25 @@ class User implements UserInterface
     public function incrementScore(int $value): self
     {
         $this->score += $value;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     * @return $this
+     */
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
         return $this;
     }
 }
