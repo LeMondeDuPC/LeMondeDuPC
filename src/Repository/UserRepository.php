@@ -30,6 +30,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @param $reset
+     * @param $limit
+     * @return int|mixed|string
+     */
+    public function getScore($reset, $limit)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.score > :score')
+            ->andWhere('u.validated = :validated')
+            ->setParameter('score', $reset)
+            ->setParameter('validated', User::VALIDATED)
+            ->orderBy('u.score', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()->getResult();
+    }
+
+    /**
      * Used to upgrade (rehash) the user's password automatically over time.
      * @param UserInterface $user
      * @param string $newEncodedPassword

@@ -137,7 +137,7 @@ class UserController extends AbstractController
      */
     public function ranking(): Response
     {
-        $users = $this->userRepository->findBy(['validated' => User::VALIDATED], ['score' => 'DESC'], 10);
+        $users = $this->userRepository->getScore(0, 10);
         return $this->render('user/ranking.html.twig', [
             'users' => $users,
         ]);
