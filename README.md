@@ -19,5 +19,5 @@ Les sujets du numérique et du high tech ne doivent pas être compris uniquement
 
 ## Réseaux
 * [Discord](https://discord.gg/WHYRZfU)
-* [Instagram](https://www.instagram.com/lemondedupc.fr/)
+* [Instagram](https://www.instagram.com/lemondedupc)
 * [Twitter](https://twitter.com/LeMondeDuPC)
