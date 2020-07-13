@@ -115,7 +115,7 @@ class UserController extends AbstractController
 
                     $senderService->welcomeEmail($user);
 
-                    $this->addFlash('success', 'Votre compte a bien été crée ! Veuillez confirmer votre inscription via le mail qui vous a été envoyé');
+                    $this->addFlash('success', 'Votre compte a bien été créé ! Veuillez confirmer votre inscription via le mail qui vous a été envoyé');
                     return $this->redirectToRoute('user_login');
                 } else {
                     $this->addFlash('danger', 'Veuillez valider le ReCaptcha');
