@@ -109,6 +109,7 @@ class UserController extends AbstractController
                     $user->setValidated(false);
                     $user->setNewsletter(false);
                     $user->setScore(0);
+                    $user->setGoogleAuthenticatorSecret(null);
 
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
