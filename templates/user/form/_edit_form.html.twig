@@ -1,6 +1,11 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="button">{{ button_label|default('Mettre à jour') }}</button>
+    {% if googleQrCode is not null %}
+        <div class="col-4">
+            <img src="{{ qr_code_data_uri(googleQrCode) }}" alt="" class="featured"/>
+        </div>
+    {% endif %}
+<button class="button">{{ button_label|default('Mettre à jour') }}</button>
 {{ form_end(form) }}
 <form method="post" action="{{ path('user_delete', {'id': user.id}) }}"
       onsubmit="return confirm('Confirmer la suppression ?');">

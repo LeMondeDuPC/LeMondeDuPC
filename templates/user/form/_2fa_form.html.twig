@@ -1,0 +1,22 @@
+<form method="post" action="{{ path('2fa_login_check') }}">
+    {% if authenticationError %}
+        <p>{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
+    {% endif %}
+    <div class="row gtr-uniform">
+        <div class="col-12 col-12-xsmall">
+            <label for="inputUsername">Code</label>
+            <input id="_auth_code" type="text" name="_auth_code" class="form-control" required autofocus
+                   autocomplete="one-time-code" />
+            {% if isCsrfProtectionEnabled %}
+                <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+            {% endif %}
+        </div>
+
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" name="formconnexion" value="Se connecter"/></li>
+                <li><a href="{{ path('user_logout') }}" class="button">Annuler</a></li>
+            </ul>
+        </div>
+    </div>
+</form>

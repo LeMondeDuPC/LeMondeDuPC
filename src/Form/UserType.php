@@ -94,6 +94,15 @@ class UserType extends AbstractType
                         'Oui' => true,
                         'Non' => false,
                     ],
+                ])
+                ->add('2fa', ChoiceType::class, [
+                    'mapped' => false,
+                    'label' => 'Activé la double authentification ?',
+                    'choices' => [
+                        'Non' => false,
+                        'Oui' => true,
+                    ],
+                    'data' => ($options['security']->getUser()->isGoogleAuthenticatorEnabled()) ? true : false,
                 ]);
         }
     }

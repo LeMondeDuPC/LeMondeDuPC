@@ -1,5 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <div class="g-recaptcha" data-sitekey="{{ google_recaptcha_site_key }}"></div>
-    <button class="button">S'inscrire</button>
+<div class="g-recaptcha" data-sitekey="{{ google_recaptcha_site_key }}"></div>
+<p>Vos données personnelles (email et nom d'utilisateur) sont utilisées à des fin d'authentification et ne sont
+    pas partagé avec des tiers.</p>
+<button class="button">S'inscrire</button>
 {{ form_end(form) }}

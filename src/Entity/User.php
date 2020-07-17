@@ -6,6 +6,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="This email already exists in the database"
  * )
  */
-class User implements UserInterface
+class User implements UserInterface, TwoFactorInterface
 {
 
     /**
@@ -121,6 +122,11 @@ class User implements UserInterface
      * @Assert\Length(max="255")
      */
     private $description;
+
+    /**
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
+     */
+    private $googleAuthenticatorSecret;
 
     /**
      * User constructor.
@@ -394,9 +400,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return array|Vote[]
+     * @return ArrayCollection
      */
-    public function getComments(): array
+    public function getComments(): ArrayCollection
     {
         $comments = [];
         foreach ($this->votes as $vote) {
@@ -497,5 +503,37 @@ class User implements UserInterface
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGoogleAuthenticatorEnabled(): bool
+    {
+        return $this->googleAuthenticatorSecret ? true : false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleAuthenticatorUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGoogleAuthenticatorSecret(): ?string
+    {
+        return $this->googleAuthenticatorSecret;
+    }
+
+    /**
+     * @param string|null $googleAuthenticatorSecret
+     */
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
+    {
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 }
