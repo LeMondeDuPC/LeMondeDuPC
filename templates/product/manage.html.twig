@@ -18,6 +18,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Titre</th>
+                    <th>Auteur</th>
                     <th>Validation</th>
                     <th>Actions</th>
                 </tr>
@@ -27,6 +28,13 @@
                     <tr>
                         <td>{{ product.id }}</td>
                         <td>{{ product.title }}</td>
+                        {% if product.user is not null %}
+                            <td>
+                                <a href="{{ path('user_show', {'id' : product.user.id}) }}">{{ product.user.username }}</a>
+                            </td>
+                        {% else %}
+                            <td>Anonyme</td>
+                        {% endif %}
                         <td>{% if product.validated %}Oui{% else %}Non{% endif %}</td>
                         <td>
                             <a href="{{ path('product_show', {'id': product.id, 'slug': product.title|slugify}) }}">Afficher</a>
