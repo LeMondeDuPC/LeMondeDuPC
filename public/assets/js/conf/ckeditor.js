@@ -4,8 +4,17 @@ CKEDITOR.on('instanceReady', function (evt) {
             img: function (el) {
                 el.attributes.alt = 'Image explicative de l\'article';
                 el.attributes.class = 'image featured';
-                el.attributes.style = null;
-            }
+                reset(el);
+            },
+            p: function (el) {
+                reset(el);
+            },
+            div: function (el) {
+                reset(el);
+            },
+            td: function (el) {
+                reset(el);
+            },
         }
     });
     this.dataProcessor.writer.selfClosingEnd = ' />';
@@ -22,3 +31,9 @@ CKEDITOR.on('instanceReady', function (evt) {
         });
     }
 });
+
+function reset(el) {
+    el.attributes.style = null;
+    el.attributes.width = null;
+    el.attributes.height = null;
+}
