@@ -50,7 +50,7 @@
                 <h2>Les articles de l'utilisateur : </h2>
                 <div class="box alt">
                     <div class="row gtr-uniform">
-                        {% for product in user.products %}
+                        {% for product in user.products|reverse %}
                             <div class="col-4">
                                 <a class="image featured"
                                    href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
