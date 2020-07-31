@@ -113,4 +113,18 @@ class Category
         return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return ArrayCollection
+     */
+    public function getRelated(Product $product): ArrayCollection
+    {
+        $products = [];
+        foreach ($this->getProducts() as $related) {
+            if ($related !== $product) {
+                array_push($products, $related);
+            }
+        }
+        return new ArrayCollection($products);
+    }
 }

@@ -97,7 +97,7 @@
             <h3>Dans la même catégorie :</h3>
             <div class="box alt">
                 <div class="row gtr-uniform">
-                    {% for related in product.category.products|reverse[0:6] %}
+                    {% for related in product.category.getRelated(product)|reverse[0:6] %}
                         <div class="col-4">
                             <a class="image featured"
                                href="{{ path('product_show', {'id' : related.id, 'slug' : related.title|slugify }) }}">
@@ -108,6 +108,8 @@
                                 <span>{{ related.title }}</span>
                             </a>
                         </div>
+                    {% else %}
+                        <p>Aucun autre article n'est disponible pour le moment dans cette catégorie</p>
                     {% endfor %}
                 </div>
             </div>
