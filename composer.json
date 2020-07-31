@@ -40,7 +40,7 @@
         },
         "sort-packages": true,
         "optimize-autoloader": true,
-        "apcu-autoloader": true
+        "classmap-authoritative": true
     },
     "autoload": {
         "psr-4": {

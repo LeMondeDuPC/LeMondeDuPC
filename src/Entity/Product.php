@@ -73,7 +73,7 @@ class Product
     private $validated;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", fetch="EAGER")
      * @ORM\JoinColumn(nullable=true)
      */
     private $category;
