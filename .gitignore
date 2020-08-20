@@ -11,4 +11,5 @@
 /src/Migrations/
 symfony.lock
 .todo
+.update
 ###< symfony/framework-bundle ###
