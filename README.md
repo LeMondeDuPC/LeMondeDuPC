@@ -21,6 +21,7 @@ Les sujets du numérique et du high tech ne doivent pas être compris uniquement
 * [Discord](https://discord.gg/WHYRZfU)
 * [Instagram](https://www.instagram.com/lemondedupc)
 * [Twitter](https://twitter.com/LeMondeDuPC)
+* [LinkedIn](https://www.linkedin.com/company/lemondedupc)
 
 ## Installation
 Paquets nécessaires : 
