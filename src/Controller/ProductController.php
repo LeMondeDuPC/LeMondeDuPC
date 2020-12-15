@@ -63,18 +63,23 @@ class ProductController extends AbstractController
      */
     public function show(Product $product, string $slug = null): Response
     {
-        $product = $this->productRepository->findOneBy(['id' => $product->getId(), 'validated' => Product::VALIDATED]);
+        $product = $this->productRepository->find($product->getId());
         if ($product !== null) {
-            $productSlug = (new Slugify())->slugify($product->getTitle());
-            if ($slug !== $productSlug) {
-                return $this->redirectToRoute('product_show', [
-                    'id' => $product->getId(),
-                    'slug' => $productSlug,
-                ], 308);
+            if ($product->getValidated() === Product::VALIDATED or ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS'))) {
+                $productSlug = (new Slugify())->slugify($product->getTitle());
+                if ($slug !== $productSlug) {
+                    return $this->redirectToRoute('product_show', [
+                        'id' => $product->getId(),
+                        'slug' => $productSlug,
+                    ], 308);
+                }
+                return $this->render('product/show.html.twig', [
+                    'product' => $product
+                ]);
+            } else {
+                throw $this->createNotFoundException('Page non trouvée');
+
             }
-            return $this->render('product/show.html.twig', [
-                'product' => $product
-            ]);
         } else {
             throw $this->createNotFoundException('Page non trouvée');
         }
