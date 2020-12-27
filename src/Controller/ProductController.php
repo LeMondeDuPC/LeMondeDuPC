@@ -169,17 +169,26 @@ class ProductController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $product->setTimeUpdate(new DateTime());
                 $entityManager = $this->getDoctrine()->getManager();
-                if (!$form->get('file')->isEmpty() and !$form->get('file_description')->isEmpty()) {
-                    $file = ($product->getFile() !== null) ? $product->getFile() : new File();
-                    $file->setDescription($form->get('file_description')->getData());
-                    $file->setProduct($product);
-                    $file->setFile($form->get('file')->getData());
-                    $entityManager->persist($file);
+                if (!$form->get('file')->isEmpty()) {
+                    if(!$form->get('file_description')->isEmpty()){
+                        $file = ($product->getFile() !== null) ? $product->getFile() : new File();
+                        $file->setDescription($form->get('file_description')->getData());
+                        $file->setProduct($product);
+                        $file->setFile($form->get('file')->getData());
+                        $entityManager->persist($file);
+                    } else {
+                        $valid = false;
+                    }
                 }
-                $entityManager->persist($product);
-                $entityManager->flush();
-                $this->addFlash('success', 'Votre article a bien été modifié !');
-                return $this->redirectToRoute('product_manage');
+                if(isset($valid) and $valid === false){
+                    $this->addFlash('danger', 'Veuillez ajouter une description à la miniature');
+                } else {
+                    $entityManager->persist($product);
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Votre article a bien été modifié !');
+                    return $this->redirectToRoute('product_manage');
+                }
+
             }
             return $this->render('product/edit.html.twig', [
                 'product' => $product,

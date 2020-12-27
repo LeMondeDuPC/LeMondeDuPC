@@ -11,7 +11,7 @@
                 </h1>
             </div>
             <div class="meta">
-                <time class="published">Inscrit depuis le : {{ user.timePublication|date('Y-m-d H:i:s') }}</time>
+                <time class="published">Inscrit depuis le : {{ user.timePublication|date('d M Y à H:i') }}</time>
                 <a href="#" class="author">
                     <span class="name">{{ user.username }}</span>
                     {% if user.file is not null %}
@@ -55,7 +55,8 @@
                                 <a class="image featured"
                                    href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
                                     {% if product.file is not null %}
-                                        <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"/>
+                                        <img src="{{ asset(product.file.getWebPath) }}"
+                                             alt="{{ product.file.description }}"/>
                                     {% endif %}
                                     <span>{{ product.title }}</span>
                                 </a>
