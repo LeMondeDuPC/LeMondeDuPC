@@ -102,7 +102,7 @@ class UserType extends AbstractType
                         'Non' => false,
                         'Oui' => true,
                     ],
-                    'data' => ($options['security']->getUser()->isGoogleAuthenticatorEnabled()) ? true : false,
+                    'data' => ($options['data']->isGoogleAuthenticatorEnabled()) ? true : false,
                 ]);
         }
     }
