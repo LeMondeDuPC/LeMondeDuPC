@@ -53,6 +53,12 @@ DirectoryIndex index.php
     # Rewrite all other queries to the front controller.
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ %{ENV:BASE}/index.php [L]
+
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#
+#    RewriteCond %{HTTP_HOST} !^www\.
+#    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
@@ -65,12 +71,14 @@ DirectoryIndex index.php
     </IfModule>
 </IfModule>
 
+# XSS protection
 <IfModule mod_headers.c>
     Header set X-Frame-Options DENY
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Content-Type-Options "nosniff"
 </IfModule>
 
+# File type
 AddType application/javascript .js
 AddType text/html .html .htm
 AddType application/xhtml+xml .xhtml
@@ -80,3 +88,57 @@ AddType application/vnd.ms-fontobject  .eot
 AddType font/truetype .ttf
 AddType font/opentype .otf
 AddType application/x-font-woff .woff
+AddType image/x-icon .ico
+
+# Compression
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+
+Header append Vary User-Agent env=!dont-vary
+
+# Expire headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 2592000 seconds"
+    ExpiresByType image/jpg "access plus 31536000 seconds"
+    ExpiresByType image/jpeg "access plus 31536000 seconds"
+    ExpiresByType image/png "access plus 31536000 seconds"
+    ExpiresByType image/gif "access plus 31536000 seconds"
+    ExpiresByType image/ico "access plus 31536000 seconds"
+    ExpiresByType image/icon "access plus 31536000 seconds"
+    ExpiresByType image/x-icon "access plus 31536000 seconds"
+    ExpiresByType text/css "access plus 31536000 seconds"
+    ExpiresByType text/javascript "access plus 31536000 seconds"
+    ExpiresByType text/html "access plus 31536000 seconds"
+    ExpiresByType application/xhtml+xml "access plus 2592000 seconds"
+    ExpiresByType application/javascript "access plus 31536000 secondes"
+    ExpiresByType application/x-javascript "access plus 31536000 seconds"
+    ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+</IfModule>
+
+# Cache-Control Headers
+<IfModule mod_headers.c>
+    <FilesMatch "\\.(ico|jpe?g|png|gif|swf|gz|ttf)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    <FilesMatch "\\.(css)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    <FilesMatch "\\.(js)$">
+        Header set Cache-Control "max-age=31536000, private"
+    </FilesMatch>
+    <FilesMatch "\\.(html|htm)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    # Disable caching for scripts and other dynamic files
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+        Header unset Cache-Control
+    </FilesMatch>
+</IfModule>

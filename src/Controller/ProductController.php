@@ -58,7 +58,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/article/{id}-{slug}", name="product_show", methods={"GET"})
      * @param Product $product
-     * @param string $slug
+     * @param string|null $slug
      * @return Response
      */
     public function show(Product $product, string $slug = null): Response

@@ -141,15 +141,19 @@
                     qui les
                     maitrisent.</p>
                 <ul class="icons">
-                    <li><a href="https://www.linkedin.com/company/lemondedupc" target="_blank" class="icon fa-linkedin"><span
+                    <li><a href="https://www.linkedin.com/company/lemondedupc" rel="noopener" target="_blank"
+                           class="icon fa-linkedin"><span
                                     class="label">LinkedIn</span></a></li>
-                    <li><a href="https://discord.gg/WHYRZfU" target="_blank" class="icon fa-discord"><span
+                    <li><a href="https://discord.gg/WHYRZfU" rel="noopener" target="_blank"
+                           class="icon fa-discord"><span
                                     class="label">Discord</span></a></li>
-                    <li><a href="https://twitter.com/LeMondeDuPC" target="_blank" class="icon fa-twitter"><span
+                    <li><a href="https://twitter.com/LeMondeDuPC" rel="noopener" target="_blank"
+                           class="icon fa-twitter"><span
                                     class="label">Twitter</span></a></li>
-                    <li><a href="https://www.instagram.com/lemondedupc" target="_blank"
+                    <li><a href="https://www.instagram.com/lemondedupc" rel="noopener" target="_blank"
                            class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="https://github.com/NielsTRS/LeMondeDuPC" target="_blank" class="icon fa-github"><span
+                    <li><a href="https://github.com/NielsTRS/LeMondeDuPC" rel="noopener" target="_blank"
+                           class="icon fa-github"><span
                                     class="label">Github</span></a></li>
                     <li><a href="{{ path('page_rss') }}" target="_blank" class="icon fa-rss"><span
                                     class="label">RSS</span></a></li>
@@ -161,21 +165,16 @@
                 </p>
             </header>
         </section>
+
+        <!-- Pub -->
         <section>
             <p>Les pubs permettent de maintenir le site en "vie". Merci de votre compréhension !</p>
         </section>
+
         <!-- Mini Posts -->
         <section>
             <h3>Catégories :</h3>
             {{ render(controller('App\\Controller\\CategoryController::_index')) }}
-        </section>
-
-        <!-- Discord widget -->
-        <section>
-            <h3>Notre serveur Discord :</h3>
-            <iframe src="https://discordapp.com/widget?id=431902533984714752&theme=dark" style="width:100%;height:500px"
-                    allowtransparency="true" frameborder="0"
-                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
         </section>
 
         <!-- Footer -->
@@ -193,14 +192,12 @@
 <script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/conf/ckeditor.js') }}"></script>
 <script type="application/javascript" async src="https://kit.fontawesome.com/75d1f3e298.js"
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/tarteaucitron/tarteaucitron.js') }}"></script>
-
 <script type="text/javascript">
     tarteaucitron.init({
-        "privacyUrl": "", /* Privacy policy url */
+        "privacyUrl": "{{ path('page_about') }}#vie_privee", /* Privacy policy url */
 
         "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
         "cookieName": "consent_status", /* Cookie name */
@@ -218,15 +215,11 @@
         "moreInfoLink": true, /* Show more info link */
         "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
 
-        //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-
         "readmoreLink": "{{ path('page_about') }}#vie_privee", /* Change the default readmore link */
 
         "mandatory": false, /* Show a message about mandatory cookies */
     });
-    (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
-    (tarteaucitron.job = tarteaucitron.job || []).push('recaptcha');
 </script>
-
+{% block scripts %}{% endblock %}
 </body>
 </html>
