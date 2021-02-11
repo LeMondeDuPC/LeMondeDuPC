@@ -14,6 +14,7 @@ fos_ck_editor:
             filebrowserBrowseRouteParameters: []
             extraPlugins: "youtube"
             allowedContent: true
+            extraAllowedContent: ['img[*, !data-src]']
             language: "fr"
     plugins:
         youtube:
