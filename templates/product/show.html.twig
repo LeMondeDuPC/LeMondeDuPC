@@ -98,6 +98,10 @@
                                 {% if product.file is not null %}
                                     <img data-src="{{ asset(related.file.getWebPath) }}"
                                          alt="{{ related.file.description }}" class="lazyload"/>
+                                    <noscript>
+                                        <img src="{{ asset(related.file.getWebPath) }}"
+                                             alt="{{ related.file.description }}"/>
+                                    </noscript>
                                 {% endif %}
                                 <span>{{ related.title }}</span>
                             </a>
@@ -128,6 +132,10 @@
                                 {% if vote.user.file is not null %}
                                     <img data-src="{{ asset(vote.user.file.getWebPath) }}"
                                          alt="{{ vote.user.file.description }}" class="lazyload"/>
+                                    <noscript>
+                                        <img src="{{ asset(vote.user.file.getWebPath) }}"
+                                             alt="{{ vote.user.file.description }}"/>
+                                    </noscript>
                                 {% endif %}
                             </a>
                             {% if app.user == vote.user %}

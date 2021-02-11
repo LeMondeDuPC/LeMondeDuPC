@@ -57,6 +57,10 @@
                                     {% if product.file is not null %}
                                         <img data-src="{{ asset(product.file.getWebPath) }}"
                                              alt="{{ product.file.description }}" class="lazyload"/>
+                                        <noscript>
+                                            <img src="{{ asset(product.file.getWebPath) }}"
+                                                 alt="{{ product.file.description }}"/>
+                                        </noscript>
                                     {% endif %}
                                     <span>{{ product.title }}</span>
                                 </a>

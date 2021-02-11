@@ -27,7 +27,10 @@
                     <section>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
-                            <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" />
+                            <img data-src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" class="lazyload" />
+                            <noscript>
+                                <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}" />
+                            </noscript>
                         </a>
                     </section>
                 </article>
@@ -40,4 +43,6 @@
 {% block paginate %}
     {{ knp_pagination_render(products) }}
 {% endblock %}
-
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
+{% endblock %}
