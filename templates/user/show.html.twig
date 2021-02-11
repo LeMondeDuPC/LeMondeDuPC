@@ -55,8 +55,8 @@
                                 <a class="image featured"
                                    href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
                                     {% if product.file is not null %}
-                                        <img src="{{ asset(product.file.getWebPath) }}"
-                                             alt="{{ product.file.description }}"/>
+                                        <img data-src="{{ asset(product.file.getWebPath) }}"
+                                             alt="{{ product.file.description }}" class="lazyload"/>
                                     {% endif %}
                                     <span>{{ product.title }}</span>
                                 </a>
@@ -68,4 +68,7 @@
         {% endif %}
 
     </article>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
 {% endblock %}

@@ -96,8 +96,8 @@
                             <a class="image featured"
                                href="{{ path('product_show', {'id' : related.id, 'slug' : related.title|slugify }) }}">
                                 {% if product.file is not null %}
-                                    <img src="{{ asset(related.file.getWebPath) }}"
-                                         alt="{{ related.file.description }}"/>
+                                    <img data-src="{{ asset(related.file.getWebPath) }}"
+                                         alt="{{ related.file.description }}" class="lazyload"/>
                                 {% endif %}
                                 <span>{{ related.title }}</span>
                             </a>
@@ -126,8 +126,8 @@
                                href="{{ path('user_show', {'id': vote.user.id }) }}">
                                 <span class="name">{{ vote.user.username }}</span>
                                 {% if vote.user.file is not null %}
-                                    <img src="{{ asset(vote.user.file.getWebPath) }}"
-                                         alt="{{ vote.user.file.description }}"/>
+                                    <img data-src="{{ asset(vote.user.file.getWebPath) }}"
+                                         alt="{{ vote.user.file.description }}" class="lazyload"/>
                                 {% endif %}
                             </a>
                             {% if app.user == vote.user %}
@@ -144,4 +144,5 @@
     <script type="text/javascript">
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
     </script>
+    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
 {% endblock %}
