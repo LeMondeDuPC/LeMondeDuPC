@@ -4,19 +4,22 @@ twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 fos_ck_editor:
-    base_path: "assets/fosckeditor"
-    js_path:   "assets/fosckeditor/ckeditor.js"
+    base_path: "assets/plugins/ckeditor"
+    js_path:   "assets/plugins/ckeditor/ckeditor.js"
     configs:
         main_config:
             toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', '-', 'Table', '-', 'Format', '-', 'Source'] }
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', '-', 'Table', '-', 'Format', '-', 'Source', 'Markdown'] }
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            extraPlugins: "youtube"
+            extraPlugins: ['youtube', 'markdown']
             allowedContent: true
             extraAllowedContent: ['img[*, !data-src]']
             language: "fr"
     plugins:
         youtube:
-            path: "assets/fosckeditor/plugins/youtube/" # with trailing slash
+            path: "assets/plugins/ckeditor/plugins/youtube/" # with trailing slash
+            filename: "plugin.js"
+        markdown:
+            path: "assets/plugins/ckeditor/plugins/markdown/"
             filename: "plugin.js"
