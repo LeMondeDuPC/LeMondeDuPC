@@ -81,7 +81,7 @@ class CleanUsersCommand extends Command
             }
             $this->entityManager->flush();
             $io->success('Users score cleaned');
+            return 0;
         }
-        return 1;
     }
 }
