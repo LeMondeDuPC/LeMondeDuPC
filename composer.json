@@ -1,4 +1,6 @@
 {
+    "name": "niels/lemondedupc",
+    "description": "List of dependency for the Le Monde Du PC Project",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -40,6 +42,7 @@
         },
         "sort-packages": true,
         "optimize-autoloader": true,
+        "apcu-autoloader": true,
         "classmap-authoritative": true
     },
     "autoload": {
