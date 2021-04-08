@@ -37,19 +37,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     /**
      * @var UrlGeneratorInterface
      */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
     /**
      * @var CsrfTokenManagerInterface
      */
-    private $csrfTokenManager;
+    private CsrfTokenManagerInterface $csrfTokenManager;
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     /**
      * LoginFormAuthenticator constructor.
@@ -70,7 +70,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * @param Request $request
      * @return bool
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
@@ -80,11 +80,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * @param Request $request
      * @return array|mixed
      */
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('username'),
             'password' => $request->request->get('password'),
+            'twoFaBackup' => $request->request->get('twoFaBackup'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -121,9 +122,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * @param UserInterface $user
      * @return bool
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $return = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if ($return) {
+            if (isset($credentials['twoFaBackup']) and !empty($credentials['twoFaBackup']) and $user->isBackupCode($credentials['twoFaBackup'])) {
+                $user->setGoogleAuthenticatorSecret(null);
+                $user->setBackupCodes(null);
+                $this->entityManager->flush();
+            }
+        }
+        return $return;
     }
 
     /**
@@ -142,7 +151,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * @param string $providerKey
      * @return RedirectResponse|Response|null
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);

@@ -156,7 +156,7 @@ class PageController extends AbstractController
      * @Route("/a-propos", name="page_about"): Response
      * @return Response
      */
-    public function about()
+    public function about(): Response
     {
         return $this->render('page/about.html.twig');
     }

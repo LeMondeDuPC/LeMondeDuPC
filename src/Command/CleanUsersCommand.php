@@ -25,11 +25,11 @@ class CleanUsersCommand extends Command
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * CleanUsersCommand constructor.

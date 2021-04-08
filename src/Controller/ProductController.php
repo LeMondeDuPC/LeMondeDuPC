@@ -25,7 +25,7 @@ class ProductController extends AbstractController
     /**
      * @var ProductRepository
      */
-    private $productRepository;
+    private ProductRepository $productRepository;
 
     /**
      * PostsController constructor.
@@ -52,7 +52,6 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products
         ]);
-
     }
 
     /**
@@ -170,7 +169,7 @@ class ProductController extends AbstractController
                 $product->setTimeUpdate(new DateTime());
                 $entityManager = $this->getDoctrine()->getManager();
                 if (!$form->get('file')->isEmpty()) {
-                    if(!$form->get('file_description')->isEmpty()){
+                    if (!$form->get('file_description')->isEmpty()) {
                         $file = ($product->getFile() !== null) ? $product->getFile() : new File();
                         $file->setDescription($form->get('file_description')->getData());
                         $file->setProduct($product);
@@ -180,7 +179,7 @@ class ProductController extends AbstractController
                         $valid = false;
                     }
                 }
-                if(isset($valid) and $valid === false){
+                if (isset($valid) and $valid === false) {
                     $this->addFlash('danger', 'Veuillez ajouter une description à la miniature');
                 } else {
                     $entityManager->persist($product);

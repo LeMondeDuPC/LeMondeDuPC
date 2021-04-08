@@ -9,13 +9,15 @@
 
         {% if previous is defined %}
             <li>
-                <a class="button fit" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">Page précédante</a>
+                <a class="button fit" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">Page
+                    précédante</a>
             </li>
         {% endif %}
 
         {% if next is defined %}
             <li>
-                <a class="button fit" href="{{ path(route, query|merge({(pageParameterName): next})) }}">Page suivante</a>
+                <a class="button fit" href="{{ path(route, query|merge({(pageParameterName): next})) }}">Page
+                    suivante</a>
             </li>
         {% endif %}
 

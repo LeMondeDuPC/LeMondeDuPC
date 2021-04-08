@@ -6,6 +6,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,13 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="This email already exists in the database"
  * )
  */
-class User implements UserInterface, TwoFactorInterface
+class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
 {
 
     /**
      *
      */
     public const VALIDATED = true;
+    private const _NUMBER_BACKUP_CODES = 5;
 
     /**
      *
@@ -127,6 +130,11 @@ class User implements UserInterface, TwoFactorInterface
      * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
     private $googleAuthenticatorSecret;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $backupCodes;
 
     /**
      * User constructor.
@@ -535,5 +543,57 @@ class User implements UserInterface, TwoFactorInterface
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+    }
+
+    /**
+     * @param array|null $codes
+     * @return $this
+     */
+    public function setBackupCodes(?array $codes): self
+    {
+        $this->backupCodes = $codes;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBackupCodes()
+    {
+        return $this->backupCodes;
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function generateBackupCodes(): array
+    {
+        $codes = [];
+        for ($i = 0; $i < User::_NUMBER_BACKUP_CODES; $i++) {
+            $codes[$i] = bin2hex(random_bytes(4));
+        }
+        return $codes;
+    }
+
+    /**
+     * @param string $code
+     * @return bool
+     */
+    public function isBackupCode(string $code): bool
+    {
+        return in_array($code, $this->backupCodes);
+    }
+
+    /**
+     * @param string $code
+     */
+    public function invalidateBackupCode(string $code): void
+    {
+        $key = array_search($code, $this->backupCodes);
+        if ($key !== false) {
+            unset($this->backupCodes[$key]);
+        }
     }
 }

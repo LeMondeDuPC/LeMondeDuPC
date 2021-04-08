@@ -4,9 +4,9 @@
     {% endif %}
     <div class="row gtr-uniform">
         <div class="col-12 col-12-xsmall">
-            <label for="inputUsername">Code</label>
+            <label for="_auth_code">Code</label>
             <input id="_auth_code" type="text" name="_auth_code" class="form-control" required autofocus
-                   autocomplete="one-time-code" />
+                   autocomplete="one-time-code"/>
             {% if isCsrfProtectionEnabled %}
                 <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
             {% endif %}

@@ -1,6 +1,6 @@
 {% for robot in robots %}User-agent: {{ robot.agent }}
-{% for disallow in robot.disallow %}Disallow: {{ disallow }}
-{% endfor %}
+    {% for disallow in robot.disallow %}Disallow: {{ disallow }}
+    {% endfor %}
 
 {% endfor %}
 

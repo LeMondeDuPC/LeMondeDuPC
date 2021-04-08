@@ -24,11 +24,11 @@ class SenderService
     /**
      * @var MailerInterface
      */
-    private $mailer;
+    private MailerInterface $mailer;
     /**
      * @var ProductRepository
      */
-    private $productRepository;
+    private ProductRepository $productRepository;
 
     /**
      * SenderService constructor.

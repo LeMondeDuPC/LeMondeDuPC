@@ -24,11 +24,11 @@ class NewsletterCommand extends Command
     /**
      * @var SenderService
      */
-    private $senderService;
+    private SenderService $senderService;
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * NewsletterCommand constructor.

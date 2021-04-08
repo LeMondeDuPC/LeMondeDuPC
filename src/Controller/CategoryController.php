@@ -24,7 +24,7 @@ class CategoryController extends AbstractController
     /**
      * @var CategoryRepository
      */
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
 
     /**
      * LocationsController constructor.

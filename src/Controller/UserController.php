@@ -8,8 +8,10 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\SenderService;
 use DateTime;
+use Exception;
 use ReCaptcha\ReCaptcha;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\QrCode\QrCodeGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +32,7 @@ class UserController extends AbstractController
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * UsersController constructor.
@@ -110,6 +112,7 @@ class UserController extends AbstractController
                     $user->setNewsletter(false);
                     $user->setScore(0);
                     $user->setGoogleAuthenticatorSecret(null);
+                    $user->setBackupCodes(null);
 
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
@@ -188,6 +191,42 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/membre/{id}/backup-2fa", name="user_download_two_fa")
+     * @param User $user
+     * @return Response
+     */
+    public function downloadTwoFA(User $user): Response
+    {
+        if (($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) {
+            $text = 'Utilisateur Le Monde Du PC : ' . $user->getUsername() . "\n \n";
+            $codes = $user->getBackupCodes();
+            foreach ($codes as $code) {
+                $text .= $code . "\n";
+            }
+            return new Response($text, 200, ['Content-Type' => 'application/octect-stream']);
+        } else {
+            return $this->redirectToRoute('user_login');
+        }
+    }
+
+    /**
+     * @Route("/membre/{id}/qr-code", name="user_qr")
+     * @param QrCodeGenerator $qrCodeGenerator
+     * @param User $user
+     * @return Response
+     */
+    public function displayQrCode(QrCodeGenerator $qrCodeGenerator, User $user): Response
+    {
+        if (($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) {
+            $qrCode = $qrCodeGenerator->getGoogleAuthenticatorQrCode($user);
+
+            return new Response($qrCode->writeString(), 200, ['Content-Type' => 'image/png']);
+        } else {
+            return $this->redirectToRoute('user_login');
+        }
+    }
+
+    /**
      * @Route("/membre/{id}/parametres", name="user_edit", methods={"GET","POST"})
      * @param GoogleAuthenticatorInterface $googleAuthenticator
      * @param Request $request
@@ -195,12 +234,12 @@ class UserController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param Security $security
      * @return Response
+     * @throws Exception
      */
     public function edit(GoogleAuthenticatorInterface $googleAuthenticator, Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
     {
         if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
             $roles = [];
-            $newGoogleCode = false;
             foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role) {
                 $roles[$role] = $role;
             }
@@ -218,12 +257,13 @@ class UserController extends AbstractController
                 }
                 if ($form->get('2fa')->getData()) {
                     if ($user->isGoogleAuthenticatorEnabled() === false) {
-                        $newGoogleCode = true;
                         $googleSecretKey = $googleAuthenticator->generateSecret();
                         $user->setGoogleAuthenticatorSecret($googleSecretKey);
+                        $user->setBackupCodes($user->generateBackupCodes());
                     }
                 } else {
                     $user->setGoogleAuthenticatorSecret(null);
+                    $user->setBackupCodes(null);
                 }
                 if ($form->has('file') and !$form->get('file')->isEmpty()) {
                     $file = ($user->getFile() !== null) ? $user->getFile() : new File();
@@ -233,17 +273,13 @@ class UserController extends AbstractController
                     $entityManager->persist($file);
                 }
                 $entityManager->flush();
-                if ($form->get('2fa')->getData() and $newGoogleCode) {
-                    $this->addFlash('success', 'La double authentification a été activé, veuillez scanner le QR Code dans Google Authenticator');
-                } else {
-                    $this->addFlash('success', 'Le compte a bien été modifié');
-                    return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
-                }
+                $this->addFlash('success', 'Le compte a bien été modifié');
+                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
             }
             return $this->render('user/edit.html.twig', [
                 'user' => $user,
                 'form' => $form->createView(),
-                'googleQrCode' => ($newGoogleCode) ? $googleAuthenticator->getQRContent($user) : null,
+                'two_factor' => $user->isGoogleAuthenticatorEnabled()
             ]);
         } else {
             return $this->redirectToRoute('user_login');

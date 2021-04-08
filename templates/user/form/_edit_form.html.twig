@@ -1,8 +1,13 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    {% if googleQrCode is not null %}
+    {% if two_factor %}
         <div class="col-4">
-            <img src="{{ qr_code_data_uri(googleQrCode) }}" alt="" class="featured"/>
+            <ul>
+                <li><a href="{{ path('user_qr', {'id': user.id}) }}" target="_blank">QR Code pour Google
+                        Authenticator</a></li>
+                <li><a href="{{ path('user_download_two_fa', {'id': user.id}) }}">Téléchargez les codes de Backup</a>
+                </li>
+            </ul>
         </div>
     {% endif %}
 <button class="button">{{ button_label|default('Mettre à jour') }}</button>

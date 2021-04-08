@@ -31,7 +31,7 @@ class ProductRepository extends ServiceEntityRepository
      * @param Search $search
      * @return Query
      */
-    public function findByWordQuery(Search $search)
+    public function findByWordQuery(Search $search): Query
     {
         $query = $this->findValidatedQuery();
         if ($search->getQuery()) {
@@ -47,7 +47,7 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @return QueryBuilder
      */
-    private function findValidatedQuery()
+    private function findValidatedQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
             ->where('p.validated = :validated')

@@ -20,7 +20,7 @@ class PartnerController extends AbstractController
     /**
      * @var PartnerRepository
      */
-    private $partnersRepository;
+    private PartnerRepository $partnersRepository;
 
     /**
      * PartnersController constructor.

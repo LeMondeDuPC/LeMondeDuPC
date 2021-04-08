@@ -23,7 +23,7 @@ class SearchController extends AbstractController
     /**
      * @var Search
      */
-    private $search;
+    private Search $search;
 
     /**
      * SearchController constructor.
