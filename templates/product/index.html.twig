@@ -19,22 +19,22 @@
                         <p>{{ product.description }}</p>
                         <div class="display-article">
                             {% if product.category is not null %}
-                                <span class="item icon fa-tag"><a
+                                <span class="item icon icon-hashtag"><a
                                             href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
                             {% else %}
-                                <span class="item icon fa-tag">Non répertorié</span>
+                                <span class="item icon icon-hashtag">Non répertorié</span>
                             {% endif %}
 
                             {% if product.user is not null %}
-                                <span class="item icon fa-user"><a
+                                <span class="item icon icon-user"><a
                                             href="{{ path('user_show', {'id' : product.user.id}) }}">
                                     {{ product.user.username }}
                                 </a></span>
                             {% else %}
-                                <span class="item icon fa-user">Anonyme</span>
+                                <span class="item icon icon-user">Anonyme</span>
                             {% endif %}
 
-                            <time class="item icon fa-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                            <time class="item icon icon-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
                         </div>
                     </section>
                     <section>

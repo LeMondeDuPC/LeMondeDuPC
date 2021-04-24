@@ -17,9 +17,9 @@
             <div class="meta">
                 <ul class="icons">
                     <li>
-                        <time class="published icon fa-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                        <time class="published icon icon-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
                         {% if product.timeUpdate is not null %}
-                            <time class="published icon fa-edit">{{ product.timeUpdate|date('Y-m-d H:i:s') }}</time>
+                            <time class="published icon icon-edit">{{ product.timeUpdate|date('Y-m-d H:i:s') }}</time>
                         {% endif %}
                     </li>
                 </ul>
@@ -27,7 +27,7 @@
                     <li>
                         {% if product.user is not null %}
                             <a href="{{ path('user_show', {'id' : product.user.id}) }}" class="author">
-                                <span class="icon fa fa-coins">{{ product.user.score }}</span>
+                                <span class="icon icon-coins">{{ product.user.score }}</span>
                                 <span class="name">{{ product.user.username }}</span>
                                 {% if product.user.file is not null %}
                                     <img src="{{ asset(product.user.file.getWebPath) }}"
@@ -41,7 +41,7 @@
                 </ul>
                 <ul class="icons">
                     <li>
-                        <a href="{{ path('vote_heart', {'id': product.id}) }}" class="icon fa-heart"
+                        <a href="{{ path('vote_heart', {'id': product.id}) }}" class="icon icon-heart"
                            title="Ajouter dans ma liste d'article favoris">
                             <span>{{ product.hearts|length }}</span>
                         </a>
@@ -50,19 +50,19 @@
                 <ul class="icons">
                     <li>
                         <a href="https://twitter.com/share?url={{ app.request.uri }}&text={{ product.title|slugify }}"
-                           target="_blank" class="icon fa-twitter">
+                           target="_blank" class="icon icon-twitter">
                             <span class="label">Twitter</span>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ product.title|slugify }}"
-                           target="_blank" class="icon fa-facebook">
+                           target="_blank" class="icon icon-facebook">
                             <span class="label">Facebook</span>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title={{ product.title|slugify }}"
-                           target="_blank" class="icon fa-linkedin">
+                           target="_blank" class="icon icon-linkedin">
                             <span class="label">LinkedIn</span>
                         </a>
                     </li>
@@ -70,10 +70,10 @@
                 <ul class="icons">
                     <li>
                         {% if product.category is not null %}
-                            <span class="item icon fa-tag"><a
+                            <span class="item icon icon-hashtag"><a
                                         href="{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}">{{ product.category.name }}</a></span>
                         {% else %}
-                            <span class="item icon fa-tag">Non répertorié</span>
+                            <span class="item icon icon-tag">Non répertorié</span>
                         {% endif %}
                     </li>
                 </ul>

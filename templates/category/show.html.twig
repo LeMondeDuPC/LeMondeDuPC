@@ -17,6 +17,17 @@
                             <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
                         </h2>
                         <p>{{ product.description }}</p>
+                        <div class="display-article">
+                            {% if product.user is not null %}
+                                <span class="item icon icon-user"><a
+                                            href="{{ path('user_show', {'id' : product.user.id}) }}">
+                                    {{ product.user.username }}
+                                </a></span>
+                            {% else %}
+                                <span class="item icon icon-user">Anonyme</span>
+                            {% endif %}
+                            <time class="item icon icon-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
+                        </div>
                     </section>
                     <section>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"

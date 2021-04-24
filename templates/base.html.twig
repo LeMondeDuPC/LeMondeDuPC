@@ -20,10 +20,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicons/favicon-32x32.png') }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>
     <link rel="preload" href="{{ asset('assets/style/css/main.css') }}" as="style"/>
+    <link rel="preload" href="{{ asset('assets/style/css/icomoon.css') }}" as="style"/>
     <link rel="preload"
           href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"
           as="style"/>
     <link rel="stylesheet" href="{{ asset('assets/style/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/style/css/icomoon.css') }}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/>
 
@@ -47,11 +49,11 @@
         <nav class="main">
             <ul>
                 <li class="search">
-                    <a class="icon fa-search" href="#search">Rechercher</a>
+                    <a class="icon icon-search" href="#search">Rechercher</a>
                     {{ render(controller('App\\Controller\\SearchController::createView')) }}
                 </li>
                 <li class="menu">
-                    <a class="icon fa-bars" href="#menu">Menu</a>
+                    <a class="icon icon-bars" href="#menu">Menu</a>
                 </li>
             </ul>
         </nav>
@@ -146,20 +148,20 @@
                     maitrisent.</p>
                 <ul class="icons">
                     <li><a href="https://www.linkedin.com/company/lemondedupc" rel="noopener" target="_blank"
-                           class="icon fa-linkedin"><span
+                           class="icon icon-linkedin"><span
                                     class="label">LinkedIn</span></a></li>
                     <li><a href="https://discord.gg/WHYRZfU" rel="noopener" target="_blank"
-                           class="icon fa-discord"><span
+                           class="icon icon-discord"><span
                                     class="label">Discord</span></a></li>
                     <li><a href="https://twitter.com/LeMondeDuPC" rel="noopener" target="_blank"
-                           class="icon fa-twitter"><span
+                           class="icon icon-twitter"><span
                                     class="label">Twitter</span></a></li>
                     <li><a href="https://www.instagram.com/lemondedupc" rel="noopener" target="_blank"
-                           class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                           class="icon icon-instagram"><span class="label">Instagram</span></a></li>
                     <li><a href="https://github.com/NielsTRS/LeMondeDuPC" rel="noopener" target="_blank"
-                           class="icon fa-github"><span
+                           class="icon icon-github"><span
                                     class="label">Github</span></a></li>
-                    <li><a href="{{ path('page_rss') }}" target="_blank" class="icon fa-rss"><span
+                    <li><a href="{{ path('page_rss') }}" target="_blank" class="icon icon-rss"><span
                                     class="label">RSS</span></a></li>
                 </ul>
                 <hr/>
@@ -222,9 +224,6 @@
         "mandatory": false, /* Show a message about mandatory cookies */
     });
 </script>
-{% block scripts %}{% endblock %}
-<script type="application/javascript" async src="https://kit.fontawesome.com/75d1f3e298.js"
-        crossorigin="anonymous"></script>
 <script data-ad-client="ca-pub-4341744515604326" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
