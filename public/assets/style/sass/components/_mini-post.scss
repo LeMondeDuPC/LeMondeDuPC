@@ -17,9 +17,10 @@
     overflow: hidden;
     width: 100%;
 
-    img {
+    .img {
       transition: transform _duration(transition) ease-out;
       width: 100%;
+      height: auto;
     }
 
     &:hover {

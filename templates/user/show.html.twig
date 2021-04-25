@@ -33,10 +33,16 @@
                     <div class="row gtr-uniform">
                         {% for heart in user.hearts %}
                             <div class="col-4">
-                                <a class="image featured"
-                                   href="{{ path('product_show', {'id' : heart.product.id, 'slug' : heart.product.title|slugify }) }}">
-                                    <img src="{{ asset(heart.product.file.getWebPath) }}" alt=""/>
-                                    <span>{{ heart.product.title }}</span>
+                                <a href="{{ path('product_show', {'id' : heart.product.id, 'slug' : heart.product.title|slugify }) }}">
+                                    <img class="image featured lazyload" width="297" height="177"
+                                         data-src="{{ asset(heart.product.file.getWebPath) }}"
+                                         alt="{{ heart.product.file.description }}"/>
+                                    <noscript>
+                                        <img class="image featured" width="297" height="177"
+                                             src="{{ asset(heart.product.file.getWebPath) }}"
+                                             alt="{{ heart.product.file.description }}"/>
+                                    </noscript>
+                                    <p>{{ heart.product.title }}</p>
                                 </a>
                             </div>
                         {% endfor %}
@@ -52,17 +58,17 @@
                     <div class="row gtr-uniform">
                         {% for product in user.products|reverse %}
                             <div class="col-4">
-                                <a class="image featured"
-                                   href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
+                                <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">
                                     {% if product.file is not null %}
-                                        <img data-src="{{ asset(product.file.getWebPath) }}"
-                                             alt="{{ product.file.description }}" class="lazyload"/>
+                                        <img width="297" height="177" data-src="{{ asset(product.file.getWebPath) }}"
+                                             alt="{{ product.file.description }}" class="image featured lazyload"/>
                                         <noscript>
-                                            <img src="{{ asset(product.file.getWebPath) }}"
+                                            <img width="297" height="177" class="image featured"
+                                                 src="{{ asset(product.file.getWebPath) }}"
                                                  alt="{{ product.file.description }}"/>
                                         </noscript>
                                     {% endif %}
-                                    <span>{{ product.title }}</span>
+                                    <p>{{ product.title }}</p>
                                 </a>
                             </div>
                         {% endfor %}
@@ -70,7 +76,6 @@
                 </div>
             </section>
         {% endif %}
-
     </article>
 {% endblock %}
 {% block scripts %}

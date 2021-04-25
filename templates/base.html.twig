@@ -139,7 +139,7 @@
     <aside id="sidebar">
         <!-- Intro -->
         <section id="intro">
-            <img class="logo" src="{{ asset('assets/images/favicons/favicon-192x192.png') }}"
+            <img class="logo" height="64" width="64" src="{{ asset('assets/images/favicons/favicon-192x192.png') }}"
                  alt="Logo"/>
             <header>
                 <h2>Le Monde Du PC</h2>
@@ -198,33 +198,21 @@
 <script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
-<script type="text/javascript">
-    tarteaucitron.init({
-        "privacyUrl": "{{ path('page_about') }}#vie_privee", /* Privacy policy url */
-
-        "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
-        "cookieName": "consent_status", /* Cookie name */
-
-        "orientation": "bottom", /* Banner position (top - middle - bottom) */
-        "showAlertSmall": true, /* Show the small banner on bottom right */
-        "cookieslist": true, /* Show the cookie list */
-
-        "adblocker": false, /* Show a Warning if an adblocker is detected */
-        "AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
-        "highPrivacy": true, /* Disable auto consent */
-        "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
-
-        "removeCredit": false, /* Remove credit link */
-        "moreInfoLink": true, /* Show more info link */
-        "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-
-        "readmoreLink": "{{ path('page_about') }}#vie_privee", /* Change the default readmore link */
-
-        "mandatory": false, /* Show a message about mandatory cookies */
-    });
-</script>
-<script data-ad-client="ca-pub-4341744515604326" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{% block scripts %}{% endblock %}
+{#<script type="text/javascript">#}
+{#    function downloadJSAtOnload() {#}
+{#        var element = document.createElement("script");#}
+{#        element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";#}
+{#        element.setAttribute('data-ad-client', 'ca-pub-4341744515604326');#}
+{#        document.body.appendChild(element);#}
+{#    }#}
+{#    if (window.addEventListener)#}
+{#        window.addEventListener("load", downloadJSAtOnload, false);#}
+{#    else if (window.attachEvent)#}
+{#        window.attachEvent("onload", downloadJSAtOnload);#}
+{#    else window.onload = downloadJSAtOnload;#}
+{#</script>#}
+{#<script data-ad-client="ca-pub-4341744515604326" async#}
+{#        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
 </body>
 </html>

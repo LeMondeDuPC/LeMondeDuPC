@@ -41,12 +41,12 @@
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
                             {% if product.file is not null %}
-                                <img data-src="{{ asset(product.file.getWebPath) }}"
+                                <img data-src="{{ asset(product.file.getWebPath) }}" width=920" height="620"
                                      alt="{{ product.file.description }}"
-                                     class="lazyload"/>
+                                     class="lazyload img"/>
                                 <noscript>
                                     <img src="{{ asset(product.file.getWebPath) }}"
-                                         alt="{{ product.file.description }}"/>
+                                         alt="{{ product.file.description }}" width=920" height="620" class="img"/>
                                 </noscript>
                             {% endif %}
                         </a>

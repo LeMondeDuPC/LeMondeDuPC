@@ -30,8 +30,12 @@
                                 <span class="icon icon-coins">{{ product.user.score }}</span>
                                 <span class="name">{{ product.user.username }}</span>
                                 {% if product.user.file is not null %}
-                                    <img src="{{ asset(product.user.file.getWebPath) }}"
-                                         alt="{{ product.user.file.description }}"/>
+                                    <img data-src="{{ asset(product.user.file.getWebPath) }}" width="56" height="56"
+                                         alt="{{ product.user.file.description }}" class="img lazyload"/>
+                                    <noscript>
+                                        <img src="{{ asset(product.user.file.getWebPath) }}" width="56" height="56"
+                                             alt="{{ product.user.file.description }}" class="img"/>
+                                    </noscript>
                                 {% endif %}
                             </a>
                         {% else %}
@@ -81,8 +85,12 @@
         </header>
         <section>
             {% if product.file is not null %}
-                <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
-                     class="image featured"/>
+                <img data-src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
+                     class="image featured lazyload" width="846" height="476"/>
+                <noscript>
+                    <img src="{{ asset(product.file.getWebPath) }}" alt="{{ product.file.description }}"
+                         class="image featured" width="846" height="476"/>
+                </noscript>
             {% endif %}
             {{ product.content|raw }}
         </section>
@@ -93,17 +101,16 @@
                 <div class="row gtr-uniform">
                     {% for related in product.category.getRelated(product)|reverse[0:6] %}
                         <div class="col-4">
-                            <a class="image featured"
-                               href="{{ path('product_show', {'id' : related.id, 'slug' : related.title|slugify }) }}">
+                            <a href="{{ path('product_show', {'id' : related.id, 'slug' : related.title|slugify }) }}">
                                 {% if product.file is not null %}
                                     <img data-src="{{ asset(related.file.getWebPath) }}"
-                                         alt="{{ related.file.description }}" class="lazyload"/>
+                                         alt="{{ related.file.description }}" class="image featured lazyload" width="297" height="177"/>
                                     <noscript>
                                         <img src="{{ asset(related.file.getWebPath) }}"
-                                             alt="{{ related.file.description }}"/>
+                                             alt="{{ related.file.description }}" class="image featured" width="297" height="177"/>
                                     </noscript>
                                 {% endif %}
-                                <span>{{ related.title }}</span>
+                                <p>{{ related.title }}</p>
                             </a>
                         </div>
                     {% else %}
@@ -149,6 +156,10 @@
     </article>
 {% endblock %}
 {% block scripts %}
+    <script type="text/javascript" src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
+    <script type="text/javascript">
+        tarteaucitron.init({privacyUrl:"{{ path('page_about') }}#vie_privee",hashtag:"#tarteaucitron",cookieName:"consent_status",orientation:"bottom",showAlertSmall:!0,cookieslist:!0,adblocker:!1,AcceptAllCta:!0,highPrivacy:!0,handleBrowserDNTRequest:!1,removeCredit:!1,moreInfoLink:!0,useExternalCss:!1,readmoreLink:"{{ path('page_about') }}#vie_privee",mandatory:!1});
+    </script>
     <script type="text/javascript">
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
     </script>
