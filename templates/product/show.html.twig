@@ -4,6 +4,8 @@
 
 {% block description %}{{ product.description }}{% endblock %}
 
+{% block preloads %}<link rel="preload" href="{{ asset(product.file.getWebPath) }}" />{% endblock %}
+
 {% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endif %}{% endblock %}
 
 {% block body %}
