@@ -21,14 +21,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>
     <link rel="preload" href="{{ asset('assets/style/css/main.css') }}" as="style"/>
     <link rel="preload" href="{{ asset('assets/style/css/icomoon.css') }}" as="style"/>
-    <link rel="preload"
-          href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"
-          as="style"/>
+    {# <link rel="preload" #}
+    {# href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap" #}
+    {# as="style"/> #}
     {% block preloads %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('assets/style/css/main.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/style/css/icomoon.css') }}"/>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/>
+    {# <link rel="stylesheet" #}
+    {# href="https://fonts.googleapis.com/css?family=Raleway:600,700|Source+Sans+Pro:400,400i,600,600i&display=swap"/> #}
 
 
 </head>
@@ -132,12 +132,6 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        {% block body %}{% endblock %}
-        {% block paginate %}{% endblock %}
-    </div>
-
-    <!-- Sidebar -->
-    <aside id="sidebar">
         <!-- Intro -->
         <section id="intro">
             <img class="logo" height="64" width="64" src="{{ asset('assets/images/favicons/favicon-192x192.png') }}"
@@ -172,7 +166,12 @@
                 </p>
             </header>
         </section>
+        {% block body %}{% endblock %}
+        {% block paginate %}{% endblock %}
+    </div>
 
+    <!-- Sidebar -->
+    <aside id="sidebar">
         <!-- Pub -->
         <section>
             <p>Les pubs permettent de maintenir le site en "vie". Merci de votre compréhension !</p>
@@ -200,20 +199,20 @@
 <script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 {% block scripts %}{% endblock %}
-{#<script type="text/javascript">#}
-{#    function downloadJSAtOnload() {#}
-{#        var element = document.createElement("script");#}
-{#        element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";#}
-{#        element.setAttribute('data-ad-client', 'ca-pub-4341744515604326');#}
-{#        document.body.appendChild(element);#}
-{#    }#}
-{#    if (window.addEventListener)#}
-{#        window.addEventListener("load", downloadJSAtOnload, false);#}
-{#    else if (window.attachEvent)#}
-{#        window.attachEvent("onload", downloadJSAtOnload);#}
-{#    else window.onload = downloadJSAtOnload;#}
-{#</script>#}
+{# <script type="text/javascript"> #}
+{# function downloadJSAtOnload() { #}
+{# var element = document.createElement("script"); #}
+{# element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"; #}
+{# element.setAttribute('data-ad-client', 'ca-pub-4341744515604326'); #}
+{# document.body.appendChild(element); #}
+{# } #}
+{# if (window.addEventListener) #}
+{# window.addEventListener("load", downloadJSAtOnload, false); #}
+{# else if (window.attachEvent) #}
+{# window.attachEvent("onload", downloadJSAtOnload); #}
+{# else window.onload = downloadJSAtOnload; #}
+{# </script> #}
 <script data-ad-client="ca-pub-4341744515604326" async
-       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 </html>
