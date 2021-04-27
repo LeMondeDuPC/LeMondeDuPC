@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="fr" prefix="og: http://ogp.me/ns#">
+<head>
+    <title>Le Monde Du PC - {% block title %}Du numérique expliqué simplement{% endblock %}</title>
+    <meta name="description"
+          content="{% block description %}Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent. Retrouvez tout sur www.lemondedupc.fr !{% endblock %}"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta property="og:site_name" content="Le Monde Du PC"/>
+    <meta property="og:locale" content="fr_FR"/>
+    <meta property="og:title" content="Le Monde Du PC - {{ block('title') }}"/>
+    <meta property="og:description"
+          content="{{ block('description') }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image"
+          content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
+    <meta property="og:url" content="{{ app.request.uri }}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicons/apple-touch-icon.png') }}"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicons/favicon-32x32.png') }}"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>
+    <link rel="preload" href="{{ asset('assets/style/css/main.css') }}" as="style"/>
+    <link rel="preload" href="{{ asset('assets/style/css/icomoon.css') }}" as="style"/>
+    {% block preloads %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/style/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/style/css/icomoon.css') }}"/>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="{{ path('product_index') }}">Le Monde Du PC</a></h1>
+        <nav id="navheader" class="links">
+            <ul id="nav">
+                <li><a href="{{ path('page_contact') }}">Nous contacter</a></li>
+                <li><a href="{{ path('user_ranking') }}">Top des membres</a></li>
+                <li><a href="{{ path('page_about') }}">A propos</a></li>
+            </ul>
+        </nav>
+        <nav class="main">
+            <ul>
+                <li class="search">
+                    <a class="icon icon-search" href="#search">Rechercher</a>
+                    {{ render(controller('App\\Controller\\SearchController::createView')) }}
+                </li>
+                <li class="menu">
+                    <a class="icon icon-bars" href="#menu">Menu</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <!-- Search -->
+        <div>
+            {{ render(controller('App\\Controller\\SearchController::createView')) }}
+        </div>
+        <!-- links -->
+        <nav id="navmenu">
+
+        </nav>
+
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% if is_granted('ROLE_MANAGE_CATEGORIES') or is_granted('ROLE_MANAGE_USERS') or is_granted('ROLE_MANAGE_PRODUCTS') or is_granted('ROLE_MANAGE_PARTNERS') %}
+                <nav>
+                    <ul class="links">
+                        {% if is_granted('ROLE_MANAGE_USERS') %}
+                            <li><a href="{{ path('user_manage') }}">Gestions des utilisateurs</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_MANAGE_PRODUCTS') %}
+                            <li><a href="{{ path('product_manage') }}">Gestion des articles</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_MANAGE_CATEGORIES') %}
+                            <li><a href="{{ path('category_manage') }}">Gestion des catégories</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_MANAGE_PARTNERS') %}
+                            <li><a href="{{ path('partner_manage') }}">Gestion des partenaires</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_MANAGE_VOTES') %}
+                            <li><a href="{{ path('votes_manage') }}">Gestion des réactions</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+            {% if is_granted('ROLE_CREATE_PRODUCTS') and is_granted('ROLE_MANAGE_PRODUCTS') == false %}
+                <nav>
+                    <ul class="links">
+                        <li><a href="{{ path('product_new') }}">Créer un article</a></li>
+                        <li><a href="{{ path('product_manage') }}">Mes articles</a></li>
+                    </ul>
+                </nav>
+            {% endif %}
+            <nav>
+                <ul class="links">
+                    <li><a href="{{ path('user_show', {'id' : app.user.id }) }}">Mon profil</a></li>
+                    <li><a href="{{ path('user_edit', {'id' : app.user.id }) }}">Paramètres</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <!-- Links -->
+        <nav>
+            <ul class="actions fit">
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('user_logout') }}" class="button fit">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('user_login') }}" class="button fit">Connexion</a></li>
+                    <li><a href="{{ path('user_new') }}" class="button fit">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="notification {{ label }}">
+                    {{ message }}
+                    <span class="closebtn">&times;</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <!-- Intro -->
+        <section id="intro">
+            <img class="logo" height="64" width="64" src="{{ asset('assets/images/favicons/favicon-192x192.png') }}"
+                 alt="Logo"/>
+            <header>
+                <h2>Le Monde Du PC</h2>
+                <p class="intro">Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux
+                    qui les
+                    maitrisent.</p>
+                <ul class="icons">
+                    <li><a href="https://www.linkedin.com/company/lemondedupc" rel="noopener" target="_blank"
+                           class="icon icon-linkedin"><span
+                                    class="label">LinkedIn</span></a></li>
+                    <li><a href="https://discord.gg/WHYRZfU" rel="noopener" target="_blank"
+                           class="icon icon-discord"><span
+                                    class="label">Discord</span></a></li>
+                    <li><a href="https://twitter.com/LeMondeDuPC" rel="noopener" target="_blank"
+                           class="icon icon-twitter"><span
+                                    class="label">Twitter</span></a></li>
+                    <li><a href="https://www.instagram.com/lemondedupc" rel="noopener" target="_blank"
+                           class="icon icon-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://github.com/NielsTRS/LeMondeDuPC" rel="noopener" target="_blank"
+                           class="icon icon-github"><span
+                                    class="label">Github</span></a></li>
+                    <li><a href="{{ path('page_rss') }}" target="_blank" class="icon icon-rss"><span
+                                    class="label">RSS</span></a></li>
+                </ul>
+                <hr/>
+                <p>
+                    Vous voulez rejoindre notre équipe de rédacteurs afin de partager vos connaisances ? Il suffit de
+                    <a href="{{ path('user_new') }}">créer un compte</a> !
+                </p>
+            </header>
+        </section>
+        {% block body %}{% endblock %}
+        {% block paginate %}{% endblock %}
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <!-- Pub -->
+        <section>
+            <p>Les pubs permettent de maintenir le site en "vie". Merci de votre compréhension !</p>
+        </section>
+
+        <!-- Mini Posts -->
+        <section>
+            <h3>Catégories :</h3>
+            {{ render(controller('App\\Controller\\CategoryController::_index')) }}
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="license">
+                Le Monde Du PC | Sur une base de
+                <a target="_blank" href="https://html5up.net/" rel="noopener">HTML5 UP!</a>
+            </p>
+        </footer>
+    </aside>
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/main_mobile.js') }}"></script>
+{% block scripts %}{% endblock %}
+{# <script type="text/javascript"> #}
+{# function downloadJSAtOnload() { #}
+{# var element = document.createElement("script"); #}
+{# element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"; #}
+{# element.setAttribute('data-ad-client', 'ca-pub-4341744515604326'); #}
+{# document.body.appendChild(element); #}
+{# } #}
+{# if (window.addEventListener) #}
+{# window.addEventListener("load", downloadJSAtOnload, false); #}
+{# else if (window.attachEvent) #}
+{# window.attachEvent("onload", downloadJSAtOnload); #}
+{# else window.onload = downloadJSAtOnload; #}
+{# </script> #}
+<script data-ad-client="ca-pub-4341744515604326" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</body>
+</html>

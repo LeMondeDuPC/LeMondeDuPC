@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends is_mobile() ? 'base_mobile.html.twig' : 'base_default.html.twig' %}
 
 {% block title %}A propos{% endblock %}
 
