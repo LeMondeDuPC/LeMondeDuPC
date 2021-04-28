@@ -1,0 +1,6 @@
+mobile_detect:
+  cookie_key: "device_view"                     # default
+  cookie_expire_datetime_modifier: "+1 month"   # default
+  cookie_secure: true
+  cookie_httponly: true
+  switch_param: "device_view"                   # default
