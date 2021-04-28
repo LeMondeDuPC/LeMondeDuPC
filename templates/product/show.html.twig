@@ -4,7 +4,8 @@
 
 {% block description %}{{ product.description }}{% endblock %}
 
-{% block preloads %}<link rel="preload" href="{{ asset(product.file.getWebPath) }}" as="image"/>{% endblock %}
+{% block preloads %}
+    <link rel="preload" href="{{ asset(product.file.getWebPath) }}" as="image"/>{% endblock %}
 
 {% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endif %}{% endblock %}
 
@@ -106,10 +107,12 @@
                             <a href="{{ path('product_show', {'id' : related.id, 'slug' : related.title|slugify }) }}">
                                 {% if product.file is not null %}
                                     <img data-src="{{ asset(related.file.getWebPath) }}"
-                                         alt="{{ related.file.description }}" class="image featured lazyload" width="297" height="177"/>
+                                         alt="{{ related.file.description }}" class="image featured lazyload"
+                                         width="297" height="177"/>
                                     <noscript>
                                         <img src="{{ asset(related.file.getWebPath) }}"
-                                             alt="{{ related.file.description }}" class="image featured" width="297" height="177"/>
+                                             alt="{{ related.file.description }}" class="image featured" width="297"
+                                             height="177"/>
                                     </noscript>
                                 {% endif %}
                                 <p>{{ related.title }}</p>
@@ -160,9 +163,7 @@
 {% block scripts %}
     <script type="text/javascript" src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
     <script type="text/javascript">
-        tarteaucitron.init({privacyUrl:"{{ path('page_about') }}#vie_privee",hashtag:"#tarteaucitron",cookieName:"consent_status",orientation:"bottom",showAlertSmall:!0,cookieslist:!0,adblocker:!1,AcceptAllCta:!0,highPrivacy:!0,handleBrowserDNTRequest:!1,removeCredit:!1,moreInfoLink:!0,useExternalCss:!1,readmoreLink:"{{ path('page_about') }}#vie_privee",mandatory:!1});
-    </script>
-    <script type="text/javascript">
+        tarteaucitron.init({"privacyUrl":"{{ path('page_about') }}#vie_privee","hashtag":"#tarteaucitron","cookieName":"tarteaucitron","orientation":"bottom","groupServices":false,"showAlertSmall":false,"cookieslist":false,"showIcon":true,"iconPosition":"BottomRight","adblocker":false,"DenyAllCta":true,"AcceptAllCta":true,"highPrivacy":true,"handleBrowserDNTRequest":false,"removeCredit":false,"moreInfoLink":true,"useExternalCss":false,"readmoreLink":"{{ path('page_about') }}#vie_privee","mandatory":true});
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
     </script>
     <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
