@@ -97,7 +97,7 @@ class ProductController extends AbstractController
             ]);
         } elseif ($this->isGranted('ROLE_CREATE_PRODUCTS')) {
             return $this->render('product/manage.html.twig', [
-                'products' => $this->getUser()->getProducts(),
+                'products' => $this->getUser()->getProducts(true),
             ]);
         } else {
             return $this->redirectToRoute('user_login');

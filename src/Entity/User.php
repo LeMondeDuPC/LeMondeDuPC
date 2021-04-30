@@ -310,13 +310,18 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
     }
 
     /**
+     * @param bool $all
      * @return Collection|Product[]
      */
-    public function getProducts(): Collection
+    public function getProducts($all = false): Collection
     {
-        return $this->products->filter(function (Product $product) {
-            return $product->getValidated() === Product::VALIDATED;
-        });
+        if ($all === false) {
+            return $this->products->filter(function (Product $product) {
+                return $product->getValidated() === Product::VALIDATED;
+            });
+        } else {
+            return $this->products;
+        }
     }
 
     /**
