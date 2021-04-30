@@ -16,9 +16,9 @@
     <meta property="og:image"
           content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
     <meta property="og:url"
-          content="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
+          content="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
     <link rel="cannonical"
-          href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
+          href="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicons/apple-touch-icon.png') }}"/>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicons/favicon-32x32.png') }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>
