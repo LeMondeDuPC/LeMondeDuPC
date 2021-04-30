@@ -4,7 +4,7 @@
 
 {% block description %}{{ product.description }}{% endblock %}
 
-{% block preloads %}
+{% block head %}
     <link rel="preload" href="{{ asset(product.file.getWebPath) }}" as="image"/>{% endblock %}
 
 {% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endif %}{% endblock %}
@@ -49,7 +49,7 @@
                 <ul class="icons">
                     <li>
                         <a href="{{ path('vote_heart', {'id': product.id}) }}" class="icon icon-heart"
-                           title="Ajouter dans ma liste d'article favoris">
+                           title="Ajouter dans ma liste d'article favoris" rel="nofollow">
                             <span>{{ product.hearts|length }}</span>
                         </a>
                     </li>
