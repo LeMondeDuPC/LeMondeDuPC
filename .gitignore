@@ -7,7 +7,7 @@
 /vendor/
 /src/Cron/
 /public/assets/uploads/
-/public/assets/style/.sass-cache
+/public/assets/style/.sass-cache/
 /src/Migrations/
 symfony.lock
 .todo

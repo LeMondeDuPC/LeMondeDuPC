@@ -10,11 +10,21 @@
             <input type="password" name="password" id="inputPassword" class="form-control" required autocomplete="off"/>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
         </div>
-        <div class="col-12 col-12-xsmall">
+        <div class="col-12 col-12-xsmall collapsible">
+            <span>Backup de Double Authentification</span>
+        </div>
+        <div class="col-12 col-12-xsmall content">
             <label for="inputTwoFABackup">Code de backup pour la double authentification</label>
             <input type="text" name="twoFaBackup" id="inputTwoFABackup"
                    class="form-control" placeholder="Laissez vide si non nécessaire"/>
         </div>
+        <noscript>
+            <div class="col-12 col-12-xsmall">
+                <label for="inputTwoFABackup">Code de backup pour la double authentification</label>
+                <input type="text" name="twoFaBackup" id="inputTwoFABackup"
+                       class="form-control" placeholder="Laissez vide si non nécessaire"/>
+            </div>
+        </noscript>
         <div class="col-12">
             <ul class="actions">
                 <li><input type="submit" name="formconnexion" value="Se connecter"/></li>

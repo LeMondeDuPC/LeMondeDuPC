@@ -583,7 +583,11 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
      */
     public function isBackupCode(string $code): bool
     {
-        return in_array($code, $this->backupCodes);
+        if ($this->isGoogleAuthenticatorEnabled()) {
+            return in_array($code, $this->backupCodes);
+        } else {
+            return false;
+        }
     }
 
     /**

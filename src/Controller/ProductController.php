@@ -50,7 +50,8 @@ class ProductController extends AbstractController
             Product::ITEM_ON_PAGE
         );
         return $this->render('product/index.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'page' => ($page > 1) ? $page : null
         ]);
     }
 

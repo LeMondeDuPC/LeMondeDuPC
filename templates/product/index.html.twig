@@ -1,6 +1,8 @@
 {% extends is_mobile() ? 'base_mobile.html.twig' : 'base_default.html.twig' %}
 
-{% block title %}Du numérique expliqué simplement{% endblock %}
+{% block title %}Du numérique expliqué simplement{% if page is not null %} : Page {{ page }}{% endif %}{% endblock %}
+
+{% block description %}{% if page is not null %}Liste des articles de la page {{ page }}.{% endif %}{% endblock%}
 
 {% block body %}
     <article class="post">

@@ -1,0 +1,19 @@
+.collapsible {
+  cursor: pointer;
+
+  &:after {
+    content: '\002B';
+    float: right;
+  }
+}
+
+.active:after {
+  content: "\2212";
+  float: right;
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
