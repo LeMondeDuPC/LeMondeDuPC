@@ -8,7 +8,7 @@
     <article class="post">
         <header>
             <div class="title">
-                <h1 class="heading">Les derniers articles</h1>
+                <h3 class="heading">Les derniers articles</h3>
             </div>
         </header>
         <section>
@@ -39,20 +39,20 @@
                             <time class="item icon icon-plus-square">{{ product.timePublication|date('Y-m-d H:i:s') }}</time>
                         </div>
                     </section>
-                    <section>
+                    <aside>
                         <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
                            class="image">
                             {% if product.file is not null %}
-                                <img data-src="{{ asset(product.file.getWebPath) }}" width=920" height="620"
+                                <img data-src="{{ asset(product.file.getWebPath) }}" width="920" height="620"
                                      alt="{{ product.file.description }}"
                                      class="lazyload img"/>
                                 <noscript>
                                     <img src="{{ asset(product.file.getWebPath) }}"
-                                         alt="{{ product.file.description }}" width=920" height="620" class="img"/>
+                                         alt="{{ product.file.description }}" width="920" height="620" class="img"/>
                                 </noscript>
                             {% endif %}
                         </a>
-                    </section>
+                    </aside>
                 </article>
             {% else %}
                 <p>Aucun article n'est disponible pour le moment</p>
@@ -64,5 +64,5 @@
     {{ knp_pagination_render(products) }}
 {% endblock %}
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
 {% endblock %}

@@ -20,7 +20,7 @@
   header {
     text-align: center;
 
-    h2 {
+    .title {
       font-size: 1.75em;
       font-weight: _font(weight-heading-bold);
     }
@@ -36,7 +36,7 @@
     text-align: center;
 
     header {
-      h2 {
+      .title {
         font-size: 2em;
       }
 
@@ -59,7 +59,7 @@
     }
 
     header {
-      h2 {
+      .title {
         font-size: 1.25em;
       }
 

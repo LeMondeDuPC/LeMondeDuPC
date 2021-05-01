@@ -10,16 +10,6 @@ CKEDITOR.on('instanceReady', function (evt) {
                     el.attributes['data-src'] = el.attributes['data-cke-saved-src'];
                 }
                 el.attributes['data-cke-saved-src'] = null;
-                reset(el);
-            },
-            p: function (el) {
-                reset(el);
-            },
-            div: function (el) {
-                reset(el);
-            },
-            td: function (el) {
-                reset(el);
             },
         }
     });
@@ -37,9 +27,3 @@ CKEDITOR.on('instanceReady', function (evt) {
         });
     }
 });
-
-function reset(el) {
-    el.attributes.style = null;
-    el.attributes.width = null;
-    el.attributes.height = null;
-}

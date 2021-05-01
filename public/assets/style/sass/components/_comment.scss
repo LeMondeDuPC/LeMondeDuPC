@@ -53,6 +53,13 @@
         word-wrap: break-word;
         text-align: justify;
       }
+
+      .author {
+        .img {
+          width: 4em;
+          height: auto;
+        }
+      }
     }
   }
 
@@ -107,10 +114,6 @@
 
           .name {
             margin: 0 0 0 1.5em;
-          }
-
-          img {
-            width: 3.5em;
           }
         }
       }

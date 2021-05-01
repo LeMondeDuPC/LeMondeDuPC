@@ -13,9 +13,11 @@ fos_ck_editor:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
             extraPlugins: ['youtube', 'markdown']
-            allowedContent: true
+            allowedContent: false
             extraAllowedContent: ['img[*, !data-src]']
+            fillEmptyBlocks: false
             language: "fr"
+            entities: false
     plugins:
         youtube:
             path: "assets/plugins/ckeditor/plugins/youtube/" # with trailing slash

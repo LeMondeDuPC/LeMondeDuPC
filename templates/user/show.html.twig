@@ -17,7 +17,12 @@
                 <a href="#" class="author">
                     <span class="name">{{ user.username }}</span>
                     {% if user.file is not null %}
-                        <img src="{{ asset(user.file.getWebPath) }}" alt="{{ user.file.description }}"/>
+                        <img data-src="{{ asset(user.file.getWebPath) }}"
+                             alt="{{ user.file.description }}" class="img lazyload" width="56" height="56"/>
+                        <noscript>
+                            <img src="{{ asset(user.file.getWebPath) }}"
+                                 alt="{{ user.file.description }}" class="img" width="56" height="56"/>
+                        </noscript>
                     {% endif %}
                 </a>
                 <p class="icon icon-coins">{{ user.score }}</p>
@@ -81,5 +86,5 @@
     </article>
 {% endblock %}
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
 {% endblock %}

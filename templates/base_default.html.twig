@@ -35,7 +35,7 @@
 
     <!-- Header -->
     <header id="header">
-        <h1><a href="{{ path('product_index') }}">Le Monde Du PC</a></h1>
+        <h2 class="title"><a href="{{ path('product_index') }}">Le Monde Du PC</a></h2>
         <nav id="navheader" class="links">
             <ul id="nav">
                 <li><a href="{{ path('page_contact') }}">Nous contacter</a></li>
@@ -47,7 +47,14 @@
             <ul>
                 <li class="search">
                     <a class="icon icon-search" href="#search">Rechercher</a>
-                    {{ render(controller('App\\Controller\\SearchController::createView')) }}
+                    <form method="get" action="{{ path('product_search') }}" id="search">
+                        <div>
+                            <div>
+                                <input type="search" name="query" required="required"
+                                       placeholder="Rechercher"/>
+                            </div>
+                        </div>
+                    </form>
                 </li>
                 <li class="menu">
                     <a class="icon icon-bars" href="#menu">Menu</a>
@@ -60,7 +67,13 @@
     <nav id="menu">
         <!-- Search -->
         <div>
-            {{ render(controller('App\\Controller\\SearchController::createView')) }}
+            <form method="get" action="{{ path('product_search') }}">
+                <div>
+                    <div>
+                        <input type="search" name="query" required="required" placeholder="Rechercher"/>
+                    </div>
+                </div>
+            </form>
         </div>
         <!-- links -->
         <nav id="navmenu">
@@ -139,7 +152,7 @@
             <img class="logo" height="64" width="64" src="{{ asset('assets/images/favicons/favicon-192x192.png') }}"
                  alt="Logo"/>
             <header>
-                <h2>Le Monde Du PC</h2>
+                <h2 class="title">Le Monde Du PC</h2>
                 <p class="intro">Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux
                     qui les
                     maitrisent.</p>
@@ -191,10 +204,10 @@
 </div>
 
 <!-- Scripts -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/libs/util.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/main_default.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('assets/js/libs/breakpoints.js') }}"></script>
+<script src="{{ asset('assets/js/libs/util.js') }}"></script>
+<script src="{{ asset('assets/js/main_default.js') }}"></script>
 {% block scripts %}{% endblock %}
 <script data-ad-client="ca-pub-4341744515604326" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

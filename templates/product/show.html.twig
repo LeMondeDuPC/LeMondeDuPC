@@ -143,10 +143,10 @@
                                 <span class="name">{{ vote.user.username }}</span>
                                 {% if vote.user.file is not null %}
                                     <img data-src="{{ asset(vote.user.file.getWebPath) }}"
-                                         alt="{{ vote.user.file.description }}" class="lazyload"/>
+                                         alt="{{ vote.user.file.description }}" class="img lazyload" width="56" height="56"/>
                                     <noscript>
                                         <img src="{{ asset(vote.user.file.getWebPath) }}"
-                                             alt="{{ vote.user.file.description }}"/>
+                                             alt="{{ vote.user.file.description }}" class="img" width="56" height="56"/>
                                     </noscript>
                                 {% endif %}
                             </a>
@@ -161,10 +161,10 @@
     </article>
 {% endblock %}
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
     <script type="text/javascript">
         tarteaucitron.init({"privacyUrl":"{{ path('page_about') }}#vie_privee","hashtag":"#tarteaucitron","cookieName":"tarteaucitron","orientation":"bottom","groupServices":false,"showAlertSmall":false,"cookieslist":false,"showIcon":true,"iconPosition":"BottomRight","adblocker":false,"DenyAllCta":true,"AcceptAllCta":true,"highPrivacy":true,"handleBrowserDNTRequest":false,"removeCredit":false,"moreInfoLink":true,"useExternalCss":false,"readmoreLink":"{{ path('page_about') }}#vie_privee","mandatory":true});
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
     </script>
-    <script type="text/javascript" src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>
 {% endblock %}

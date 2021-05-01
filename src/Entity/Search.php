@@ -32,7 +32,7 @@ class Search
      * @param mixed $query
      * @return Search
      */
-    public function setQuery(string $query)
+    public function setQuery(string $query): Search
     {
         $this->query = $query;
         return $this;
