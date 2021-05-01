@@ -104,7 +104,7 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 
 Header append Vary User-Agent env=!dont-vary
 
- Expire headers
+# Expire headers
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 2592000 seconds"
