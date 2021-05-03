@@ -9,19 +9,25 @@ fos_ck_editor:
     configs:
         main_config:
             toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', '-', 'Table', '-', 'Format', '-', 'Source', 'Markdown'] }
+                - { name: "styles", items: ['Bold', 'Italic', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Youtube', '-', 'Table', '-', 'Format', '-', 'Source', 'Markdown'] }
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            extraPlugins: ['youtube', 'markdown']
-            allowedContent: false
-            extraAllowedContent: ['img[*, !data-src]']
+            extraPlugins: ['youtube', 'markdown', 'lazyload']
+            allowedContent: ['img(*)[*]', 'p[id]', 'h2[id]', 'h3[id]', 'strong', 'a[!href, target, rel]', 'ol', 'ul', 'li', 'i', 'blockquote', 'pre', 'code', 'div(*)[*]']
+#            allowedContent: true
+#            extraAllowedContent: ['img[*, !data-src]']
+#            disallowedContent: ['h1', 'h4', 'h5', 'h6', 'p(*){*}', 'span', 'img{*}']
             fillEmptyBlocks: false
             language: "fr"
             entities: false
+            basicEntities: false
     plugins:
         youtube:
             path: "assets/plugins/ckeditor/plugins/youtube/" # with trailing slash
             filename: "plugin.js"
         markdown:
             path: "assets/plugins/ckeditor/plugins/markdown/"
+            filename: "plugin.js"
+        lazyload:
+            path: "assets/plugins/ckeditor/plugins/lazyload/"
             filename: "plugin.js"

@@ -15,10 +15,12 @@
     <meta property="og:type" content="website"/>
     <meta property="og:image"
           content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
-    <meta property="og:url"
-          content="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
-    <link rel="cannonical"
-          href="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
+    {% block url %}
+        <meta property="og:url"
+              content="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
+        <link rel="cannonical"
+              href="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
+    {% endblock %}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicons/apple-touch-icon.png') }}"/>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicons/favicon-32x32.png') }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicons/favicon-16x16.png') }}"/>

@@ -188,10 +188,10 @@
                                 } else a.preview && (a.preview.removeAttribute("src"), a.preview.setStyle("display", "none"))
                             }, setup: function (a, b) {
                                 if (1 == a) {
-                                    var c = b.data("cke-saved-src") || b.getAttribute("data-src");
+                                    var c = b.data("cke-saved-src") || b.getAttribute("src");
                                     this.getDialog().dontResetSize = !0;
                                     this.setValue(c);
-                                    this.setInitValue();
+                                    this.setInitValue()
                                 }
                             }, commit: function (a, b) {
                                 1 == a && (this.getValue() || this.isChanged()) ? (b.data("cke-saved-src", this.getValue()), b.setAttribute("src", this.getValue())) : 8 == a && (b.setAttribute("src", ""), b.removeAttribute("src"))

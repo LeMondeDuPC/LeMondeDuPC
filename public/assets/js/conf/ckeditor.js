@@ -2,14 +2,18 @@ CKEDITOR.on('instanceReady', function (evt) {
     evt.editor.dataProcessor.htmlFilter.addRules({
         elements: {
             img: function (el) {
-                el.attributes.class = 'image featured lazyload';
+                if(!el.hasClass('image')) {
+                    el.addClass('image');
+                }
+                if(!el.hasClass('featured')) {
+                    el.addClass('featured');
+                }
                 if (el.attributes.alt === '') {
                     el.attributes.alt = 'Image explicative de l\'article';
                 }
-                if (el.attributes['data-src'] == null) {
-                    el.attributes['data-src'] = el.attributes['data-cke-saved-src'];
-                }
-                el.attributes['data-cke-saved-src'] = null;
+            },
+            a: function (el) {
+                el.attributes.target = "_blank";
             },
         }
     });
