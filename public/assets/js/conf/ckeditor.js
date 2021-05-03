@@ -12,9 +12,6 @@ CKEDITOR.on('instanceReady', function (evt) {
                     el.attributes.alt = 'Image explicative de l\'article';
                 }
             },
-            a: function (el) {
-                el.attributes.target = "_blank";
-            },
         }
     });
     evt.editor.dataProcessor.writer.selfClosingEnd = ' />';

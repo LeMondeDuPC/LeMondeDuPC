@@ -13,10 +13,7 @@ fos_ck_editor:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
             extraPlugins: ['youtube', 'markdown', 'lazyload']
-            allowedContent: ['img(*)[*]', 'p[id]', 'h2[id]', 'h3[id]', 'strong', 'a[!href, target, rel]', 'ol', 'ul', 'li', 'i', 'blockquote', 'pre', 'code', 'div(*)[*]']
-#            allowedContent: true
-#            extraAllowedContent: ['img[*, !data-src]']
-#            disallowedContent: ['h1', 'h4', 'h5', 'h6', 'p(*){*}', 'span', 'img{*}']
+            allowedContent: ['img(*)[*]', 'p[id]', 'h2[id]', 'h3[id]', 'strong', 'a[!href, target, rel]', 'ol', 'ul[id]', 'li[id]', 'i', 'blockquote', 'pre', 'code', 'div(*)[*]', 'table', 'tr', 'td', 'tbody']
             fillEmptyBlocks: false
             language: "fr"
             entities: false
