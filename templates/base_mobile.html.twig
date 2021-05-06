@@ -3,7 +3,7 @@
 <head>
     <title>Le Monde Du PC - {% block title %}Du numérique expliqué simplement{% endblock %}</title>
     <meta name="description"
-          content="{% block description %}{% endblock %} Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent. Retrouvez tout sur www.lemondedupc.fr !"/>
+          content="{% block description %}Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent. Retrouvez tout sur www.lemondedupc.fr !{% endblock %}"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -52,7 +52,7 @@
                     <form method="get" action="{{ path('product_search') }}" id="search">
                         <div>
                             <div>
-                                <input type="search" id="query" name="query" required="required"
+                                <input type="search" name="query" required="required"
                                        placeholder="Rechercher"/>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
             <form method="get" action="{{ path('product_search') }}">
                 <div>
                     <div>
-                        <input type="search" id="query" name="query" required="required" placeholder="Rechercher"/>
+                        <input type="search" name="query" required="required" placeholder="Rechercher"/>
                     </div>
                 </div>
             </form>
