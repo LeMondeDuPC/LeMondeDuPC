@@ -112,10 +112,31 @@ class PageController extends AbstractController
         $hostname = $request->getSchemeAndHttpHost();
         $urls = [];
 
-        $urls[] = ['loc' => $hostname . $this->generateUrl('page_about')];
-        $urls[] = ['loc' => $hostname . $this->generateUrl('page_contact')];
-        $urls[] = ['loc' => $hostname . $this->generateUrl('user_login')];
-        $urls[] = ['loc' => $hostname . $this->generateUrl('user_new')];
+        $urls[] = [
+            'loc' => $hostname . $this->generateUrl('product_index'),
+            'changefreq' => 'weekly',
+            'priority' => 0.8,
+        ];
+        $urls[] = [
+            'loc' => $hostname . $this->generateUrl('page_about'),
+            'changefreq' => 'yearly',
+            'priority' => 0.5,
+        ];
+        $urls[] = [
+            'loc' => $hostname . $this->generateUrl('page_contact'),
+            'changefreq' => 'yearly',
+            'priority' => 0.5,
+        ];
+        $urls[] = [
+            'loc' => $hostname . $this->generateUrl('user_login'),
+            'changefreq' => 'yearly',
+            'priority' => 0.5,
+        ];
+        $urls[] = [
+            'loc' => $hostname . $this->generateUrl('user_new'),
+            'changefreq' => 'yearly',
+            'priority' => 0.5,
+        ];
 
         foreach ($productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
@@ -124,20 +145,28 @@ class PageController extends AbstractController
                         'id' => $product->getId(),
                         'slug' => $slugify->slugify($product->getTitle()),
                     ]),
-                'lastmod' => $time->format('Y-m-d'),
+                'lastmod' => $time->format("c"),
                 'image' => [
                     'loc' => $hostname . $assetPackage->getUrl($product->getFile()->getWebPath()),
                     'title' => $product->getTitle(),
-                ]
+                    'caption' => $product->getDescription(),
+                ],
+                'changefreq' => 'weekly',
+                'priority' => 1,
             ];
         }
 
         foreach ($categoryRepository->findAll() as $category) {
-            $urls[] = ['loc' => $hostname . $this->generateUrl('category_show', [
-                        'id' => $category->getId(),
-                        'name' => $slugify->slugify($category->getName()),
-                    ]
-                )];
+            $urls[] = [
+                'loc' => $hostname . $this->generateUrl('category_show',
+                        [
+                            'id' => $category->getId(),
+                            'name' => $slugify->slugify($category->getName()),
+                        ]
+                    ),
+                'changefreq' => 'weekly',
+                'priority' => 0.7,
+            ];
         }
         $response = new Response(
             $this->renderView('page/sitemap.html.twig', [

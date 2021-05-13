@@ -58,7 +58,7 @@ DirectoryIndex index.php
 #    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #
 #    RewriteCond %{HTTP_HOST} !^www\.
-#    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+#    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 <IfModule !mod_rewrite.c>

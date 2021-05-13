@@ -5,7 +5,135 @@
 {% block description %}{{ product.description }}{% endblock %}
 
 {% block head %}
-    <link rel="preload" href="{{ asset(product.file.getWebPath) }}" as="image"/>{% endblock %}
+    <link rel="preload" href="{{ asset(product.file.getWebPath) }}" as="image"/>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization",
+                "name": "Le Monde Du PC",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                "sameAs": [
+                    "https://www.linkedin.com/company/lemondedupc",
+                    "https://twitter.com/LeMondeDuPC",
+                    "https://www.instagram.com/lemondedupc"
+                ],
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#website",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                "name": "Le Monde Du PC",
+                "description": "Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent. Retrouvez tout sur www.lemondedupc.fr !",
+                "publisher": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization"
+                },
+                "inLanguage": "fr-FR"
+            },
+            {
+                "@type": "WebPage",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#webpage",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}",
+                "name": "{{ product.title }} - Le Monde Du PC",
+                "isPartOf": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#website"
+                },
+                "datePublished": "{{ product.timePublication|date("c") }}",
+                {% if product.timeUpdate is not null %}
+                    "dateModified": "{{ product.timeUpdate|date("c") }}",
+                {% endif %}
+                "description": "{{ product.description }}",
+                "breadcrumb": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#breadcrumb"
+                },
+                "inLanguage": "fr-FR",
+                "potentialAction": [
+                    {
+                        "@type": "ReadAction",
+                        "target": [
+                            "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}"
+                        ]
+                    }
+                ]
+            },
+            {
+            "@type": "BreadcrumbList",
+            "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#breadcrumb",
+                "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                        "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                        "name": "Accueil"
+                    }
+                },{
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        {% if product.category is not null %}
+                            "@type": "WebPage",
+                            "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}",
+                            "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': product.category.id, 'name': product.category.name|slugify }) }}",
+                            "name": "{{ product.category.name }}"
+                        {% else %}
+                            "name": "Anonyme"
+                        {% endif %}
+                    }
+                },{
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#webpage"
+                    }
+                }]
+            },
+            {
+                "@type": [
+                    "Article",
+                    "NewsArticle"
+                ],
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#article",
+                "headline": "{{ product.title }}",
+                "mainEntityOfPage": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#webpage"
+                },
+                "publisher": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization"
+                },
+                "inLanguage": "fr-FR",
+                "copyrightYear": "2021",
+                "copyrightHolder": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization"
+                },
+                {% if product.user is not null %}
+                "author": {
+                    "@type": "Person",
+                    "name": "{{ product.user.username }}"
+                },
+                {% endif %}
+                "datePublished": "{{ product.timePublication|date("c") }}",
+                {% if product.timeUpdate is not null %}
+                    "dateModified": "{{ product.timeUpdate|date("c") }}",
+                {% endif %}
+                {% if product.file is not null %}
+                    "image": "{{ asset(product.file.getWebPath) }}",
+                {% endif %}
+                {% if product.category is not null %}
+                    "articleSection": "{{ product.category.name }}"
+                {% endif %}
+            }
+        ]
+    }
+    </script>
+{% endblock %}
 
 {% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endif %}{% endblock %}
 
@@ -143,7 +271,8 @@
                                 <span class="name">{{ vote.user.username }}</span>
                                 {% if vote.user.file is not null %}
                                     <img data-src="{{ asset(vote.user.file.getWebPath) }}"
-                                         alt="{{ vote.user.file.description }}" class="img lazyload" width="56" height="56"/>
+                                         alt="{{ vote.user.file.description }}" class="img lazyload" width="56"
+                                         height="56"/>
                                     <noscript>
                                         <img src="{{ asset(vote.user.file.getWebPath) }}"
                                              alt="{{ vote.user.file.description }}" class="img" width="56" height="56"/>
@@ -163,7 +292,27 @@
 {% block scripts %}
     <script src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
     <script type="text/javascript">
-        tarteaucitron.init({"privacyUrl":"{{ path('page_about') }}#vie_privee","hashtag":"#tarteaucitron","cookieName":"tarteaucitron","orientation":"bottom","groupServices":false,"showAlertSmall":false,"cookieslist":false,"showIcon":true,"iconPosition":"BottomRight","adblocker":false,"DenyAllCta":true,"AcceptAllCta":true,"highPrivacy":true,"handleBrowserDNTRequest":false,"removeCredit":false,"moreInfoLink":true,"useExternalCss":false,"readmoreLink":"{{ path('page_about') }}#vie_privee","mandatory":true});
+        tarteaucitron.init({
+            "privacyUrl": "{{ path('page_about') }}#vie_privee",
+            "hashtag": "#tarteaucitron",
+            "cookieName": "tarteaucitron",
+            "orientation": "bottom",
+            "groupServices": false,
+            "showAlertSmall": false,
+            "cookieslist": false,
+            "showIcon": true,
+            "iconPosition": "BottomRight",
+            "adblocker": false,
+            "DenyAllCta": true,
+            "AcceptAllCta": true,
+            "highPrivacy": true,
+            "handleBrowserDNTRequest": false,
+            "removeCredit": false,
+            "moreInfoLink": true,
+            "useExternalCss": false,
+            "readmoreLink": "{{ path('page_about') }}#vie_privee",
+            "mandatory": true
+        });
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
     </script>
     <script src="{{ asset('assets/js/libs/lazysizes.min.js') }}"></script>

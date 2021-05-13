@@ -7,6 +7,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@LeMondeDuPC"/>
     <meta property="og:site_name" content="Le Monde Du PC"/>
     <meta property="og:locale" content="fr_FR"/>
     <meta property="og:title" content="Le Monde Du PC - {{ block('title') }}"/>
@@ -37,7 +39,7 @@
 
     <!-- Header -->
     <header id="header">
-        <h2 class="title"><a href="{{ path('product_index') }}">Le Monde Du PC</a></h2>
+        <span class="title"><a href="{{ path('product_index') }}">Le Monde Du PC</a></span>
         <nav id="navheader" class="links">
             <ul id="nav">
                 <li><a href="{{ path('page_contact') }}">Nous contacter</a></li>
@@ -170,11 +172,6 @@
                     <li><a href="{{ path('page_rss') }}" target="_blank" class="icon icon-rss"><span
                                     class="label">RSS</span></a></li>
                 </ul>
-                <hr/>
-                <p>
-                    Vous voulez rejoindre notre équipe de rédacteurs afin de partager vos connaisances ? Il suffit de
-                    <a href="{{ path('user_new') }}">créer un compte</a> !
-                </p>
             </header>
         </section>
         {% block body %}{% endblock %}
@@ -183,6 +180,11 @@
 
     <!-- Sidebar -->
     <aside id="sidebar">
+        <!-- Equipe -->
+        <p>
+            Vous voulez rejoindre notre équipe de rédacteurs afin de partager vos connaisances ? Il suffit de
+            <a href="{{ path('user_new') }}">créer un compte</a> !
+        </p>
         <!-- Pub -->
         <section>
             <p>Les pubs permettent de maintenir le site en "vie". Merci de votre compréhension !</p>

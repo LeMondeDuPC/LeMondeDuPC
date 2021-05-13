@@ -4,6 +4,83 @@
 
 {% block description %}Liste des articles dans la catégorie {{ category.name }}{% if page is not null %}, page {{ page }}{% endif %}.{% endblock %}
 
+{% block head %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization",
+                "name": "Le Monde Du PC",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                "sameAs": [
+                    "https://www.linkedin.com/company/lemondedupc",
+                    "https://twitter.com/LeMondeDuPC",
+                    "https://www.instagram.com/lemondedupc"
+                ],
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#website",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                "name": "Le Monde Du PC",
+                "description": "Les sujets du numérique et du high tech ne doivent pas être compris uniquement par ceux qui les maitrisent. Retrouvez tout sur www.lemondedupc.fr !",
+                "publisher": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization"
+                },
+                "inLanguage": "fr-FR"
+            },
+            {
+                "@type": "CollectionPage",
+                "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}#webpage",
+                "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}",
+                "name": "Catégorie {{ category.name }}{% if page is not null %} : Page {{ page }}{% endif %} - Le Monde Du PC",
+                "isPartOf": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#website"
+                },
+                "breadcrumb": {
+                    "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}#breadcrumb"
+                },
+                "inLanguage": "fr-FR",
+                "potentialAction": [
+                    {
+                        "@type": "ReadAction",
+                        "target": [
+                            "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}"
+                        ]
+                    }
+                ]
+            },
+            {
+            "@type": "BreadcrumbList",
+            "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}#breadcrumb",
+                "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "WebPage",
+                        "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                        "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}",
+                        "name": "Accueil"
+                    }
+                },{
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('category_show', {'id': category.id, 'name': category.name|slugify }) }}#webpage"
+                    }
+                }]
+            }
+        ]
+    }
+    </script>
+{% endblock %}
+
 {% block body %}
     <article class="post">
         <header>
