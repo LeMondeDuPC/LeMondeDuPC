@@ -5,6 +5,7 @@
 /config/secrets/prod/prod.decrypt.private.php
 /var/
 /vendor/
+/bin/composer.phar
 /src/Cron/
 /public/assets/uploads/
 /public/assets/style/.sass-cache/
