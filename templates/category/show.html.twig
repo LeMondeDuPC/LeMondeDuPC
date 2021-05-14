@@ -1,6 +1,6 @@
 {% extends is_mobile() ? 'base_mobile.html.twig' : 'base_default.html.twig' %}
 
-{% block title %}Catégorie {{ category.name }}{% if page is not null %} : Page {{ page }}{% endif %}{% endblock %}
+{% block title %}Le Monde Du PC - Catégorie {{ category.name }}{% if page is not null %} : Page {{ page }}{% endif %}{% endblock %}
 
 {% block description %}Liste des articles dans la catégorie {{ category.name }}{% if page is not null %}, page {{ page }}{% endif %}.{% endblock %}
 
