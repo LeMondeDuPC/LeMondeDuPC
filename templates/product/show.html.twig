@@ -40,7 +40,7 @@
                 "@type": "WebPage",
                 "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}#webpage",
                 "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}",
-                "name": "{{ product.title }} - Le Monde Du PC",
+                "name": "{{ product.title }}",
                 "isPartOf": {
                     "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#website"
                 },
