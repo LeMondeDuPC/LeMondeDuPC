@@ -7,8 +7,8 @@
 /vendor/
 /bin/composer.phar
 /src/Cron/
-/public/assets/uploads/
-/public/assets/style/.sass-cache/
+/www/assets/uploads/
+/www/assets/style/.sass-cache/
 /src/Migrations/
 symfony.lock
 .todo

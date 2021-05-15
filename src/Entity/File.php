@@ -136,7 +136,7 @@ class File
      */
     protected function getUploadRootDir()
     {
-        return __DIR__ . '/../../public/' . $this->getUploadDir();
+        return __DIR__ . '/../../www/' . $this->getUploadDir();
     }
 
     /**

@@ -16,3 +16,30 @@
         </section>
     </article>
 {% endblock %}
+{% block scripts %}
+    <script src="{{ asset('assets/plugins/tarteaucitron/tarteaucitron.js') }}"></script>
+    <script type="text/javascript">
+        tarteaucitron.init({
+            "privacyUrl": "{{ path('page_about') }}#vie_privee",
+            "hashtag": "#tarteaucitron",
+            "cookieName": "tarteaucitron",
+            "orientation": "bottom",
+            "groupServices": false,
+            "showAlertSmall": false,
+            "cookieslist": false,
+            "showIcon": true,
+            "iconPosition": "BottomRight",
+            "adblocker": false,
+            "DenyAllCta": true,
+            "AcceptAllCta": true,
+            "highPrivacy": true,
+            "handleBrowserDNTRequest": false,
+            "removeCredit": false,
+            "moreInfoLink": true,
+            "useExternalCss": false,
+            "readmoreLink": "{{ path('page_about') }}#vie_privee",
+            "mandatory": true
+        });
+        (tarteaucitron.job = tarteaucitron.job || []).push('recaptcha');
+    </script>
+{% endblock %}
