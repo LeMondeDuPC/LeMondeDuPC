@@ -11,12 +11,16 @@
     <meta name="twitter:site" content="@LeMondeDuPC"/>
     <meta property="og:site_name" content="Le Monde Du PC"/>
     <meta property="og:locale" content="fr_FR"/>
-    <meta property="og:title" content="Le Monde Du PC - {{ block('title') }}"/>
+    <meta property="og:title" content="{{ block('title') }}"/>
+    <meta property="twitter:title" content="{{ block('title') }}"/>
     <meta property="og:description"
+          content="{{ block('description') }}"/>
+    <meta property="twitter:description"
           content="{{ block('description') }}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:image"
-          content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endblock %}">
+          content="{% block image %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-512x512.png') }}{% endblock %}" />
+    <meta property="twitter:image" content="{{ block('image') }}" />
     {% block url %}
         <meta property="og:url"
               content="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
