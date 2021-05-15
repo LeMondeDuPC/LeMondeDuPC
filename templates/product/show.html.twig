@@ -135,7 +135,7 @@
     </script>
 {% endblock %}
 
-{% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-192x192.png') }}{% endif %}{% endblock %}
+{% block image %}{% if product.file is not null %}{{ app.request.getSchemeAndHttpHost() }}{{ asset(product.file.getWebPath) }}{% else %}{{ app.request.getSchemeAndHttpHost() }}{{ asset('assets/images/favicons/favicon-512x512.png') }}{% endif %}{% endblock %}
 
 {% block body %}
     <article class="post">
