@@ -8,6 +8,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -73,6 +74,16 @@ class ProductType extends AbstractType
                         'Non' => false,
                     ],
                 ]);
+            if ($options['edit_mode']) {
+                $builder->add('timePublication', DateTimeType::class, [
+                    'with_seconds' => true,
+                    'date_widget' => 'choice',
+                    'placeholder' => [
+                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                        'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
+                    ]
+                ]);
+            }
         }
     }
 
@@ -84,6 +95,7 @@ class ProductType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Product::class,
             'security' => Security::class,
+            'edit_mode' => false,
         ]);
     }
 }

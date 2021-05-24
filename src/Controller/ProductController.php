@@ -115,7 +115,7 @@ class ProductController extends AbstractController
         if ($this->isGranted('ROLE_CREATE_PRODUCTS')) {
             $product = new Product();
             $file = new File();
-            $form = $this->createForm(ProductType::class, $product, ['security' => $security]);
+            $form = $this->createForm(ProductType::class, $product, ['security' => $security, 'edit_mode' => false]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -164,7 +164,7 @@ class ProductController extends AbstractController
     public function edit(Request $request, Product $product, Security $security): Response
     {
         if ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS')) {
-            $form = $this->createForm(ProductType::class, $product, ['security' => $security]);
+            $form = $this->createForm(ProductType::class, $product, ['security' => $security, 'edit_mode' => true]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $product->setTimeUpdate(new DateTime());
