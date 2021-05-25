@@ -60,6 +60,7 @@
         word-wrap: break-word;
         text-align: justify;
       }
+
       .author {
         .img {
           width: 4em;
@@ -67,6 +68,10 @@
         }
       }
     }
+  }
+
+  > #post-main a {
+    color: #e85034;
   }
 
   > a.image.featured {
