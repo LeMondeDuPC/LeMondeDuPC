@@ -247,7 +247,7 @@ class UserController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
-                if ($form->has('file') and !$form->get('plainPassword')->isEmpty()) {
+                if ($form->has('plainPassword') and !$form->get('plainPassword')->isEmpty()) {
                     $user->setPassword(
                         $passwordEncoder->encodePassword(
                             $user,
