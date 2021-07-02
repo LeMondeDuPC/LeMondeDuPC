@@ -176,17 +176,23 @@ class UserController extends AbstractController
 
     /**
      * @Route("/membre/mot-de-passe/{id}-{key}", name="user_reset_password", methods={"GET", "POST"})
+     * @param Request $request
+     * @param UserRepository $repository
+     * @param SenderService $senderService
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param null $id
+     * @param null $key
+     * @return RedirectResponse|Response
      */
     public function resetPassword(Request $request, UserRepository $repository, SenderService $senderService, UserPasswordEncoderInterface $passwordEncoder, $id = null, $key = null)
     {
-        if($this->getUser())
-        {
+        if ($this->getUser()) {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
         if ($id === null or $key === null) {
             if ($request->attributes->get('_route') === 'user_reset_password' and $request->isMethod('POST') and $request->request->get('username') !== null and $request->request->get('email') !== null) {
                 $user = $repository->findOneBy(['username' => $request->request->get('username'), 'email' => $request->request->get('email'), 'validated' => User::VALIDATED]);
-                if($user != null){
+                if ($user != null) {
                     $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
@@ -206,7 +212,7 @@ class UserController extends AbstractController
             if ($user !== null and $user->getConfirmKey() === $key) {
                 if ($request->attributes->get('_route') === 'user_reset_password' and $request->isMethod('POST') and $request->request->get('password') !== null and $request->request->get('passwordConfirm') !== null) {
                     if ($request->request->get('password') === $request->request->get('passwordConfirm')) {
-                        if(strlen($request->request->get('password')) >= 6){
+                        if (strlen($request->request->get('password')) >= 6) {
                             $user->setPassword(
                                 $passwordEncoder->encodePassword(
                                     $user,
