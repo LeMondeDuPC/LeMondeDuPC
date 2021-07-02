@@ -78,7 +78,7 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string")
      */
     private $confirmKey;
@@ -261,10 +261,10 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
     }
 
     /**
-     * @param string $confirmKey
+     * @param string|null $confirmKey
      * @return $this
      */
-    public function setConfirmKey(string $confirmKey): self
+    public function setConfirmKey(?string $confirmKey): self
     {
         $this->confirmKey = $confirmKey;
 

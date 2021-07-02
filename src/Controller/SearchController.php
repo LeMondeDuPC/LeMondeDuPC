@@ -41,9 +41,9 @@ class SearchController extends AbstractController
      */
     public function productSearch(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository, int $page): Response
     {
-        if (isset($_GET['query']) and !empty($_GET['query'])) {
+        if ($request->attributes->get('_route') === 'product_search' and $request->isMethod('GET') and $request->query->get('query') !== null) {
             $products = $paginator->paginate(
-                $productRepository->findByWordQuery($this->search->setQuery($_GET['query'])),
+                $productRepository->findByWordQuery($this->search->setQuery($request->query->get('query'))),
                 $page,
                 Product::ITEM_ON_PAGE
             );

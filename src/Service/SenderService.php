@@ -103,4 +103,27 @@ class SenderService
         } catch (TransportExceptionInterface $e) {
         }
     }
+
+    /**
+     * @param User $user
+     */
+    public function resetPasswordEmail(User $user)
+    {
+        $products = $this->productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC'], 6);
+        $email = (new TemplatedEmail())
+            ->from(new Address('no-reply@lemondedupc.fr', 'Le Monde Du PC'))
+            ->to(new Address($user->getEmail(), $user->getUsername()))
+            ->subject('Confirmation de réinitialisation de votre mot de passe')
+            ->htmlTemplate('email/reset_password.html.twig')
+            ->context([
+                'user_name' => $user->getUsername(),
+                'user_id' => $user->getId(),
+                'confirm_key' => $user->getConfirmKey(),
+                'products' => $products,
+            ]);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+        }
+    }
 }

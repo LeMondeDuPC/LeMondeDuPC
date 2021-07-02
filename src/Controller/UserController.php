@@ -161,6 +161,7 @@ class UserController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $user->setValidated(User::VALIDATED);
                 $user->setNewsletter(User::VALIDATED);
+                $user->setConfirmKey(null);
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
@@ -170,6 +171,69 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_login');
         } else {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+        }
+    }
+
+    /**
+     * @Route("/membre/mot-de-passe/{id}-{key}", name="user_reset_password", methods={"GET", "POST"})
+     */
+    public function resetPassword(Request $request, UserRepository $repository, SenderService $senderService, UserPasswordEncoderInterface $passwordEncoder, $id = null, $key = null)
+    {
+        if($this->getUser())
+        {
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+        }
+        if ($id === null or $key === null) {
+            if ($request->attributes->get('_route') === 'user_reset_password' and $request->isMethod('POST') and $request->request->get('username') !== null and $request->request->get('email') !== null) {
+                $user = $repository->findOneBy(['username' => $request->request->get('username'), 'email' => $request->request->get('email'), 'validated' => User::VALIDATED]);
+                if($user != null){
+                    $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                    $senderService->resetPasswordEmail($user);
+                    $this->addFlash('success', 'Un mail de confirmation vous a été envoyé !');
+                } else {
+                    $this->addFlash('danger', 'Utilisateur introuvable !');
+
+                }
+            }
+            return $this->render('user/reset_password.html.twig', [
+                'new' => false
+            ]);
+        } else {
+            $user = $repository->find($id);
+            if ($user !== null and $user->getConfirmKey() === $key) {
+                if ($request->attributes->get('_route') === 'user_reset_password' and $request->isMethod('POST') and $request->request->get('password') !== null and $request->request->get('passwordConfirm') !== null) {
+                    if ($request->request->get('password') === $request->request->get('passwordConfirm')) {
+                        if(strlen($request->request->get('password')) >= 6){
+                            $user->setPassword(
+                                $passwordEncoder->encodePassword(
+                                    $user,
+                                    $request->request->get('password')
+                                )
+                            );
+                            $user->setConfirmKey(null);
+                            $entityManager = $this->getDoctrine()->getManager();
+                            $entityManager->persist($user);
+                            $entityManager->flush();
+                            $this->addFlash('success', 'Votre mot de passe a bien été changé, vous pouvez maintenant vous connecter !');
+                            return $this->redirectToRoute('user_login');
+                        } else {
+                            $this->addFlash('warning', 'Votre mot de passe doit contenir au moins 6 caractères !');
+                        }
+                    } else {
+                        $this->addFlash('warning', 'Le 2e mot de passe est différent du premier !');
+                    }
+                }
+                return $this->render('user/reset_password.html.twig', [
+                    'new' => true,
+                    'id' => $id,
+                    'key' => $key
+                ]);
+            } else {
+                return $this->redirectToRoute('user_reset_password');
+            }
         }
     }
 

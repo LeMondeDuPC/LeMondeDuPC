@@ -63,6 +63,13 @@ class CleanUsersCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $days = $input->getArgument('days');
 
+        $users = $this->userRepository->findBy(['validated' => true]);
+        foreach ($users as $user) {
+            $user->setConfirmKey(null);
+        }
+        $this->entityManager->flush();
+        $io->success('Confirm keys cleaned');
+
         if ($days) {
             $users = $this->userRepository->findBy(['validated' => false]);
             foreach ($users as $user) {
@@ -80,7 +87,7 @@ class CleanUsersCommand extends Command
                 $user->setScore(0);
             }
             $this->entityManager->flush();
-            $io->success('Users score cleaned');
+            $io->success('Scores cleaned');
             return 0;
         }
     }
