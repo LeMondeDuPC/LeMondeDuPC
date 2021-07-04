@@ -19,6 +19,7 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
     # project in a subdirectory, the base path will be prepended to allow proper
@@ -28,6 +29,12 @@ DirectoryIndex index.php
     # the following 2 lines to eliminate the overhead.
     RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
     RewriteRule .* - [E=BASE:%1]
+
+	RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
+
+    RewriteCond %{HTTP_HOST} !^www\.
+    RewriteRule ^ https://www\.%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
 
     # Sets the HTTP_AUTHORIZATION header removed by Apache
     RewriteCond %{HTTP:Authorization} .+
@@ -53,11 +60,6 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ %{ENV:BASE}/index.php [L]
 
-#    RewriteCond %{HTTP_HOST} !^www\.
-#    RewriteRule ^ https://www\.%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
-#
-#    RewriteCond %{HTTPS} off
-#    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
