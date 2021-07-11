@@ -6,225 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b9cf3dc-f097-4472-8e08-65f763cac15a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.bash_profile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_8_4_20__12_17_AM.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/compass_library.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/stylesheetLinters/stylelint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/symfony.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.start_docker.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" afterPath="$PROJECT_DIR$/bin/console" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/www/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/apple-touch-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/apple-touch-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-16x16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-192x192.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-32x32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-512x512.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-512x512.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/js/libs/breakpoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/libs/breakpoints.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/js/libs/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/libs/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/js/main_mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/main_mobile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/css/codemirror.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/css/codemirror.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/hidpi/markdown.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/hidpi/markdown.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/markdown.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/markdown.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/codemirror-gfm-min.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/codemirror-gfm-min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/marked.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/marked.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/to-markdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/to-markdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/plugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/plugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-day.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-day.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-night.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-night.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance-mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance-mobile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-light.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/blackboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/blackboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/cobalt.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/cobalt.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/eclipse.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/eclipse.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/elegant.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/elegant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/erlang-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/erlang-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/lesser-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/lesser-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mbo.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mbo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mdn-like.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mdn-like.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/midnight.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/midnight.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/monokai.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/monokai.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neat.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neo.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/night.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/night.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-light.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/pastel-on-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/pastel-on-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/rubyblue.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/rubyblue.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/solarized.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/solarized.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/the-matrix.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/the-matrix.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/tomorrow-night-eighties.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/tomorrow-night-eighties.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/twilight.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/twilight.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/vibrant-ink.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/vibrant-ink.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-light.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/config.rb" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/config.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_reset.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_typography.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_actions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_actions.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_author.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_author.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_box.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_box.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_button.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_button.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_form.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_form.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_icon.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_icon.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_icons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_image.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_image.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_list.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_post.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_post.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_posts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_posts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_row.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_row.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_section.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_section.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_table.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_table.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_footer.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_intro.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_intro.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_menu.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_menu.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_wrapper.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_wrapper.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_breakpoints.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_functions.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_html-grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_html-grid.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_vars.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_vars.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/elfinder.full.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/elfinder.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/arrows-active.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/arrows-normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/crop.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/dialogs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_aceeditor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_ckeditor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_ckeditor5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_codemirror.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_creativecloud.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_onlineconvert.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_pixlreditor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_pixlrexpress.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_simplemde.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_tinymce.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_tuiimgedit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_zohooffice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/editor-icons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-big.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-big.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-small.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/progress.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/quicklook-bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/quicklook-icons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/resize.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/spinner-mini.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/toolbar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/trashmesh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-a.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-c.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-d.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/ui-icons_ffffff_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_box.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_dropbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_dropbox.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_ftp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_ftp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_googledrive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_googledrive.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_local.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_local.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_network.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_network.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_onedrive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_onedrive.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_sql.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_sql.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_trash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_trash.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_zip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_zip.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/elfinder.full.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/elfinder.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/editors.default.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/editors.default.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/quicklook.googledocs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/quicklook.googledocs.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.LANG.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.bg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.cs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.da.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.de.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.el.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.es.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fallback.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fr_CA.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.he.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.hr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.hu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.id.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.it.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ja.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ko.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.nl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.no.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.pl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.pt_BR.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ro.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ru.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.si.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.tr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ug_CN.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.uk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.vi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.zh_CN.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.zh_TW.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/cs.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/de.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/en.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/es.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ja.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ko.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/pl.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ru.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/sk.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/tr.html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/proxy/elFinderSupportVer1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/calcfilehash.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/quicklook.tiff.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/quicklook.unzip.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/sounds/rm.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +40,7 @@
   <component name="NamedScopeManager">
     <scope name="html + css" pattern="(!file[symfony]:.idea/*&amp;&amp;!file[symfony]:bin/*&amp;&amp;!file[symfony]:config/*&amp;&amp;!file[symfony]:src/*&amp;&amp;!file[symfony]:translations/*&amp;&amp;!file[symfony]:vendor/*&amp;&amp;!file[symfony]:var/*||file[symfony]:public/*)&amp;&amp;!file[symfony]:.idea//*&amp;&amp;!file[symfony]:bin//*&amp;&amp;!file[symfony]:config//*&amp;&amp;!file[symfony]:src//*&amp;&amp;!file[symfony]:translations//*&amp;&amp;!file[symfony]:var//*&amp;&amp;!file[symfony]:vendor//*&amp;&amp;!file:.env&amp;&amp;!file:.gitignore&amp;&amp;!file:.update&amp;&amp;!file:.todo&amp;&amp;!file:composer.json&amp;&amp;!file:composer.lock&amp;&amp;!file:README.md&amp;&amp;!file:symfony.lock" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+  <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
@@ -399,6 +181,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
+    <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm" value="Docker" />
+    <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm" value="Docker" />
     <property name="dumpAutoload /home/niels/Projects/personnal/web/v2/symfony/composer.json" value="--no-interaction --ansi --verbose" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -415,7 +199,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -877,7 +661,7 @@
       <workItem from="1625956990814" duration="351000" />
       <workItem from="1625957680478" duration="625000" />
       <workItem from="1625985389679" duration="16546000" />
-      <workItem from="1626018402373" duration="773000" />
+      <workItem from="1626018402373" duration="2107000" />
     </task>
     <servers />
   </component>
