@@ -6,6 +6,8 @@ services:
     volumes:
       - /var/www/html/var
       - /var/www/html/vendor
+      - /var/www/html/.idea
+      - /var/www/html/.git
       - .:/var/www/html:cached
     links:
       - db:db
