@@ -10,8 +10,6 @@
 /www/assets/uploads/
 /www/assets/style/.sass-cache/
 /src/Migrations/
-symfony.lock
-.todo
 .start_docker.sh
-/.idea
+/.idea/
 ###< symfony/framework-bundle ###
