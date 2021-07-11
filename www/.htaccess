@@ -30,11 +30,11 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
     RewriteRule .* - [E=BASE:%1]
 
-	RewriteCond %{HTTPS} off
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
-
-    RewriteCond %{HTTP_HOST} !^www\.
-    RewriteRule ^ https://www\.%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
+#	RewriteCond %{HTTPS} off
+#    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
+#
+#    RewriteCond %{HTTP_HOST} !^www\.
+#    RewriteRule ^ https://www\.%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
 
     # Sets the HTTP_AUTHORIZATION header removed by Apache
     RewriteCond %{HTTP:Authorization} .+
@@ -103,7 +103,6 @@ BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 
 SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 
-Header append Vary User-Agent env=!dont-vary
 
 # Expire headers
 <IfModule mod_expires.c>
@@ -127,6 +126,7 @@ Header append Vary User-Agent env=!dont-vary
 
 # Cache-Control Headers
 <IfModule mod_headers.c>
+    Header append Vary User-Agent env=!dont-vary
     <FilesMatch "\\.(ico|jpe?g|png|gif|swf|gz|ttf)$">
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>

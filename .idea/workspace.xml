@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SPLITTER_PROPORTION" value="0.3362184" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8b9cf3dc-f097-4472-8e08-65f763cac15a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.bash_profile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_8_4_20__12_17_AM.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/compass_library.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/stylesheetLinters/stylelint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.start_docker.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" afterPath="$PROJECT_DIR$/bin/console" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/www/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/apple-touch-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/apple-touch-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-16x16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-192x192.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-32x32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon-512x512.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon-512x512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/images/favicons/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/images/favicons/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/js/libs/breakpoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/libs/breakpoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/js/libs/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/libs/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/js/main_mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/js/main_mobile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/css/codemirror.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/css/codemirror.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/hidpi/markdown.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/hidpi/markdown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/markdown.png" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/icons/markdown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/codemirror-gfm-min.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/codemirror-gfm-min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/marked.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/marked.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/to-markdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/js/to-markdown.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/plugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/plugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-day.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-day.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-night.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/3024-night.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance-mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance-mobile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/ambiance.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/base16-light.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/blackboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/blackboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/cobalt.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/cobalt.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/eclipse.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/eclipse.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/elegant.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/elegant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/erlang-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/erlang-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/lesser-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/lesser-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mbo.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mbo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mdn-like.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/mdn-like.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/midnight.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/midnight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/monokai.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/monokai.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neat.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neo.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/neo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/night.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/night.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/paraiso-light.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/pastel-on-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/pastel-on-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/rubyblue.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/rubyblue.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/solarized.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/solarized.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/the-matrix.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/the-matrix.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/tomorrow-night-eighties.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/tomorrow-night-eighties.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/twilight.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/twilight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/vibrant-ink.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/vibrant-ink.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-light.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/plugins/ckeditor/plugins/markdown/theme/xq-light.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/config.rb" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/config.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_reset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/base/_typography.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/base/_typography.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_actions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_actions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_author.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_author.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_box.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_box.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_button.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_button.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_form.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_form.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_icon.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_icon.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_icons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_image.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_image.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_list.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_post.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_post.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_posts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_posts.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_row.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_row.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_section.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_section.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/components/_table.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/components/_table.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_footer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_intro.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_intro.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_menu.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_menu.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_sidebar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/layout/_wrapper.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/layout/_wrapper.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_breakpoints.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_functions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_html-grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_html-grid.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/libs/_vars.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/libs/_vars.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/assets/style/sass/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets/style/sass/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/elfinder.full.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/elfinder.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/css/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/arrows-active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/arrows-normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/crop.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/dialogs.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_aceeditor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_ckeditor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_ckeditor5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_codemirror.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_creativecloud.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_onlineconvert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_pixlreditor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_pixlrexpress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_simplemde.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_tinymce.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_tuiimgedit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/edit_zohooffice.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/editor-icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-big.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/icons-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/progress.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/quicklook-bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/quicklook-icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/resize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/spinner-mini.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/toolbar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/trashmesh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-a.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-b.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-c.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/tui-icon-d.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/ui-icons_ffffff_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_box.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_dropbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_dropbox.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_ftp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_ftp.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_googledrive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_googledrive.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_local.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_local.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_network.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_network.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_onedrive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_onedrive.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_sql.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_sql.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_trash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_trash.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_zip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/img/volume_icon_zip.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/elfinder.full.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/elfinder.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/editors.default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/editors.default.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/quicklook.googledocs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/extras/quicklook.googledocs.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.LANG.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.bg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.el.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fallback.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.fr_CA.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.he.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.hr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.hu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.it.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ko.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.no.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.pt_BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ru.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.si.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.sv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.tr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.ug_CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.uk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.vi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.zh_CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/elfinder.zh_TW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/cs.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/de.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/en.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/es.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ja.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ko.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/pl.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/ru.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/sk.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/i18n/help/tr.html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/proxy/elFinderSupportVer1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/calcfilehash.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/quicklook.tiff.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/js/worker/quicklook.unzip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/bundles/fmelfinder/sounds/rm.wav" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <phar pharPath="/bin/composer.phar" interpreterId="c65cc115-2177-455c-98e9-6f6c194536ce" />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="MJML" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/templates/base_default.html.twig" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/templates/product/show.html.twig" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.env" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/templates/base_mobile.html.twig" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="html + css" pattern="(!file[symfony]:.idea/*&amp;&amp;!file[symfony]:bin/*&amp;&amp;!file[symfony]:config/*&amp;&amp;!file[symfony]:src/*&amp;&amp;!file[symfony]:translations/*&amp;&amp;!file[symfony]:vendor/*&amp;&amp;!file[symfony]:var/*||file[symfony]:public/*)&amp;&amp;!file[symfony]:.idea//*&amp;&amp;!file[symfony]:bin//*&amp;&amp;!file[symfony]:config//*&amp;&amp;!file[symfony]:src//*&amp;&amp;!file[symfony]:translations//*&amp;&amp;!file[symfony]:var//*&amp;&amp;!file[symfony]:vendor//*&amp;&amp;!file:.env&amp;&amp;!file:.gitignore&amp;&amp;!file:.update&amp;&amp;!file:.todo&amp;&amp;!file:composer.json&amp;&amp;!file:composer.lock&amp;&amp;!file:README.md&amp;&amp;!file:symfony.lock" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/cocur/slugify" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/scheb/2fa-google-authenticator" />
+      <path value="$PROJECT_DIR$/vendor/scheb/2fa-backup-code" />
+      <path value="$PROJECT_DIR$/vendor/scheb/2fa-bundle" />
+      <path value="$PROJECT_DIR$/vendor/scheb/2fa-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
+      <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/suncat/mobile-detect-bundle" />
+      <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/endroid/qr-code" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/profiler-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/orm-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/beberlei/assert" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/helios-ag/fm-elfinder-bundle" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/studio-42/elfinder" />
+      <path value="$PROJECT_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
+      <path value="$PROJECT_DIR$/vendor/spomky-labs/otphp" />
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
+      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <path value="$PROJECT_DIR$/vendor/friendsofsymfony/ckeditor-bundle" />
+      <path value="$PROJECT_DIR$/vendor/thecodingmachine/safe" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/.gitignore" />
+        <option value="$PROJECT_DIR$/.idea/symfony.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/php.xml" />
+        <option value="$PROJECT_DIR$/.idea/symfony2.xml" />
+        <option value="$PROJECT_DIR$/.idea/dataSources.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1PEKLqDc8P3xuRLDrdvtkWMMrzU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
+    <property name="dumpAutoload /home/niels/Projects/personnal/web/v2/symfony/composer.json" value="--no-interaction --ansi --verbose" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.stylelint" value="C:\Users\Niels\node_modules\stylelint" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bin" />
+      <recent name="$PROJECT_DIR$/public/assets/js" />
+      <recent name="$PROJECT_DIR$/public/assets/style" />
+      <recent name="$PROJECT_DIR$/public/assets" />
+      <recent name="$PROJECT_DIR$/public/assets/fonts/fontawesome5" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/partner" />
+      <recent name="$PROJECT_DIR$/www" />
+      <recent name="$PROJECT_DIR$/www/assets/plugins" />
+      <recent name="$PROJECT_DIR$/public/assets/plugins/ckeditor/plugins/lazyload" />
+      <recent name="$PROJECT_DIR$/public/assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+    <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+    <configuration name=".start_docker.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/.start_docker.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
+          <option name="upExitCodeFromService" value="" />
+          <option name="upTimeout" value="" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.maildev: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="maildev" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="web" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.maildev: Compose Deployment" />
+        <item itemvalue="Shell Script..start_docker.sh" />
+        <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+        <item itemvalue="Docker.Dockerfile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructuralSearchPlugin">
+    <searchConfiguration name="user defined" created="1566304814031" text="App\Entity\User&#10;" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304802461" text="App\Entity\Users" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304584645" text="Product&#10;" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304569159" text="product&#10;" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304553393" text="Products" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" script="&quot;Products&quot;" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304508951" text="Users" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="user defined" created="1566304489040" text="users" recursive="true" caseInsensitive="true" type="PHP" scope_type="PROJECT" scope_descriptor="" history="1">
+      <constraint name="__context__" within="" contains="" />
+    </searchConfiguration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8b9cf3dc-f097-4472-8e08-65f763cac15a" name="Default Changelist" comment="" />
+      <created>1565433763035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565433763035</updated>
+      <workItem from="1565433764286" duration="1501000" />
+      <workItem from="1565435346347" duration="2002000" />
+      <workItem from="1565438188681" duration="1442000" />
+      <workItem from="1565719741862" duration="2615000" />
+      <workItem from="1565773490639" duration="7048000" />
+      <workItem from="1565869283954" duration="1365000" />
+      <workItem from="1565873644636" duration="3575000" />
+      <workItem from="1565987073191" duration="494000" />
+      <workItem from="1566043133849" duration="7795000" />
+      <workItem from="1566130056483" duration="11357000" />
+      <workItem from="1566301239287" duration="75000" />
+      <workItem from="1566301329799" duration="4636000" />
+      <workItem from="1566306576854" duration="26510000" />
+      <workItem from="1566769408312" duration="331000" />
+      <workItem from="1566988100320" duration="746000" />
+      <workItem from="1566996188869" duration="3269000" />
+      <workItem from="1567252472249" duration="6686000" />
+      <workItem from="1567285231940" duration="3290000" />
+      <workItem from="1567450273065" duration="1289000" />
+      <workItem from="1567535645836" duration="12122000" />
+      <workItem from="1567659447575" duration="3844000" />
+      <workItem from="1567787770546" duration="835000" />
+      <workItem from="1567788705826" duration="133000" />
+      <workItem from="1567788865212" duration="607000" />
+      <workItem from="1567943263119" duration="643000" />
+      <workItem from="1567945387271" duration="7656000" />
+      <workItem from="1568031657650" duration="285000" />
+      <workItem from="1568045080573" duration="1109000" />
+      <workItem from="1568052221995" duration="4658000" />
+      <workItem from="1568136858764" duration="5315000" />
+      <workItem from="1568206032564" duration="5721000" />
+      <workItem from="1568401354473" duration="266000" />
+      <workItem from="1568402950465" duration="45000" />
+      <workItem from="1568403207160" duration="3432000" />
+      <workItem from="1568477515159" duration="4020000" />
+      <workItem from="1568496671829" duration="377000" />
+      <workItem from="1568497137095" duration="12353000" />
+      <workItem from="1568635713297" duration="36000" />
+      <workItem from="1568636115954" duration="1514000" />
+      <workItem from="1569595079881" duration="268000" />
+      <workItem from="1570216435147" duration="9000" />
+      <workItem from="1571062233509" duration="611000" />
+      <workItem from="1571165113690" duration="270000" />
+      <workItem from="1571165413947" duration="21000" />
+      <workItem from="1571678947728" duration="644000" />
+      <workItem from="1571687773815" duration="407000" />
+      <workItem from="1572115241469" duration="1135000" />
+      <workItem from="1572543836759" duration="1170000" />
+      <workItem from="1572549567755" duration="1257000" />
+      <workItem from="1572603843924" duration="1580000" />
+      <workItem from="1573222309716" duration="522000" />
+      <workItem from="1573226840109" duration="47000" />
+      <workItem from="1573761089856" duration="624000" />
+      <workItem from="1573909770145" duration="1404000" />
+      <workItem from="1574082816152" duration="44000" />
+      <workItem from="1574277631608" duration="2266000" />
+      <workItem from="1575402128706" duration="204000" />
+      <workItem from="1575489070044" duration="78000" />
+      <workItem from="1575489218159" duration="482000" />
+      <workItem from="1576878692326" duration="255000" />
+      <workItem from="1576878991618" duration="37000" />
+      <workItem from="1576879138403" duration="716000" />
+      <workItem from="1579363800656" duration="430000" />
+      <workItem from="1579543144021" duration="2419000" />
+      <workItem from="1580132126821" duration="143000" />
+      <workItem from="1580731978033" duration="590000" />
+      <workItem from="1582734208742" duration="1016000" />
+      <workItem from="1585162216289" duration="1969000" />
+      <workItem from="1588247362052" duration="1501000" />
+      <workItem from="1588252561469" duration="386000" />
+      <workItem from="1588281895378" duration="1780000" />
+      <workItem from="1588326021663" duration="1712000" />
+      <workItem from="1588328515314" duration="812000" />
+      <workItem from="1588414519900" duration="3838000" />
+      <workItem from="1588421237196" duration="2175000" />
+      <workItem from="1588519772543" duration="15718000" />
+      <workItem from="1588671473400" duration="10396000" />
+      <workItem from="1588761638608" duration="5235000" />
+      <workItem from="1588787533058" duration="4843000" />
+      <workItem from="1588885071561" duration="9091000" />
+      <workItem from="1588959204398" duration="3929000" />
+      <workItem from="1589017381907" duration="19000" />
+      <workItem from="1589017425807" duration="19051000" />
+      <workItem from="1589216485482" duration="800000" />
+      <workItem from="1589273222823" duration="12044000" />
+      <workItem from="1589309642371" duration="28086000" />
+      <workItem from="1589566404110" duration="4302000" />
+      <workItem from="1589661244634" duration="26825000" />
+      <workItem from="1589806291983" duration="594000" />
+      <workItem from="1589826377398" duration="3254000" />
+      <workItem from="1589904175699" duration="21929000" />
+      <workItem from="1589995629132" duration="523000" />
+      <workItem from="1589998634270" duration="592000" />
+      <workItem from="1589999276227" duration="230000" />
+      <workItem from="1590056172094" duration="109000" />
+      <workItem from="1590139920528" duration="2249000" />
+      <workItem from="1590143250390" duration="18940000" />
+      <workItem from="1590245128416" duration="577000" />
+      <workItem from="1590430014311" duration="9828000" />
+      <workItem from="1590524455128" duration="1288000" />
+      <workItem from="1590592823125" duration="9494000" />
+      <workItem from="1590695931913" duration="2146000" />
+      <workItem from="1590787951550" duration="25029000" />
+      <workItem from="1591020215607" duration="11323000" />
+      <workItem from="1591216976217" duration="660000" />
+      <workItem from="1591219387107" duration="1948000" />
+      <workItem from="1591280946710" duration="3259000" />
+      <workItem from="1591337232598" duration="2360000" />
+      <workItem from="1591477901056" duration="29350000" />
+      <workItem from="1591607826602" duration="5242000" />
+      <workItem from="1591682958848" duration="2757000" />
+      <workItem from="1591703334536" duration="3453000" />
+      <workItem from="1591800102122" duration="5036000" />
+      <workItem from="1591805884289" duration="111000" />
+      <workItem from="1591808045138" duration="523000" />
+      <workItem from="1591893594835" duration="7304000" />
+      <workItem from="1591967030405" duration="599000" />
+      <workItem from="1591969311451" duration="1733000" />
+      <workItem from="1591998054184" duration="3034000" />
+      <workItem from="1592049249395" duration="2643000" />
+      <workItem from="1592066713324" duration="1549000" />
+      <workItem from="1592074712323" duration="7337000" />
+      <workItem from="1592215749016" duration="4167000" />
+      <workItem from="1592234880901" duration="46301000" />
+      <workItem from="1592659673823" duration="8361000" />
+      <workItem from="1592749884143" duration="6167000" />
+      <workItem from="1592778215269" duration="15361000" />
+      <workItem from="1592850936276" duration="7048000" />
+      <workItem from="1592944066553" duration="8663000" />
+      <workItem from="1593034063260" duration="819000" />
+      <workItem from="1593034903278" duration="2838000" />
+      <workItem from="1593082509304" duration="9818000" />
+      <workItem from="1593100104423" duration="378000" />
+      <workItem from="1593118123432" duration="2879000" />
+      <workItem from="1593164399207" duration="2250000" />
+      <workItem from="1593168433122" duration="9064000" />
+      <workItem from="1593415917626" duration="1534000" />
+      <workItem from="1593451597048" duration="2546000" />
+      <workItem from="1593460619470" duration="4094000" />
+      <workItem from="1593466213414" duration="8935000" />
+      <workItem from="1593523274913" duration="1901000" />
+      <workItem from="1593539333574" duration="3456000" />
+      <workItem from="1593558997309" duration="79000" />
+      <workItem from="1593559156702" duration="109000" />
+      <workItem from="1593639534791" duration="567000" />
+      <workItem from="1593640905236" duration="680000" />
+      <workItem from="1593684966370" duration="62000" />
+      <workItem from="1593685886484" duration="140000" />
+      <workItem from="1593689889226" duration="41000" />
+      <workItem from="1593768042320" duration="1763000" />
+      <workItem from="1593858017633" duration="2837000" />
+      <workItem from="1593886759927" duration="608000" />
+      <workItem from="1593891424820" duration="1047000" />
+      <workItem from="1593894564849" duration="1327000" />
+      <workItem from="1593896918689" duration="808000" />
+      <workItem from="1593897817106" duration="301000" />
+      <workItem from="1593898166048" duration="599000" />
+      <workItem from="1593938950206" duration="484000" />
+      <workItem from="1593950237269" duration="1472000" />
+      <workItem from="1593962248415" duration="105000" />
+      <workItem from="1593982299485" duration="435000" />
+      <workItem from="1593985164448" duration="274000" />
+      <workItem from="1593985608239" duration="16000" />
+      <workItem from="1593985653096" duration="1129000" />
+      <workItem from="1594028101199" duration="598000" />
+      <workItem from="1594114289981" duration="180000" />
+      <workItem from="1594123249532" duration="143000" />
+      <workItem from="1594145577516" duration="1164000" />
+      <workItem from="1594157289105" duration="2815000" />
+      <workItem from="1594383898769" duration="916000" />
+      <workItem from="1594393662247" duration="281000" />
+      <workItem from="1594401704788" duration="1487000" />
+      <workItem from="1594411332758" duration="637000" />
+      <workItem from="1594412385806" duration="102000" />
+      <workItem from="1594462150126" duration="52000" />
+      <workItem from="1594462380751" duration="4507000" />
+      <workItem from="1594476628657" duration="26000" />
+      <workItem from="1594479314654" duration="568000" />
+      <workItem from="1594480524432" duration="135000" />
+      <workItem from="1594504720737" duration="110000" />
+      <workItem from="1594544707475" duration="46000" />
+      <workItem from="1594554931565" duration="540000" />
+      <workItem from="1594571393732" duration="90000" />
+      <workItem from="1594584151602" duration="946000" />
+      <workItem from="1594593506080" duration="179000" />
+      <workItem from="1594633923325" duration="428000" />
+      <workItem from="1594639877222" duration="115000" />
+      <workItem from="1594643735526" duration="78000" />
+      <workItem from="1594848353395" duration="24791000" />
+      <workItem from="1595071519733" duration="971000" />
+      <workItem from="1595072705096" duration="200000" />
+      <workItem from="1595109323183" duration="41000" />
+      <workItem from="1595150761878" duration="986000" />
+      <workItem from="1595410703629" duration="1511000" />
+      <workItem from="1595440553436" duration="1414000" />
+      <workItem from="1595498837045" duration="41000" />
+      <workItem from="1595586078093" duration="1373000" />
+      <workItem from="1596144550412" duration="2630000" />
+      <workItem from="1596188873806" duration="4863000" />
+      <workItem from="1596208204012" duration="6494000" />
+      <workItem from="1596493014296" duration="3102000" />
+      <workItem from="1596496366336" duration="264000" />
+      <workItem from="1597933219930" duration="1725000" />
+      <workItem from="1597936888697" duration="887000" />
+      <workItem from="1597953910739" duration="587000" />
+      <workItem from="1597955555466" duration="480000" />
+      <workItem from="1597956712438" duration="599000" />
+      <workItem from="1598045844521" duration="141000" />
+      <workItem from="1598087903445" duration="334000" />
+      <workItem from="1598297842524" duration="1420000" />
+      <workItem from="1598444369601" duration="1695000" />
+      <workItem from="1598884273029" duration="223000" />
+      <workItem from="1598973385635" duration="1031000" />
+      <workItem from="1599064261012" duration="1721000" />
+      <workItem from="1599153274467" duration="2445000" />
+      <workItem from="1599158887183" duration="1064000" />
+      <workItem from="1600328070146" duration="77000" />
+      <workItem from="1600328414978" duration="665000" />
+      <workItem from="1602435309839" duration="140000" />
+      <workItem from="1602587534874" duration="90000" />
+      <workItem from="1602590122501" duration="227000" />
+      <workItem from="1603382426431" duration="79000" />
+      <workItem from="1607585501420" duration="21000" />
+      <workItem from="1608026429986" duration="3439000" />
+      <workItem from="1608816063131" duration="6290000" />
+      <workItem from="1609091694152" duration="81000" />
+      <workItem from="1609091812438" duration="2219000" />
+      <workItem from="1609591115172" duration="2716000" />
+      <workItem from="1609621400104" duration="650000" />
+      <workItem from="1609679252163" duration="377000" />
+      <workItem from="1609680026545" duration="674000" />
+      <workItem from="1609681061499" duration="38000" />
+      <workItem from="1609684264784" duration="1502000" />
+      <workItem from="1609852301788" duration="1774000" />
+      <workItem from="1609918389147" duration="43000" />
+      <workItem from="1610008760929" duration="632000" />
+      <workItem from="1611397658453" duration="1017000" />
+      <workItem from="1611432304910" duration="6012000" />
+      <workItem from="1611485690164" duration="5208000" />
+      <workItem from="1611736509835" duration="1049000" />
+      <workItem from="1612953490561" duration="21760000" />
+      <workItem from="1613075975897" duration="4079000" />
+      <workItem from="1613128256967" duration="333000" />
+      <workItem from="1613475912504" duration="1637000" />
+      <workItem from="1613481462667" duration="878000" />
+      <workItem from="1615890629868" duration="968000" />
+      <workItem from="1615966941801" duration="177000" />
+      <workItem from="1616492068151" duration="286000" />
+      <workItem from="1616495744156" duration="57000" />
+      <workItem from="1616495812865" duration="12000" />
+      <workItem from="1616497266479" duration="62000" />
+      <workItem from="1616570553734" duration="2530000" />
+      <workItem from="1616591147769" duration="786000" />
+      <workItem from="1616661293165" duration="1376000" />
+      <workItem from="1617174715685" duration="868000" />
+      <workItem from="1617176905617" duration="472000" />
+      <workItem from="1617260931950" duration="969000" />
+      <workItem from="1617263112812" duration="299000" />
+      <workItem from="1617396207782" duration="2214000" />
+      <workItem from="1617446077611" duration="597000" />
+      <workItem from="1617475853823" duration="6415000" />
+      <workItem from="1617690919838" duration="15874000" />
+      <workItem from="1617862604167" duration="12782000" />
+      <workItem from="1617884467579" duration="586000" />
+      <workItem from="1617906061668" duration="1149000" />
+      <workItem from="1619184998842" duration="123000" />
+      <workItem from="1619216040882" duration="5278000" />
+      <workItem from="1619265820166" duration="12326000" />
+      <workItem from="1619354718785" duration="2769000" />
+      <workItem from="1619359687639" duration="1939000" />
+      <workItem from="1619428399775" duration="225000" />
+      <workItem from="1619447990232" duration="1356000" />
+      <workItem from="1619516750283" duration="5409000" />
+      <workItem from="1619531823308" duration="892000" />
+      <workItem from="1619533100381" duration="5896000" />
+      <workItem from="1619550092599" duration="932000" />
+      <workItem from="1619592281422" duration="2309000" />
+      <workItem from="1619594615908" duration="2776000" />
+      <workItem from="1619603016469" duration="670000" />
+      <workItem from="1619699951715" duration="2361000" />
+      <workItem from="1619702638488" duration="398000" />
+      <workItem from="1619790145574" duration="7230000" />
+      <workItem from="1619809252267" duration="3467000" />
+      <workItem from="1619816828834" duration="11000" />
+      <workItem from="1619816974160" duration="2363000" />
+      <workItem from="1619861761369" duration="19882000" />
+      <workItem from="1619897975375" duration="13948000" />
+      <workItem from="1620045918580" duration="8701000" />
+      <workItem from="1620059039271" duration="12623000" />
+      <workItem from="1620293441918" duration="11011000" />
+      <workItem from="1620856114736" duration="276000" />
+      <workItem from="1620898771471" duration="14866000" />
+      <workItem from="1620933856532" duration="6923000" />
+      <workItem from="1620944734231" duration="7682000" />
+      <workItem from="1620983678685" duration="467000" />
+      <workItem from="1620984219688" duration="907000" />
+      <workItem from="1620986187894" duration="2457000" />
+      <workItem from="1620988900908" duration="32000" />
+      <workItem from="1620988997785" duration="417000" />
+      <workItem from="1620989450068" duration="79000" />
+      <workItem from="1620994393621" duration="17000" />
+      <workItem from="1620995526883" duration="108000" />
+      <workItem from="1621029558211" duration="1535000" />
+      <workItem from="1621087916669" duration="4272000" />
+      <workItem from="1621093704590" duration="592000" />
+      <workItem from="1621094539768" duration="1481000" />
+      <workItem from="1621107398433" duration="667000" />
+      <workItem from="1621115831799" duration="582000" />
+      <workItem from="1621116845512" duration="78000" />
+      <workItem from="1621275897575" duration="49000" />
+      <workItem from="1621439220218" duration="1090000" />
+      <workItem from="1621443023653" duration="148000" />
+      <workItem from="1621674972434" duration="362000" />
+      <workItem from="1621855006509" duration="236000" />
+      <workItem from="1621860708111" duration="2885000" />
+      <workItem from="1621887071254" duration="1078000" />
+      <workItem from="1621969326495" duration="826000" />
+      <workItem from="1622615406559" duration="2302000" />
+      <workItem from="1623677944891" duration="970000" />
+      <workItem from="1623683666016" duration="3608000" />
+      <workItem from="1623702901372" duration="5971000" />
+      <workItem from="1624017079112" duration="3973000" />
+      <workItem from="1625054872322" duration="171000" />
+      <workItem from="1625081608942" duration="20724000" />
+      <workItem from="1625321028573" duration="2949000" />
+      <workItem from="1625398613764" duration="2083000" />
+      <workItem from="1625406513100" duration="1882000" />
+      <workItem from="1625423780842" duration="35000" />
+      <workItem from="1625733408672" duration="651000" />
+      <workItem from="1625775780763" duration="887000" />
+      <workItem from="1625956990814" duration="351000" />
+      <workItem from="1625957680478" duration="625000" />
+      <workItem from="1625985389679" duration="16546000" />
+      <workItem from="1626018402373" duration="773000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
