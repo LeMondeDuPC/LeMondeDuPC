@@ -1,0 +1,34 @@
+services:
+  web:
+    image: lemondedupc/server
+    ports:
+      - "80:80"
+    volumes:
+      - /var/www/lemondedupc/var
+      - /var/www/lemondedupc/vendor
+      - /var/www/lemondedupc/.idea
+      - /var/www/lemondedupc/.git
+      - .:/var/www/lemondedupc:cached
+    links:
+      - db:db
+      - maildev:maildev
+    environment:
+      - ALLOW_OVERRIDE=true
+  maildev:
+    image: maildev/maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    ports:
+      - "1080:80"
+  db:
+    image: mariadb:10.3.22
+    volumes:
+      - ./docker/mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=v2_dev
+  myadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+    links:
+      - db:db
