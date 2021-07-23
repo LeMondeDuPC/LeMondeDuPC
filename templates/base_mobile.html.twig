@@ -190,10 +190,16 @@
             <a href="{{ path('user_new') }}">créer un compte</a> !
         </p>
 
-        <!-- Mini Posts -->
+        <!-- Categories -->
         <section>
             <h3>Catégories :</h3>
             {{ render(controller('App\\Controller\\CategoryController::_index')) }}
+        </section>
+
+        <!-- Mini Posts -->
+        <section>
+            <h3>Actualités :</h3>
+            {{ render(controller('App\\Controller\\PartnerController::_indexRss')) }}
         </section>
 
         <!-- Footer -->

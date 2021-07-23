@@ -8,6 +8,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-json": "*",
         "cocur/slugify": "^4.0",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "google/recaptcha": "^1.2",
@@ -18,8 +20,10 @@
         "scheb/2fa-google-authenticator": "^5.8",
         "scheb/2fa-qr-code": "^5.8",
         "sensio/framework-extra-bundle": "^5.5",
+        "suncat/mobile-detect-bundle": "dev-master",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.2.*",
+        "symfony/cache": "5.2.*",
         "symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
         "symfony/expression-language": "5.2.*",
@@ -32,8 +36,7 @@
         "symfony/security-csrf": "5.2.*",
         "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
-        "symfony/yaml": "5.2.*",
-        "suncat/mobile-detect-bundle": "dev-master"
+        "symfony/yaml": "5.2.*"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.19",
@@ -72,4 +75,3 @@
         }
     }
 }
-

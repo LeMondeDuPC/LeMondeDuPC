@@ -24,6 +24,8 @@
                     <th>Nom</th>
                     <th>Lien</th>
                     <th>Description</th>
+                    <th>Visible</th>
+                    <th>Flux RSS</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -34,6 +36,8 @@
                         <td>{{ partner.name }}</td>
                         <td>{{ partner.link }}</td>
                         <td>{{ partner.description }}</td>
+                        <td>{% if partner.visibledInList %}Oui{% else %}Non{% endif %}</td>
+                        <td>{% if partner.rss %}Oui{% else %}Non{% endif %}</td>
                         <td>
                             <a href="{{ path('partner_edit', {'id': partner.id}) }}">Modifier</a>
                         </td>

@@ -5,7 +5,11 @@ namespace App\Controller;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Repository\PartnerRepository;
+use DateTime;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,10 +38,29 @@ class PartnerController extends AbstractController
     /**
      * @return Response
      */
-    public function _index(): Response
+    public function _indexPartner(): Response
     {
-        return $this->render('partner/_index.html.twig', [
-            'partners' => $this->partnersRepository->findAll()
+        return $this->render('partner/_indexPartner.html.twig', [
+            'partners' => $this->partnersRepository->findBy(['visibled_in_list' => true]),
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @throws InvalidArgumentException
+     */
+    public function _indexRss(AdapterInterface $cache)
+    {
+        $cachedRss = $cache->getItem('rss_' . md5(date('Y-m-d')));
+        $cachedRss->expiresAt(new DateTime('tomorrow'));
+        if (!$cachedRss->isHit()) {
+            $rss = $this->loadRss();
+            $cachedRss->set($rss);
+            $cache->save($cachedRss);
+        }
+        $rss = $cachedRss->get();
+        return $this->render('partner/_indexRss.html.twig', [
+            'rss' => $rss
         ]);
     }
 
@@ -131,5 +154,21 @@ class PartnerController extends AbstractController
         } else {
             return $this->redirectToRoute('user_login');
         }
+    }
+
+    private function loadRss()
+    {
+        $feed = [];
+        foreach ($this->partnersRepository->findBy(['rss' => true]) as $partner) {
+            $xml = json_decode(json_encode((array)simplexml_load_file($partner->getLink())), true);
+            foreach ($xml['channel']['item'] as $item) {
+                $feed[] = $item;
+            }
+        }
+        $feed = array_slice($feed, 0, Partner::RSS_ITEM_ON_PAGE);
+        usort($feed, function ($a, $b) {
+            return strtotime($b['pubDate']) - strtotime($a['pubDate']);
+        });
+        return $feed;
     }
 }

@@ -13,7 +13,7 @@ Les sujets du numérique et du high tech ne doivent pas être compris uniquement
 
 ## Outils
 * PHPStorm
-* Sass
+* SCSS
 * Symfony
 * Mjml
 
@@ -25,9 +25,7 @@ Les sujets du numérique et du high tech ne doivent pas être compris uniquement
 
 ## Installation
 Paquets nécessaires : 
-* php
-* mysql
-* symfony 
+* [Voir composer.json](composer.json)
 
 Téléchargement des fichiers :
 ``` bash 

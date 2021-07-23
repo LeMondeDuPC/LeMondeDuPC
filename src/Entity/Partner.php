@@ -20,6 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Partner
 {
+
+    public const RSS_ITEM_ON_PAGE = 5;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -50,6 +53,18 @@ class Partner
      * @Assert\Length(min="20", max="255")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $rss;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $visibled_in_list;
 
     /**
      * @return int|null
@@ -112,6 +127,30 @@ class Partner
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getRss(): ?bool
+    {
+        return $this->rss;
+    }
+
+    public function setRss(bool $rss): self
+    {
+        $this->rss = $rss;
+
+        return $this;
+    }
+
+    public function getVisibledInList(): ?bool
+    {
+        return $this->visibled_in_list;
+    }
+
+    public function setVisibledInList(bool $visibled_in_list): self
+    {
+        $this->visibled_in_list = $visibled_in_list;
 
         return $this;
     }

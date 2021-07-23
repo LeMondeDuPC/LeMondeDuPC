@@ -1,0 +1,18 @@
+// page width is always >=320px.
+@include breakpoint('<=xsmall') {
+  html, body {
+    min-width: 320px;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: _palette(bg-alt);
+}

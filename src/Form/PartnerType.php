@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Partner;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -31,6 +33,20 @@ class PartnerType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
+            ])
+            ->add('visibled_in_list', ChoiceType::class, [
+                'label' => 'Visible en tant que partenaire ?',
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+            ])
+            ->add('rss', ChoiceType::class, [
+                'label' => 'Flux RSS',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
             ]);
     }
 
