@@ -1,0 +1,21 @@
+<ul class="posts">
+    {% for item in rss %}
+        <li>
+            <article>
+                <header>
+                    <h3><a href="{{ item['link'] }}" target="_blank">{{ item['title'] }}</a></h3>
+                    <time class="published" datetime="2015-10-20">{{ item['pubDate']|date('d M Y à H:i') }}</time>
+                </header>
+            </article>
+        </li>
+    {% else %}
+        <li>
+            <article>
+                <header>
+                    <h3>Aucun flux n'est disponible</h3>
+                </header>
+            </article>
+        </li>
+        <p></p>
+    {% endfor %}
+</ul>
