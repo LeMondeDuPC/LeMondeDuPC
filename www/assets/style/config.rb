@@ -1,5 +1,6 @@
+Encoding.default_external = "utf-8"
 require 'compass/import-once/activate'
-# Require any additional compass plugins here.
+require 'autoprefixer-rails'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
@@ -23,8 +24,6 @@ line_comments = false
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
 preferred_syntax = :scss
 
-# autoprefixer (sudo apt-get install ruby-autoprefixer-rails)
-require 'autoprefixer-rails'
 on_stylesheet_saved do |file|
   css = File.read(file)
   map = file + '.map'

@@ -11,5 +11,6 @@
 /src/Migrations/
 /.start_docker.sh
 /.idea/
-/docker/
+/docker/config/
+/docker/storage/
 ###< symfony/framework-bundle ###

@@ -9,6 +9,7 @@ services:
       - /var/www/lemondedupc/.idea
       - /var/www/lemondedupc/.git
       - .:/var/www/lemondedupc:cached
+      - ./docker/config/apache:/etc/apache2/sites-enabled
     links:
       - db:db
       - maildev:maildev
@@ -22,7 +23,7 @@ services:
   db:
     image: mariadb:10.3.22
     volumes:
-      - ./docker/mariadb:/var/lib/mysql
+      - ./docker/storage/mariadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=v2_dev
@@ -32,3 +33,8 @@ services:
       - "8080:80"
     links:
       - db:db
+  compass:
+    image: lemondedupc/compass
+    volumes:
+      - ./www/assets/style:/src/compass
+    command: compass watch --poll /src/compass
