@@ -51,7 +51,9 @@
                     "@id": "{{ app.request.getSchemeAndHttpHost() }}{{ path('product_index') }}#organization"
                 },
                 "datePublished": "2017-09-04T15:00:00+02:00",
-                "dateModified": "{{ products[0].timePublication|date("c") }}",
+                {% if products is not empty %}
+                    "dateModified": "{{ products[0].timePublication|date("c") }}",
+                {% endif %}
                 "inLanguage": "fr-FR",
                 "potentialAction": [
                     {
@@ -75,6 +77,7 @@
             }
         ]
     }
+
     </script>
 {% endblock %}
 
