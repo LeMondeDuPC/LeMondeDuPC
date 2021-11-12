@@ -90,8 +90,13 @@ class UserController extends AbstractController
      * @param SenderService $senderService
      * @return Response
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, ReCaptcha $ReCaptcha, Security $security, SenderService $senderService): Response
-    {
+    public function new(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        ReCaptcha $ReCaptcha,
+        Security $security,
+        SenderService $senderService
+    ): Response {
         if (!$this->getUser()) {
             $user = new User();
             $form = $this->createForm(UserType::class, $user, ['security' => $security]);
@@ -120,7 +125,8 @@ class UserController extends AbstractController
 
                     $senderService->welcomeEmail($user);
 
-                    $this->addFlash('success', 'Votre compte a bien été créé ! Veuillez confirmer votre inscription via le mail qui vous a été envoyé');
+                    $this->addFlash('success',
+                        'Votre compte a bien été créé ! Veuillez confirmer votre inscription via le mail qui vous a été envoyé');
                     return $this->redirectToRoute('user_login');
                 } else {
                     $this->addFlash('danger', 'Veuillez valider le ReCaptcha');
@@ -166,11 +172,36 @@ class UserController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre compte a bien été confirmé, vous pouvez maintenant vous connecter !');
             } else {
-                $this->addFlash('warning', 'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
+                $this->addFlash('warning',
+                    'Une erreur s\'est produite lors de la confirmation de votre compte ou votre compte a déjà été confirmé');
             }
             return $this->redirectToRoute('user_login');
         } else {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+        }
+    }
+
+    /**
+     * @Route("/membre/newsletter/{id}/{confirmKey}", name="user_delete_newsletter", methods={"GET"})
+     * @param string $confirmKey
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function deleteNewsletter(string $confirmKey, User $user)
+    {
+        if (!$this->getUser()) {
+            if (md5($user->getEmail()) === $confirmKey) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $user->setNewsletter(false);
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vous vous êtes bien désinscrit de la newsletter !');
+            } else {
+                $this->addFlash('warning', 'Echec de la désinscription');
+            }
+            return $this->redirectToRoute('product_index');
+        } else {
+            return $this->redirectToRoute('product_index', ['id' => $this->getUser()->getId()]);
         }
     }
 
@@ -184,14 +215,24 @@ class UserController extends AbstractController
      * @param null $key
      * @return RedirectResponse|Response
      */
-    public function resetPassword(Request $request, UserRepository $repository, SenderService $senderService, UserPasswordEncoderInterface $passwordEncoder, $id = null, $key = null)
-    {
+    public function resetPassword(
+        Request $request,
+        UserRepository $repository,
+        SenderService $senderService,
+        UserPasswordEncoderInterface $passwordEncoder,
+        $id = null,
+        $key = null
+    ) {
         if ($this->getUser()) {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
         if ($id === null or $key === null) {
             if ($request->attributes->get('_route') === 'user_reset_password' and $request->isMethod('POST') and $request->request->get('username') !== null and $request->request->get('email') !== null) {
-                $user = $repository->findOneBy(['username' => $request->request->get('username'), 'email' => $request->request->get('email'), 'validated' => User::VALIDATED]);
+                $user = $repository->findOneBy([
+                    'username' => $request->request->get('username'),
+                    'email' => $request->request->get('email'),
+                    'validated' => User::VALIDATED
+                ]);
                 if ($user != null) {
                     $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
                     $entityManager = $this->getDoctrine()->getManager();
@@ -223,7 +264,8 @@ class UserController extends AbstractController
                             $entityManager = $this->getDoctrine()->getManager();
                             $entityManager->persist($user);
                             $entityManager->flush();
-                            $this->addFlash('success', 'Votre mot de passe a bien été changé, vous pouvez maintenant vous connecter !');
+                            $this->addFlash('success',
+                                'Votre mot de passe a bien été changé, vous pouvez maintenant vous connecter !');
                             return $this->redirectToRoute('user_login');
                         } else {
                             $this->addFlash('warning', 'Votre mot de passe doit contenir au moins 6 caractères !');
@@ -306,8 +348,13 @@ class UserController extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function edit(GoogleAuthenticatorInterface $googleAuthenticator, Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, Security $security): Response
-    {
+    public function edit(
+        GoogleAuthenticatorInterface $googleAuthenticator,
+        Request $request,
+        User $user,
+        UserPasswordEncoderInterface $passwordEncoder,
+        Security $security
+    ): Response {
         if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
             $roles = [];
             foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role) {
@@ -364,8 +411,12 @@ class UserController extends AbstractController
      * @param SessionInterface $session
      * @return Response
      */
-    public function delete(Request $request, User $user, TokenStorageInterface $token, SessionInterface $session): Response
-    {
+    public function delete(
+        Request $request,
+        User $user,
+        TokenStorageInterface $token,
+        SessionInterface $session
+    ): Response {
         if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $products = $user->getProducts();

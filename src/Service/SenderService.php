@@ -78,6 +78,8 @@ class SenderService
                 ->htmlTemplate('email/newsletter.html.twig')
                 ->context([
                     'user_name' => $user->getUsername(),
+                    'confirmKey' => md5($user->getEmail()),
+                    'user_id' => $user->getId(),
                     'products' => $products,
                 ]);
 
