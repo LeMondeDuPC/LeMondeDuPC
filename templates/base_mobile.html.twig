@@ -24,7 +24,7 @@
     {% block url %}
         <meta property="og:url"
               content="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
-        <link rel="cannonical"
+        <link rel="canonical"
               href="{{ app.request.getSchemeAndHttpHost() }}{{ path(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))) }}"/>
     {% endblock %}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicons/apple-touch-icon.png') }}"/>
