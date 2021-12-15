@@ -31,11 +31,16 @@ class PageController extends AbstractController
      * @param Packages $assetPackage
      * @return Response
      */
-    public function rss(Request $request, ProductRepository $productRepository, SlugifyInterface $slugify, Packages $assetPackage): Response
-    {
+    public function rss(
+        Request $request,
+        ProductRepository $productRepository,
+        SlugifyInterface $slugify,
+        Packages $assetPackage
+    ): Response {
         $hostname = $request->getSchemeAndHttpHost();
         $items = [];
-        foreach ($productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']) as $product) {
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED],
+            ['timePublication' => 'DESC']) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
             $items[] = [
                 'title' => $product->getTitle(),
@@ -107,8 +112,13 @@ class PageController extends AbstractController
      * @param Packages $assetPackage
      * @return Response
      */
-    public function sitemap(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SlugifyInterface $slugify, Packages $assetPackage): Response
-    {
+    public function sitemap(
+        Request $request,
+        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
+        SlugifyInterface $slugify,
+        Packages $assetPackage
+    ): Response {
         $hostname = $request->getSchemeAndHttpHost();
         $urls = [];
 
@@ -138,7 +148,8 @@ class PageController extends AbstractController
             'priority' => 0.5,
         ];
 
-        foreach ($productRepository->findBy(['validated' => Product::VALIDATED], ['timePublication' => 'DESC']) as $product) {
+        foreach ($productRepository->findBy(['validated' => Product::VALIDATED],
+            ['timePublication' => 'DESC']) as $product) {
             $time = ($product->getTimeUpdate() === null) ? $product->getTimePublication() : $product->getTimeUpdate();
             $urls[] = [
                 'loc' => $hostname . $this->generateUrl('product_show', [

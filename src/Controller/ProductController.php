@@ -65,7 +65,7 @@ class ProductController extends AbstractController
     {
         $product = $this->productRepository->find($product->getId());
         if ($product !== null) {
-            if ($product->getValidated() === Product::VALIDATED or ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS'))) {
+            if ($this->isGranted('view', $product)) {
                 $productSlug = (new Slugify())->slugify($product->getTitle());
                 if ($slug !== $productSlug) {
                     return $this->redirectToRoute('product_show', [
@@ -163,7 +163,7 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, Product $product, Security $security): Response
     {
-        if ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS')) {
+        if ($this->isGranted('edit', $product)) {
             $form = $this->createForm(ProductType::class, $product, ['security' => $security, 'edit_mode' => true]);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -188,7 +188,6 @@ class ProductController extends AbstractController
                     $this->addFlash('success', 'Votre article a bien été modifié !');
                     return $this->redirectToRoute('product_manage');
                 }
-
             }
             return $this->render('product/edit.html.twig', [
                 'product' => $product,
@@ -207,7 +206,7 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product): Response
     {
-        if ((($this->getUser() !== null and $product->getUser() !== null) ? ($this->getUser()->getId() === $product->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_PRODUCTS')) {
+        if ($this->isGranted('edit', $product)) {
             if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
                 $product->getUser()->decrementScore(User::SCORE['PRODUCT']);
                 $entityManager = $this->getDoctrine()->getManager();

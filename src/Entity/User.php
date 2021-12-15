@@ -272,6 +272,15 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
     }
 
     /**
+     * @return $this
+     */
+    public function generateConfirmKey(): self
+    {
+        $this->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+        return $this;
+    }
+
+    /**
      * @return DateTimeInterface|null
      */
     public function getTimePublication(): ?DateTimeInterface
@@ -523,7 +532,7 @@ class User implements UserInterface, TwoFactorInterface, BackupCodeInterface
      */
     public function isGoogleAuthenticatorEnabled(): bool
     {
-        return $this->googleAuthenticatorSecret ? true : false;
+        return (bool)$this->googleAuthenticatorSecret;
     }
 
     /**

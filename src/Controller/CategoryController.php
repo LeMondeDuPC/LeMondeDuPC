@@ -54,8 +54,13 @@ class CategoryController extends AbstractController
      * @param string|null $name
      * @return Response
      */
-    public function show(Category $category, int $page, PaginatorInterface $paginator, ProductRepository $productRepository, string $name = null): Response
-    {
+    public function show(
+        Category $category,
+        int $page,
+        PaginatorInterface $paginator,
+        ProductRepository $productRepository,
+        string $name = null
+    ): Response {
         $categorySlug = (new Slugify())->slugify($category->getName());
         if ($name !== $categorySlug) {
             return $this->redirectToRoute('category_show', [
@@ -64,7 +69,8 @@ class CategoryController extends AbstractController
             ], 308);
         }
         $products = $paginator->paginate(
-            $productRepository->findBy(['category' => $category, 'validated' => Product::VALIDATED], ['timePublication' => 'DESC']),
+            $productRepository->findBy(['category' => $category, 'validated' => Product::VALIDATED],
+                ['timePublication' => 'DESC']),
             $page,
             Product::ITEM_ON_PAGE
         );

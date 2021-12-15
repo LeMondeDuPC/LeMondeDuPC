@@ -30,7 +30,11 @@ class VoteController extends AbstractController
     public function heart(Product $product, VoteRepository $voteRepository, SlugifyInterface $slugify): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            if ($voteRepository->count(['product' => $product, 'type' => Vote::TYPE_HEART, 'user' => $this->getUser()]) === 0) {
+            if ($voteRepository->count([
+                    'product' => $product,
+                    'type' => Vote::TYPE_HEART,
+                    'user' => $this->getUser()
+                ]) === 0) {
                 $vote = new Vote();
                 $vote->setProduct($product);
                 $vote->setType(Vote::TYPE_HEART);
@@ -41,7 +45,11 @@ class VoteController extends AbstractController
                 $entityManager->persist($vote);
                 $entityManager->flush();
             } else {
-                $vote = $voteRepository->findOneBy(['product' => $product, 'type' => Vote::TYPE_HEART, 'user' => $this->getUser()]);
+                $vote = $voteRepository->findOneBy([
+                    'product' => $product,
+                    'type' => Vote::TYPE_HEART,
+                    'user' => $this->getUser()
+                ]);
                 $vote->getUser()->decrementScore(User::SCORE['HEART']);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($vote);
@@ -50,7 +58,8 @@ class VoteController extends AbstractController
         } else {
             $this->addFlash('warning', 'Veuillez vous connecter');
         }
-        return $this->redirectToRoute('product_show', ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
+        return $this->redirectToRoute('product_show',
+            ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
     }
 
     /**
@@ -81,13 +90,16 @@ class VoteController extends AbstractController
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($vote);
                     $entityManager->flush();
-                    return $this->redirectToRoute('product_show', ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
+                    return $this->redirectToRoute('product_show',
+                        ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
                 } else {
                     $this->addFlash('warning', 'Veuillez vous connecter');
-                    return $this->redirectToRoute('product_show', ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
+                    return $this->redirectToRoute('product_show',
+                        ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
                 }
             } else {
-                return $this->redirectToRoute('product_show', ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
+                return $this->redirectToRoute('product_show',
+                    ['id' => $product->getId(), 'slug' => $slugify->slugify($product->getTitle())]);
             }
         }
         return $this->render('vote/form/_comment_form.html.twig', [
@@ -104,7 +116,7 @@ class VoteController extends AbstractController
      */
     public function deleteComment(Request $request, Vote $vote, SlugifyInterface $slugify): Response
     {
-        if ((($this->getUser() !== null and $vote->getUser() !== null) ? ($this->getUser()->getId() === $vote->getUser()->getId()) : false) or $this->isGranted('ROLE_MANAGE_COMMENTS')) {
+        if ($this->isGranted('edit', $vote)) {
             if ($this->isCsrfTokenValid('delete' . $vote->getId(), $request->request->get('_token'))) {
                 $vote->getUser()->decrementScore(User::SCORE['COMMENT']);
                 $entityManager = $this->getDoctrine()->getManager();
@@ -114,10 +126,11 @@ class VoteController extends AbstractController
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas supprimer ce commentaire');
         }
-        if ($this->isGranted('ROLE_MANAGE_VOTES')) {
+        if ($this->isGranted('ROLE_MANAGE_VOTES') and $vote->getUser() !== $this->getUser()) {
             return $this->redirectToRoute('votes_manage');
         }
-        return $this->redirectToRoute('product_show', ['id' => $vote->getProduct()->getId(), 'slug' => $slugify->slugify($vote->getProduct()->getTitle())]);
+        return $this->redirectToRoute('product_show',
+            ['id' => $vote->getProduct()->getId(), 'slug' => $slugify->slugify($vote->getProduct()->getTitle())]);
     }
 
     /**

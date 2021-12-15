@@ -43,6 +43,7 @@ class UserController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
+
     /**
      * @Route("/membre/connexion", name="user_login")
      * @param AuthenticationUtils $authenticationUtils
@@ -102,7 +103,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user, ['security' => $security]);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() and $form->isValid()) {
                 $response = $ReCaptcha->verify($_POST['g-recaptcha-response']);
                 if ($response->isSuccess()) {
                     $user->setPassword(
@@ -111,7 +112,7 @@ class UserController extends AbstractController
                             $form->get('plainPassword')->getData()
                         )
                     );
-                    $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+                    $user->generateConfirmKey();
                     $user->setTimePublication(new DateTime());
                     $user->setValidated(false);
                     $user->setNewsletter(false);
@@ -139,7 +140,6 @@ class UserController extends AbstractController
         } else {
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
-
     }
 
     /**
@@ -187,7 +187,7 @@ class UserController extends AbstractController
      * @param User $user
      * @return RedirectResponse
      */
-    public function deleteNewsletter(string $confirmKey, User $user)
+    public function deleteNewsletter(string $confirmKey, User $user): RedirectResponse
     {
         if (!$this->getUser()) {
             if (md5($user->getEmail()) === $confirmKey) {
@@ -234,7 +234,7 @@ class UserController extends AbstractController
                     'validated' => User::VALIDATED
                 ]);
                 if ($user != null) {
-                    $user->setConfirmKey(md5(bin2hex(openssl_random_pseudo_bytes(30))));
+                    $user->generateConfirmKey();
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
                     $entityManager->flush();
@@ -309,7 +309,7 @@ class UserController extends AbstractController
      */
     public function downloadTwoFA(User $user): Response
     {
-        if (($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) {
+        if ($this->isGranted('2fa', $user)) {
             $text = 'Utilisateur Le Monde Du PC : ' . $user->getUsername() . "\n \n";
             $codes = $user->getBackupCodes();
             foreach ($codes as $code) {
@@ -329,7 +329,7 @@ class UserController extends AbstractController
      */
     public function displayQrCode(QrCodeGenerator $qrCodeGenerator, User $user): Response
     {
-        if (($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) {
+        if ($this->isGranted('2fa', $user)) {
             $qrCode = $qrCodeGenerator->getGoogleAuthenticatorQrCode($user);
 
             return new Response($qrCode->writeString(), 200, ['Content-Type' => 'image/png']);
@@ -355,7 +355,7 @@ class UserController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         Security $security
     ): Response {
-        if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
+        if ($this->isGranted('edit', $user)) {
             $roles = [];
             foreach (array_keys($this->getParameter('security.role_hierarchy.roles')) as $role) {
                 $roles[$role] = $role;
@@ -417,7 +417,7 @@ class UserController extends AbstractController
         TokenStorageInterface $token,
         SessionInterface $session
     ): Response {
-        if ((($this->getUser() !== null and $user !== null) ? ($this->getUser()->getId() === $user->getId()) : false) or $this->isGranted('ROLE_MANAGE_USERS')) {
+        if ($this->isGranted('edit', $user)) {
             if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
                 $products = $user->getProducts();
                 foreach ($products as $product) {
@@ -426,7 +426,7 @@ class UserController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($user);
                 $entityManager->flush();
-                if ($this->getUser()->getId() === $user->getId()) {
+                if ($this->getUser() === $user) {
                     $token->setToken(null);
                     $session->invalidate(0);
                 }

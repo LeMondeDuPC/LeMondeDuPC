@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ vote.id }}</td>
                         <td>{{ vote.type }}</td>
-                        <td>{{ vote.user.id }}</td>
+                        <td><a href="{{ path('user_show', {'id': vote.user.id}) }}">{{ vote.user.username }}</a></td>
                         <td>{{ vote.product.id }}</td>
                         <td>{{ vote.content }}</td>
                         <td>

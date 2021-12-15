@@ -73,7 +73,8 @@ class CleanUsersCommand extends Command
         if ($days) {
             $users = $this->userRepository->findBy(['validated' => false]);
             foreach ($users as $user) {
-                $interval = intval(date_diff($user->getTimePublication(), date_create(date('Y-m-d H:i:s')))->format('%a'));
+                $interval = intval(date_diff($user->getTimePublication(),
+                    date_create(date('Y-m-d H:i:s')))->format('%a'));
                 if ($interval >= $days) {
                     $this->entityManager->remove($user);
                 }

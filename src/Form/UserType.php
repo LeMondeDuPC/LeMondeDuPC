@@ -66,7 +66,7 @@ class UserType extends AbstractType
                     'choices' => $options['roles'],
                 ]);
         }
-        if ($options['security']->isGranted('ROLE_USER') and $options['data']->getId() === $options['security']->getUser()->getId() or $options['security']->isGranted('ROLE_MANAGE_USERS')) {
+        if ($options['security']->isGranted('edit', $options['data'])) {
             $builder
                 ->add('description', TextareaType::class, [
                     'label' => 'Description',
@@ -97,12 +97,12 @@ class UserType extends AbstractType
                 ])
                 ->add('2fa', ChoiceType::class, [
                     'mapped' => false,
-                    'label' => 'Activé la double authentification ?',
+                    'label' => 'Activer la double authentification ?',
                     'choices' => [
                         'Non' => false,
                         'Oui' => true,
                     ],
-                    'data' => ($options['data']->isGoogleAuthenticatorEnabled()) ? true : false,
+                    'data' => (bool)$options['data']->isGoogleAuthenticatorEnabled(),
                 ]);
         }
     }
