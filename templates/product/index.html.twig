@@ -78,6 +78,7 @@
         ]
     }
 
+
     </script>
 {% endblock %}
 
@@ -92,9 +93,15 @@
             {% for product in products %}
                 <article class="mini-post">
                     <section class="content">
-                        <h2 class="title-max">
-                            <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
-                        </h2>
+                        {% if product.id == products[0].id %}
+                            <h1 class="title-max">
+                                <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
+                            </h1>
+                        {% else %}
+                            <h2 class="title-max">
+                                <a href="{{ path('product_show', {'id' : product.id, 'slug' : product.title|slugify }) }}">{{ product.title }}</a>
+                            </h2>
+                        {% endif %}
                         <p>{{ product.description }}</p>
                         <div class="display-article">
                             {% if product.category is not null %}

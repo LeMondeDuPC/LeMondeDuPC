@@ -4,18 +4,19 @@
 
 {% block description %}Profil du compte utilisateur de {{ user.username }}.{% endblock %}
 
+{% block head %}<meta name="robots" content="noindex" />{% endblock %}
+
 {% block body %}
     <article class="post">
         <header>
             <div class="title">
                 <h1 class="heading">
-                    Compte utilisateur
+                    Profil de {{ user.username }}
                 </h1>
             </div>
             <div class="meta">
                 <time class="published">Inscrit depuis le : {{ user.timePublication|date('d M Y à H:i') }}</time>
-                <a href="#" class="author">
-                    <span class="name">{{ user.username }}</span>
+                <span class="author">
                     {% if user.file is not null %}
                         <img data-src="{{ asset(user.file.getWebPath) }}"
                              alt="{{ user.file.description }}" class="img lazyload" width="56" height="56"/>
@@ -24,7 +25,7 @@
                                  alt="{{ user.file.description }}" class="img" width="56" height="56"/>
                         </noscript>
                     {% endif %}
-                </a>
+                </span>
                 <p class="icon icon-coins">{{ user.score }}</p>
             </div>
         </header>

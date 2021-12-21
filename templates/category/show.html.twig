@@ -1,6 +1,6 @@
 {% extends is_mobile() ? 'base_mobile.html.twig' : 'base_default.html.twig' %}
 
-{% block title %}Le Monde Du PC - Catégorie {{ category.name }}{% if page is not null %} : Page {{ page }}{% endif %}{% endblock %}
+{% block title %}Le Monde Du PC - Catégorie {{ category.name }}{% if page is not null %} (Page {{ page }}){% endif %}{% endblock %}
 
 {% block description %}Liste des articles dans la catégorie {{ category.name }}{% if page is not null %}, page {{ page }}{% endif %}.{% endblock %}
 
@@ -78,6 +78,7 @@
             }
         ]
     }
+
     </script>
 {% endblock %}
 
@@ -85,7 +86,8 @@
     <article class="post">
         <header>
             <div class="title">
-                <h1 class="heading">Catégorie : {{ category.name }}</h1>
+                <h1 class="heading">Catégorie
+                    : {{ category.name }}{% if page is not null %} (Page {{ page }}){% endif %}</h1>
             </div>
         </header>
         <section>
