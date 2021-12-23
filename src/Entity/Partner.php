@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Partner
 {
 
-    public const RSS_ITEM_ON_PAGE = 5;
+    public const RSS_ITEM_PER_PARTNER = 3;
 
     /**
      * @ORM\Id()

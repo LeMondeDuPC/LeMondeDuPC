@@ -23,15 +23,15 @@ class PartnerController extends AbstractController
     /**
      * @var PartnerRepository
      */
-    private PartnerRepository $partnersRepository;
+    private PartnerRepository $partnerRepository;
 
     /**
      * PartnersController constructor.
-     * @param PartnerRepository $partnersRepository
+     * @param PartnerRepository $partnerRepository
      */
-    public function __construct(PartnerRepository $partnersRepository)
+    public function __construct(PartnerRepository $partnerRepository)
     {
-        $this->partnersRepository = $partnersRepository;
+        $this->partnerRepository = $partnerRepository;
     }
 
     /**
@@ -40,7 +40,7 @@ class PartnerController extends AbstractController
     public function _indexPartner(): Response
     {
         return $this->render('partner/_indexPartner.html.twig', [
-            'partners' => $this->partnersRepository->findBy(['visibled_in_list' => true]),
+            'partners' => $this->partnerRepository->findBy(['visibled_in_list' => true]),
         ]);
     }
 
@@ -50,13 +50,7 @@ class PartnerController extends AbstractController
      */
     public function _indexRss(AdapterInterface $cache)
     {
-        $cachedRss = $cache->getItem('rss_' . md5(date('Y-m-d')));
-        $cachedRss->expiresAt(new DateTime('tomorrow'));
-        if (!$cachedRss->isHit()) {
-            $rss = $this->loadRss();
-            $cachedRss->set($rss);
-            $cache->save($cachedRss);
-        }
+        $cachedRss = $cache->getItem('rss');
         $rss = $cachedRss->get();
         return $this->render('partner/_indexRss.html.twig', [
             'rss' => $rss
@@ -71,7 +65,7 @@ class PartnerController extends AbstractController
     {
         if ($this->isGranted('ROLE_MANAGE_PARTNERS')) {
             return $this->render('partner/manage.html.twig', [
-                'partners' => $this->partnersRepository->findBy([], ['id' => 'DESC']),
+                'partners' => $this->partnerRepository->findBy([], ['id' => 'DESC']),
             ]);
         } else {
             return $this->redirectToRoute('user_login');
@@ -153,21 +147,5 @@ class PartnerController extends AbstractController
         } else {
             return $this->redirectToRoute('user_login');
         }
-    }
-
-    private function loadRss()
-    {
-        $feed = [];
-        foreach ($this->partnersRepository->findBy(['rss' => true]) as $partner) {
-            $xml = json_decode(json_encode((array)simplexml_load_file($partner->getLink())), true);
-            foreach ($xml['channel']['item'] as $item) {
-                $feed[] = $item;
-            }
-        }
-        $feed = array_slice($feed, 0, Partner::RSS_ITEM_ON_PAGE);
-        usort($feed, function ($a, $b) {
-            return strtotime($b['pubDate']) - strtotime($a['pubDate']);
-        });
-        return $feed;
     }
 }
