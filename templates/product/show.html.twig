@@ -116,7 +116,8 @@
                 {% if product.user is not null %}
                 "author": {
                     "@type": "Person",
-                    "name": "{{ product.user.username }}"
+                    "name": "{{ product.user.username }}",
+                    "url": "{{ app.request.getSchemeAndHttpHost() }}{{ path('user_show', {'id' : product.user.id}) }}"
                 },
                 {% endif %}
                 "datePublished": "{{ product.timePublication|date("c") }}",
