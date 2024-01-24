@@ -20,4 +20,4 @@ then
   docker build -t lemondedupc/compass -f ./docker/dockerfiles/compass/Dockerfile .
 fi
 docker compose up -d
-docker container exec -it lemondedupc-web-1 bash -c "cd /var/www/lemondedupc && composer install"
+docker container exec -it lemondedupc-web-1 bash -c "cd /var/www/lemondedupc && composer install && php bin/console make:migration && php bin/console doctrine:migrations:migrate"
