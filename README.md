@@ -37,5 +37,3 @@ cd LeMondeDuPC
 ./run.sh
 ```
 Connectez la base de données au site via le fichier .env généré automatiquement et décommentez la variable MAILER_DSN
-
-```
