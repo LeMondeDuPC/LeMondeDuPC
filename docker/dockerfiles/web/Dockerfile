@@ -10,5 +10,4 @@ RUN mkdir /var/www/lemondedupc \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo pdo_mysql \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-COPY ./../../../vendor /var/www/lemondedupc/vendor
 EXPOSE 80
