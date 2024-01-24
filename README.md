@@ -34,17 +34,8 @@ git clone https://github.com/LeMondeDuPC/LeMondeDuPC.git
 Installation des dépendances :
 ``` bash 
 cd LeMondeDuPC
-composer install
+./run.sh
 ```
 Connectez la base de données au site via le fichier .env généré automatiquement et décommentez la variable MAILER_DSN
 
-Configuration de la base de données :
-``` bash 
-php bin/console doctrine:database:create
-php bin/console make:migration
-php bin/console doctrine:migrations:migrate
-```
-Lancement du site (http://127.0.0.1:8000):
-``` bash 
-symfony server:start 
 ```
